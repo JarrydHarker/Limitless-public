@@ -7,29 +7,42 @@
     android:layout_height="match_parent"
     tools:context=".Settings">
 
+    <ImageView
+        android:id="@+id/BackgroundImage"
+        android:layout_width="438dp"
+        android:layout_height="238dp"
+        android:layout_marginTop="-120dp"
+        android:background="@drawable/settingoval"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView3"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        android:padding="16dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-59dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
 
 
             <ImageView
                 android:id="@+id/profileImage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_gravity="center"
                 android:layout_marginBottom="24dp"
-                android:src="@drawable/defaultpic"
-            android:scaleType="centerCrop"
-            android:contentDescription="Profile Image"
-            android:background="@android:color/darker_gray"
-            android:layout_gravity="center"/>
-
+                android:background="@android:color/darker_gray"
+                android:contentDescription="Profile Image"
+                android:scaleType="centerCrop"
+                android:src="@drawable/defaultpic" />
 
 
             <TextView
@@ -62,11 +75,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Theme"
-                android:textStyle="bold"
-                android:textSize="18sp"
                 android:paddingTop="16dp"
-                android:paddingBottom="8dp" />
+                android:paddingBottom="8dp"
+                android:text="Theme"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="315dp"
@@ -90,11 +103,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Language"
-                android:textStyle="bold"
-                android:textSize="18sp"
                 android:paddingTop="16dp"
-                android:paddingBottom="8dp" />
+                android:paddingBottom="8dp"
+                android:text="Language"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/spnLanguage"
@@ -105,29 +118,29 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Privacy Policy"
-                android:textStyle="bold"
-                android:textSize="18sp"
                 android:paddingTop="16dp"
-                android:paddingBottom="8dp" />
+                android:paddingBottom="8dp"
+                android:text="Privacy Policy"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/privacyPolicy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
                 android:text="View Privacy Policy"
-                android:textColor="@android:color/holo_blue_light"
-                android:paddingBottom="8dp" />
+                android:textColor="@android:color/holo_blue_light" />
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Terms &amp; Conditions"
-                android:textStyle="bold"
-                android:textSize="18sp"
                 android:paddingTop="16dp"
-                android:paddingBottom="8dp" />
+                android:paddingBottom="8dp"
+                android:text="Terms &amp; Conditions"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/termsConditions"
@@ -138,6 +151,7 @@
 
         </LinearLayout>
     </ScrollView>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/NavBar"
         android:layout_width="wrap_content"
@@ -150,6 +164,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu"
-        app:navigationIconTint="#FFDA1616"></com.google.android.material.bottomnavigation.BottomNavigationView>
+        app:navigationIconTint="#FFDA1616">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
