@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Report_Activity">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -24,30 +24,18 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView"
-                android:name="com.example.limitless.Recent_Act_Fragment"
+                android:name="com.example.limitless.ReportStats_Fragment"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="450dp" />
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView2"
-                android:name="com.example.limitless.Popular_Excerises_Fragment"
+                android:name="com.example.limitless.Graph_Fragment"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView3"
-                android:name="com.example.limitless.Workout_Process_Fragment"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="400dp" />
 
         </LinearLayout>
     </ScrollView>
 
-    <TextView
-        android:id="@+id/Home_txtUsername"
-        android:layout_width="243dp"
-        android:layout_height="48dp"
-        tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

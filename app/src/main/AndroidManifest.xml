@@ -13,7 +13,20 @@
         android:theme="@style/Theme.Limitless"
         tools:targetApi="31">
         <activity
+
             android:name=".Settings"
+
+            android:name=".AI_Page"
+            android:exported="false" />
+        <activity
+            android:name=".Map_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Report_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Diet_Activity"
+
             android:exported="false" />
         <activity
             android:name=".Exercise_Activity"
