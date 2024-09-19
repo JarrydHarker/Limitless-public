@@ -30,7 +30,7 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView2"
-                android:name="com.example.limitless.Popular_Excerises_Fragment"
+                android:name="com.example.limitless.Popular_Exercises_Fragment"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
 
