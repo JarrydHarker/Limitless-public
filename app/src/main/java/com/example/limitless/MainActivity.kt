@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         }
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
 
-       /* bottomNavBar.setSelectedItemId(R.id.ic_home)
+        bottomNavBar.setSelectedItemId(R.id.ic_home)
         bottomNavBar.setOnNavigationItemSelectedListener{item ->
             when (item.itemId){
                 R.id.ic_workouts -> {
@@ -28,20 +28,19 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.ic_nutrition -> {
-                    startActivity(Intent(this, AllSheets::class.java))
+                    startActivity(Intent(this, Diet_Activity::class.java))
                     true
                 }
-                R.id.ic_timer -> {
-                    startActivity(Intent(this, TrackTime::class.java))
+                R.id.ic_AI -> {
+                    startActivity(Intent(this, AI_Page::class.java))
                     true
                 }
                 R.id.ic_settings -> {
-                    startActivity(Intent(this, SettingsActivity::class.java))
+                    startActivity(Intent(this, Settings::class.java))
                     true
                 }
                 else -> false
             }
-        }*/
+        }
     }
-
 }
