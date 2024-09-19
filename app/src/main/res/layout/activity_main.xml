@@ -35,7 +35,7 @@
                 android:layout_height="200dp" />
 
             <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView2"
+                android:id="@+id/fragmentContainerView3"
                 android:name="com.example.limitless.Workout_Process_Fragment"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
