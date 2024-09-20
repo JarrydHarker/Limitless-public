@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Limitless"
         tools:targetApi="31">
-
+        <activity
+            android:name=".SSOActivity"
+            android:exported="false" />
         <activity
             android:name=".Settings"
             android:exported="false" />
@@ -27,7 +29,6 @@
             android:exported="false" />
         <activity
             android:name=".Diet_Activity"
-
             android:exported="false" />
         <activity
             android:name=".Exercise_Activity"
