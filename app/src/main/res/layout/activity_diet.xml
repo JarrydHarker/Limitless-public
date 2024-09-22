@@ -7,30 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".Diet_Activity">
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="411dp"
-        android:layout_height="678dp"
-        android:layout_marginTop="220dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView2"
-                android:name="com.example.limitless.DietsStats_Fragment"
-                android:layout_width="match_parent"
-                android:layout_height="591dp" />
-
-        </LinearLayout>
-    </ScrollView>
-
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
@@ -43,16 +19,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/diet_background"
+        android:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="137dp">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <Button
         android:id="@+id/button"
-        android:layout_width="96dp"
+        android:layout_width="103dp"
         android:layout_height="38dp"
         android:layout_marginTop="76dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="28dp"
+        android:backgroundTint="#6D61DA"
         android:text="Add Meal"
         android:textSize="11sp"
+        app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/box"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.885"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.719">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="412dp"
@@ -66,27 +70,74 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="79dp"
+            android:layout_width="27dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@drawable/ai" />
 
         <TextView
             android:id="@+id/textView8"
-            android:layout_width="190dp"
+            android:layout_width="247dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:paddingLeft="30dp"
+            android:paddingTop="10dp"
+            android:paddingRight="0dp"
             android:text="Need Assistance?"
-            android:textAlignment="center" />
+            android:textAlignment="textStart"
+            android:textSize="18sp" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button2"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
+            android:background="@drawable/ic_search"
             android:text="Search"
             app:iconSize="8dp" />
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/box"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/box"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.885"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/box"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.719">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
