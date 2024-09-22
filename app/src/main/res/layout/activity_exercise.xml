@@ -23,16 +23,10 @@
             android:orientation="vertical">
 
             <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView"
-                android:name="com.example.limitless.DailyActivity_Fragment"
-                android:layout_width="match_parent"
-                android:layout_height="350dp" />
-
-            <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView2"
                 android:name="com.example.limitless.Exercises_Fragment"
                 android:layout_width="match_parent"
-                android:layout_height="500dp" />
+                android:layout_height="match_parent" />
 
         </LinearLayout>
     </ScrollView>
