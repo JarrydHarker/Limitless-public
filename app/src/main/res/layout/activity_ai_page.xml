@@ -19,7 +19,7 @@
         tools:layout_editor_absoluteY="600dp">
 
         <ImageView
-            android:id="@+id/imageView25"
+            android:id="@+id/imgSearch_AI"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -48,6 +48,7 @@
         app:srcCompat="@drawable/img" />
 
     <ListView
+        android:id="@+id/listMessages_AI"
         android:layout_width="409dp"
         android:layout_height="257dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
