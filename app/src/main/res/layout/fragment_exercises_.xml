@@ -78,7 +78,7 @@
                 android:id="@+id/imageView14"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
-                tools:src="@tools:sample/avatars" />
+                tools:src="@drawable/run_icon" />
 
             <TextView
                 android:id="@+id/textView24"
@@ -97,7 +97,7 @@
                 android:id="@+id/imageView15"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
-                tools:src="@tools:sample/avatars" />
+                tools:src="@drawable/cycling_icon" />
 
             <TextView
                 android:id="@+id/textView25"
@@ -116,7 +116,7 @@
                 android:id="@+id/imageView16"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
-                tools:src="@tools:sample/avatars" />
+                tools:src="@drawable/yoga_icon" />
 
             <TextView
                 android:id="@+id/textView26"
@@ -135,7 +135,7 @@
                 android:id="@+id/imageView17"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
-                tools:src="@tools:sample/avatars" />
+                tools:src="@drawable/hiit_icon" />
 
             <TextView
                 android:id="@+id/textView27"
