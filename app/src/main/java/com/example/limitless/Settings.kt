@@ -31,8 +31,8 @@ class Settings : AppCompatActivity() {
                     startActivity(Intent(this, Diet_Activity::class.java))
                     true
                 }
-                R.id.ic_AI -> {
-                    startActivity(Intent(this, AI_Page::class.java))
+                R.id.ic_Report -> {
+                    startActivity(Intent(this, Report_Activity::class.java))
                     true
                 }
                 R.id.ic_home -> {
