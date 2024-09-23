@@ -9,36 +9,129 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
-        android:layout_height="590dp"
-        android:layout_marginTop="220dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="415dp"
+        android:layout_height="508dp"
+        android:layout_marginBottom="15dp"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/NavBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingBottom="16dp"
+                android:text="Recent Activities"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/dailyActivityCard"
+                    android:layout_width="0dp"
+                    android:layout_height="117dp"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@color/orange"
+                    app:cardCornerRadius="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/dailyact" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Daily Activity"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/workoutsCard"
+                    android:layout_width="0dp"
+                    android:layout_height="117dp"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@color/purple"
+                    app:cardCornerRadius="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/workouts" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Workouts"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingBottom="16dp"
+                android:text="Popular Exercises"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/PE_ListExercises"
+                    android:layout_width="match_parent"
+                    android:layout_height="144dp" />
+            </LinearLayout>
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView"
-                android:name="com.example.limitless.Recent_Act_Fragment"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" />
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView2"
-                android:name="com.example.limitless.Popular_Exercises_Fragment"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" />
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView3"
                 android:name="com.example.limitless.Workout_Process_Fragment"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="317dp"
+                android:layout_marginTop="16dp" />
 
         </LinearLayout>
     </ScrollView>
@@ -47,8 +140,12 @@
         android:id="@+id/Home_txtUsername"
         android:layout_width="243dp"
         android:layout_height="48dp"
-        tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.845"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/NavBar"

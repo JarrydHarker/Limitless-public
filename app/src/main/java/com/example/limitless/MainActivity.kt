@@ -4,8 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +23,9 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
+        val dailyActivity: CardView = findViewById(R.id.dailyActivityCard)
+        val workout: CardView = findViewById(R.id.workoutsCard)
+        val recyclerView: RecyclerView = findViewById(R.id.PE_ListExercises)
 
         bottomNavBar.setSelectedItemId(R.id.ic_home)
         bottomNavBar.setOnNavigationItemSelectedListener{item ->
@@ -42,5 +49,21 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        dailyActivity.setOnClickListener{
+            val intent = Intent(this, Exercise_Activity::class.java)
+            startActivity(intent)
+        }
+        workout.setOnClickListener{
+            //val intent = Intent(this, Exercise_Activity::class.java)
+            //startActivity(intent)
+        }
+
+        val mLayoutManager = LinearLayoutManager(applicationContext)
+        mLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        recyclerView.layoutManager = mLayoutManager
+        recyclerView.itemAnimator = DefaultItemAnimator()
+        //recyclerView.adapter = moviesAdapter
+
     }
 }
