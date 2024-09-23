@@ -178,7 +178,7 @@
                     <ImageView
                         android:id="@+id/imageView20"
                         android:layout_width="match_parent"
-                        android:layout_height="32dp"
+                        android:layout_height="match_parent"
                         android:src="@drawable/steps_icon" />
 
 
@@ -224,6 +224,7 @@
                         android:layout_height="38dp"
                         android:paddingTop="7dp"
                         android:text="Calories"
+                        android:textAlignment="center"
                         android:textSize="18sp" />
 
                     <ImageView
