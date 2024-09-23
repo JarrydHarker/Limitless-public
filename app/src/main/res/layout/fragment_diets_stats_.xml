@@ -57,7 +57,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/txtGoal_DSF"
+                    android:id="@+id/lblGoal_DSF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="-"
@@ -73,7 +73,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/txtFood_DSF"
+                    android:id="@+id/lblFood_DSF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="-"
@@ -89,7 +89,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/txtExercise_DSF"
+                    android:id="@+id/lblExercise_DSF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="-"
@@ -178,14 +178,14 @@
                     <ImageView
                         android:id="@+id/imageView20"
                         android:layout_width="match_parent"
-                        android:layout_height="32dp"
+                        android:layout_height="match_parent"
                         android:src="@drawable/steps_icon" />
 
 
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/txtSteps_DSF"
+                    android:id="@+id/lblSteps_DSF"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="-"
@@ -224,6 +224,7 @@
                         android:layout_height="38dp"
                         android:paddingTop="7dp"
                         android:text="Calories"
+                        android:textAlignment="center"
                         android:textSize="18sp" />
 
                     <ImageView
@@ -236,7 +237,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/txtCalories_DSF"
+                    android:id="@+id/lblCalories_DSF"
                     android:layout_width="match_parent"
                     android:layout_height="47dp"
                     android:text="-"
@@ -289,7 +290,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/txtStreak_DSF"
+                    android:id="@+id/lblStreak_DSF"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
                     android:text="-"
@@ -341,7 +342,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/txtToLet_DSF"
+                    android:id="@+id/lblToLet_DSF"
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
                     android:text="-"
