@@ -37,5 +37,20 @@
         </LinearLayout>
     </ScrollView>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/NavBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="-60dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu"
+        app:navigationIconTint="#FFDA1616"></com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
