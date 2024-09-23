@@ -493,6 +493,48 @@ class DbAccess {
         return user // Return the deserialized User object (if any)
     }
 
+    fun GetAllUsers(): List<User> {
+        val executor = Executors.newSingleThreadExecutor()
+        var users: List<User> = emptyList()
+
+        executor.execute {
+            try {
+                // Construct the URL for the GET request
+                val url = URL(apiUrl + epUser + "/All") // Assuming the endpoint is something like /users
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to GET
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val gson = Gson()
+
+                        // Deserialize the JSON array into a List<User>
+                        users = gson.fromJson(jsonResponse, Array<User>::class.java).toList()
+                    }
+                } else {
+                    // Handle error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("GetAllUsersError", reader.readText())
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetAllUsersError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return users // Return the list of users (could be empty if request fails)
+    }
+
+
     fun GetDay(date: LocalDate, userId: String): Day?{
         val executor = Executors.newSingleThreadExecutor()
 
@@ -786,6 +828,7 @@ class DbAccess {
 
         return movement // Return the deserialized User object (if any)
     }
+
     fun GetWorkout(workoutId: Workout): Workout?{
         val executor = Executors.newSingleThreadExecutor()
 
@@ -830,10 +873,93 @@ class DbAccess {
     //Read//
 
     //Update//
+    fun UpdateUser(user: User): String {
+        val executor = Executors.newSingleThreadExecutor()
+        var responseMessage = ""
+
+        executor.execute {
+            try {
+                // Construct URL for updating the user
+                val url = URL(apiUrl + epUser)
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to POST
+                connection.requestMethod = "PUT"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+                connection.doOutput = true
+
+                // Serialize the User object to JSON using Gson
+                val gson = Gson()
+                val jsonInputString = gson.toJson(user)
+
+                // Write the JSON data to the output stream
+                OutputStreamWriter(connection.outputStream).use { writer ->
+                    writer.write(jsonInputString)
+                    writer.flush()
+                }
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's response message
+                    }
+                } else {
+                    // Read error message if the request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("UpdateUserError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage // Return the server's response (success or error message)
+    }
 
     //Update//
 
     //Delete//
+    fun DeleteUser(userId: String): String {
+        val executor = Executors.newSingleThreadExecutor()
+        var responseMessage = ""
+
+        executor.execute {
+            try {
+                // Construct URL for deleting the user with the userId
+                val url = URL(apiUrl + epUser)
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to DELETE
+                connection.requestMethod = "DELETE"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's success message
+                    }
+                } else {
+                    // Read error message if the request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("DeleteUserError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage // Return the server's response (success or error message)
+    }
 
     //Delete//
 }
