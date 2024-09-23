@@ -139,140 +139,148 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/mealtrackerbox"
                 android:orientation="horizontal"
                 android:padding="16dp"
-                android:layout_marginBottom="16dp">
-
-
-
-
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_breakfast" />
-
+                android:textAlignment="center">
 
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginTop="25dp"
                     android:layout_weight="1"
+                    android:orientation="vertical"
                     android:paddingStart="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Breakfast"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=" PLACEHOLDER Recommended 600-1000 calories"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/darker_gray" />
+                        android:text="Recommended 600-1000 calories"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="14sp" />
+
+                    <Button
+                        android:layout_width="115dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#6d61da"
+
+                        android:text="Add"
+                        android:textColor="@android:color/white" />
                 </LinearLayout>
 
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Add"
-
-                    android:textColor="@android:color/white" />
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/brekkie" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginBottom="16dp"
 
-                android:padding="16dp"
-                android:layout_marginBottom="16dp">
+                android:background="@drawable/mealtrackerbox"
+                android:orientation="horizontal"
+                android:padding="16dp">
 
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/ic_lunch" />
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/lunch" />
 
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginTop="25dp"
                     android:layout_weight="1"
+                    android:orientation="vertical"
                     android:paddingStart="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Lunch"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recommended 500-800 calories"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/darker_gray" />
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="14sp" />
+
+                    <Button
+                        android:layout_width="115dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#6d61da"
+
+                        android:text="Add"
+                        android:textColor="@android:color/white" />
                 </LinearLayout>
 
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Add"
-
-                    android:textColor="@android:color/white" />
             </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+
+                android:background="@drawable/mealtrackerbox"
                 android:orientation="horizontal"
+                android:padding="16dp">
 
-                android:padding="16dp"
-                android:layout_marginBottom="16dp">
-
-
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_dinner" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginTop="25dp"
                     android:layout_weight="1"
+                    android:orientation="vertical"
                     android:paddingStart="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dinner"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recommended 600-1000 calories"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/darker_gray" />
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="14sp" />
+
+                    <Button
+                        android:layout_width="115dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#6d61da"
+                        android:text="Add"
+                        android:textColor="@android:color/white" />
                 </LinearLayout>
 
                 <!-- Add Button -->
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Add"
-                    android:textColor="@android:color/white" />
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/dinnie" />
             </LinearLayout>
 
         </LinearLayout>
