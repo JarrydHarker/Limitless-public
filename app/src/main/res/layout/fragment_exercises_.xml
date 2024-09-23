@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/diet_background">
 
         <ImageView
             android:id="@+id/imageView13"
@@ -32,14 +33,15 @@
 
         <TextView
             android:id="@+id/textView23"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="127dp"
+            android:layout_height="79dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="22dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="8dp"
             android:text="Daily Activity"
-            android:textAlignment="center"
+            android:textAlignment="viewStart"
+            android:textColor="@color/white"
             android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/btnAddWorkout_EF"
             app:layout_constraintEnd_toEndOf="@+id/btnAddWorkout_EF"
@@ -52,7 +54,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="35dp"
             android:layout_marginBottom="29dp"
+            android:backgroundTint="#fff"
             android:text="Add Workout"
+            android:textColor="#6d61da"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView13"
@@ -72,7 +76,8 @@
         <LinearLayout
             android:layout_width="61dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/buttonbackground">
 
             <ImageView
                 android:id="@+id/imageView14"
@@ -84,14 +89,15 @@
                 android:id="@+id/textView24"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Running"
+                android:text="Cadio"
                 android:textAlignment="center" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="61dp"
+            android:layout_width="78dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/buttonbackground">
 
             <ImageView
                 android:id="@+id/imageView15"
@@ -101,16 +107,17 @@
 
             <TextView
                 android:id="@+id/textView25"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cyceling"
+                android:text="Plyometrics"
                 android:textAlignment="center" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="61dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/buttonbackground">
 
             <ImageView
                 android:id="@+id/imageView16"
@@ -122,14 +129,15 @@
                 android:id="@+id/textView26"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Yoga"
+                android:text="Streching"
                 android:textAlignment="center" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="61dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/buttonbackground">
 
             <ImageView
                 android:id="@+id/imageView17"
@@ -141,14 +149,15 @@
                 android:id="@+id/textView27"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="HIIT"
+                android:text="Strength"
                 android:textAlignment="center" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="61dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/buttonbackground">
 
             <ImageView
                 android:id="@+id/imageView18"
@@ -160,14 +169,15 @@
                 android:id="@+id/textView28"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="-"
+                android:text="Powerlifting"
                 android:textAlignment="center" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="61dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/buttonbackground">
 
             <ImageView
                 android:id="@+id/imageView19"
@@ -179,7 +189,24 @@
                 android:id="@+id/textView29"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="-"
+                android:text="Strongman"
+                android:textAlignment="center" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="61dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/buttonbackground">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                tools:src="@tools:sample/avatars"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Olympic Weightlifting"
                 android:textAlignment="center" />
         </LinearLayout>
     </LinearLayout>
@@ -190,6 +217,7 @@
         android:layout_height="wrap_content"
         android:text="Categories"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.047"
@@ -214,6 +242,7 @@
         android:layout_marginBottom="8dp"
         android:text="Exercises"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/listExercises_EF"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -221,6 +250,7 @@
         android:id="@+id/btnAddExercise_EF"
         android:layout_width="143dp"
         android:layout_height="38dp"
+        android:backgroundTint="#6d61da"
         android:layout_marginTop="384dp"
         android:text="Add Exercise"
         app:layout_constraintEnd_toEndOf="parent"
