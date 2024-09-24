@@ -12,7 +12,10 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.limitless.data.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
+var currentUser: User? = null
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,8 +34,14 @@ class MainActivity : AppCompatActivity() {
         val workout: CardView = findViewById(R.id.workoutsCard)
         val recyclerView: RecyclerView = findViewById(R.id.PE_ListExercises)
 
+
         btn.setOnClickListener{
             val intent = Intent(this, Map_Activity::class.java)
+        }
+
+        if(currentUser == null){
+            val intent = Intent(this, SSOActivity::class.java)
+
             startActivity(intent)
         }
 
@@ -47,8 +56,8 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this, Diet_Activity::class.java))
                     true
                 }
-                R.id.ic_AI -> {
-                    startActivity(Intent(this, AI_Page::class.java))
+                R.id.ic_Report -> {
+                    startActivity(Intent(this, Report_Activity::class.java))
                     true
                 }
                 R.id.ic_settings -> {
@@ -64,8 +73,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         workout.setOnClickListener{
-            //val intent = Intent(this, Exercise_Activity::class.java)
-            //startActivity(intent)
+            val intent = Intent(this, Workout_Planner::class.java)
+            startActivity(intent)
         }
 
         val mLayoutManager = LinearLayoutManager(applicationContext)

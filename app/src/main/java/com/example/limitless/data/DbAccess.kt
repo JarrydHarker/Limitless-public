@@ -533,6 +533,326 @@ class DbAccess {
 
         return users // Return the list of users (could be empty if request fails)
     }
+    fun GetAllDays(): List<Day> {
+        val executor = Executors.newSingleThreadExecutor()
+        var days: List<Day> = emptyList()
+
+        executor.execute {
+            try {
+                // Construct the URL for the GET request
+                val url = URL(apiUrl + epDay + "/All") // Assuming the endpoint is something like /users
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to GET
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val gson = Gson()
+
+                        // Deserialize the JSON array into a List<User>
+                        days = gson.fromJson(jsonResponse, Array<Day>::class.java).toList()
+                    }
+                } else {
+                    // Handle error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("GetAllDaysError", reader.readText())
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetAllDaysError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return days // Return the list of users (could be empty if request fails)
+    }
+    fun GetAllExercises(): List<Exercise> {
+        val executor = Executors.newSingleThreadExecutor()
+        var exercise: List<Exercise> = emptyList()
+
+        executor.execute {
+            try {
+                // Construct the URL for the GET request
+                val url = URL(apiUrl + epExercise + "/All") // Assuming the endpoint is something like /users
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to GET
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val gson = Gson()
+
+                        // Deserialize the JSON array into a List<User>
+                        exercise = gson.fromJson(jsonResponse, Array<Exercise>::class.java).toList()
+                    }
+                } else {
+                    // Handle error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("GetAllExerciseError", reader.readText())
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetAllExerciseError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return exercise // Return the list of users (could be empty if request fails)
+    }
+    fun GetAllCardio(): List<CardioExercise> {
+        val executor = Executors.newSingleThreadExecutor()
+        var cardio: List<CardioExercise> = emptyList()
+
+        executor.execute {
+            try {
+                // Construct the URL for the GET request
+                val url = URL(apiUrl + epCardio + "/All") // Assuming the endpoint is something like /users
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to GET
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val gson = Gson()
+
+                        // Deserialize the JSON array into a List<User>
+                        cardio = gson.fromJson(jsonResponse, Array<CardioExercise>::class.java).toList()
+                    }
+                } else {
+                    // Handle error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("GetAllCardioError", reader.readText())
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetAllCardioError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return cardio // Return the list of users (could be empty if request fails)
+    }
+    fun GetAllStrength(): List<StrengthExercise> {
+        val executor = Executors.newSingleThreadExecutor()
+        var strength: List<StrengthExercise> = emptyList()
+
+        executor.execute {
+            try {
+                // Construct the URL for the GET request
+                val url = URL(apiUrl + epStrength + "/All") // Assuming the endpoint is something like /users
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to GET
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val gson = Gson()
+
+                        // Deserialize the JSON array into a List<User>
+                        strength = gson.fromJson(jsonResponse, Array<StrengthExercise>::class.java).toList()
+                    }
+                } else {
+                    // Handle error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("GetAllStrengthError", reader.readText())
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetAllStrengthError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return strength // Return the list of users (could be empty if request fails)
+    }
+    fun GetAllMeals(): List<Meal> {
+        val executor = Executors.newSingleThreadExecutor()
+        var meals: List<Meal> = emptyList()
+
+        executor.execute {
+            try {
+                // Construct the URL for the GET request
+                val url = URL(apiUrl + epMeal + "/All") // Assuming the endpoint is something like /users
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to GET
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val gson = Gson()
+
+                        // Deserialize the JSON array into a List<User>
+                        meals = gson.fromJson(jsonResponse, Array<Meal>::class.java).toList()
+                    }
+                } else {
+                    // Handle error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("GetAllMealsError", reader.readText())
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetAllMealsError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return meals // Return the list of users (could be empty if request fails)
+    }
+    fun GetAllFood(): List<Food> {
+        val executor = Executors.newSingleThreadExecutor()
+        var food: List<Food> = emptyList()
+
+        executor.execute {
+            try {
+                // Construct the URL for the GET request
+                val url = URL(apiUrl + epFood + "/All") // Assuming the endpoint is something like /users
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to GET
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val gson = Gson()
+
+                        // Deserialize the JSON array into a List<User>
+                        food = gson.fromJson(jsonResponse, Array<Food>::class.java).toList()
+                    }
+                } else {
+                    // Handle error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("GetAllFoodError", reader.readText())
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetAllFoodError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return food // Return the list of users (could be empty if request fails)
+    }
+    fun GetAllMovements(): List<Movement> {
+        val executor = Executors.newSingleThreadExecutor()
+        var movement: List<Movement> = emptyList()
+
+        executor.execute {
+            try {
+                // Construct the URL for the GET request
+                val url = URL(apiUrl + epMovement + "/All") // Assuming the endpoint is something like /users
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to GET
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val gson = Gson()
+
+                        // Deserialize the JSON array into a List<User>
+                        movement = gson.fromJson(jsonResponse, Array<Movement>::class.java).toList()
+                    }
+                } else {
+                    // Handle error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("GetAllMovementError", reader.readText())
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetAllMovementError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return movement // Return the list of users (could be empty if request fails)
+    }
+    fun GetAllWorkouts(): List<Workout> {
+        val executor = Executors.newSingleThreadExecutor()
+        var workout: List<Workout> = emptyList()
+
+        executor.execute {
+            try {
+                // Construct the URL for the GET request
+                val url = URL(apiUrl + epWorkout + "/All") // Assuming the endpoint is something like /users
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to GET
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val gson = Gson()
+
+                        // Deserialize the JSON array into a List<User>
+                        workout = gson.fromJson(jsonResponse, Array<Workout>::class.java).toList()
+                    }
+                } else {
+                    // Handle error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("GetAllWorkoutError", reader.readText())
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetAllWorkoutError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return workout // Return the list of users (could be empty if request fails)
+    }
 
 
     fun GetDay(date: LocalDate, userId: String): Day?{
@@ -921,6 +1241,382 @@ class DbAccess {
         return responseMessage // Return the server's response (success or error message)
     }
 
+    fun UpdateDay(day: Day): String {
+        val executor = Executors.newSingleThreadExecutor()
+        var responseMessage = ""
+
+        executor.execute {
+            try {
+                // Construct URL for updating the user
+                val url = URL(apiUrl + epDay)
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to POST
+                connection.requestMethod = "PUT"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+                connection.doOutput = true
+
+                // Serialize the User object to JSON using Gson
+                val gson = Gson()
+                val jsonInputString = gson.toJson(day)
+
+                // Write the JSON data to the output stream
+                OutputStreamWriter(connection.outputStream).use { writer ->
+                    writer.write(jsonInputString)
+                    writer.flush()
+                }
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's response message
+                    }
+                } else {
+                    // Read error message if the request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("UpdateDayError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage // Return the server's response (success or error message)
+    }
+    fun UpdateExercise(exercise: Exercise): String {
+        val executor = Executors.newSingleThreadExecutor()
+        var responseMessage = ""
+
+        executor.execute {
+            try {
+                // Construct URL for updating the user
+                val url = URL(apiUrl + epExercise)
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to POST
+                connection.requestMethod = "PUT"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+                connection.doOutput = true
+
+                // Serialize the User object to JSON using Gson
+                val gson = Gson()
+                val jsonInputString = gson.toJson(exercise)
+
+                // Write the JSON data to the output stream
+                OutputStreamWriter(connection.outputStream).use { writer ->
+                    writer.write(jsonInputString)
+                    writer.flush()
+                }
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's response message
+                    }
+                } else {
+                    // Read error message if the request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("UpdateExerciseError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage // Return the server's response (success or error message)
+    }
+    fun UpdateCardio(cardio: CardioExercise): String {
+        val executor = Executors.newSingleThreadExecutor()
+        var responseMessage = ""
+
+        executor.execute {
+            try {
+                // Construct URL for updating the user
+                val url = URL(apiUrl + epCardio)
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to POST
+                connection.requestMethod = "PUT"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+                connection.doOutput = true
+
+                // Serialize the User object to JSON using Gson
+                val gson = Gson()
+                val jsonInputString = gson.toJson(cardio)
+
+                // Write the JSON data to the output stream
+                OutputStreamWriter(connection.outputStream).use { writer ->
+                    writer.write(jsonInputString)
+                    writer.flush()
+                }
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's response message
+                    }
+                } else {
+                    // Read error message if the request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("UpdateCardioError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage // Return the server's response (success or error message)
+    }
+    fun UpdateStrength(strength: StrengthExercise): String {
+        val executor = Executors.newSingleThreadExecutor()
+        var responseMessage = ""
+
+        executor.execute {
+            try {
+                // Construct URL for updating the user
+                val url = URL(apiUrl + epStrength)
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to POST
+                connection.requestMethod = "PUT"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+                connection.doOutput = true
+
+                // Serialize the User object to JSON using Gson
+                val gson = Gson()
+                val jsonInputString = gson.toJson(strength)
+
+                // Write the JSON data to the output stream
+                OutputStreamWriter(connection.outputStream).use { writer ->
+                    writer.write(jsonInputString)
+                    writer.flush()
+                }
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's response message
+                    }
+                } else {
+                    // Read error message if the request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("UpdateUserError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage // Return the server's response (success or error message)
+    }
+    fun UpdateMeal(meal: Meal): String {
+        val executor = Executors.newSingleThreadExecutor()
+        var responseMessage = ""
+
+        executor.execute {
+            try {
+                // Construct URL for updating the user
+                val url = URL(apiUrl + epMeal)
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to POST
+                connection.requestMethod = "PUT"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+                connection.doOutput = true
+
+                // Serialize the User object to JSON using Gson
+                val gson = Gson()
+                val jsonInputString = gson.toJson(meal)
+
+                // Write the JSON data to the output stream
+                OutputStreamWriter(connection.outputStream).use { writer ->
+                    writer.write(jsonInputString)
+                    writer.flush()
+                }
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's response message
+                    }
+                } else {
+                    // Read error message if the request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("UpdateMealError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage // Return the server's response (success or error message)
+    }
+    fun UpdateFood(food: Food): String {
+        val executor = Executors.newSingleThreadExecutor()
+        var responseMessage = ""
+
+        executor.execute {
+            try {
+                // Construct URL for updating the user
+                val url = URL(apiUrl + epUser)
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to POST
+                connection.requestMethod = "PUT"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+                connection.doOutput = true
+
+                // Serialize the User object to JSON using Gson
+                val gson = Gson()
+                val jsonInputString = gson.toJson(food)
+
+                // Write the JSON data to the output stream
+                OutputStreamWriter(connection.outputStream).use { writer ->
+                    writer.write(jsonInputString)
+                    writer.flush()
+                }
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's response message
+                    }
+                } else {
+                    // Read error message if the request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("UpdateFoodError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage // Return the server's response (success or error message)
+    }
+    fun UpdateMovement(movement: Movement): String {
+        val executor = Executors.newSingleThreadExecutor()
+        var responseMessage = ""
+
+        executor.execute {
+            try {
+                // Construct URL for updating the user
+                val url = URL(apiUrl + epMovement)
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to POST
+                connection.requestMethod = "PUT"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+                connection.doOutput = true
+
+                // Serialize the User object to JSON using Gson
+                val gson = Gson()
+                val jsonInputString = gson.toJson(movement)
+
+                // Write the JSON data to the output stream
+                OutputStreamWriter(connection.outputStream).use { writer ->
+                    writer.write(jsonInputString)
+                    writer.flush()
+                }
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's response message
+                    }
+                } else {
+                    // Read error message if the request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("UpdateMovementError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage // Return the server's response (success or error message)
+    }
+    fun UpdateWorkout(workout: Workout): String {
+        val executor = Executors.newSingleThreadExecutor()
+        var responseMessage = ""
+
+        executor.execute {
+            try {
+                // Construct URL for updating the user
+                val url = URL(apiUrl + epWorkout)
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to POST
+                connection.requestMethod = "PUT"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+                connection.doOutput = true
+
+                // Serialize the User object to JSON using Gson
+                val gson = Gson()
+                val jsonInputString = gson.toJson(workout)
+
+                // Write the JSON data to the output stream
+                OutputStreamWriter(connection.outputStream).use { writer ->
+                    writer.write(jsonInputString)
+                    writer.flush()
+                }
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's response message
+                    }
+                } else {
+                    // Read error message if the request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("UpdateWorkoutError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage // Return the server's response (success or error message)
+    }
     //Update//
 
     //Delete//
@@ -931,7 +1627,7 @@ class DbAccess {
         executor.execute {
             try {
                 // Construct URL for deleting the user with the userId
-                val url = URL(apiUrl + epUser)
+                val url = URL(apiUrl + epUser + "?userId=${userId}")
                 val connection = url.openConnection() as HttpURLConnection
 
                 // Set the request method to DELETE
@@ -960,6 +1656,257 @@ class DbAccess {
 
         return responseMessage // Return the server's response (success or error message)
     }
+    fun DeleteDay(date: LocalDate, userId: String): String {
+        val executor = Executors.newSingleThreadExecutor()
+        var responseMessage = ""
 
+        executor.execute {
+            try {
+                // Construct URL for deleting the user with the userId
+                val url = URL(apiUrl + epDay + "?year=${date.year}&month=${date.month}&day=${date.dayOfMonth}&dayOfWeek=${date.dayOfWeek}&userId=${userId}")
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to DELETE
+                connection.requestMethod = "DELETE"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's success message
+                    }
+                } else {
+                    // Read error message if the request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("DeleteDayError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage // Return the server's response (success or error message)
+    }
+    fun DeleteCardio(cardioId: CardioExercise): String {
+        val executor = Executors.newSingleThreadExecutor()
+        var responseMessage = ""
+
+        executor.execute {
+            try {
+                // Construct URL for deleting the user with the userId
+                val url = URL(apiUrl + epCardio + "?cardioId=${cardioId}")
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to DELETE
+                connection.requestMethod = "DELETE"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's success message
+                    }
+                } else {
+                    // Read error message if the request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("DeleteCardioError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage // Return the server's response (success or error message)
+    }
+    fun DeleteStrength(strengthId: StrengthExercise): String {
+        val executor = Executors.newSingleThreadExecutor()
+        var responseMessage = ""
+
+        executor.execute {
+            try {
+                // Construct URL for deleting the user with the userId
+                val url = URL(apiUrl + epStrength+ "?strengthId=${strengthId}")
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to DELETE
+                connection.requestMethod = "DELETE"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's success message
+                    }
+                } else {
+                    // Read error message if the request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("DeleteStrengthError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage // Return the server's response (success or error message)
+    }
+    fun DeleteMeal(mealId: Meal): String {
+        val executor = Executors.newSingleThreadExecutor()
+        var responseMessage = ""
+
+        executor.execute {
+            try {
+                // Construct URL for deleting the user with the userId
+                val url = URL(apiUrl + epMeal+ "?mealId=${mealId}")
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to DELETE
+                connection.requestMethod = "DELETE"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's success message
+                    }
+                } else {
+                    // Read error message if the request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("DeleteMealError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage // Return the server's response (success or error message)
+    }
+    fun DeleteFood(foodId: Food): String {
+        val executor = Executors.newSingleThreadExecutor()
+        var responseMessage = ""
+
+        executor.execute {
+            try {
+                // Construct URL for deleting the user with the userId
+                val url = URL(apiUrl + epFood+ "?foodId=${foodId}")
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to DELETE
+                connection.requestMethod = "DELETE"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's success message
+                    }
+                } else {
+                    // Read error message if the request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("DeleteFoodError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage // Return the server's response (success or error message)
+    }
+    fun DeleteMovement(movementId: Movement): String {
+        val executor = Executors.newSingleThreadExecutor()
+        var responseMessage = ""
+
+        executor.execute {
+            try {
+                // Construct URL for deleting the user with the userId
+                val url = URL(apiUrl + epMovement+ "?movementId=${movementId}")
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to DELETE
+                connection.requestMethod = "DELETE"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's success message
+                    }
+                } else {
+                    // Read error message if the request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("DeleteMovementError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage // Return the server's response (success or error message)
+    }
+    fun DeleteWorkout(workoutId: Workout): String {
+        val executor = Executors.newSingleThreadExecutor()
+        var responseMessage = ""
+
+        executor.execute {
+            try {
+                // Construct URL for deleting the user with the userId
+                val url = URL(apiUrl + epWorkout+ "?workoutId=${workoutId}")
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to DELETE
+                connection.requestMethod = "DELETE"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's success message
+                    }
+                } else {
+                    // Read error message if the request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("DeleteWorkoutError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage // Return the server's response (success or error message)
+    }
     //Delete//
 }

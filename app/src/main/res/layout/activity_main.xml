@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="left"
                 android:paddingBottom="16dp"
                 android:text="Recent Activities"
                 android:textSize="20sp" />
@@ -48,7 +48,7 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@color/orange"
+                    app:cardBackgroundColor="#FF934E"
                     app:cardCornerRadius="16dp">
 
                     <LinearLayout
@@ -80,7 +80,7 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@color/purple"
+                    app:cardBackgroundColor="#6d61da"
                     app:cardCornerRadius="16dp">
 
                     <LinearLayout
@@ -108,7 +108,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="left"
                 android:paddingBottom="16dp"
                 android:text="Popular Exercises"
                 android:textSize="20sp" />
@@ -128,7 +128,7 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView"
-                android:name="com.example.limitless.Workout_Process_Fragment"
+                android:name="com.example.limitless.Workout_Process"
                 android:layout_width="match_parent"
                 android:layout_height="317dp"
                 android:layout_marginTop="16dp" />

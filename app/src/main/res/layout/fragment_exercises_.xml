@@ -89,7 +89,7 @@
                 android:id="@+id/textView24"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cadio"
+                android:text="Cardio"
                 android:textAlignment="center" />
         </LinearLayout>
 
@@ -129,7 +129,7 @@
                 android:id="@+id/textView26"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Streching"
+                android:text="Stretching"
                 android:textAlignment="center" />
         </LinearLayout>
 

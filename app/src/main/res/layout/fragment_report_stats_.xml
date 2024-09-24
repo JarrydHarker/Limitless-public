@@ -8,13 +8,17 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout9"
-        android:layout_width="380dp"
+        android:layout_width="0dp"
         android:layout_height="149dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/statsbox"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintHorizontal_bias="0.548"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.027">
 
         <TextView
             android:id="@+id/textView10"
@@ -23,8 +27,10 @@
             android:layout_marginTop="18dp"
             android:text="Consumed Today"
             app:layout_constraintBottom_toTopOf="@+id/lblConsumedC_RSF"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="26dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.082"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/lblConsumedC_RSF"
@@ -45,8 +51,9 @@
             android:layout_height="0dp"
             android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView16"
-            tools:layout_editor_absoluteX="26dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
         <TextView
             android:id="@+id/textView16"
@@ -66,33 +73,45 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout10"
-        android:layout_width="405dp"
-        android:layout_height="294dp"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout9"
-        app:layout_constraintVertical_bias="0.237">
+        app:layout_constraintVertical_bias="0.076">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout7"
-            android:layout_width="180dp"
-            android:layout_height="85dp"
-            tools:layout_editor_absoluteX="212dp"
-            tools:layout_editor_absoluteY="180dp">
+            android:layout_width="165dp"
+            android:layout_height="86dp"
+            android:background="@drawable/statsbox"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.768">
 
             <LinearLayout
-                android:layout_width="113dp"
-                android:layout_height="72dp"
+                android:id="@+id/linearLayout6"
+                android:layout_width="100dp"
+                android:layout_height="75dp"
+                android:layout_marginTop="4dp"
                 android:orientation="vertical"
-                tools:layout_editor_absoluteX="63dp"
-                tools:layout_editor_absoluteY="1dp">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/textView20"
                     android:layout_width="match_parent"
-                    android:layout_height="34dp"
+                    android:layout_height="wrap_content"
                     android:text="Fats" />
 
                 <TextView
@@ -104,29 +123,44 @@
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="65dp"
-                android:layout_height="72dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/linearLayout6"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/avatars" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout7"
-            android:layout_width="178dp"
-            android:layout_height="82dp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="182dp">
+            android:id="@+id/constraintLayout8"
+            android:layout_width="165dp"
+            android:layout_height="83dp"
+            android:background="@drawable/statsbox"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.761">
 
             <LinearLayout
-                android:layout_width="113dp"
+                android:id="@+id/linearLayout5"
+                android:layout_width="100dp"
                 android:layout_height="72dp"
+                android:layout_marginTop="4dp"
                 android:orientation="vertical"
-                tools:layout_editor_absoluteX="63dp"
-                tools:layout_editor_absoluteY="1dp">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/textView20"
+                    android:id="@+id/carbtxt"
                     android:layout_width="match_parent"
-                    android:layout_height="34dp"
+                    android:layout_height="wrap_content"
                     android:text="Carbs" />
 
                 <TextView
@@ -137,30 +171,45 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="65dp"
-                android:layout_height="72dp"
+                android:id="@+id/carbIMG"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.454"
                 tools:src="@tools:sample/avatars" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout7"
-            android:layout_width="177dp"
+            android:id="@+id/calorieCL"
+            android:layout_width="165dp"
             android:layout_height="82dp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="40dp">
+            android:background="@drawable/statsbox"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.005"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.19">
 
             <LinearLayout
-                android:layout_width="113dp"
+                android:id="@+id/linearLayout4"
+                android:layout_width="100dp"
                 android:layout_height="72dp"
                 android:orientation="vertical"
-                tools:layout_editor_absoluteX="63dp"
-                tools:layout_editor_absoluteY="1dp">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/textView20"
+                    android:id="@+id/calorietxt"
                     android:layout_width="match_parent"
-                    android:layout_height="34dp"
+                    android:layout_height="wrap_content"
                     android:text="Calories" />
 
                 <TextView
@@ -171,30 +220,43 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="65dp"
-                android:layout_height="72dp"
+                android:id="@+id/CaloriesIMG"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.01"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/avatars" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout7"
-            android:layout_width="177dp"
+            android:id="@+id/ProteinCL"
+            android:layout_width="165dp"
             android:layout_height="84dp"
-            tools:layout_editor_absoluteX="215dp"
-            tools:layout_editor_absoluteY="39dp">
+            android:background="@drawable/statsbox"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.186">
 
             <LinearLayout
-                android:layout_width="113dp"
+                android:layout_width="100dp"
                 android:layout_height="72dp"
                 android:orientation="vertical"
-                tools:layout_editor_absoluteX="63dp"
-                tools:layout_editor_absoluteY="1dp">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/textView20"
+                    android:id="@+id/proteintxt"
                     android:layout_width="match_parent"
-                    android:layout_height="34dp"
+                    android:layout_height="wrap_content"
                     android:text="Protein" />
 
                 <TextView
@@ -205,22 +267,30 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="62dp"
-                android:layout_height="72dp"
+                android:id="@+id/ProteinIMG"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/avatars" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="408dp"
+        android:layout_width="0dp"
         android:layout_height="222dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.903">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
