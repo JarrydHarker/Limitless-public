@@ -7,6 +7,7 @@
     tools:context=".DietsStats_Fragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout11"
         android:layout_width="0dp"
         android:layout_height="250dp"
         android:layout_marginHorizontal="30dp"
@@ -20,6 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.054">
+
 
         <ImageView
             android:id="@+id/imageView"
