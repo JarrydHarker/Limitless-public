@@ -10,7 +10,10 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.limitless.data.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
+var currentUser: User? = null
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +29,11 @@ class MainActivity : AppCompatActivity() {
         val dailyActivity: CardView = findViewById(R.id.dailyActivityCard)
         val workout: CardView = findViewById(R.id.workoutsCard)
         val recyclerView: RecyclerView = findViewById(R.id.PE_ListExercises)
+
+        if(currentUser == null){
+            val intent = Intent(this, SSOActivity::class.java)
+            startActivity(intent)
+        }
 
         bottomNavBar.setSelectedItemId(R.id.ic_home)
         bottomNavBar.setOnNavigationItemSelectedListener{item ->
