@@ -2,7 +2,9 @@ package com.example.limitless
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
@@ -25,13 +27,21 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val btn = findViewById<Button>(R.id.btnMap)
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
         val dailyActivity: CardView = findViewById(R.id.dailyActivityCard)
         val workout: CardView = findViewById(R.id.workoutsCard)
         val recyclerView: RecyclerView = findViewById(R.id.PE_ListExercises)
 
+
+        btn.setOnClickListener{
+            val intent = Intent(this, Map_Activity::class.java)
+        }
+
         if(currentUser == null){
             val intent = Intent(this, SSOActivity::class.java)
+
             startActivity(intent)
         }
 
