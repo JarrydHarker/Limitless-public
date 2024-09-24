@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.Limitless" parent="Base.Theme.Limitless" />
+   <style name="dialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slideup</item>
+       <item name="android:windowExitAnimation">@anim/slidedown</item>
+   </style>
 </resources>
