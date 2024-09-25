@@ -37,6 +37,7 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -47,6 +48,12 @@ dependencies {
     implementation(libs.googleid)
     implementation(libs.gson)
     implementation(libs.play.services.auth)
+    implementation(libs.androidx.security.crypto)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.foundation)
+    implementation(libs.androidx.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

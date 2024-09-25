@@ -126,13 +126,6 @@
                     android:layout_height="144dp" />
             </LinearLayout>
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView"
-                android:name="com.example.limitless.Workout_Process_Fragment"
-                android:layout_width="match_parent"
-                android:layout_height="317dp"
-                android:layout_marginTop="16dp" />
-
         </LinearLayout>
     </ScrollView>
 
