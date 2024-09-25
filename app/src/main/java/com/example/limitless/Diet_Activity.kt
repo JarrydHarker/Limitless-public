@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.limitless.data.ViewModels.NutritionViewModel
 import com.example.limitless.data.ViewModels.NutritionViewModelFactory
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Diet_Activity : AppCompatActivity() {
 
@@ -34,9 +35,30 @@ class Diet_Activity : AppCompatActivity() {
             
         val intent = findViewById<Button>(R.id.btnaddmealpage)
 
-        intent.setOnClickListener {
-            val navigateToAddMeal = Intent(this, MealTracker::class.java)
-            startActivity(navigateToAddMeal)
+        
+        val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
+
+        bottomNavBar.setSelectedItemId(R.id.ic_nutrition)
+        bottomNavBar.setOnNavigationItemSelectedListener{item ->
+            when (item.itemId){
+                R.id.ic_workouts -> {
+                    startActivity(Intent(this, Exercise_Activity::class.java))
+                    true
+                }
+                R.id.ic_home -> {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    true
+                }
+                R.id.ic_Report -> {
+                    startActivity(Intent(this, Report_Activity::class.java))
+                    true
+                }
+                R.id.ic_settings -> {
+                    startActivity(Intent(this, Settings::class.java))
+                    true
+                }
+                else -> false
+            }
         }
 
     }

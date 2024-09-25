@@ -24,9 +24,6 @@
             android:name=".Workout_Planner"
             android:exported="false" />
         <activity
-            android:name=".SSOActivity"
-            android:exported="false" />
-        <activity
             android:name=".Settings"
             android:exported="false" />
         <activity
