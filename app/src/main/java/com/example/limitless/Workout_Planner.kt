@@ -2,6 +2,11 @@ package com.example.limitless
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ListView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -18,6 +23,22 @@ class Workout_Planner : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        //Nicks Animation things
+        val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
+        val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
+        val btt = AnimationUtils.loadAnimation(this, R.anim.btt)
+//        val btt2 = AnimationUtils.loadAnimation(this, R.anim.btt2)
+//        val btt3 = AnimationUtils.loadAnimation(this, R.anim.btt3)
+//        val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
+
+        val textView14 = findViewById<TextView>(R.id.textView14)
+        val wp_ListPlanner = findViewById<ListView>(R.id.wp_ListPlanner)
+
+        textView14.startAnimation(ttb)
+        wp_ListPlanner.startAnimation(btt)
+        //till here
+
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
 
         bottomNavBar.setSelectedItemId(R.id.ic_workouts)

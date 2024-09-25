@@ -54,6 +54,7 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -90,6 +91,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
+            android:id="@+id/ll1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#efefef"
@@ -110,6 +112,7 @@
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:paddingLeft="20dp"
@@ -151,6 +154,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
+            android:id="@+id/ll2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#efefef"
@@ -177,6 +181,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -196,6 +201,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#efefef"
@@ -216,6 +222,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
