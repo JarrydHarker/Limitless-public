@@ -109,7 +109,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/textView20"
+                    android:id="@+id/Fatstxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Fats" />
@@ -122,7 +122,7 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/fatsIMG"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 app:layout_constraintBottom_toBottomOf="parent"
