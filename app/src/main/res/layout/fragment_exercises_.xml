@@ -9,14 +9,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout8"
-        android:layout_width="370dp"
+        android:layout_width="0dp"
         android:layout_height="186dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="52dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/diet_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/diet_background">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imageView13"
@@ -67,7 +69,9 @@
         android:id="@+id/horizontalScrollViewCategories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
         android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,9 +87,9 @@
             <LinearLayout
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/buttonbackground"
-                android:layout_marginEnd="8dp">
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/imageView14"
@@ -106,9 +110,9 @@
             <LinearLayout
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/buttonbackground"
-                android:layout_marginEnd="8dp">
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/imageView15"
@@ -129,9 +133,9 @@
             <LinearLayout
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/buttonbackground"
-                android:layout_marginEnd="8dp">
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/imageView16"
@@ -152,9 +156,9 @@
             <LinearLayout
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/buttonbackground"
-                android:layout_marginEnd="8dp">
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/imageView17"
@@ -175,9 +179,9 @@
             <LinearLayout
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/buttonbackground"
-                android:layout_marginEnd="8dp">
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/imageView18"
@@ -198,9 +202,9 @@
             <LinearLayout
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/buttonbackground"
-                android:layout_marginEnd="8dp">
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/imageView19"
@@ -221,9 +225,9 @@
             <LinearLayout
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/buttonbackground"
-                android:layout_marginEnd="8dp">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -246,8 +250,8 @@
         android:id="@+id/textView31"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="4dp"
         android:text="Exercises"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -256,8 +260,10 @@
 
     <ListView
         android:id="@+id/listExercises_EF"
-        android:layout_width="377dp"
+        android:layout_width="0dp"
         android:layout_height="292dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -268,10 +274,11 @@
         android:id="@+id/btnAddExercise_EF"
         android:layout_width="143dp"
         android:layout_height="38dp"
+        android:layout_marginEnd="30dp"
         android:backgroundTint="#6d61da"
         android:text="Add Exercise"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.858"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView31"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
