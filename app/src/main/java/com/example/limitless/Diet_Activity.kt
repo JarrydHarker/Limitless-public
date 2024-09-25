@@ -5,8 +5,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
+import com.example.limitless.data.ViewModels.NutritionViewModel
+import com.example.limitless.data.ViewModels.NutritionViewModelFactory
 
 class Diet_Activity : AppCompatActivity() {
+
+    private lateinit var nutritionViewModel: NutritionViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -16,5 +22,12 @@ class Diet_Activity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        currentUser!!.calorieWallet = 2000.0
+        val viewModelFactory = NutritionViewModelFactory(currentUser!!.calorieWallet!!)
+
+        // Use ViewModelProvider to instantiate the ViewModel
+        nutritionViewModel = ViewModelProvider(this, viewModelFactory)
+            .get(NutritionViewModel::class.java)
     }
 }
