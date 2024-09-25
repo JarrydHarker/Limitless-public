@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
+import com.example.limitless.data.ViewModels.NutritionViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,12 +32,25 @@ class DietsStats_Fragment : Fragment() {
         }
     }
 
+    private lateinit var nutritionViewModel: NutritionViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        // Get the shared ViewModel from the activity scope
+        nutritionViewModel = ViewModelProvider(requireActivity())[NutritionViewModel::class.java]
+
+        val view = inflater.inflate(R.layout.fragment_diets_stats_, container, false)
+        val lblGoal: TextView = view.findViewById(R.id.lblGoal_DSF)
+        val lblFood: TextView = view.findViewById(R.id.lblFood_DSF)
+
+        lblFood.setText(nutritionViewModel.GetTotalCalories().toString())
+        lblGoal.setText(nutritionViewModel.calorieWallet.toString())
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_diets_stats_, container, false)
+        return view
     }
 
     companion object {
