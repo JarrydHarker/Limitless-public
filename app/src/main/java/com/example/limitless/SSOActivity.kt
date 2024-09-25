@@ -1,6 +1,7 @@
 package com.example.limitless
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.GetCredentialResponse
 import android.os.Bundle
@@ -41,6 +42,13 @@ class SSOActivity : AppCompatActivity() {
         val activityContext = this
         // Initialize the CredentialManager
         val credentialManager = CredentialManager.create(this)
+
+        val btnMap = findViewById<Button>(R.id.btnMap_test)
+
+        btnMap.setOnClickListener {
+            val intent = Intent(this, Map_Activity::class.java)
+            startActivity(intent)
+        }
 
         btnGoogle.setOnClickListener {
             /*val signInWithGoogleOption: GetSignInWithGoogleOption = GetSignInWithGoogleOption.Builder("677746774102-0mfqbkl5q7k3b207q7dmutj3mv6s81rq.apps.googleusercontent.com")
