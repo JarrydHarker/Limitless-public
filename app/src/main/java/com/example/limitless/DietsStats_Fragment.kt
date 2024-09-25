@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import com.example.limitless.data.Graphics.CircleGraphic
 import com.example.limitless.data.ViewModels.NutritionViewModel
 
 // TODO: Rename parameter arguments, choose names that match
@@ -45,6 +46,14 @@ class DietsStats_Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_diets_stats_, container, false)
         val lblGoal: TextView = view.findViewById(R.id.lblGoal_DSF)
         val lblFood: TextView = view.findViewById(R.id.lblFood_DSF)
+        val cgTotalCalories: CircleGraphic = view.findViewById(R.id.cgTotalCalories)
+
+        cgTotalCalories.setGoal(nutritionViewModel.calorieWallet!!.toFloat())
+        cgTotalCalories.setProgress(nutritionViewModel.calorieCounter.calories.toFloat())
+        cgTotalCalories.setSize(370f,370f)
+        cgTotalCalories.setThickness(20f)
+        cgTotalCalories.setType("circle")
+
 
         lblFood.setText(nutritionViewModel.GetTotalCalories().toString())
         lblGoal.setText(nutritionViewModel.calorieWallet.toString())
