@@ -24,7 +24,7 @@
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView8"
                 android:name="com.example.limitless.ai"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="73dp" />
 
             <androidx.fragment.app.FragmentContainerView
