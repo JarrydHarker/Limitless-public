@@ -1,6 +1,8 @@
 package com.example.limitless
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -29,5 +31,13 @@ class Diet_Activity : AppCompatActivity() {
         // Use ViewModelProvider to instantiate the ViewModel
         nutritionViewModel = ViewModelProvider(this, viewModelFactory)
             .get(NutritionViewModel::class.java)
+            
+        val intent = findViewById<Button>(R.id.btnaddmealpage)
+
+        intent.setOnClickListener {
+            val navigateToAddMeal = Intent(this, MealTracker::class.java)
+            startActivity(navigateToAddMeal)
+        }
+
     }
 }
