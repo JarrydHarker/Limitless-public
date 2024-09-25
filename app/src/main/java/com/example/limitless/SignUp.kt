@@ -1,10 +1,17 @@
 package com.example.limitless
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.limitless.data.DbAccess
+import com.example.limitless.data.PasswordHasher
+import com.example.limitless.data.User
 
 class SignUp : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,5 +23,47 @@ class SignUp : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val btnSignUp: Button = findViewById(R.id.SU_btnSignIn)
+        val txtEmail: EditText = findViewById(R.id.SU_txtUsername)
+        val txtPassword: EditText = findViewById(R.id.SU_txtPassword)
+
+
+        btnSignUp.setOnClickListener {
+            val email = txtEmail.text.toString()
+            val password = txtPassword.text.toString()
+
+            if(email.isEmpty()){
+                Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            if(password.isEmpty()){
+                Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            val response = SignUpUser(email, password)
+
+            if(response == "Success"){
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+
+            Toast.makeText(this, response, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    fun SignUpUser(email: String, password: String): String{
+        val dbAccess = DbAccess.GetInstance()
+        val user = User()
+        val pwHasher = PasswordHasher()
+
+        val hashedPW = pwHasher.HashPassword(password)
+
+        user.email = email
+        user.password = hashedPW
+
+        return dbAccess.CreateUser(user)
     }
 }

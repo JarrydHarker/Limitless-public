@@ -14,13 +14,13 @@
         android:layout_marginTop="84dp"
         android:text="Today"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/btnaddmealpage"
         app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnaddmealpage"
         android:layout_width="103dp"
         android:layout_height="38dp"
         android:layout_marginTop="76dp"
