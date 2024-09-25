@@ -6,6 +6,8 @@ class CalorieCounter(var calorieWallet: Double?) {
 
     fun CreateMeal(foods: List<Food>){
         val dbAccess = DbAccess.GetInstance()
+
+
     }
 
     fun ChangeWallet(newWallet: Double){

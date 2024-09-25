@@ -23,8 +23,8 @@
         app:layout_constraintVertical_bias="0.054">
 
 
-        <ImageView
-            android:id="@+id/imageView"
+        <com.example.limitless.data.Graphics.CircleGraphic
+            android:id="@+id/cgTotalCalories"
             android:layout_width="149dp"
             android:layout_height="140dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +33,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.854"
-            tools:src="@tools:sample/avatars" />
+            />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
