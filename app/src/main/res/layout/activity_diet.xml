@@ -61,7 +61,7 @@
                 android:id="@+id/fragmentContainerView4"
                 android:name="com.example.limitless.DietsStats_Fragment"
                 android:layout_width="match_parent"
-                android:layout_height="653dp" />
+                android:layout_height="780dp" />
         </LinearLayout>
     </ScrollView>
 
