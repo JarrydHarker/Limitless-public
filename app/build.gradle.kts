@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.limitless"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.limitless"
@@ -58,4 +58,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation ("com.google.android.gms:play-services-auth:20.7.0")
 }

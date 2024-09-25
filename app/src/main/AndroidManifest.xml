@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_HEALTH"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -49,7 +50,10 @@
         <activity
             android:name=".SignUp"
             android:exported="false" />
-        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            />
         <activity
             android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
