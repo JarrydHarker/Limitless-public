@@ -37,7 +37,6 @@ class SSOActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         val btnGoogle: Button = findViewById(R.id.google_sso_button)
         val activityContext = this
         // Initialize the CredentialManager
