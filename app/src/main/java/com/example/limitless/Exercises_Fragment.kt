@@ -5,10 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import com.example.limitless.data.ViewModels.CurrentDayViewModel
+import kotlinx.coroutines.launch
+import androidx.fragment.app.activityViewModels
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
+//private val currentDayViewModel: CurrentDayViewModel by activityViewModels()
 private const val ARG_PARAM2 = "param2"
 
 /**
@@ -18,13 +22,11 @@ private const val ARG_PARAM2 = "param2"
  */
 class Exercises_Fragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
     private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -33,6 +35,14 @@ class Exercises_Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            /*currentDayViewModel.currentScreenState.collect { state ->
+                // Handle your UI updates here based on the state
+
+            }*/
+        }
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_exercises_, container, false)
     }
@@ -48,10 +58,10 @@ class Exercises_Fragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param2: String) =
             Exercises_Fragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
+
                     putString(ARG_PARAM2, param2)
                 }
             }

@@ -13,7 +13,19 @@ import java.util.Date
 import java.util.concurrent.Executors
 
 
-class DbAccess {
+class DbAccess private constructor(){
+
+    companion object {
+        private var instance: DbAccess? = null
+
+        fun GetInstance(): DbAccess {
+            if (instance == null) {
+                instance = DbAccess()
+            }
+            return instance!!
+        }
+    }
+
     private val apiUrl = "https://localhost:7230/api/Limitless"
     private val epUser = "/User"
     private val epDay = "/Day"

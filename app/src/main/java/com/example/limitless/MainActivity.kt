@@ -1,12 +1,17 @@
 package com.example.limitless
 
+import android.content.Context
 import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.compose.material.Text
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -34,14 +39,18 @@ class MainActivity : AppCompatActivity() {
         val workout: CardView = findViewById(R.id.workoutsCard)
         val recyclerView: RecyclerView = findViewById(R.id.PE_ListExercises)
 
+        val sensorManager by lazy {
+            getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        }
+        val sensor: Sensor? by lazy {
+            sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) }
 
-        btn.setOnClickListener{
-            val intent = Intent(this, Map_Activity::class.java)
+        if (sensor == null) {
+            Toast.makeText(this, "Step counter sensor is not present on this device", Toast.LENGTH_LONG).show()
         }
 
         if(currentUser == null){
-            val intent = Intent(this, SSOActivity::class.java)
-
+            val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
 

@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.limitless.data.ViewModels.CurrentDayViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Exercise_Activity : AppCompatActivity() {
@@ -19,6 +20,10 @@ class Exercise_Activity : AppCompatActivity() {
             insets
         }
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
+
+        val currentDayViewModel = CurrentDayViewModel()
+
+        //val state: CurrentDayScreenState = currentDayViewModel.currentScreenState.collectAsState().value
 
         bottomNavBar.setSelectedItemId(R.id.ic_workouts)
         bottomNavBar.setOnNavigationItemSelectedListener{item ->
