@@ -79,7 +79,10 @@ class Log_Meal : AppCompatActivity() {
                 )
             )
 
-            // Show the dialog
+            // Create a CalorieCounter instance
+            val calorieCounter = CalorieCounter(calorieWallet = 2000.0)
+
+
             showDialog(foods, nutritionViewModel.calorieCounter)
         }
 

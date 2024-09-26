@@ -36,6 +36,9 @@
             android:name=".User_Height"
             android:exported="false" />
         <activity
+            android:name=".data.Add_Exercise"
+            android:exported="false" />
+        <activity
             android:name=".Log_Meal"
             android:exported="false" />
         <activity
