@@ -21,9 +21,6 @@ class Exercise_Activity : AppCompatActivity() {
         }
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
 
-
-        //val state: CurrentDayScreenState = currentDayViewModel.currentScreenState.collectAsState().value
-
         bottomNavBar.setSelectedItemId(R.id.ic_workouts)
         bottomNavBar.setOnNavigationItemSelectedListener{item ->
             when (item.itemId){
