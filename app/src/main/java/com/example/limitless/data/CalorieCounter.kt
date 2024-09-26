@@ -5,9 +5,7 @@ class CalorieCounter(var calorieWallet: Double?) {
     var arrMeals: MutableList<Meal>? = null
 
     fun CreateMeal(foods: List<Food>){
-        val dbAccess = DbAccess.GetInstance()
-
-
+        //val dbAccess = DbAccess.GetInstance()
     }
 
     fun ChangeWallet(newWallet: Double){

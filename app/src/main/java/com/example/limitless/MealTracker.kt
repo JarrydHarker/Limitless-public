@@ -12,7 +12,7 @@ import com.example.limitless.data.ViewModels.NutritionViewModel
 
 class MealTracker : AppCompatActivity() {
 
-    private lateinit var nutritionViewModel: NutritionViewModel
+     private lateinit var nutritionViewModel: NutritionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +20,10 @@ class MealTracker : AppCompatActivity() {
 
         nutritionViewModel = ViewModelProvider(this, viewModelFactory)
             .get(NutritionViewModel::class.java)
+
+
+
+
     }
 
 

@@ -40,6 +40,13 @@ class Login : AppCompatActivity() {
             insets
         }
 
+        val btnMap = findViewById<Button>(R.id.btnMap)
+
+        btnMap.setOnClickListener {
+            val intent = Intent(this, Map_Activity::class.java)
+            startActivity(intent)
+        }
+
         val btnLogin: Button = findViewById(R.id.btnLogin_LG)
         val btnSignup: Button = findViewById(R.id.btnSignup_LG)
         val btnSkip: Button = findViewById(R.id.btnSkip)
