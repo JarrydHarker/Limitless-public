@@ -27,6 +27,12 @@ class SignUp : AppCompatActivity() {
         val btnSignUp: Button = findViewById(R.id.SU_btnSignIn)
         val txtEmail: EditText = findViewById(R.id.SU_txtUsername)
         val txtPassword: EditText = findViewById(R.id.SU_txtPassword)
+        val test: Button = findViewById(R.id.btnTest)
+
+        test.setOnClickListener{
+            val intent = Intent(this, User_Height::class.java)
+            startActivity(intent)
+        }
 
 
         btnSignUp.setOnClickListener {
