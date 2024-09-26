@@ -133,17 +133,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/SU_lblForgotPass"
-            android:layout_width="147dp"
-            android:layout_height="37dp"
-            android:text="Forgot Password?"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.15"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.874" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
