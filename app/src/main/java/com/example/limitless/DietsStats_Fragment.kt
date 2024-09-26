@@ -9,7 +9,6 @@ import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.example.limitless.data.Graphics.CircleGraphic
-import com.example.limitless.data.ViewModels.NutritionViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,12 +33,6 @@ class DietsStats_Fragment : Fragment() {
         }
     }
 
-
-
-
-
-    private lateinit var nutritionViewModel: NutritionViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,8 +40,6 @@ class DietsStats_Fragment : Fragment() {
 
 
         // Get the shared ViewModel from the activity scope
-        nutritionViewModel = ViewModelProvider(requireActivity())[NutritionViewModel::class.java]
-
         val view = inflater.inflate(R.layout.fragment_diets_stats_, container, false)
         val lblGoal: TextView = view.findViewById(R.id.lblGoal_DSF)
         val lblFood: TextView = view.findViewById(R.id.lblFood_DSF)
@@ -58,13 +49,11 @@ class DietsStats_Fragment : Fragment() {
         val cgFibre: CircleGraphic = view.findViewById(R.id.cgFibre)
         val cgProtein: CircleGraphic = view.findViewById(R.id.cgProtein)
 
-
         cgTotalCalories.setGoal(nutritionViewModel.calorieWallet!!.toFloat())
-        cgTotalCalories.setProgress(nutritionViewModel.calorieCounter.calories.toFloat())
+        cgTotalCalories.setProgress(nutritionViewModel.calorieCounter.CalculateTotalCalories().toFloat())
         cgTotalCalories.setSize(370f,370f)
         cgTotalCalories.setThickness(20f)
         cgTotalCalories.setType("circle")
-
 
         lblFood.setText(nutritionViewModel.GetTotalCalories().toString())
         lblGoal.setText(nutritionViewModel.calorieWallet.toString())

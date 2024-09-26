@@ -20,6 +20,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.example.limitless.MainActivity
 import com.example.limitless.R
+import com.example.limitless.activityViewModel
 import java.util.Calendar
 
 class StepCounterService : Service() {
@@ -59,8 +60,9 @@ class StepCounterService : Service() {
     }
 
     private fun startTrackingSteps() {
-        pedometer.startListening { stepsSinceReboot ->
-            stepCountForTheDay = calculateStepsForTheDay(stepsSinceReboot) // Implement this based on how you're tracking
+        pedometer.startListening { currentSteps ->
+            activityViewModel.steps = currentSteps.toInt()
+            stepCountForTheDay = currentSteps // Implement this based on how you're tracking
             updateNotification(stepCountForTheDay)
         }
     }

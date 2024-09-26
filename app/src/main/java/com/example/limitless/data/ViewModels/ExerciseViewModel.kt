@@ -11,13 +11,3 @@ class ActivityViewModel(val currentDate: LocalDate) {
 
 
 }
-
-class ActivityViewModelFactory(private val calorieWallet: Double) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(NutritionViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return NutritionViewModel(LocalDate.now() , calorieWallet) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}

@@ -9,6 +9,7 @@ import android.widget.Button
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import androidx.fragment.app.activityViewModels
+import com.example.limitless.data.Graphics.CircleGraphic
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,6 +37,15 @@ class Exercises_Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_exercises_, container, false)
+
+        val cgSteps: CircleGraphic = view.findViewById(R.id.cgSteps)
+
+        cgSteps.setSize(280f,280f)
+        cgSteps.setThickness(20f)
+        cgSteps.setType("circle")
+        cgSteps.RemoveLabel()
+        cgSteps.setGoal(currentUser?.stepGoal!!.toFloat())
+        cgSteps.setProgress(activityViewModel.steps.toFloat())
 
         val btnAddWorkout: Button = view.findViewById(R.id.btnAddWorkout_EF)
 

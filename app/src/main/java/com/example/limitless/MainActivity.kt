@@ -31,8 +31,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.Manifest
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityOptionsCompat
+import com.example.limitless.data.ViewModels.ActivityViewModel
+import com.example.limitless.data.ViewModels.NutritionViewModel
+import java.time.LocalDate
 
-var currentUser: User? = null
+var  currentUser: User? = null
+lateinit var nutritionViewModel: NutritionViewModel
+lateinit var activityViewModel: ActivityViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -52,6 +57,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
+
+        // Initialize ViewModel with calorieWallet from currentUser
+        currentUser!!.calorieWallet = 2000.0
+        nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.calorieWallet)
+        activityViewModel = ActivityViewModel(LocalDate.now())
 
         checkAndRequestPermissions()
 
