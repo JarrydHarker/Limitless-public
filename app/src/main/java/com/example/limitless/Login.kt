@@ -40,6 +40,7 @@ class Login : AppCompatActivity() {
             insets
         }
 
+        val btnForgotPassword: Button = findViewById(R.id.Btn2ForgotPassword)
         val btnLogin: Button = findViewById(R.id.btnLogin_LG)
         val btnSignup: Button = findViewById(R.id.btnSignup_LG)
         val btnSkip: Button = findViewById(R.id.btnSkip)
@@ -49,6 +50,11 @@ class Login : AppCompatActivity() {
         val activityContext = this
         // Initialize the CredentialManager
         val credentialManager = CredentialManager.create(this)
+
+        btnForgotPassword.setOnClickListener{
+            val intent = Intent(this, ForgotPassword::class.java)
+            startActivity(intent)
+        }
 
         btnSignup.setOnClickListener {
             val intent = Intent(this, SignUp::class.java)
