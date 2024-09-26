@@ -14,16 +14,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MealTracker : AppCompatActivity() {
 
-     private lateinit var nutritionViewModel: NutritionViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meal_tracker)
 
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
-
-        nutritionViewModel = ViewModelProvider(this, viewModelFactory)
-            .get(NutritionViewModel::class.java)
 
         bottomNavBar.setSelectedItemId(R.id.ic_nutrition)
         bottomNavBar.setOnNavigationItemSelectedListener { item ->

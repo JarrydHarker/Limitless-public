@@ -27,8 +27,6 @@ class MealTracker_Fragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var nutritionViewModel: NutritionViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -41,8 +39,6 @@ class MealTracker_Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Get the shared ViewModel from the activity scope
-        nutritionViewModel = ViewModelProvider(requireActivity())[NutritionViewModel::class.java]
 
         val view = inflater.inflate(R.layout.fragment_meal_tracker_, container, false)
 

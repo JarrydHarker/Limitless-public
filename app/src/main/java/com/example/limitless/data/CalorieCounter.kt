@@ -1,5 +1,6 @@
 package com.example.limitless.data
 
+import android.util.Log
 import java.time.LocalDate
 
 class CalorieCounter(var calorieWallet: Double?) {
@@ -21,10 +22,12 @@ class CalorieCounter(var calorieWallet: Double?) {
 
             // Add the meal to the calorie counter's meal list
             if (calorieCounter.arrMeals == null) {
-                calorieCounter.arrMeals = mutableListOf()
+                calorieCounter.arrMeals = mutableListOf(meal)
+                Log.d("Food", "Number of meals: ${arrMeals?.count()}")
+            }else{
+                calorieCounter.arrMeals?.add(meal)
             }
-            calorieCounter.arrMeals?.add(meal)
-        }
+    }
 
 
     fun ChangeWallet(newWallet: Double){
@@ -35,11 +38,13 @@ class CalorieCounter(var calorieWallet: Double?) {
         var totalCalories = 0.0
 
         if(arrMeals != null){
+            Log.d("Food", "arrMeals is not null")
             for(meal in arrMeals!!){
                 var mealCalories = 0.0
 
                 for(food in meal.foods){
                     mealCalories += food.calories
+                    Log.d("Food", "${food.description}|${food.calories}")
                 }
 
                 totalCalories += mealCalories

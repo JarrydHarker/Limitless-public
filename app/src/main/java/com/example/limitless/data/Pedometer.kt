@@ -45,7 +45,6 @@ class Pedometer(private val context: Context) {
                     onStepCountUpdated(currentStepCount)
                 }
             }
-
             override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
         }
 
