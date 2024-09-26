@@ -1,5 +1,6 @@
 package com.example.limitless
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,6 +20,8 @@ private const val ARG_PARAM2 = "param2"
  * Use the [MealTracker_Fragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+var mealTitle: String = ""
+
 class MealTracker_Fragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -48,19 +51,29 @@ class MealTracker_Fragment : Fragment() {
         val btnAddDinner: Button = view.findViewById(R.id.btnAddDinner_MT)
 
         btnAddBreakfast.setOnClickListener{
-
+            mealTitle = "Breakfast"
+            val intent = Intent(requireActivity(), Log_Meal::class.java)
+            startActivity(intent)
         }
 
         btnAddLunch.setOnClickListener{
-
+            mealTitle = "Lunch"
+            val intent = Intent(requireActivity(), Log_Meal::class.java)
+            startActivity(intent)
         }
 
         btnAddDinner.setOnClickListener{
-
+            mealTitle = "Dinner"
+            val intent = Intent(requireActivity(), Log_Meal::class.java)
+            startActivity(intent)
         }
 
         // Inflate the layout for this fragment
         return view
+    }
+
+    fun showDialog(){
+
     }
 
     companion object {

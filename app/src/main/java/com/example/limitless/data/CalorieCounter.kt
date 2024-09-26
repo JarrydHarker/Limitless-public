@@ -1,14 +1,31 @@
 package com.example.limitless.data
 
+import java.time.LocalDate
+
 class CalorieCounter(var calorieWallet: Double?) {
     var calories = 0
     var arrMeals: MutableList<Meal>? = null
 
-    fun CreateMeal(foods: List<Food>){
-        val dbAccess = DbAccess.GetInstance()
+    fun CreateMeal(foods: List<Food>, calorieCounter: CalorieCounter) {
+        //val dbAccess = DbAccess.GetInstance()
 
+            // Create a new meal
+            val meal = Meal(
+                mealId = "1",
+                date = LocalDate.now(),
+                userId = "user123", // Replace with actual user ID
+                name = "My Meal",
+                day = null, // Replace with actual day object if needed
+                foods = foods.toMutableList()
+            )
 
-    }
+            // Add the meal to the calorie counter's meal list
+            if (calorieCounter.arrMeals == null) {
+                calorieCounter.arrMeals = mutableListOf()
+            }
+            calorieCounter.arrMeals?.add(meal)
+        }
+
 
     fun ChangeWallet(newWallet: Double){
         calorieWallet = newWallet

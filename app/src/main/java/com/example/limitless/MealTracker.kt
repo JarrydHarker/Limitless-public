@@ -14,7 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MealTracker : AppCompatActivity() {
 
-    private lateinit var nutritionViewModel: NutritionViewModel
+     private lateinit var nutritionViewModel: NutritionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
