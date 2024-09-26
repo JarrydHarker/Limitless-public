@@ -21,9 +21,6 @@ class MealTracker : AppCompatActivity() {
         nutritionViewModel = ViewModelProvider(this, viewModelFactory)
             .get(NutritionViewModel::class.java)
 
-
-
-
     }
 
 
