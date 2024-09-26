@@ -37,6 +37,7 @@ class CircleGraphic @JvmOverloads constructor(
     private var isReset = false
     private var drawLevels = false
     private var drawWeekly = false
+    private var hasLabel = true
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -80,20 +81,26 @@ class CircleGraphic @JvmOverloads constructor(
     }
 
     private fun drawCircle(canvas: Canvas) {
-        textPaint.textSize=height/5
-        // Set the typeface to bold
-        textPaint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
-        textPaint.color= Color.WHITE
 
-        paint.style = Paint.Style.STROKE
-        canvas.drawArc(10f, 10f, width, height, 270f, calcSegmentSize(progress, goal), false, paint)
-        paint.color = Color.LTGRAY
-        canvas.drawArc(10f,10f,width, height,270f + calcSegmentSize(progress, goal),360 - calcSegmentSize(progress, goal),false, paint)
+        if(hasLabel){
+            textPaint.textSize=height/5
+            // Set the typeface to bold
+            textPaint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+            textPaint.color= Color.WHITE
 
-        canvas.drawText((goal - progress).toInt().toString(), (width / 2)-100, (height / 2), textPaint)
-        textPaint.textSize=height/9
-        textPaint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
-        canvas.drawText("remaining", (width / 2)-100, (height / 2)+80, textPaint)
+            canvas.drawArc(10f, 10f, width, height, 270f, calcSegmentSize(progress, goal), false, paint)
+            paint.color = Color.LTGRAY
+            canvas.drawArc(10f,10f,width, height,270f + calcSegmentSize(progress, goal),360 - calcSegmentSize(progress, goal),false, paint)
+
+            canvas.drawText((goal - progress).toInt().toString(), (width / 2)-100, (height / 2), textPaint)
+            textPaint.textSize=height/9
+            textPaint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
+            canvas.drawText("remaining", (width / 2)-100, (height / 2)+80, textPaint)
+        }else {
+            canvas.drawArc(10f, 10f, width, height, 270f, calcSegmentSize(progress, goal), false, paint)
+            paint.color = Color.LTGRAY
+            canvas.drawArc(10f,10f,width, height,270f + calcSegmentSize(progress, goal),360 - calcSegmentSize(progress, goal),false, paint)
+        }
     }
 
     private fun calcSegmentSize(progress: Float, goal: Float): Float {
@@ -180,6 +187,10 @@ class CircleGraphic @JvmOverloads constructor(
         this.progress = progress
         isUpdate = true
         invalidate()
+    }
+
+    fun RemoveLabel(){
+        hasLabel = false
     }
 
     fun resetTimer(goal: Float, progress: Float){
