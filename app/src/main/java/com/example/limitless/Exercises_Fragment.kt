@@ -34,16 +34,10 @@ class Exercises_Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            /*currentDayViewModel.currentScreenState.collect { state ->
-                // Handle your UI updates here based on the state
-
-            }*/
-        }
+        val view = inflater.inflate(R.layout.fragment_exercises_, container, false)
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_exercises_, container, false)
+        return view
     }
 
     companion object {
