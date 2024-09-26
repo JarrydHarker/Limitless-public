@@ -182,16 +182,15 @@
                     android:text="-" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/fatsIMG"
+            <com.example.limitless.data.Graphics.CircleGraphic
+                android:id="@+id/cgFats"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/linearLayout6"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintTop_toTopOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -231,8 +230,8 @@
                     android:text="-" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/carbIMG"
+            <com.example.limitless.data.Graphics.CircleGraphic
+                android:id="@+id/cgCarbs"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -240,8 +239,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.454"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintVertical_bias="0.454"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -268,10 +266,10 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/calorietxt"
+                    android:id="@+id/fibretxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Calories" />
+                    android:text="Fibre" />
 
                 <TextView
                     android:id="@+id/lblCalories_RSF"
@@ -280,16 +278,15 @@
                     android:text="-" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/CaloriesIMG"
+            <com.example.limitless.data.Graphics.CircleGraphic
+                android:id="@+id/cgFibre"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.01"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -327,16 +324,15 @@
                     android:text="-" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/ProteinIMG"
+            <com.example.limitless.data.Graphics.CircleGraphic
+                android:id="@+id/cgProtein"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

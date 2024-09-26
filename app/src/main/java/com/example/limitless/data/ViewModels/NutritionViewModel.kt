@@ -3,8 +3,9 @@ package com.example.limitless.data.ViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.limitless.data.CalorieCounter
+import java.time.LocalDate
 
-class NutritionViewModel(var calorieWallet: Double? = 2250.0): ViewModel() {
+class NutritionViewModel(val currentDate: LocalDate , var calorieWallet: Double? = 2250.0): ViewModel() {
     var proteinRatio = 0.35
     var carbRatio = 0.45
     var fibreRatio = 0.014
@@ -121,7 +122,7 @@ class NutritionViewModelFactory(private val calorieWallet: Double) : ViewModelPr
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(NutritionViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return NutritionViewModel(calorieWallet) as T
+            return NutritionViewModel(LocalDate.now() , calorieWallet) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

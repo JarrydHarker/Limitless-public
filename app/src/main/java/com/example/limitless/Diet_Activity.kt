@@ -37,8 +37,8 @@ class Diet_Activity : AppCompatActivity() {
             .get(NutritionViewModel::class.java)
 
         // Setup button to navigate to Add Meal page
-        val intentButton = findViewById<Button>(R.id.btnaddmealpage)
-        intentButton.setOnClickListener {
+       val btnAddMeal: Button = findViewById(R.id.btnAddMeal)
+        btnAddMeal.setOnClickListener {
             val intent = Intent(this, MealTracker::class.java)
             val options = ActivityOptionsCompat.makeCustomAnimation(
                 this, R.anim.slide_in_right, R.anim.slide_out_left
@@ -94,9 +94,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import com.example.limitless.data.Meal
 import com.example.limitless.data.ViewModels.NutritionViewModel
 import com.example.limitless.data.ViewModels.NutritionViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
+val viewModelFactory = NutritionViewModelFactory(currentUser!!.calorieWallet!!)
 
 class Diet_Activity : AppCompatActivity() {
 
@@ -113,13 +116,18 @@ class Diet_Activity : AppCompatActivity() {
         }
 
         currentUser!!.calorieWallet = 2000.0
-        val viewModelFactory = NutritionViewModelFactory(currentUser!!.calorieWallet!!)
+
 
         // Use ViewModelProvider to instantiate the ViewModel
         nutritionViewModel = ViewModelProvider(this, viewModelFactory)
             .get(NutritionViewModel::class.java)
+            
+        val btnAddMeal: Button = findViewById(R.id.btnAddMeal)
 
-        val intent = findViewById<Button>(R.id.btnaddmealpage)
+        btnAddMeal.setOnClickListener{
+            val intent = Intent(this, MealTracker::class.java)
+            startActivity(intent)
+        }
 
 
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)

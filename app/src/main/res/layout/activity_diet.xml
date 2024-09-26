@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content">
 
                 <Button
-                    android:id="@+id/btnaddmealpage"
+                    android:id="@+id/btnAddMeal"
                     android:layout_width="103dp"
                     android:layout_height="38dp"
                     android:layout_marginTop="28dp"
@@ -50,7 +50,7 @@
                     android:layout_marginTop="36dp"
                     android:text="Today"
                     android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/btnaddmealpage"
+                    app:layout_constraintEnd_toStartOf="@+id/btnAddMeal"
                     app:layout_constraintHorizontal_bias="0.13"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
