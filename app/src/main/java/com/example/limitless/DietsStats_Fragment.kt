@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.example.limitless.data.Graphics.CircleGraphic
@@ -33,12 +34,17 @@ class DietsStats_Fragment : Fragment() {
         }
     }
 
+
+
+
+
     private lateinit var nutritionViewModel: NutritionViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
 
         // Get the shared ViewModel from the activity scope
         nutritionViewModel = ViewModelProvider(requireActivity())[NutritionViewModel::class.java]

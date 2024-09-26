@@ -5,7 +5,11 @@ import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -32,6 +36,23 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        //Nicks Animation things
+        val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
+//        val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
+        val btt = AnimationUtils.loadAnimation(this, R.anim.btt)
+        val btt2 = AnimationUtils.loadAnimation(this, R.anim.btt2)
+//        val btt3 = AnimationUtils.loadAnimation(this, R.anim.btt3)
+//        val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
+
+        val LinearLayout3 = findViewById<LinearLayout>(R.id.linearLayout3)
+        val linearLayout2 = findViewById<LinearLayout>(R.id.linearLayout2)
+        val scrollView2 = findViewById<ScrollView>(R.id.scrollView2)
+
+        scrollView2.startAnimation(ttb)
+        linearLayout2.startAnimation(btt2)
+        LinearLayout3.startAnimation(btt)
+        //till here
 
         val btn = findViewById<Button>(R.id.btnMap)
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)

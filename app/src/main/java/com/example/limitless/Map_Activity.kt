@@ -25,21 +25,21 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
-
+var isPaused = false
 class Map_Activity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_map)
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
         val btnShow = findViewById<Button>(R.id.btnTimerDialog)
-
-
-
         btnShow.setOnClickListener{
             showDialog()
         }
@@ -50,25 +50,41 @@ class Map_Activity : AppCompatActivity() {
     private fun showDialog(){
         val dialog = Dialog(this@Map_Activity)
 
-        val time: Float = (0*3600000).toFloat() + (1*60000).toFloat() + (3*1000).toFloat()
+        val time: Float = (60*3600000).toFloat() + (60*60000).toFloat() + (60*1000).toFloat()
         val Ticktimer = Timer(time.toLong())
+
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.timer_dialog)
         dialog.window!!.attributes.windowAnimations=R.style.dialogAnimation
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window!!.setGravity(Gravity.BOTTOM)
+
         val cancel = dialog.findViewById<Button>(R.id.btnClose)
         val go = dialog.findViewById<Button>(R.id.btnGO)
+        val stop = dialog.findViewById<Button>(R.id.btnStop)
         val lblTime1 = dialog.findViewById<TextView>(R.id.lblTime1)
 
+        stop.setOnClickListener {
+            Ticktimer.pause()
+        }
+
         go.setOnClickListener{
+
+
+            if (Ticktimer.time > 0){
+                Ticktimer.resume()
+            }else{
+                Ticktimer.start()
+                go.text = "Resume"
+            }
+
             Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate({
                 try {
                     runOnUiThread {
                         lblTime1.text = Ticktimer.getTime()
                     }
-                    showChart(Ticktimer.get(), time)
+                    //showChart(Ticktimer.get(), time)
                 } catch (e: Exception) {
                     Log.e("Error", "Error: ${e.message}")
                 }
@@ -81,7 +97,7 @@ class Map_Activity : AppCompatActivity() {
         dialog.show()
     }
 
-    fun showChart(time: Float, goal: Float){
+    /*fun showChart(time: Float, goal: Float){
         try{
             val pieChart: PieChart = findViewById(R.id.TT_pieChart)
 
@@ -185,7 +201,7 @@ class Map_Activity : AppCompatActivity() {
         }catch(e: Exception){
             Log.e("Error", e.toString())
         }
-    }
+    }*/
 
 
 }
