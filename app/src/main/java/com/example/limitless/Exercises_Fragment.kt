@@ -1,13 +1,16 @@
 package com.example.limitless
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import androidx.fragment.app.activityViewModels
+import com.example.limitless.data.Add_Exercise
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,9 +44,16 @@ class Exercises_Fragment : Fragment() {
 
             }*/
         }
+        val view = inflater.inflate(R.layout.fragment_exercises_, container, false)
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_exercises_, container, false)
+        val btnExercise = view.findViewById<Button>(R.id.btnAddWorkout_EF)
+
+        btnExercise.setOnClickListener {
+            val intent = Intent(requireActivity(), Add_Exercise::class.java)
+            startActivity(intent)
+        }
+
+        return view
     }
 
     companion object {

@@ -83,7 +83,6 @@ class Log_Meal : AppCompatActivity() {
             val calorieCounter = CalorieCounter(calorieWallet = 2000.0)
 
 
-
             // Show the dialog
             showDialog(foods, calorieCounter)
         }
