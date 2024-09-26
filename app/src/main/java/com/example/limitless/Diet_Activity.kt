@@ -13,6 +13,8 @@ import com.example.limitless.data.ViewModels.NutritionViewModel
 import com.example.limitless.data.ViewModels.NutritionViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+val viewModelFactory = NutritionViewModelFactory(currentUser!!.calorieWallet!!)
+
 class Diet_Activity : AppCompatActivity() {
 
     private lateinit var nutritionViewModel: NutritionViewModel

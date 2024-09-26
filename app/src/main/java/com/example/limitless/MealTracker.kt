@@ -8,6 +8,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.limitless.data.ViewModels.NutritionViewModel
 
+
+
 class MealTracker : AppCompatActivity() {
 
     private lateinit var nutritionViewModel: NutritionViewModel
