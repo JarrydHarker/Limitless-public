@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import androidx.fragment.app.activityViewModels
@@ -35,6 +36,12 @@ class Exercises_Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_exercises_, container, false)
+
+        val btnAddWorkout: Button = view.findViewById(R.id.btnAddWorkout_EF)
+
+        btnAddWorkout.setOnClickListener {
+
+        }
 
         // Inflate the layout for this fragment
         return view

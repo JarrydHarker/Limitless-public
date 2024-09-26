@@ -32,10 +32,14 @@ class Pedometer(private val context: Context) {
 
                     // Retrieve the stored steps reset at midnight from SharedPreferences
                     val sharedPreferences = context.getSharedPreferences("StepCounterPrefs", Context.MODE_PRIVATE)
-                    val storedSteps = sharedPreferences.getLong("storedSteps", stepsSinceReboot)
+                    storedSteps = sharedPreferences.getLong("storedSteps", stepsSinceReboot)
 
                     // Calculate daily steps by subtracting storedSteps from stepsSinceReboot
                     currentStepCount = stepsSinceReboot - storedSteps
+
+                    val editor = sharedPreferences.edit()
+                    editor.putLong("currentStepCount", currentStepCount)
+                    editor.apply()
 
                     // Update the UI or app logic with the current step count
                     onStepCountUpdated(currentStepCount)
