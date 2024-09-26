@@ -55,19 +55,19 @@ class Diet_Activity : AppCompatActivity() {
         bottomNavBar.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.ic_workouts -> {
-                    navigateToActivity(Exercise_Activity::class.java)
+                    navigateToActivityLeft(Exercise_Activity::class.java)
                     true
                 }
                 R.id.ic_home -> {
-                    navigateToActivity(MainActivity::class.java)
+                    navigateToActivityLeft(MainActivity::class.java)
                     true
                 }
                 R.id.ic_Report -> {
-                    navigateToActivity(Report_Activity::class.java)
+                    navigateToActivityLeft(Report_Activity::class.java)
                     true
                 }
                 R.id.ic_settings -> {
-                    navigateToActivity(Settings::class.java)
+                    navigateToActivityRight(Settings::class.java)
                     true
                 }
                 else -> false
@@ -76,10 +76,17 @@ class Diet_Activity : AppCompatActivity() {
     }
 
     // Helper function to navigate to another activity with transition
-    private fun navigateToActivity(activityClass: Class<*>) {
+    private fun navigateToActivityRight(activityClass: Class<*>) {
         val intent = Intent(this, activityClass)
         val options = ActivityOptionsCompat.makeCustomAnimation(
             this, R.anim.slide_in_right, R.anim.slide_out_left
+        )
+        startActivity(intent, options.toBundle())
+    }
+    private fun navigateToActivityLeft(activityClass: Class<*>) {
+        val intent = Intent(this, activityClass)
+        val options = ActivityOptionsCompat.makeCustomAnimation(
+            this, R.anim.slide_in_left, R.anim.slide_out_right
         )
         startActivity(intent, options.toBundle())
     }

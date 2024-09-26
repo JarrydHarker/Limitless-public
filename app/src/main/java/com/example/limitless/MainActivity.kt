@@ -30,6 +30,7 @@ import com.example.limitless.data.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.Manifest
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityOptionsCompat
 
 var currentUser: User? = null
 
@@ -85,19 +86,19 @@ class MainActivity : AppCompatActivity() {
         bottomNavBar.setOnNavigationItemSelectedListener{item ->
             when (item.itemId){
                 R.id.ic_workouts -> {
-                    startActivity(Intent(this, Exercise_Activity::class.java))
+                    navigateToActivityLeft(Exercise_Activity::class.java)
                     true
                 }
                 R.id.ic_nutrition -> {
-                    startActivity(Intent(this, Diet_Activity::class.java))
+                    navigateToActivityRight(Diet_Activity::class.java)
                     true
                 }
                 R.id.ic_Report -> {
-                    startActivity(Intent(this, Report_Activity::class.java))
+                    navigateToActivityLeft(Report_Activity::class.java)
                     true
                 }
                 R.id.ic_settings -> {
-                    startActivity(Intent(this, Settings::class.java))
+                    navigateToActivityRight(Settings::class.java)
                     true
                 }
                 else -> false
@@ -119,6 +120,22 @@ class MainActivity : AppCompatActivity() {
         recyclerView.itemAnimator = DefaultItemAnimator()
         //recyclerView.adapter = moviesAdapter
 
+    }
+
+    // Helper function to navigate to another activity with transition
+    private fun navigateToActivityRight(activityClass: Class<*>) {
+        val intent = Intent(this, activityClass)
+        val options = ActivityOptionsCompat.makeCustomAnimation(
+            this, R.anim.slide_in_right, R.anim.slide_out_left
+        )
+        startActivity(intent, options.toBundle())
+    }
+    private fun navigateToActivityLeft(activityClass: Class<*>) {
+        val intent = Intent(this, activityClass)
+        val options = ActivityOptionsCompat.makeCustomAnimation(
+            this, R.anim.slide_in_left, R.anim.slide_out_right
+        )
+        startActivity(intent, options.toBundle())
     }
 
     private fun checkAndRequestPermissions() {

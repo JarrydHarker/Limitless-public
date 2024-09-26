@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -24,23 +25,31 @@ class Report_Activity : AppCompatActivity() {
         bottomNavBar.setOnNavigationItemSelectedListener{item ->
             when (item.itemId){
                 R.id.ic_nutrition -> {
-                    startActivity(Intent(this, Diet_Activity::class.java))
+                    navigateToActivityRight(Diet_Activity::class.java)
                     true
                 }
                 R.id.ic_home -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    navigateToActivityRight(MainActivity::class.java)
                     true
                 }
                 R.id.ic_workouts -> {
-                    startActivity(Intent(this, Exercise_Activity::class.java))
+                    navigateToActivityRight(Exercise_Activity::class.java)
                     true
                 }
                 R.id.ic_settings -> {
-                    startActivity(Intent(this, Settings::class.java))
+                    navigateToActivityRight(Settings::class.java)
                     true
                 }
                 else -> false
             }
         }
+    }
+    // Helper function to navigate to another activity with transition
+    private fun navigateToActivityRight(activityClass: Class<*>) {
+        val intent = Intent(this, activityClass)
+        val options = ActivityOptionsCompat.makeCustomAnimation(
+            this, R.anim.slide_in_right, R.anim.slide_out_left
+        )
+        startActivity(intent, options.toBundle())
     }
 }
