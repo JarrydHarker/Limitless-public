@@ -10,7 +10,11 @@ import android.widget.Button
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import androidx.fragment.app.activityViewModels
+
 import com.example.limitless.data.Add_Exercise
+
+import com.example.limitless.data.Graphics.CircleGraphic
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,21 +41,30 @@ class Exercises_Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            /*currentDayViewModel.currentScreenState.collect { state ->
-                // Handle your UI updates here based on the state
-
-            }*/
-        }
         val view = inflater.inflate(R.layout.fragment_exercises_, container, false)
 
+        val cgSteps: CircleGraphic = view.findViewById(R.id.cgSteps)
+
+        cgSteps.setSize(280f,280f)
+        cgSteps.setThickness(20f)
+        cgSteps.setType("circle")
+        cgSteps.RemoveLabel()
+        cgSteps.setGoal(currentUser?.stepGoal!!.toFloat())
+        cgSteps.setProgress(activityViewModel.steps.toFloat())
+
+        val btnAddWorkout: Button = view.findViewById(R.id.btnAddWorkout_EF)
+
+        btnAddWorkout.setOnClickListener {
+
+        }
+        val view = inflater.inflate(R.layout.fragment_exercises_, container, false)
         val btnExercise = view.findViewById<Button>(R.id.btnAddWorkout_EF)
 
         btnExercise.setOnClickListener {
             val intent = Intent(requireActivity(), Add_Exercise::class.java)
             startActivity(intent)
         }
+
 
         return view
     }

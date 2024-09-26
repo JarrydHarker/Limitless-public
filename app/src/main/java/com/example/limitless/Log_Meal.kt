@@ -24,6 +24,7 @@ private lateinit var mealListAdapter: ArrayAdapter<String>
 private val mealDescriptions = mutableListOf<String>()
 
 class Log_Meal : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -41,7 +42,6 @@ class Log_Meal : AppCompatActivity() {
         val btnCreateMeal = findViewById<Button>(R.id.btnCreateMeal_LM)
         val lblMealTitle = findViewById<TextView>(R.id.lblMealTitle_LM)
         lblMealTitle.text = mealTitle
-
 
         btnLog.setOnClickListener {
 
@@ -83,8 +83,7 @@ class Log_Meal : AppCompatActivity() {
             val calorieCounter = CalorieCounter(calorieWallet = 2000.0)
 
 
-            // Show the dialog
-            showDialog(foods, calorieCounter)
+            showDialog(foods, nutritionViewModel.calorieCounter)
         }
 
     }

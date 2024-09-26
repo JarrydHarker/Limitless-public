@@ -1,18 +1,38 @@
 package com.example.limitless
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.animation.AnimationUtils
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RadioButton
+import android.widget.SeekBar
+import android.widget.Switch
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.findViewTreeViewModelStoreOwner
+import com.example.limitless.data.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Settings : AppCompatActivity() {
+    private lateinit var sharedPreferences: SharedPreferences
+
+    companion object {
+        private const val PREFS_NAME = "MyAppPrefs"
+        private const val KEY_DARK_MODE = "dark_mode"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -33,35 +53,118 @@ class Settings : AppCompatActivity() {
         val BackgroundImage = findViewById(R.id.BackgroundImage) as ImageView
         val profileImage = findViewById(R.id.profileImage) as ImageView
         val linearLayout7 = findViewById(R.id.linearLayout7) as LinearLayout
+        val goals: LinearLayout = findViewById(R.id.ll4)
+
+        goals.setOnClickListener{
+            Goals()
+        }
 
         BackgroundImage.startAnimation(ttb)
         profileImage.startAnimation(stb)
         linearLayout7.startAnimation(btt)
         //till here
+        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
+        // Apply the saved theme before setting the content view
+        applyTheme()
+        val switchTheme: Switch = findViewById(R.id.switchTheme)
+
 
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
 
+        switchTheme.isChecked = isDarkModeEnabled()
+
+        switchTheme.setOnCheckedChangeListener { _, isChecked ->
+            saveDarkModeState(isChecked)
+            applyTheme()
+            recreate() // Recreate the activity to apply the new theme
+        }
         bottomNavBar.setSelectedItemId(R.id.ic_settings)
-        bottomNavBar.setOnNavigationItemSelectedListener{item ->
-            when (item.itemId){
+        bottomNavBar.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
                 R.id.ic_workouts -> {
-                    startActivity(Intent(this, Exercise_Activity::class.java))
+                    navigateToActivityLeft(Exercise_Activity::class.java)
                     true
                 }
+
                 R.id.ic_nutrition -> {
-                    startActivity(Intent(this, Diet_Activity::class.java))
+                    navigateToActivityLeft(Diet_Activity::class.java)
                     true
                 }
+
                 R.id.ic_Report -> {
-                    startActivity(Intent(this, Report_Activity::class.java))
+                    navigateToActivityLeft(Report_Activity::class.java)
                     true
                 }
+
                 R.id.ic_home -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    navigateToActivityLeft(MainActivity::class.java)
                     true
                 }
+
                 else -> false
             }
         }
+    }
+    // Helper function to navigate to another activity with transition
+    private fun navigateToActivityLeft(activityClass: Class<*>) {
+        val intent = Intent(this, activityClass)
+        val options = ActivityOptionsCompat.makeCustomAnimation(
+            this, R.anim.slide_in_left, R.anim.slide_out_right
+        )
+        startActivity(intent, options.toBundle())
+    }
+
+    public fun isDarkModeEnabled(): Boolean {
+        return sharedPreferences.getBoolean(KEY_DARK_MODE, false)
+    }
+
+    private fun saveDarkModeState(isDarkMode: Boolean) {
+        sharedPreferences.edit().putBoolean(KEY_DARK_MODE, isDarkMode).apply()
+    }
+
+    private fun applyTheme() {
+        val isDarkMode = isDarkModeEnabled()
+        AppCompatDelegate.setDefaultNightMode(
+            if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES
+            else AppCompatDelegate.MODE_NIGHT_NO
+        )
+
+    }
+    private fun Goals(){
+        // Inflate the custom layout
+        val inflater = layoutInflater
+        val dialogView = inflater.inflate(R.layout.layout_set_goal, null)
+
+        val seekbar : SeekBar = dialogView.findViewById(R.id.seekbarTime)
+        val showSeekbar: TextView = dialogView.findViewById(R.id.lblSelectPeriod)
+        val loseWeight: RadioButton = dialogView.findViewById(R.id.rbLoseWeight)
+        val gainWeight: RadioButton = dialogView.findViewById(R.id.rbGainWeight)
+        
+        seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                showSeekbar.text = "Time Period: $progress weeks"
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+        })
+
+        // Build and show the dialog
+        AlertDialog.Builder(this)
+            .setTitle("Set Goal")
+            .setView(dialogView) // Set the custom view
+            .setPositiveButton("Confirm") { dialog, which ->
+
+            }
+            .setNegativeButton("Cancel") { dialog, which ->
+                dialog.dismiss()
+
+            }
+            .create()
+            .show()
     }
 }

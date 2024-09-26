@@ -22,11 +22,13 @@ import androidx.lifecycle.lifecycleScope
 import com.example.limitless.data.DbAccess
 import com.example.limitless.data.PasswordHasher
 import com.example.limitless.data.User
+import com.example.limitless.data.ViewModels.NutritionViewModel
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import kotlinx.coroutines.launch
 import java.security.SecureRandom
+import java.time.LocalDate
 import java.util.Base64
 
 class Login : AppCompatActivity() {
@@ -47,6 +49,8 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val btnForgotPassword: Button = findViewById(R.id.Btn2ForgotPassword)
+
         val btnLogin: Button = findViewById(R.id.btnLogin_LG)
         val btnSignup: Button = findViewById(R.id.btnSignup_LG)
         val btnSkip: Button = findViewById(R.id.btnSkip)
@@ -56,6 +60,11 @@ class Login : AppCompatActivity() {
         val activityContext = this
         // Initialize the CredentialManager
         val credentialManager = CredentialManager.create(this)
+
+        btnForgotPassword.setOnClickListener{
+            val intent = Intent(this, ForgotPassword::class.java)
+            startActivity(intent)
+        }
 
         btnSignup.setOnClickListener {
             val intent = Intent(this, SignUp::class.java)

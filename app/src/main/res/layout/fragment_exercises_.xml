@@ -20,8 +20,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView13"
+        <com.example.limitless.data.Graphics.CircleGraphic
+            android:id="@+id/cgSteps"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="37dp"
@@ -30,7 +30,7 @@
             app:layout_constraintEnd_toStartOf="@+id/btnAddWorkout_EF"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView23"
-            tools:src="@tools:sample/avatars" />
+            />
 
         <TextView
             android:id="@+id/textView23"
@@ -251,6 +251,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
         android:text="Exercises"
         android:textSize="16sp"
@@ -274,15 +275,4 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <Button
-        android:id="@+id/btnAddExercise_EF"
-        android:layout_width="143dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="30dp"
-        android:backgroundTint="#6d61da"
-        android:text="Add Exercise"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
