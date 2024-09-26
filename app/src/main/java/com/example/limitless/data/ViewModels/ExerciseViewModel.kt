@@ -6,7 +6,9 @@ import com.example.limitless.data.WorkoutPlanner
 import java.time.LocalDate
 
 class ActivityViewModel(val currentDate: LocalDate) {
-    val workoutPlanner = WorkoutPlanner()
+    var arrWorkouts: MutableList<WorkoutPlanner>? = null
+
+
 }
 
 class ActivityViewModelFactory(private val calorieWallet: Double) : ViewModelProvider.Factory {

@@ -2,8 +2,10 @@ package com.example.limitless
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorManager
+import android.os.Build
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.Button
@@ -16,17 +18,25 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.compose.material.Text
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.limitless.data.StepCounterService
 import com.example.limitless.data.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.Manifest
+import androidx.appcompat.app.AlertDialog
 
 var currentUser: User? = null
 
 class MainActivity : AppCompatActivity() {
+
+    private val REQUEST_CODE_PERMISSIONS = 100
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -36,6 +46,13 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        if(currentUser == null){
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+        }
+
+        checkAndRequestPermissions()
 
         //Nicks Animation things
         val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
@@ -60,20 +77,9 @@ class MainActivity : AppCompatActivity() {
         val workout: CardView = findViewById(R.id.workoutsCard)
         val recyclerView: RecyclerView = findViewById(R.id.PE_ListExercises)
 
-        val sensorManager by lazy {
-            getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        }
-        val sensor: Sensor? by lazy {
-            sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) }
+        val intent = Intent(this, StepCounterService::class.java)
+        startService(intent)
 
-        if (sensor == null) {
-            Toast.makeText(this, "Step counter sensor is not present on this device", Toast.LENGTH_LONG).show()
-        }
-
-        if(currentUser == null){
-            val intent = Intent(this, Login::class.java)
-            startActivity(intent)
-        }
 
         bottomNavBar.setSelectedItemId(R.id.ic_home)
         bottomNavBar.setOnNavigationItemSelectedListener{item ->
@@ -113,5 +119,81 @@ class MainActivity : AppCompatActivity() {
         recyclerView.itemAnimator = DefaultItemAnimator()
         //recyclerView.adapter = moviesAdapter
 
+    }
+
+    private fun checkAndRequestPermissions() {
+        val permissionsToRequest = mutableListOf<String>()
+
+        // Check for ACTIVITY_RECOGNITION permission (Required from Android 10)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION)
+            != PackageManager.PERMISSION_GRANTED) {
+            permissionsToRequest.add(Manifest.permission.ACTIVITY_RECOGNITION)
+        }
+
+        // Add INTERNET permission if not already granted (it's usually granted automatically)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)
+            != PackageManager.PERMISSION_GRANTED) {
+            permissionsToRequest.add(Manifest.permission.INTERNET)
+        }
+
+        // Foreground Service permissions
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.FOREGROUND_SERVICE)
+            != PackageManager.PERMISSION_GRANTED) {
+            permissionsToRequest.add(Manifest.permission.FOREGROUND_SERVICE)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+                permissionsToRequest.add(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+
+        // Check if there are any permissions to request
+        if (permissionsToRequest.isNotEmpty()) {
+            ActivityCompat.requestPermissions(
+                this,
+                permissionsToRequest.toTypedArray(),
+                REQUEST_CODE_PERMISSIONS
+            )
+        }
+    }
+
+    // Handle the result of the permission request
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            for ((index, permission) in permissions.withIndex()) {
+                if (grantResults[index] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "$permission granted", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "$permission denied", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun showPermissionExplanation(permission: String, requestCode: Int) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
+            // Show an explanation to the user why you need the permission
+            AlertDialog.Builder(this)
+                .setTitle("Permission Required")
+                .setMessage("This app requires $permission for tracking steps.")
+                .setPositiveButton("OK") { _, _ ->
+                    ActivityCompat.requestPermissions(this, arrayOf(permission), requestCode)
+                }
+                .setNegativeButton("Cancel", null)
+                .show()
+        } else {
+            ActivityCompat.requestPermissions(this, arrayOf(permission), requestCode)
+        }
     }
 }
