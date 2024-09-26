@@ -11,42 +11,25 @@
         android:id="@+id/lblMealTitle_LM"
         android:layout_width="130dp"
         android:layout_height="34dp"
-        android:layout_marginTop="44dp"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/txtFoods_LM"
-        android:layout_width="215dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="84dp"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblMealTitle_LM" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="65dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="84dp"
-        android:text="+"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.24"
-        app:layout_constraintStart_toEndOf="@+id/txtFoods_LM"
-        app:layout_constraintTop_toBottomOf="@+id/lblMealTitle_LM" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.113" />
 
     <Spinner
         android:id="@+id/spinPrevFoods_LM"
-        android:layout_width="295dp"
+        android:layout_width="match_parent"
         android:layout_height="51dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/buttonbackground"
+        android:paddingLeft="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listView" />
 
@@ -54,9 +37,13 @@
         android:id="@+id/btnLog_LM"
         android:layout_width="159dp"
         android:layout_height="40dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginStart="30dp"
+        android:backgroundTint="#6d61da"
         android:text="Log Food"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinPrevFoods_LM" />
 
@@ -64,22 +51,40 @@
         android:id="@+id/btnCreateMeal_LM"
         android:layout_width="162dp"
         android:layout_height="39dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="#6d61da"
         android:text="Create Meal"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLog_LM"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintTop_toBottomOf="@+id/spinPrevFoods_LM" />
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="294dp"
-        android:layout_height="196dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="274dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtFoods_LM" />
+        app:layout_constraintTop_toBottomOf="@+id/lblMealTitle_LM"
+        app:layout_constraintVertical_bias="0.273" />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="Select Food from"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinPrevFoods_LM"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listView"
+        app:layout_constraintVertical_bias="0.571" />
 </androidx.constraintlayout.widget.ConstraintLayout>

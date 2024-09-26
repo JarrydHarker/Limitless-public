@@ -29,11 +29,7 @@ class Calorie_Fragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
-        val btnSetGoal: Button = requireView().findViewById(R.id.btnCalorieGoal)
 
-        btnSetGoal.setOnClickListener{
-            
-        }
     }
 
     override fun onCreateView(
