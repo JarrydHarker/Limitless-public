@@ -50,7 +50,7 @@ class Exercises_Fragment : Fragment() {
         val btnExercise = view.findViewById<Button>(R.id.btnAddWorkout_EF)
 
         btnExercise.setOnClickListener {
-            val intent = Intent(requireActivity(), Add_Exercise::class.java)
+            val intent = Intent(requireActivity(), exerciseCategory::class.java)
             startActivity(intent)
         }
 

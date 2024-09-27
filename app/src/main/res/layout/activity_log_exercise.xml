@@ -21,56 +21,70 @@
 
     <ListView
         android:id="@+id/listSets_LE"
-        android:layout_width="391dp"
+        android:layout_width="match_parent"
         android:layout_height="288dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblCurrentExercise_LE" />
+        tools:layout_editor_absoluteY="195dp" />
 
     <Button
         android:id="@+id/btnEditSet_LE"
-        android:layout_width="115dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="59dp"
+        android:layout_marginStart="30dp"
+        android:backgroundTint="#6d61da"
         android:text="Edit Sets"
-        app:layout_constraintEnd_toStartOf="@+id/btnAddSet_LE"
-        app:layout_constraintHorizontal_bias="0.407"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listSets_LE" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.766" />
 
     <Button
         android:id="@+id/btnAddSet_LE"
-        android:layout_width="108dp"
+        android:layout_width="wrap_content"
         android:layout_height="59dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="44dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="#6d61da"
         android:text="Add Set"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listSets_LE" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.766" />
 
     <Button
         android:id="@+id/btnRestTimer_LE"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="30dp"
+        android:backgroundTint="#6d61da"
         android:text="Rest Timer"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEditSet_LE"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.951" />
 
     <Button
         android:id="@+id/btnLogSet_LE"
-        android:layout_width="136dp"
+        android:layout_width="wrap_content"
         android:layout_height="59dp"
-        android:layout_marginBottom="16dp"
+        android:backgroundTint="#6d61da"
         android:text="Log Set"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toEndOf="@+id/btnRestTimer_LE"
-        app:layout_constraintTop_toBottomOf="@+id/btnAddSet_LE"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintHorizontal_bias="0.89"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
 </androidx.constraintlayout.widget.ConstraintLayout>
