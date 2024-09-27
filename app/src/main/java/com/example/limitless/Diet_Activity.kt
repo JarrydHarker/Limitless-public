@@ -36,6 +36,7 @@ class Diet_Activity : AppCompatActivity() {
 
         // Initialize bottom navigation bar
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
+        ThemeManager.updateNavBarColor(this, bottomNavBar)
         bottomNavBar.selectedItemId = R.id.ic_nutrition
 
         bottomNavBar.setOnNavigationItemSelectedListener { item ->

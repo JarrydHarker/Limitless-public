@@ -20,6 +20,8 @@ class MealTracker : AppCompatActivity() {
 
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
 
+        ThemeManager.updateNavBarColor(this, bottomNavBar)
+
         bottomNavBar.setSelectedItemId(R.id.ic_nutrition)
         bottomNavBar.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
