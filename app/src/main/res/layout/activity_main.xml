@@ -137,11 +137,11 @@
                 android:textSize="20sp"/>
 
             <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView"
+                android:id="@+id/fragmentContainerView10"
                 android:name="com.example.limitless.Workout_Process"
                 android:layout_width="match_parent"
                 android:layout_height="317dp"
-                android:layout_marginTop="16dp" />
+                tools:layout="@layout/fragment_workout__process" />
 
         </LinearLayout>
     </ScrollView>

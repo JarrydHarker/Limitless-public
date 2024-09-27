@@ -28,6 +28,7 @@ class DbAccess private constructor(){
 
     private val apiUrl = "https://localhost:7230/api/Limitless"
     private val epUser = "/User"
+    private val epUserInfo = "/UserInfo"
     private val epDay = "/Day"
     private val epExercise = "/Exercise"
     private val epCardio = "/Cardio"
@@ -179,7 +180,7 @@ class DbAccess private constructor(){
         return responseMessage
     }
 
-    fun CreateCardio(cardio: CardioExercise): String {
+    fun CreateCardio(cardio: Cardio): String {
         val executor = Executors.newSingleThreadExecutor()
 
         var responseMessage = ""
@@ -226,7 +227,7 @@ class DbAccess private constructor(){
         return responseMessage
     }
 
-    fun CreateStrength(strength: StrengthExercise): String {
+    fun CreateStrength(strength: Strength): String {
         val executor = Executors.newSingleThreadExecutor()
 
         var responseMessage = ""
@@ -625,9 +626,9 @@ class DbAccess private constructor(){
 
         return exercise // Return the list of users (could be empty if request fails)
     }
-    fun GetAllCardio(): List<CardioExercise> {
+    fun GetAllCardio(): List<Cardio> {
         val executor = Executors.newSingleThreadExecutor()
-        var cardio: List<CardioExercise> = emptyList()
+        var cardio: List<Cardio> = emptyList()
 
         executor.execute {
             try {
@@ -647,7 +648,7 @@ class DbAccess private constructor(){
                         val gson = Gson()
 
                         // Deserialize the JSON array into a List<User>
-                        cardio = gson.fromJson(jsonResponse, Array<CardioExercise>::class.java).toList()
+                        cardio = gson.fromJson(jsonResponse, Array<Cardio>::class.java).toList()
                     }
                 } else {
                     // Handle error message if request fails
@@ -665,9 +666,9 @@ class DbAccess private constructor(){
 
         return cardio // Return the list of users (could be empty if request fails)
     }
-    fun GetAllStrength(): List<StrengthExercise> {
+    fun GetAllStrength(): List<Strength> {
         val executor = Executors.newSingleThreadExecutor()
-        var strength: List<StrengthExercise> = emptyList()
+        var strength: List<Strength> = emptyList()
 
         executor.execute {
             try {
@@ -687,7 +688,7 @@ class DbAccess private constructor(){
                         val gson = Gson()
 
                         // Deserialize the JSON array into a List<User>
-                        strength = gson.fromJson(jsonResponse, Array<StrengthExercise>::class.java).toList()
+                        strength = gson.fromJson(jsonResponse, Array<Strength>::class.java).toList()
                     }
                 } else {
                     // Handle error message if request fails
@@ -951,10 +952,10 @@ class DbAccess private constructor(){
         return exercise // Return the deserialized User object (if any)
     }
 
-    fun GetCardio(cardioId: String): CardioExercise?{
+    fun GetCardio(cardioId: String): Cardio?{
         val executor = Executors.newSingleThreadExecutor()
 
-        var cardio: CardioExercise? = null
+        var cardio: Cardio? = null
 
         executor.execute {
             try {
@@ -973,7 +974,7 @@ class DbAccess private constructor(){
 
                         // Deserialize JSON response into User object
                         val gson = Gson()
-                        cardio = gson.fromJson(jsonResponse, CardioExercise::class.java)
+                        cardio = gson.fromJson(jsonResponse, Cardio::class.java)
                     }
                 } else {
                     // Handle error if request fails
@@ -993,10 +994,10 @@ class DbAccess private constructor(){
         return cardio // Return the deserialized User object (if any)
     }
 
-    fun GetStrength(strengthId: StrengthExercise): StrengthExercise?{
+    fun GetStrength(strengthId: Strength): Strength?{
         val executor = Executors.newSingleThreadExecutor()
 
-        var strength: StrengthExercise? = null
+        var strength: Strength? = null
 
         executor.execute {
             try {
@@ -1015,7 +1016,7 @@ class DbAccess private constructor(){
 
                         // Deserialize JSON response into User object
                         val gson = Gson()
-                        strength = gson.fromJson(jsonResponse, StrengthExercise::class.java)
+                        strength = gson.fromJson(jsonResponse, Strength::class.java)
                     }
                 } else {
                     // Handle error if request fails
@@ -1347,7 +1348,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
-    fun UpdateCardio(cardio: CardioExercise): String {
+    fun UpdateCardio(cardio: Cardio): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""
 
@@ -1394,7 +1395,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
-    fun UpdateStrength(strength: StrengthExercise): String {
+    fun UpdateStrength(strength: Strength): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""
 
@@ -1704,7 +1705,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
-    fun DeleteCardio(cardioId: CardioExercise): String {
+    fun DeleteCardio(cardioId: Cardio): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""
 
@@ -1740,7 +1741,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
-    fun DeleteStrength(strengthId: StrengthExercise): String {
+    fun DeleteStrength(strengthId: Strength): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""
 

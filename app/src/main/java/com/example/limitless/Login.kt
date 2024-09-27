@@ -22,6 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.limitless.data.DbAccess
 import com.example.limitless.data.PasswordHasher
 import com.example.limitless.data.User
+import com.example.limitless.data.ViewModels.ActivityViewModel
 import com.example.limitless.data.ViewModels.NutritionViewModel
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
@@ -90,6 +91,9 @@ class Login : AppCompatActivity() {
             if(user != null){
                 currentUser = user
 
+                nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                activityViewModel = ActivityViewModel(LocalDate.now())
+
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }else {
@@ -99,6 +103,10 @@ class Login : AppCompatActivity() {
 
         btnSkip.setOnClickListener{
             currentUser = User()
+
+            // Initialize ViewModel with calorieWallet from currentUser
+            nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+            activityViewModel = ActivityViewModel(LocalDate.now())
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

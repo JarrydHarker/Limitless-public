@@ -137,21 +137,24 @@
         android:id="@+id/constraintLayout10"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="25dp"
         android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout11"
-        app:layout_constraintVertical_bias="0.114">
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout7"
             android:layout_width="151dp"
             android:layout_height="86dp"
-            android:background="@drawable/statsbox"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/box"
+            android:elevation="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -192,14 +195,16 @@
                 app:layout_constraintEnd_toEndOf="@+id/linearLayout6"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout8"
             android:layout_width="151dp"
             android:layout_height="83dp"
-            android:background="@drawable/statsbox"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/box"
+            android:elevation="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -241,14 +246,16 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.454"/>
+                app:layout_constraintVertical_bias="0.454" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/calorieCL"
             android:layout_width="151dp"
             android:layout_height="82dp"
-            android:background="@drawable/statsbox"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/box"
+            android:elevation="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.005"
@@ -295,7 +302,9 @@
             android:id="@+id/ProteinCL"
             android:layout_width="151dp"
             android:layout_height="84dp"
-            android:background="@drawable/statsbox"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/box"
+            android:elevation="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

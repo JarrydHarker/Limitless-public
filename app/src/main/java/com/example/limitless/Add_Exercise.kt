@@ -22,8 +22,8 @@ class Add_Exercise : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         val workout = findViewById<Button>(R.id.btnCreateExercise_AE)
+
         workout.setOnClickListener {
             ShowDialog()
         }
@@ -40,15 +40,17 @@ class Add_Exercise : AppCompatActivity() {
         dialog.window!!.setGravity(Gravity.BOTTOM)
 
         val btnAddWorkout = dialog.findViewById<Button>(R.id.btnAddWorkout_WD)
+
         val btnClose = dialog.findViewById<Button>(R.id.btnClose_WD)
 
         btnAddWorkout.setOnClickListener {
-
+          
         }
 
         btnClose.setOnClickListener {
             dialog.dismiss()
         }
+
 
         dialog.show()
     }

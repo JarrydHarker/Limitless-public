@@ -48,6 +48,8 @@ dependencies {
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.googleid)
     implementation(libs.gson)
+
+    implementation(libs.androidx.media)
     implementation(libs.play.services.auth)
     implementation(libs.androidx.security.crypto)
     implementation(platform(libs.androidx.compose.bom))
