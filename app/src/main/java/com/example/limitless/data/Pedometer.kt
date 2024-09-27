@@ -1,17 +1,12 @@
 package com.example.limitless.data
 
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.util.Log
-import androidx.core.content.ContextCompat.getSystemService
 import com.example.limitless.activityViewModel
-import java.util.Calendar
 
 private const val TAG = "STEP_COUNT_LISTENER"
 

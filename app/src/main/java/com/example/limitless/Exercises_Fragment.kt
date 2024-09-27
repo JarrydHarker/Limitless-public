@@ -7,11 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
-import androidx.fragment.app.activityViewModels
-
-import com.example.limitless.data.Add_Exercise
 
 import com.example.limitless.data.Graphics.CircleGraphic
 
@@ -49,15 +44,9 @@ class Exercises_Fragment : Fragment() {
         cgSteps.setThickness(20f)
         cgSteps.setType("circle")
         cgSteps.RemoveLabel()
-        cgSteps.setGoal(currentUser?.stepGoal!!.toFloat())
+        cgSteps.setGoal(currentUser?.GetStepGoal()!!.toFloat())
         cgSteps.setProgress(activityViewModel.steps.toFloat())
 
-        val btnAddWorkout: Button = view.findViewById(R.id.btnAddWorkout_EF)
-
-        btnAddWorkout.setOnClickListener {
-
-        }
-        val view = inflater.inflate(R.layout.fragment_exercises_, container, false)
         val btnExercise = view.findViewById<Button>(R.id.btnAddWorkout_EF)
 
         btnExercise.setOnClickListener {

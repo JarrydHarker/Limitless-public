@@ -1,4 +1,4 @@
-package com.example.limitless.data
+package com.example.limitless
 
 import android.app.Dialog
 import android.graphics.Color
@@ -11,7 +11,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.limitless.R
 
 class Add_Exercise : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +37,7 @@ class Add_Exercise : AppCompatActivity() {
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
         dialog.window!!.setGravity(Gravity.BOTTOM)
 
-        val btnAddWorkout = dialog.findViewById<Button>(R.id.btnAddWorkout_WD)
+        /*val btnAddWorkout = dialog.findViewById<Button>(R.id.btnAddWorkout_WD)
         val btnClose = dialog.findViewById<Button>(R.id.btnClose_WD)
 
         btnAddWorkout.setOnClickListener {
@@ -47,7 +46,7 @@ class Add_Exercise : AppCompatActivity() {
 
         btnClose.setOnClickListener {
             dialog.dismiss()
-        }
+        }*/
 
         dialog.show()
     }

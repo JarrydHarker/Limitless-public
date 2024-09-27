@@ -94,9 +94,7 @@ class Login : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
 
-                // Initialize ViewModel with calorieWallet from currentUser
-                currentUser!!.calorieWallet = 2000.0
-                nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.calorieWallet)
+                nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
                 activityViewModel = ActivityViewModel(LocalDate.now())
             }else {
                 Toast.makeText(this, "User not found, please sign up", Toast.LENGTH_LONG).show()
@@ -110,9 +108,7 @@ class Login : AppCompatActivity() {
             startActivity(intent)
 
             // Initialize ViewModel with calorieWallet from currentUser
-            currentUser?.calorieWallet = 2000.0
-            currentUser?.stepGoal = 10000
-            nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.calorieWallet)
+            nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
             activityViewModel = ActivityViewModel(LocalDate.now())
         }
 
