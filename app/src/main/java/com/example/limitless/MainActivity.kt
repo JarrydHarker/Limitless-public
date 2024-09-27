@@ -58,11 +58,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Initialize ViewModel with calorieWallet from currentUser
-        currentUser!!.calorieWallet = 2000.0
-        nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.calorieWallet)
-        activityViewModel = ActivityViewModel(LocalDate.now())
-
         checkAndRequestPermissions()
 
         //Nicks Animation things

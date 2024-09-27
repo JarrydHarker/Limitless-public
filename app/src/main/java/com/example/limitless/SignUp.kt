@@ -12,6 +12,9 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.limitless.data.DbAccess
 import com.example.limitless.data.PasswordHasher
 import com.example.limitless.data.User
+import com.example.limitless.data.ViewModels.ActivityViewModel
+import com.example.limitless.data.ViewModels.NutritionViewModel
+import java.time.LocalDate
 
 class SignUp : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +57,11 @@ class SignUp : AppCompatActivity() {
             if(response == "Success"){
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+
+                // Initialize ViewModel with calorieWallet from currentUser
+                currentUser!!.calorieWallet = 2000.0
+                nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.calorieWallet)
+                activityViewModel = ActivityViewModel(LocalDate.now())
             }
 
             Toast.makeText(this, response, Toast.LENGTH_LONG).show()
