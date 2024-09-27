@@ -50,7 +50,7 @@ class Log_Meal : AppCompatActivity() {
         btnCreateMeal.setOnClickListener {
             val foods = listOf(
                 Food(
-                    foodId = "2",
+                    foodId = 2,
                     mealId = "1",
                     category = "Vegetable",
                     description = "Carrot",
@@ -75,13 +75,8 @@ class Log_Meal : AppCompatActivity() {
                     potassium = 320.0,
                     iron = 0.3,
                     calcium = 33.0,
-                    meal = null
                 )
             )
-
-            // Create a CalorieCounter instance
-            val calorieCounter = CalorieCounter(calorieWallet = 2000.0)
-
 
             showDialog(foods, nutritionViewModel.calorieCounter)
         }
@@ -109,12 +104,12 @@ class Log_Meal : AppCompatActivity() {
             // Create a new meal with the provided foods
             calorieCounter.CreateMeal(foods, calorieCounter)
 
-            val meal = calorieCounter.arrMeals?.last()
+            /*val meal = calorieCounter.arrMeals?.last()
             meal?.let {
                 val mealDescription = "${it.name}: ${it.foods.joinToString(", ") { food -> food.description }}"
                 mealDescriptions.add(mealDescription)
                 mealListAdapter.notifyDataSetChanged()
-            }
+            }*/
 
             dialog.dismiss()
         }
