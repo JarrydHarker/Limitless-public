@@ -91,11 +91,11 @@ class Login : AppCompatActivity() {
             if(user != null){
                 currentUser = user
 
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-
                 nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
                 activityViewModel = ActivityViewModel(LocalDate.now())
+
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }else {
                 Toast.makeText(this, "User not found, please sign up", Toast.LENGTH_LONG).show()
             }
@@ -104,12 +104,12 @@ class Login : AppCompatActivity() {
         btnSkip.setOnClickListener{
             currentUser = User()
 
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-
             // Initialize ViewModel with calorieWallet from currentUser
             nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
             activityViewModel = ActivityViewModel(LocalDate.now())
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         btnGoogle.setOnClickListener {
