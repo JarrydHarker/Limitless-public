@@ -21,6 +21,8 @@ class Report_Activity : AppCompatActivity() {
         }
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
 
+        ThemeManager.updateNavBarColor(this, bottomNavBar)
+
         bottomNavBar.setSelectedItemId(R.id.ic_Report)
         bottomNavBar.setOnNavigationItemSelectedListener{item ->
             when (item.itemId){
