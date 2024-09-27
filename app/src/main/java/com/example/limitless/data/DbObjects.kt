@@ -194,7 +194,7 @@ class Meal(
     var userId: String? = null,
     var name: String = ""
 ){
-
+    var arrFoods: MutableList<Food> = mutableListOf()
 }
 
 class Food(
