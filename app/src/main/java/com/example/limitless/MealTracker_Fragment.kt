@@ -68,9 +68,6 @@ class MealTracker_Fragment : Fragment() {
         return view
     }
 
-    fun showDialog(){
-
-    }
 
     companion object {
         /**

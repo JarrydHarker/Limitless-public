@@ -57,7 +57,6 @@ class Exercises_Fragment : Fragment() {
         btnAddWorkout.setOnClickListener {
 
         }
-        val view = inflater.inflate(R.layout.fragment_exercises_, container, false)
         val btnExercise = view.findViewById<Button>(R.id.btnAddWorkout_EF)
 
         btnExercise.setOnClickListener {
