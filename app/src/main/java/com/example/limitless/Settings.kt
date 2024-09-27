@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
@@ -27,6 +28,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Settings : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
+    lateinit var bottomNavBar: BottomNavigationView
 
     companion object {
         private const val PREFS_NAME = "MyAppPrefs"
@@ -64,13 +66,14 @@ class Settings : AppCompatActivity() {
         linearLayout7.startAnimation(btt)
         //till here
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        bottomNavBar = findViewById(R.id.NavBar)
 
         // Apply the saved theme before setting the content view
         applyTheme()
         val switchTheme: Switch = findViewById(R.id.switchTheme)
 
 
-        val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
+
 
         switchTheme.isChecked = isDarkModeEnabled()
 
@@ -129,7 +132,13 @@ class Settings : AppCompatActivity() {
             if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES
             else AppCompatDelegate.MODE_NIGHT_NO
         )
+        val backgroundColor = if (isDarkMode) {
+            ContextCompat.getColor(this, R.color.darkBackground) // Define a dark color in your colors.xml
+        } else {
+            ContextCompat.getColor(this, R.color.lightBackground) // Define a light color in your colors.xml
+        }
 
+        bottomNavBar.setBackgroundColor(backgroundColor)
     }
     private fun Goals(){
         // Inflate the custom layout

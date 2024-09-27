@@ -82,7 +82,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
         bottomNavBar.setSelectedItemId(R.id.ic_home)
         bottomNavBar.setOnNavigationItemSelectedListener{item ->
             when (item.itemId){
