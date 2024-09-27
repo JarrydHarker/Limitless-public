@@ -9,4 +9,6 @@
         <color name="dark_text_tint">#FFFFFF</color>
         <color name="light_icon_tint">#000000</color>
         <color name="light_text_tint">#000000</color>
+    <color name="darkBackground">#121212</color>
+    <color name="lightBackground">#FFFFFFFF</color>
 </resources>
