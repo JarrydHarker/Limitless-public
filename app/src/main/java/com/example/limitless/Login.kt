@@ -22,6 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.limitless.data.DbAccess
 import com.example.limitless.data.PasswordHasher
 import com.example.limitless.data.User
+import com.example.limitless.data.ViewModels.ActivityViewModel
 import com.example.limitless.data.ViewModels.NutritionViewModel
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
@@ -92,6 +93,11 @@ class Login : AppCompatActivity() {
 
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+
+                // Initialize ViewModel with calorieWallet from currentUser
+                currentUser!!.calorieWallet = 2000.0
+                nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.calorieWallet)
+                activityViewModel = ActivityViewModel(LocalDate.now())
             }else {
                 Toast.makeText(this, "User not found, please sign up", Toast.LENGTH_LONG).show()
             }
@@ -102,6 +108,12 @@ class Login : AppCompatActivity() {
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+
+            // Initialize ViewModel with calorieWallet from currentUser
+            currentUser?.calorieWallet = 2000.0
+            currentUser?.stepGoal = 10000
+            nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.calorieWallet)
+            activityViewModel = ActivityViewModel(LocalDate.now())
         }
 
         btnGoogle.setOnClickListener {

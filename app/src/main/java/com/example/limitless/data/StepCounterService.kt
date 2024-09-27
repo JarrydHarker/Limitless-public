@@ -28,15 +28,14 @@ class StepCounterService : Service() {
     private lateinit var pedometer: Pedometer
     private lateinit var notificationManager: NotificationManager
     private val CHANNEL_ID = "step_counter_channel"
-    private var stepCountForTheDay = 0L
 
     companion object {
         const val NOTIFICATION_ID = 1
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        // Create the notification channel
-        createNotificationChannel()
+        // Ensure foreground service is running
+        startForeground(NOTIFICATION_ID, buildNotification("${activityViewModel.steps} Steps"))
 
         // Start listening for step count updates
         startTrackingSteps()
@@ -47,23 +46,25 @@ class StepCounterService : Service() {
     override fun onCreate() {
         super.onCreate()
 
+        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        // Create the notification channel
+        createNotificationChannel()
+
         // Initialize the pedometer and notification manager
         pedometer = Pedometer(this)
-        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         // Schedule the midnight reset
         scheduleMidnightReset()
 
         // Start the foreground service with the initial notification
-        val initialNotification = buildNotification("Steps today: $stepCountForTheDay")
+        val initialNotification = buildNotification("${activityViewModel.steps} Steps")
         startForeground(NOTIFICATION_ID, initialNotification)
     }
 
     private fun startTrackingSteps() {
         pedometer.startListening { currentSteps ->
-            activityViewModel.steps = currentSteps.toInt()
-            stepCountForTheDay = currentSteps // Implement this based on how you're tracking
-            updateNotification(stepCountForTheDay)
+            updateNotification(currentSteps)
         }
     }
 
@@ -94,7 +95,7 @@ class StepCounterService : Service() {
     }
 
     private fun updateNotification(stepCount: Long) {
-        val notification = buildNotification("Steps today: $stepCount")
+        val notification = buildNotification("$stepCount Steps")
         notificationManager.notify(NOTIFICATION_ID, notification) // Update the notification
     }
 
@@ -107,22 +108,25 @@ class StepCounterService : Service() {
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("Live Step Counter")
             .setContentText(contentText) // Update the content with the step count
-            .setSmallIcon(R.drawable.logo)
+            .setSmallIcon(R.drawable.logo_bg_white)
             .setContentIntent(pendingIntent)
-            .setPriority(NotificationCompat.PRIORITY_LOW) // Keep it low-priority for background task
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(false)
+            .setOngoing(true)
+            .setStyle(androidx.media.app.NotificationCompat.MediaStyle())
+            .setCategory(NotificationCompat.CATEGORY_SERVICE)
             .build()
     }
 
     private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "Step Counter Channel"
-            val descriptionText = "Channel for live step counter"
-            val importance = NotificationManager.IMPORTANCE_LOW
-            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
-                description = descriptionText
-            }
-            notificationManager.createNotificationChannel(channel)
+        val name = "Step Counter Channel"
+        val descriptionText = "Channel for live step counter"
+        val importance = NotificationManager.IMPORTANCE_LOW
+        val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+            description = descriptionText
+            setSound(null, null)
         }
+        notificationManager.createNotificationChannel(channel)
     }
 
     override fun onBind(intent: Intent?): IBinder? {

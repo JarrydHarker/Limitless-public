@@ -10,6 +10,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.util.Log
 import androidx.core.content.ContextCompat.getSystemService
+import com.example.limitless.activityViewModel
 import java.util.Calendar
 
 private const val TAG = "STEP_COUNT_LISTENER"
@@ -36,12 +37,12 @@ class Pedometer(private val context: Context) {
 
                     // Calculate daily steps by subtracting storedSteps from stepsSinceReboot
                     currentStepCount = stepsSinceReboot - storedSteps
+                    activityViewModel.steps = currentStepCount.toInt()
 
                     val editor = sharedPreferences.edit()
                     editor.putLong("currentStepCount", currentStepCount)
                     editor.apply()
 
-                    // Update the UI or app logic with the current step count
                     onStepCountUpdated(currentStepCount)
                 }
             }
