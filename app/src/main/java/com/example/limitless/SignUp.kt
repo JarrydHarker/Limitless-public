@@ -59,8 +59,8 @@ class SignUp : AppCompatActivity() {
                 startActivity(intent)
 
                 // Initialize ViewModel with calorieWallet from currentUser
-                currentUser!!.calorieWallet = 2000.0
-                nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.calorieWallet)
+                currentUser!!.SetCalorieWallet(2000.0)
+                nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
                 activityViewModel = ActivityViewModel(LocalDate.now())
             }
 
