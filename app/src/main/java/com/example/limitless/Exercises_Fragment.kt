@@ -7,11 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
-import androidx.fragment.app.activityViewModels
-
-import com.example.limitless.data.Add_Exercise
 
 import com.example.limitless.data.Graphics.CircleGraphic
 
