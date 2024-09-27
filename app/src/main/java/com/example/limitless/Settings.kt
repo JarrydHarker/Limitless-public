@@ -46,9 +46,9 @@ class Settings : AppCompatActivity() {
             insets
         }
         //Nicks Animation things
-        //val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
-       // val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
-       // val btt = AnimationUtils.loadAnimation(this, R.anim.btt)
+        val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
+        val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
+        val btt = AnimationUtils.loadAnimation(this, R.anim.btt)
 //        val btt2 = AnimationUtils.loadAnimation(this, R.anim.btt2)
 //        val btt3 = AnimationUtils.loadAnimation(this, R.anim.btt3)
 //        val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
@@ -62,9 +62,9 @@ class Settings : AppCompatActivity() {
             Goals()
         }
 
-        //BackgroundImage.startAnimation(ttb)
-       // profileImage.startAnimation(stb)
-       // linearLayout7.startAnimation(btt)
+        BackgroundImage.startAnimation(ttb)
+        profileImage.startAnimation(stb)
+        linearLayout7.startAnimation(btt)
         //till here
        // sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         bottomNavBar = findViewById(R.id.NavBar)
