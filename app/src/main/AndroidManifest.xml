@@ -23,6 +23,9 @@
         android:name=".MyApplication">
 
         <activity
+            android:name=".exerciseCategory"
+            android:exported="false" />
+        <activity
             android:name=".Log_Exercise"
             android:exported="false" />
 
@@ -33,7 +36,7 @@
         <receiver
             android:name=".data.StepResetReceiver"
             android:exported="true"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED"></receiver>
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" />
 
         <activity
             android:name=".User_Height"
