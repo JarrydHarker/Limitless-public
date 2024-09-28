@@ -37,7 +37,7 @@
         app:layout_constraintVertical_bias="0.156" />
 
     <ListView
-        android:id="@+id/listView2"
+        android:id="@+id/lvMealPreview"
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:layout_marginStart="30dp"
@@ -61,7 +61,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/btnCloseDialog"
-        app:layout_constraintTop_toBottomOf="@+id/listView2"
+        app:layout_constraintTop_toBottomOf="@+id/lvMealPreview"
         app:layout_constraintVertical_bias="0.503" />
 
     <Button
@@ -76,7 +76,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listView2"
+        app:layout_constraintTop_toBottomOf="@+id/lvMealPreview"
         app:layout_constraintVertical_bias="0.503" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -86,20 +86,21 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/buttonbackground"
-        app:layout_constraintBottom_toTopOf="@+id/listView2"
+        app:layout_constraintBottom_toTopOf="@+id/lvMealPreview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMealName_LMD"
         app:layout_constraintVertical_bias="0.0">
 
-        <EditText
-            android:id="@+id/editTextText2"
+        <AutoCompleteTextView
+            android:id="@+id/txtFoodSearch"
             android:layout_width="135dp"
             android:layout_height="64dp"
             android:background="@drawable/buttonbackground"
             android:ems="10"
             android:hint="Search Food"
+            android:completionThreshold="1"
             android:inputType="text"
             android:paddingLeft="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
