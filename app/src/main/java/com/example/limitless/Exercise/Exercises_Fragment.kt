@@ -1,10 +1,13 @@
 package com.example.limitless.Exercise
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
+import com.example.limitless.Nutrition.Diet_Activity
 import com.example.limitless.R
 
 
@@ -34,7 +37,15 @@ class Exercises_Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_exercises_, container, false)
+        val view = inflater.inflate(R.layout.fragment_exercises_, container, false)
+
+        val btnAddWorkout_EF: Button = view.findViewById(R.id.btnAddWorkout_EF)
+
+        btnAddWorkout_EF.setOnClickListener {
+            val intent = Intent(requireActivity(), exerciseCategory::class.java)
+            startActivity(intent)
+        }
+        return view
     }
 
     companion object {
