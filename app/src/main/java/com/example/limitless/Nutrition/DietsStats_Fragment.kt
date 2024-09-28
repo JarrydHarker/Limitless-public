@@ -1,14 +1,14 @@
-package com.example.limitless
+package com.example.limitless.Nutrition
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
+import com.example.limitless.R
 import com.example.limitless.data.Graphics.CircleGraphic
+import com.example.limitless.nutritionViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

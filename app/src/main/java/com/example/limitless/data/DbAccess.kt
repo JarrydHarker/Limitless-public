@@ -1,6 +1,5 @@
 package com.example.limitless.data
 
-import android.health.connect.datatypes.MealType
 import android.util.Log
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -10,8 +9,6 @@ import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
 import java.time.LocalDate
-import java.util.Calendar
-import java.util.Date
 import java.util.concurrent.Executors
 
 
@@ -875,7 +872,6 @@ class DbAccess private constructor(){
         }
     }
 
-
     fun GetAllMovements(): List<Movement> {
         val executor = Executors.newSingleThreadExecutor()
         var movement: List<Movement> = emptyList()
@@ -916,6 +912,40 @@ class DbAccess private constructor(){
 
         return movement // Return the list of users (could be empty if request fails)
     }
+
+    suspend fun SearchForMovements(strSearch: String): List<Movement> {
+        return withContext(Dispatchers.IO) {
+            var movements: List<Movement> = emptyList()
+
+            try {
+                val url = URL(apiUrl + epMovement + "/Search?strSearch=$strSearch")
+                val connection = url.openConnection() as HttpURLConnection
+
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText()
+                        val gson = Gson()
+
+                        // Deserialize the JSON array into a List<Food>
+                        movements = gson.fromJson(jsonResponse, Array<Movement>::class.java).toList()
+                    }
+                } else {
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("SearchForFood", reader.readText())
+                    }
+                }
+            } catch (ex: Exception) {
+                Log.e("SearchForFood", ex.toString())
+            }
+
+            return@withContext movements
+        }
+    }
+
     fun GetAllWorkouts(): List<Workout> {
         val executor = Executors.newSingleThreadExecutor()
         var workout: List<Workout> = emptyList()
@@ -957,6 +987,46 @@ class DbAccess private constructor(){
         return workout // Return the list of users (could be empty if request fails)
     }
 
+    fun GetCategories(): List<String> {
+        val executor = Executors.newSingleThreadExecutor()
+        var categories: List<String> = emptyList()
+
+        executor.execute {
+            try {
+                // Construct the URL for the GET request
+                val url = URL(apiUrl + "/Category") // Assuming the endpoint is something like /users
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to GET
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val gson = Gson()
+
+                        // Deserialize the JSON array into a List<User>
+                        categories = gson.fromJson(jsonResponse, Array<String>::class.java).toList()
+                    }
+                } else {
+                    // Handle error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("GetCategoriesError", reader.readText())
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetCategoriesError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return categories // Return the list of users (could be empty if request fails)
+    }
 
     fun GetDay(date: LocalDate, userId: String): Day?{
         val executor = Executors.newSingleThreadExecutor()
@@ -1391,6 +1461,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
+
     fun UpdateExercise(exercise: Exercise): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""
@@ -1438,6 +1509,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
+
     fun UpdateCardio(cardio: Cardio): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""
@@ -1485,6 +1557,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
+
     fun UpdateStrength(strength: Strength): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""
@@ -1532,6 +1605,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
+
     fun UpdateMeal(meal: Meal): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""
@@ -1579,6 +1653,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
+
     fun UpdateFood(food: Food): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""
@@ -1626,6 +1701,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
+
     fun UpdateMovement(movement: Movement): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""
@@ -1673,6 +1749,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
+
     fun UpdateWorkout(workout: Workout): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""
@@ -1759,6 +1836,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
+
     fun DeleteDay(date: LocalDate, userId: String): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""
@@ -1795,6 +1873,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
+
     fun DeleteCardio(cardioId: Cardio): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""
@@ -1831,6 +1910,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
+
     fun DeleteStrength(strengthId: Strength): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""
@@ -1867,6 +1947,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
+
     fun DeleteMeal(mealId: Meal): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""
@@ -1903,6 +1984,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
+
     fun DeleteFood(foodId: Food): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""
@@ -1939,6 +2021,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
+
     fun DeleteMovement(movementId: Movement): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""
@@ -1975,6 +2058,7 @@ class DbAccess private constructor(){
 
         return responseMessage // Return the server's response (success or error message)
     }
+
     fun DeleteWorkout(workoutId: Workout): String {
         val executor = Executors.newSingleThreadExecutor()
         var responseMessage = ""

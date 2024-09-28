@@ -22,7 +22,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView3"
-            android:name="com.example.limitless.MealTracker_Fragment"
+            android:name="com.example.limitless.Nutrition.MealTracker_Fragment"
             android:layout_width="match_parent"
             android:layout_height="597dp" />
     </LinearLayout>

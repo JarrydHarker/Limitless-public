@@ -1,4 +1,4 @@
-package com.example.limitless
+package com.example.limitless.Nutrition
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.limitless.Exercise.Exercise_Activity
+import com.example.limitless.MainActivity
+import com.example.limitless.R
+import com.example.limitless.Report_Activity
+import com.example.limitless.Settings
+import com.example.limitless.ThemeManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Diet_Activity : AppCompatActivity() {

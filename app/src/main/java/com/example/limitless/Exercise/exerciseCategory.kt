@@ -1,10 +1,8 @@
-package com.example.limitless
+package com.example.limitless.Exercise
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.limitless.R
 
 class exerciseCategory : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

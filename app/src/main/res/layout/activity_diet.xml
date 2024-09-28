@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Diet_Activity">
+    tools:context=".Nutrition.Diet_Activity">
 
     <ScrollView
         android:layout_width="412dp"
@@ -59,7 +59,7 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView4"
-                android:name="com.example.limitless.DietsStats_Fragment"
+                android:name="com.example.limitless.Nutrition.DietsStats_Fragment"
                 android:layout_width="match_parent"
                 android:layout_height="540dp" />
 

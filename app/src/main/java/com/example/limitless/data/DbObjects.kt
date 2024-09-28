@@ -147,10 +147,10 @@ class Workout(
 class Exercise(
     var exerciseId: String = "",
     var movement: Movement,
-    var cardio: Cardio?,
-    var strength: Strength?
-){
 
+){
+    var cardio: Cardio? = null
+    var strength: Strength? = null
 }
 
 class Movement(
@@ -182,14 +182,14 @@ class Strength(
 }
 
 class MealFood(
-    var mealId: String = "",
+    var mealId: Int = 0,
     var foodId: Int = 0
 ){
 
 }
 
 class Meal(
-    var mealId: String = "",
+    var mealId: Int = 0,
     var date: LocalDate? = null,  // Use String or LocalDate depending on your needs
     var userId: String? = null,
     var name: String = ""

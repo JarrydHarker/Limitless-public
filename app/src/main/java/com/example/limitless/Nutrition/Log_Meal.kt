@@ -1,4 +1,4 @@
-package com.example.limitless
+package com.example.limitless.Nutrition
 
 import android.app.Dialog
 import android.content.Intent
@@ -13,15 +13,19 @@ import android.view.Window
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.limitless.data.CalorieCounter
+import com.example.limitless.R
+import com.example.limitless.currentUser
 import com.example.limitless.data.DbAccess
 import com.example.limitless.data.Food
+import com.example.limitless.data.Meal
+import com.example.limitless.nutritionViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,6 +34,8 @@ private lateinit var mealListAdapter: ArrayAdapter<String>
 private val mealDescriptions = mutableListOf<String>()
 
 class Log_Meal : AppCompatActivity() {
+
+    val meal = Meal()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,9 +56,14 @@ class Log_Meal : AppCompatActivity() {
         val mealFoods: MutableList<Food> = mutableListOf()
         lblMealTitle.text = mealTitle
 
+
         btnLog.setOnClickListener {
             // Create a new meal with the provided foods
-            nutritionViewModel.calorieCounter.CreateMeal(mealFoods)
+            meal.date = nutritionViewModel.currentDate
+            meal.arrFoods = mealFoods
+            meal.userId = currentUser?.userId
+
+            nutritionViewModel.calorieCounter.CreateMeal(meal)
 
             val intent = Intent(this, Diet_Activity::class.java)
             startActivity(intent)
@@ -81,6 +92,9 @@ class Log_Meal : AppCompatActivity() {
         val txtFoodSearch: AutoCompleteTextView = dialog.findViewById(R.id.txtFoodSearch)
         val lvMealPreview: ListView = dialog.findViewById(R.id.lvMealPreview)
         var arrFoods: MutableList<Food> = mutableListOf()
+        val txtMealName: EditText = dialog.findViewById(R.id.txtMealName_LMD)
+
+        meal.name = txtMealName.text.toString()
 
         txtFoodSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Exercise_Activity">
+    tools:context=".Exercise.Exercise_Activity">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -31,7 +31,7 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView2"
-                android:name="com.example.limitless.Exercises_Fragment"
+                android:name="com.example.limitless.Exercise.Exercises_Fragment"
                 android:layout_width="match_parent"
                 android:layout_height="666dp" />
 

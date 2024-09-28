@@ -34,13 +34,13 @@
             android:name=".User_Weight"
             android:exported="false" />
         <activity
-            android:name=".exerciseCategory"
+            android:name=".Exercise.exerciseCategory"
             android:exported="false" />
         <activity
             android:name=".Goal_page"
             android:exported="false" />
         <activity
-            android:name=".Log_Exercise"
+            android:name=".Exercise.Log_Exercise"
             android:exported="false" />
 
         <service
@@ -56,16 +56,16 @@
             android:name=".User_Height"
             android:exported="false" />
         <activity
-            android:name=".Add_Exercise"
+            android:name=".Exercise.Add_Exercise"
             android:exported="false" />
         <activity
-            android:name=".Log_Meal"
+            android:name=".Nutrition.Log_Meal"
             android:exported="false" />
         <activity
-            android:name=".MealTracker"
+            android:name=".Nutrition.MealTracker"
             android:exported="false" />
         <activity
-            android:name=".Workout_Planner"
+            android:name=".Exercise.Workout_Planner"
             android:exported="false" />
         <activity
             android:name=".Settings"
@@ -80,10 +80,10 @@
             android:name=".Report_Activity"
             android:exported="false" />
         <activity
-            android:name=".Diet_Activity"
+            android:name=".Nutrition.Diet_Activity"
             android:exported="false" />
         <activity
-            android:name=".Exercise_Activity"
+            android:name=".Exercise.Exercise_Activity"
             android:exported="false" />
         <activity
             android:name=".ForgotPassword"

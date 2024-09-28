@@ -25,6 +25,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.Manifest
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityOptionsCompat
+import com.example.limitless.Exercise.Exercise_Activity
+import com.example.limitless.Exercise.Workout_Planner
+import com.example.limitless.Nutrition.Diet_Activity
 import com.example.limitless.data.ViewModels.ActivityViewModel
 import com.example.limitless.data.ViewModels.NutritionViewModel
 
@@ -54,8 +57,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, StepCounterService::class.java)
             startService(intent)
         }
-
-
 
         //Nicks Animation things
         val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
