@@ -3,6 +3,8 @@ package com.example.limitless.data
 import android.health.connect.datatypes.MealType
 import android.util.Log
 import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
@@ -26,7 +28,7 @@ class DbAccess private constructor(){
         }
     }
 
-    private val apiUrl = "https://localhost:7230/api/Limitless"
+    private val apiUrl = "https://opscapi-cnbqbvc2g7e4hyec.switzerlandnorth-01.azurewebsites.net/api/Limitless"
     private val epUser = "/User"
     private val epUserInfo = "/UserInfo"
     private val epDay = "/Day"
@@ -47,6 +49,53 @@ class DbAccess private constructor(){
         executor.execute{
             try{
                 val url = URL(apiUrl + epUser)
+                val connection = url.openConnection() as HttpURLConnection
+
+                connection.requestMethod = "POST"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+                connection.doOutput = true
+
+                // Serialize user object to JSON using Gson
+                val gson = Gson()
+                val jsonInputString = gson.toJson(user)
+
+                // Write the JSON data to the output stream
+                OutputStreamWriter(connection.outputStream).use { writer ->
+                    writer.write(jsonInputString)
+                    writer.flush()
+                }
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's response message
+                    }
+                } else {
+                    // Read error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            }catch (ex: Exception){
+                // Handle exceptions appropriately
+                Log.e("DbAccessError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage
+    }
+
+    fun CreateUserInfo(user: UserInfo): String {
+        val executor = Executors.newSingleThreadExecutor()
+
+        var responseMessage = ""
+
+        executor.execute{
+            try{
+                val url = URL(apiUrl + epUserInfo)
                 val connection = url.openConnection() as HttpURLConnection
 
                 connection.requestMethod = "POST"
@@ -546,6 +595,7 @@ class DbAccess private constructor(){
 
         return users // Return the list of users (could be empty if request fails)
     }
+
     fun GetAllDays(): List<Day> {
         val executor = Executors.newSingleThreadExecutor()
         var days: List<Day> = emptyList()
@@ -586,6 +636,7 @@ class DbAccess private constructor(){
 
         return days // Return the list of users (could be empty if request fails)
     }
+
     fun GetAllExercises(): List<Exercise> {
         val executor = Executors.newSingleThreadExecutor()
         var exercise: List<Exercise> = emptyList()
@@ -626,6 +677,7 @@ class DbAccess private constructor(){
 
         return exercise // Return the list of users (could be empty if request fails)
     }
+
     fun GetAllCardio(): List<Cardio> {
         val executor = Executors.newSingleThreadExecutor()
         var cardio: List<Cardio> = emptyList()
@@ -666,6 +718,7 @@ class DbAccess private constructor(){
 
         return cardio // Return the list of users (could be empty if request fails)
     }
+
     fun GetAllStrength(): List<Strength> {
         val executor = Executors.newSingleThreadExecutor()
         var strength: List<Strength> = emptyList()
@@ -706,6 +759,7 @@ class DbAccess private constructor(){
 
         return strength // Return the list of users (could be empty if request fails)
     }
+
     fun GetAllMeals(): List<Meal> {
         val executor = Executors.newSingleThreadExecutor()
         var meals: List<Meal> = emptyList()
@@ -746,14 +800,15 @@ class DbAccess private constructor(){
 
         return meals // Return the list of users (could be empty if request fails)
     }
-    fun GetAllFood(): List<Food> {
+
+    fun GetAllFood(pageNum: Int, pageSize: Int): List<Food> {
         val executor = Executors.newSingleThreadExecutor()
         var food: List<Food> = emptyList()
 
         executor.execute {
             try {
                 // Construct the URL for the GET request
-                val url = URL(apiUrl + epFood + "/All") // Assuming the endpoint is something like /users
+                val url = URL(apiUrl + epFood + "/All?pageNumber=$pageNum&pageSize=$pageSize") // Assuming the endpoint is something like /users
                 val connection = url.openConnection() as HttpURLConnection
 
                 // Set the request method to GET
@@ -786,6 +841,41 @@ class DbAccess private constructor(){
 
         return food // Return the list of users (could be empty if request fails)
     }
+
+    suspend fun SearchForFood(strSearch: String): List<Food> {
+        return withContext(Dispatchers.IO) {
+            var food: List<Food> = emptyList()
+
+            try {
+                val url = URL(apiUrl + epFood + "/Search?strSearch=$strSearch")
+                val connection = url.openConnection() as HttpURLConnection
+
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText()
+                        val gson = Gson()
+
+                        // Deserialize the JSON array into a List<Food>
+                        food = gson.fromJson(jsonResponse, Array<Food>::class.java).toList()
+                    }
+                } else {
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("SearchForFood", reader.readText())
+                    }
+                }
+            } catch (ex: Exception) {
+                Log.e("SearchForFood", ex.toString())
+            }
+
+            return@withContext food
+        }
+    }
+
+
     fun GetAllMovements(): List<Movement> {
         val executor = Executors.newSingleThreadExecutor()
         var movement: List<Movement> = emptyList()

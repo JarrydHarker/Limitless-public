@@ -38,12 +38,13 @@ class CircleGraphic @JvmOverloads constructor(
     private var drawLevels = false
     private var drawWeekly = false
     private var hasLabel = true
+    private var colour = Color.GREEN
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
         // Initialization code
-        paint.color = Color.GREEN
+        paint.color = colour
         paint.style = Paint.Style.STROKE
         paint.strokeWidth = thickness
         textPaint.style = Paint.Style.FILL
@@ -205,6 +206,9 @@ class CircleGraphic @JvmOverloads constructor(
         invalidate()
     }
 
+    fun setColour(){
+
+    }
 
     private fun degsToRads(degrees: Float):Double{
         var Output =degrees*Math.PI/180

@@ -7,7 +7,7 @@ class CalorieCounter(var calorieWallet: Double?) {
     var calories = 0
     var arrMeals: MutableList<Meal>? = null
 
-    fun CreateMeal(foods: List<Food>, calorieCounter: CalorieCounter) {
+    fun CreateMeal(foods: List<Food>) {
         //val dbAccess = DbAccess.GetInstance()
 
             // Create a new meal
@@ -21,11 +21,11 @@ class CalorieCounter(var calorieWallet: Double?) {
             meal.arrFoods = foods.toMutableList()
 
             // Add the meal to the calorie counter's meal list
-            if (calorieCounter.arrMeals == null) {
-                calorieCounter.arrMeals = mutableListOf(meal)
+            if (arrMeals == null) {
+                arrMeals = mutableListOf(meal)
                 Log.d("Food", "Number of meals: ${arrMeals?.count()}")
             }else{
-                calorieCounter.arrMeals?.add(meal)
+                arrMeals?.add(meal)
             }
     }
 

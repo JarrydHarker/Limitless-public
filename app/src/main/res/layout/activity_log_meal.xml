@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listView" />
+        app:layout_constraintTop_toBottomOf="@+id/lvCreatMeal" />
 
     <Button
         android:id="@+id/btnLog_LM"
@@ -39,7 +39,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="30dp"
         android:backgroundTint="#6d61da"
-        android:text="Log Food"
+        android:text="Log Meal"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,7 @@
         android:layout_height="39dp"
         android:layout_marginEnd="30dp"
         android:backgroundTint="#6d61da"
-        android:text="Create Meal"
+        android:text="Create New Meal"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/spinPrevFoods_LM" />
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/lvCreatMeal"
         android:layout_width="match_parent"
         android:layout_height="274dp"
         android:layout_marginStart="30dp"
@@ -79,12 +79,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:text="Select Food from"
+        android:text="Select Meal:"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/spinPrevFoods_LM"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listView"
+        app:layout_constraintTop_toBottomOf="@+id/lvCreatMeal"
         app:layout_constraintVertical_bias="0.571" />
 </androidx.constraintlayout.widget.ConstraintLayout>
