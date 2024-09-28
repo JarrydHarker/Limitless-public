@@ -2,51 +2,44 @@ package com.example.limitless
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.EditText
 import android.widget.NumberPicker
-import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.limitless.data.User
 
-class User_Height : AppCompatActivity() {
+class User_WeightGoal : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_user_height)
+        setContentView(R.layout.activity_user_weight_goal)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val next: Button = findViewById(R.id.UH_btnNext)
-        val skip:Button = findViewById(R.id.UH_btnSkip)
+        val next: Button = findViewById(R.id.UWG_btnNext)
+        val skip: Button = findViewById(R.id.UWG_btnSkip)
 
-        val npMain: NumberPicker = findViewById(R.id.UH_Main)
+        val npMain: NumberPicker = findViewById(R.id.UWG_Main)
         npMain.minValue = 0
-        npMain.maxValue = 300
+        npMain.maxValue = 500
 
-        val npSecondary: NumberPicker = findViewById(R.id.UH_Secondary)
+        val npSecondary: NumberPicker = findViewById(R.id.UWG_Secondary)
         npSecondary.minValue = 0
         npSecondary.maxValue = 9
 
-        val npText: TextView = findViewById(R.id.UH_txtUnit)
-        npText.text = "cm"
+        val npText: TextView = findViewById(R.id.UWG_txtUnit)
+        npText.text = "kg"
 
         next.setOnClickListener{
             if(npMain.value != 0)
             {
-                Toast.makeText(this, "Height Captured: ${npMain.value}, ${npSecondary.value} ${npText.text}", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, User_Weight::class.java)
+                Toast.makeText(this, "Weight Goal Captured: ${npMain.value}, ${npSecondary.value} ${npText.text}", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, User_CalorieWallet::class.java)
                 startActivity(intent)
             }
             else{
@@ -54,8 +47,9 @@ class User_Height : AppCompatActivity() {
             }
         }
         skip.setOnClickListener{
-            val intent = Intent(this, User_Weight::class.java)
+            val intent = Intent(this, User_CalorieWallet::class.java)
             startActivity(intent)
         }
+
     }
 }
