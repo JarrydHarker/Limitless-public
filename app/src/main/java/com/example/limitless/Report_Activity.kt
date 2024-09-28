@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.limitless.Exercise.Exercise_Activity
+import com.example.limitless.Nutrition.Diet_Activity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Report_Activity : AppCompatActivity() {

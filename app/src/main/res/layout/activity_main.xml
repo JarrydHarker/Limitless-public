@@ -138,7 +138,7 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView10"
-                android:name="com.example.limitless.Workout_Process"
+                android:name="com.example.limitless.Exercise.Workout_Process"
                 android:layout_width="match_parent"
                 android:layout_height="317dp"
                 tools:layout="@layout/fragment_workout__process" />
@@ -169,14 +169,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu"
         app:navigationIconTint="#FFDA1616"></com.google.android.material.bottomnavigation.BottomNavigationView>
-
-    <Button
-        android:id="@+id/btnMap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Map"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="28dp" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

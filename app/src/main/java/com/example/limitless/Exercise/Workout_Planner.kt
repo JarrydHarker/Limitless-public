@@ -1,16 +1,20 @@
-package com.example.limitless
+package com.example.limitless.Exercise
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.limitless.Nutrition.Diet_Activity
+import com.example.limitless.MainActivity
+import com.example.limitless.R
+import com.example.limitless.Report_Activity
+import com.example.limitless.Settings
+import com.example.limitless.ThemeManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Workout_Planner : AppCompatActivity() {

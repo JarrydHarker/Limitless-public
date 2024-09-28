@@ -1,32 +1,28 @@
 package com.example.limitless.data
 
 import android.util.Log
+import com.example.limitless.currentUser
+import com.example.limitless.nutritionViewModel
 import java.time.LocalDate
 
 class CalorieCounter(var calorieWallet: Double?) {
     var calories = 0
     var arrMeals: MutableList<Meal>? = null
 
-    fun CreateMeal(foods: List<Food>) {
-        //val dbAccess = DbAccess.GetInstance()
+    fun CreateMeal(meal: Meal) {
+        val db = DbAccess.GetInstance()
 
-            // Create a new meal
-            val meal = Meal(
-                mealId = "1",
-                date = LocalDate.now(),
-                userId = "user123", // Replace with actual user ID
-                name = "My Meal",
-            )
+        meal.userId = currentUser?.userId
+        meal.date = nutritionViewModel.currentDate
+        db.CreateMeal(meal)
 
-            meal.arrFoods = foods.toMutableList()
-
-            // Add the meal to the calorie counter's meal list
-            if (arrMeals == null) {
-                arrMeals = mutableListOf(meal)
-                Log.d("Food", "Number of meals: ${arrMeals?.count()}")
-            }else{
-                arrMeals?.add(meal)
-            }
+        // Add the meal to the calorie counter's meal list
+        if (arrMeals == null) {
+            arrMeals = mutableListOf(meal)
+            Log.d("Food", "Number of meals: ${arrMeals?.count()}")
+        }else{
+            arrMeals?.add(meal)
+        }
     }
 
 

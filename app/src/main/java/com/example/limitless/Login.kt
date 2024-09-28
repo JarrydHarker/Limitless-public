@@ -19,6 +19,7 @@ import androidx.credentials.GetCredentialResponse
 import androidx.credentials.exceptions.GetCredentialException
 import androidx.credentials.exceptions.NoCredentialException
 import androidx.lifecycle.lifecycleScope
+import com.example.limitless.Exercise.Log_Exercise
 import com.example.limitless.data.DbAccess
 import com.example.limitless.data.PasswordHasher
 import com.example.limitless.data.User

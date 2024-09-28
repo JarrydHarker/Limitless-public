@@ -1,4 +1,4 @@
-package com.example.limitless
+package com.example.limitless.Exercise
 
 import android.app.Dialog
 import android.graphics.Color
@@ -11,6 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.limitless.R
 
 class Log_Exercise : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +37,7 @@ class Log_Exercise : AppCompatActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.rest_dialog)
-        dialog.window!!.attributes.windowAnimations=R.style.dialogAnimation
+        dialog.window!!.attributes.windowAnimations= R.style.dialogAnimation
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
         dialog.window!!.setGravity(Gravity.BOTTOM)
 

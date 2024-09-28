@@ -1,23 +1,19 @@
-package com.example.limitless
+package com.example.limitless.Exercise
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.fragment.app.Fragment
+import com.example.limitless.Nutrition.Calorie_Fragment
+import com.example.limitless.R
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Calorie_Fragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class Calorie_Fragment : Fragment() {
+class Workout_Process : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -37,7 +33,7 @@ class Calorie_Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calorie_, container, false)
+        return inflater.inflate(R.layout.fragment_workout__process, container, false)
     }
 
     companion object {
@@ -52,7 +48,7 @@ class Calorie_Fragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Calorie_Fragment().apply {
+            Workout_Process().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
