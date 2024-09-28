@@ -26,6 +26,9 @@
             android:name=".exerciseCategory"
             android:exported="false" />
         <activity
+            android:name=".Goal_page"
+            android:exported="false" />
+        <activity
             android:name=".Log_Exercise"
             android:exported="false" />
 
