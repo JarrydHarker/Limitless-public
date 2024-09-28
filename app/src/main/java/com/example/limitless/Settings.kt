@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
@@ -26,12 +27,14 @@ import com.example.limitless.data.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Settings : AppCompatActivity() {
-    private lateinit var sharedPreferences: SharedPreferences
+   // private lateinit var sharedPreferences: SharedPreferences
+    lateinit var bottomNavBar: BottomNavigationView
+    private var themeChanged = false
 
-    companion object {
+    /*companion object {
         private const val PREFS_NAME = "MyAppPrefs"
         private const val KEY_DARK_MODE = "dark_mode"
-    }
+    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,21 +67,35 @@ class Settings : AppCompatActivity() {
         profileImage.startAnimation(stb)
         linearLayout7.startAnimation(btt)
         //till here
-        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+       // sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        bottomNavBar = findViewById(R.id.NavBar)
 
         // Apply the saved theme before setting the content view
-        applyTheme()
-        val switchTheme: Switch = findViewById(R.id.switchTheme)
+       // applyTheme()
 
 
-        val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
-
-        switchTheme.isChecked = isDarkModeEnabled()
+        /*switchTheme.isChecked = isDarkModeEnabled()
 
         switchTheme.setOnCheckedChangeListener { _, isChecked ->
             saveDarkModeState(isChecked)
             applyTheme()
             recreate() // Recreate the activity to apply the new theme
+        }*/
+        //val switchTheme: Switch = findViewById(R.id.switchTheme)
+        ThemeManager.updateNavBarColor(this, bottomNavBar)
+        val switchTheme: Switch = findViewById(R.id.switchTheme)
+        // Setup switchTheme and listen for changes
+        switchTheme.isChecked = ThemeManager.isDarkModeEnabled(this)
+        switchTheme.setOnCheckedChangeListener { _, isChecked ->
+            if (ThemeManager.isDarkModeEnabled(this) != isChecked) {
+                // Only apply the theme if there's an actual change
+                ThemeManager.saveDarkModeState(this, isChecked)
+
+                // Delay theme application slightly to prevent flickering
+                switchTheme.postDelayed({
+                    ThemeManager.applyTheme(this)
+                }, 200) // Delay in milliseconds (200ms should be smooth)
+            }
         }
         bottomNavBar.setSelectedItemId(R.id.ic_settings)
         bottomNavBar.setOnNavigationItemSelectedListener { item ->
@@ -116,7 +133,7 @@ class Settings : AppCompatActivity() {
         startActivity(intent, options.toBundle())
     }
 
-    public fun isDarkModeEnabled(): Boolean {
+    /*public fun isDarkModeEnabled(): Boolean {
         return sharedPreferences.getBoolean(KEY_DARK_MODE, false)
     }
 
@@ -130,7 +147,15 @@ class Settings : AppCompatActivity() {
             if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES
             else AppCompatDelegate.MODE_NIGHT_NO
         )
+        val backgroundColor = if (isDarkMode) {
+            ContextCompat.getColor(this, R.color.darkBackground) // Define a dark color in your colors.xml
+        } else {
+            ContextCompat.getColor(this, R.color.lightBackground) // Define a light color in your colors.xml
+        }
+
 
     }
 
+        bottomNavBar.setBackgroundColor(backgroundColor)
+    }*/
 }

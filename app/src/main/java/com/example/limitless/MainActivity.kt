@@ -1,23 +1,17 @@
 package com.example.limitless
 
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.hardware.Sensor
-import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import androidx.compose.material.Text
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -33,7 +27,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityOptionsCompat
 import com.example.limitless.data.ViewModels.ActivityViewModel
 import com.example.limitless.data.ViewModels.NutritionViewModel
-import java.time.LocalDate
 
 var  currentUser: User? = null
 lateinit var nutritionViewModel: NutritionViewModel
@@ -56,14 +49,13 @@ class MainActivity : AppCompatActivity() {
         if(currentUser == null){
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
+        }else{
+            checkAndRequestPermissions()
+            val intent = Intent(this, StepCounterService::class.java)
+            startService(intent)
         }
 
-        // Initialize ViewModel with calorieWallet from currentUser
-        currentUser!!.calorieWallet = 2000.0
-        nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.calorieWallet)
-        activityViewModel = ActivityViewModel(LocalDate.now())
 
-        checkAndRequestPermissions()
 
         //Nicks Animation things
         val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
@@ -88,9 +80,7 @@ class MainActivity : AppCompatActivity() {
         val workout: CardView = findViewById(R.id.workoutsCard)
         val recyclerView: RecyclerView = findViewById(R.id.PE_ListExercises)
 
-        val intent = Intent(this, StepCounterService::class.java)
-        startService(intent)
-
+        ThemeManager.updateNavBarColor(this, bottomNavBar)
 
         bottomNavBar.setSelectedItemId(R.id.ic_home)
         bottomNavBar.setOnNavigationItemSelectedListener{item ->

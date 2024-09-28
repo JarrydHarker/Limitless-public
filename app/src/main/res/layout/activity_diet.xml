@@ -61,13 +61,14 @@
                 android:id="@+id/fragmentContainerView4"
                 android:name="com.example.limitless.DietsStats_Fragment"
                 android:layout_width="match_parent"
-                android:layout_height="780dp" />
+                android:layout_height="540dp" />
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView9"
                 android:name="com.example.limitless.fragment_water_tracker"
                 android:layout_width="match_parent"
-                android:layout_height="196dp" />
+                android:layout_height="296dp" />
+
         </LinearLayout>
     </ScrollView>
 
@@ -77,7 +78,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginBottom="-60dp"
-        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

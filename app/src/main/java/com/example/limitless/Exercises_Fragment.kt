@@ -44,18 +44,13 @@ class Exercises_Fragment : Fragment() {
         cgSteps.setThickness(20f)
         cgSteps.setType("circle")
         cgSteps.RemoveLabel()
-        cgSteps.setGoal(currentUser?.stepGoal!!.toFloat())
+        cgSteps.setGoal(currentUser?.GetStepGoal()!!.toFloat())
         cgSteps.setProgress(activityViewModel.steps.toFloat())
 
-        val btnAddWorkout: Button = view.findViewById(R.id.btnAddWorkout_EF)
-
-        btnAddWorkout.setOnClickListener {
-
-        }
         val btnExercise = view.findViewById<Button>(R.id.btnAddWorkout_EF)
 
         btnExercise.setOnClickListener {
-            val intent = Intent(requireActivity(), Add_Exercise::class.java)
+            val intent = Intent(requireActivity(), exerciseCategory::class.java)
             startActivity(intent)
         }
 

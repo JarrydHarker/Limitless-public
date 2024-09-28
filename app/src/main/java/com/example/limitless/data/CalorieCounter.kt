@@ -7,7 +7,7 @@ class CalorieCounter(var calorieWallet: Double?) {
     var calories = 0
     var arrMeals: MutableList<Meal>? = null
 
-    fun CreateMeal(foods: List<Food>, calorieCounter: CalorieCounter) {
+    fun CreateMeal(foods: List<Food>) {
         //val dbAccess = DbAccess.GetInstance()
 
             // Create a new meal
@@ -16,16 +16,16 @@ class CalorieCounter(var calorieWallet: Double?) {
                 date = LocalDate.now(),
                 userId = "user123", // Replace with actual user ID
                 name = "My Meal",
-                day = null, // Replace with actual day object if needed
-                foods = foods.toMutableList()
             )
 
+            meal.arrFoods = foods.toMutableList()
+
             // Add the meal to the calorie counter's meal list
-            if (calorieCounter.arrMeals == null) {
-                calorieCounter.arrMeals = mutableListOf(meal)
+            if (arrMeals == null) {
+                arrMeals = mutableListOf(meal)
                 Log.d("Food", "Number of meals: ${arrMeals?.count()}")
             }else{
-                calorieCounter.arrMeals?.add(meal)
+                arrMeals?.add(meal)
             }
     }
 
@@ -42,7 +42,7 @@ class CalorieCounter(var calorieWallet: Double?) {
             for(meal in arrMeals!!){
                 var mealCalories = 0.0
 
-                for(food in meal.foods){
+                for(food in meal.arrFoods){
                     mealCalories += food.calories
                     Log.d("Food", "${food.description}|${food.calories}")
                 }
@@ -61,7 +61,7 @@ class CalorieCounter(var calorieWallet: Double?) {
             for(meal in arrMeals!!){
                 var mealCarbs = 0.0
 
-                for(food in meal.foods){
+                for(food in meal.arrFoods){
                     mealCarbs += food.carbohydrates!!
                 }
 
@@ -79,7 +79,7 @@ class CalorieCounter(var calorieWallet: Double?) {
             for (meal in arrMeals!!) {
                 var mealFats = 0.0
 
-                for (food in meal.foods) {
+                for (food in meal.arrFoods) {
                     mealFats += food.fat!!
                 }
 
@@ -97,7 +97,7 @@ class CalorieCounter(var calorieWallet: Double?) {
             for (meal in arrMeals!!) {
                 var mealProteins = 0.0
 
-                for (food in meal.foods) {
+                for (food in meal.arrFoods) {
                     mealProteins += food.protein!!
                 }
 
@@ -115,7 +115,7 @@ class CalorieCounter(var calorieWallet: Double?) {
             for (meal in arrMeals!!) {
                 var mealFibre = 0.0
 
-                for (food in meal.foods) {
+                for (food in meal.arrFoods) {
                     mealFibre += food.fibre!!
                 }
 
