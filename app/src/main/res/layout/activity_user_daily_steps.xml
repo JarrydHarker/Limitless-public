@@ -6,55 +6,47 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".User_Height">
+    tools:context=".User_DailySteps">
 
-    <LinearLayout
-        android:id="@+id/UH_Linear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499">
-
-        <NumberPicker
-            android:id="@+id/UH_Main"
-            android:layout_width="93dp"
-            android:layout_height="223dp"
-            android:layout_marginEnd="8dp" />
+        <EditText
+            android:id="@+id/UDS_txtSteps"
+            android:layout_width="195dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:background="@drawable/onboarding_box"
+            android:ems="5"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.296"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.468" />
 
         <TextView
-            android:id="@+id/textView20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text=","
-            android:textSize="20sp" />
-
-        <NumberPicker
-            android:id="@+id/UH_Secondary"
-            android:layout_width="93dp"
-            android:layout_height="223dp" />
-
-        <TextView
-            android:id="@+id/UH_txtUnit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/UDS_txtUnit"
+            android:layout_width="90dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
             android:text=""
-            android:textSize="20sp" />
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.884"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.481" />
 
-    </LinearLayout>
 
     <TextView
         android:id="@+id/textView42"
-        android:layout_width="189dp"
-        android:layout_height="54dp"
-        android:text="Add your Height"
+        android:layout_width="284dp"
+        android:layout_height="59dp"
+        android:text="Add your Daily Steps Goal"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +55,7 @@
         app:layout_constraintVertical_bias="0.155" />
 
     <Button
-        android:id="@+id/UH_btnNext"
+        android:id="@+id/UDS_btnNext"
         android:layout_width="284dp"
         android:layout_height="54dp"
         android:text="Next"
@@ -74,7 +66,7 @@
         app:layout_constraintVertical_bias="0.776" />
 
     <Button
-        android:id="@+id/UH_btnSkip"
+        android:id="@+id/UDS_btnSkip"
         android:layout_width="172dp"
         android:layout_height="47dp"
         android:text="Skip"

@@ -6,10 +6,10 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".User_Height">
+    tools:context=".User_Weight">
 
     <LinearLayout
-        android:id="@+id/UH_Linear"
+        android:id="@+id/UW_Linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.499">
 
         <NumberPicker
-            android:id="@+id/UH_Main"
+            android:id="@+id/UW_Main"
             android:layout_width="93dp"
             android:layout_height="223dp"
             android:layout_marginEnd="8dp" />
@@ -37,12 +37,12 @@
             android:textSize="20sp" />
 
         <NumberPicker
-            android:id="@+id/UH_Secondary"
+            android:id="@+id/UW_Secondary"
             android:layout_width="93dp"
             android:layout_height="223dp" />
 
         <TextView
-            android:id="@+id/UH_txtUnit"
+            android:id="@+id/UW_txtUnit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
@@ -54,7 +54,7 @@
         android:id="@+id/textView42"
         android:layout_width="189dp"
         android:layout_height="54dp"
-        android:text="Add your Height"
+        android:text="Add your Weight"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +63,7 @@
         app:layout_constraintVertical_bias="0.155" />
 
     <Button
-        android:id="@+id/UH_btnNext"
+        android:id="@+id/UW_btnNext"
         android:layout_width="284dp"
         android:layout_height="54dp"
         android:text="Next"
@@ -74,7 +74,7 @@
         app:layout_constraintVertical_bias="0.776" />
 
     <Button
-        android:id="@+id/UH_btnSkip"
+        android:id="@+id/UW_btnSkip"
         android:layout_width="172dp"
         android:layout_height="47dp"
         android:text="Skip"
@@ -83,5 +83,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.88" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

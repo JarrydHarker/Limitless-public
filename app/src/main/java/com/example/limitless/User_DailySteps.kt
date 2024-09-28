@@ -1,0 +1,63 @@
+package com.example.limitless
+
+import android.content.Intent
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.limitless.data.User
+import com.example.limitless.data.ViewModels.ActivityViewModel
+import com.example.limitless.data.ViewModels.NutritionViewModel
+import java.time.LocalDate
+
+class User_DailySteps : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_user_daily_steps)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        val next: Button = findViewById(R.id.UDS_btnNext)
+        val skip: Button = findViewById(R.id.UDS_btnSkip)
+
+        val userStepsGoal: EditText = findViewById(R.id.UDS_txtSteps)
+
+        val npText: TextView = findViewById(R.id.UDS_txtUnit)
+        npText.text = "steps"
+
+        next.setOnClickListener{
+            if(userStepsGoal.text.isNotEmpty())
+            {
+                Toast.makeText(this, "Calorie Wallet Captured: ${userStepsGoal.text} ${npText.text}", Toast.LENGTH_SHORT).show()
+                currentUser = User()
+
+                // Initialize ViewModel with calorieWallet from currentUser
+                nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                activityViewModel = ActivityViewModel(LocalDate.now())
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+            else{
+                Toast.makeText(this, "Please fill in field or press Skip to continue", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+        skip.setOnClickListener{
+            currentUser = User()
+
+            // Initialize ViewModel with calorieWallet from currentUser
+            nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+            activityViewModel = ActivityViewModel(LocalDate.now())
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+    }
+}
