@@ -56,7 +56,8 @@ class Settings : AppCompatActivity() {
         val goals: LinearLayout = findViewById(R.id.ll4)
 
         goals.setOnClickListener{
-            Goals()
+            val intent = Intent(this, Goal_page::class.java)
+            startActivity(intent)
         }
 
         BackgroundImage.startAnimation(ttb)
@@ -131,40 +132,5 @@ class Settings : AppCompatActivity() {
         )
 
     }
-    private fun Goals(){
-        // Inflate the custom layout
-        val inflater = layoutInflater
-        val dialogView = inflater.inflate(R.layout.layout_set_goal, null)
 
-        val seekbar : SeekBar = dialogView.findViewById(R.id.seekbarTime)
-        val showSeekbar: TextView = dialogView.findViewById(R.id.lblSelectPeriod)
-        val loseWeight: RadioButton = dialogView.findViewById(R.id.rbLoseWeight)
-        val gainWeight: RadioButton = dialogView.findViewById(R.id.rbGainWeight)
-        
-        seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                showSeekbar.text = "Time Period: $progress weeks"
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-            }
-        })
-
-        // Build and show the dialog
-        AlertDialog.Builder(this)
-            .setTitle("Set Goal")
-            .setView(dialogView) // Set the custom view
-            .setPositiveButton("Confirm") { dialog, which ->
-
-            }
-            .setNegativeButton("Cancel") { dialog, which ->
-                dialog.dismiss()
-
-            }
-            .create()
-            .show()
-    }
 }
