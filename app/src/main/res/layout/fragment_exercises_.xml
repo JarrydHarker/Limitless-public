@@ -94,8 +94,8 @@
                 <ImageView
                     android:id="@+id/imageView14"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    tools:src="@drawable/run_icon" />
+                    android:layout_height="57dp"
+                    android:src="@drawable/run_icon" />
 
                 <TextView
                     android:id="@+id/textView24"
@@ -117,12 +117,12 @@
                 <ImageView
                     android:id="@+id/imageView15"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    tools:src="@drawable/cycling_icon" />
+                    android:layout_height="57dp"
+                    android:src="@drawable/cycling_icon" />
 
                 <TextView
                     android:id="@+id/textView25"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Plyometrics"
                     android:textAlignment="center"
@@ -140,8 +140,8 @@
                 <ImageView
                     android:id="@+id/imageView16"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    tools:src="@drawable/yoga_icon" />
+                    android:layout_height="57dp"
+                    android:src="@drawable/yoga_icon" />
 
                 <TextView
                     android:id="@+id/textView26"
@@ -163,8 +163,8 @@
                 <ImageView
                     android:id="@+id/imageView17"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    tools:src="@drawable/hiit_icon" />
+                    android:layout_height="57dp"
+                    android:src="@drawable/hiit_icon" />
 
                 <TextView
                     android:id="@+id/textView27"
@@ -186,8 +186,8 @@
                 <ImageView
                     android:id="@+id/imageView18"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    tools:src="@tools:sample/avatars" />
+                    android:layout_height="57dp"
+                    android:src="@drawable/powerlifting" />
 
                 <TextView
                     android:id="@+id/textView28"
@@ -207,10 +207,10 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageView19"
+                    android:id="@+id/imageView20"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    tools:src="@tools:sample/avatars" />
+                    android:layout_height="57dp"
+                    android:src="@drawable/strongman" />
 
                 <TextView
                     android:id="@+id/textView29"
@@ -230,9 +230,10 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView22"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    tools:src="@tools:sample/avatars" />
+                    android:layout_height="57dp"
+                    android:src="@drawable/olympicweightlifting" />
 
                 <TextView
                     android:layout_width="match_parent"

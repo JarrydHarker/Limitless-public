@@ -71,7 +71,6 @@ class Map_Activity : AppCompatActivity() {
 
         go.setOnClickListener{
 
-
             if (Ticktimer.time > 0){
                 Ticktimer.resume()
             }else{
@@ -82,7 +81,7 @@ class Map_Activity : AppCompatActivity() {
             Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate({
                 try {
                     runOnUiThread {
-                        lblTime1.text = Ticktimer.getTime()
+                        lblTime1.text = Ticktimer.getTime2()
                     }
                     //showChart(Ticktimer.get(), time)
                 } catch (e: Exception) {

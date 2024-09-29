@@ -28,16 +28,28 @@ class Timer(val endTime: Long) {
         }
     }
 
-    fun reset(){
-        time = 0
+    fun reset(newTime: Long) {
+        time = newTime
         isTiming = false
     }
 
-    private fun update() {
+    private fun update2() {
         if (isTiming ) {
             if(time <= endTime){
                 time = System.currentTimeMillis() - startTime
             }else isTiming = false
+        }
+    }
+
+    private fun update() {
+        if (isTiming) {
+            val elapsed = System.currentTimeMillis() - startTime
+            time -= elapsed
+            startTime = System.currentTimeMillis()
+            if (time <= 0) {
+                time = 0
+                isTiming = false
+            }
         }
     }
 
@@ -47,6 +59,11 @@ class Timer(val endTime: Long) {
 
     fun getTime(): String{
         update()
+        return formatTime(time)
+    }
+
+    fun getTime2(): String{
+        update2()
         return formatTime(time)
     }
 
