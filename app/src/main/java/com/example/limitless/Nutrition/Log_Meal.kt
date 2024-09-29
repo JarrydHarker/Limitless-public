@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Spinner
 import android.widget.TextView
@@ -58,6 +59,12 @@ class Log_Meal : AppCompatActivity() {
         val mealFoods: MutableList<Food> = mutableListOf()
         val spinMeals: Spinner = findViewById(R.id.spinPrevFoods_LM)
         val mealsAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
+        val Back: ImageView = findViewById(R.id.LM_ivBack)
+
+        Back.setOnClickListener{
+            val intent = Intent(this, MealTracker::class.java)
+            startActivity(intent)
+        }
 
         val meals = dbAccess.GetUserMeals(currentUser?.userId!!)
 
