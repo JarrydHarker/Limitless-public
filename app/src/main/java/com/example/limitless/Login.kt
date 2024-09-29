@@ -252,7 +252,6 @@ class Login : AppCompatActivity() {
                             currentUser = User(name = gId.givenName.toString(), surname = gId.familyName.toString(), email = gId.id)
                         }
 
-
                         onComplete()
                     } catch (e: GoogleIdTokenParsingException) {
                         Log.e(TAG, "Received an invalid google id token response", e)
