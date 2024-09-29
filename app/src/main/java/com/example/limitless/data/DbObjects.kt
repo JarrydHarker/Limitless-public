@@ -171,7 +171,9 @@ class Exercise(
     fun GetName(): String {
         return movement.name
     }
-
+fun getCategory(): String {
+    return movement.type
+}
     override fun toString(): String {
         if(strength != null){
             return "${movement.name}\t${strength!!.sets}x${strength!!.repetitions}"
