@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout11"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="250dp"
         android:layout_marginHorizontal="30dp"
         android:layout_marginStart="30dp"
@@ -135,7 +135,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout10"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="250dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="15dp"
@@ -191,6 +191,7 @@
                 android:id="@+id/cgFats"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:paddingLeft="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/linearLayout6"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -241,6 +242,7 @@
                 android:id="@+id/cgCarbs"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:paddingLeft="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -291,6 +293,7 @@
                 android:id="@+id/cgFibre"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:paddingLeft="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.01"
@@ -339,6 +342,7 @@
                 android:id="@+id/cgProtein"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:paddingLeft="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
