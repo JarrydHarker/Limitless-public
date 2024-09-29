@@ -35,8 +35,8 @@
 
     <Button
         android:id="@+id/btnLog_LM"
-        android:layout_width="159dp"
-        android:layout_height="40dp"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:backgroundTint="#6d61da"
         android:text="Log Meal"
@@ -49,8 +49,8 @@
 
     <Button
         android:id="@+id/btnCreateMeal_LM"
-        android:layout_width="162dp"
-        android:layout_height="39dp"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:backgroundTint="#6d61da"
         android:text="Create New Meal"
@@ -87,4 +87,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lvCreatMeal"
         app:layout_constraintVertical_bias="0.571" />
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="List of Foods:"
+        app:layout_constraintBottom_toTopOf="@+id/lvCreatMeal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblMealTitle_LM"
+        app:layout_constraintVertical_bias="0.853" />
 </androidx.constraintlayout.widget.ConstraintLayout>
