@@ -55,7 +55,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }else{
             checkAndRequestPermissions()
-
+            val service = Intent(this, StepCounterService::class.java)
+            startService(service)
         }
 
         //Nicks Animation things
@@ -75,7 +76,6 @@ class MainActivity : AppCompatActivity() {
         LinearLayout3.startAnimation(btt)
         //till here
 
-        val btn = findViewById<Button>(R.id.btnMap)
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
         val dailyActivity: CardView = findViewById(R.id.dailyActivityCard)
         val workout: CardView = findViewById(R.id.workoutsCard)

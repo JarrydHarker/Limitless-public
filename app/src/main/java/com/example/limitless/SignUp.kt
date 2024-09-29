@@ -9,10 +9,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.limitless.data.DbAccess
-import com.example.limitless.data.PasswordHasher
-import com.example.limitless.data.StepCounterService
-import com.example.limitless.data.User
 import com.example.limitless.data.ViewModels.ActivityViewModel
 import com.example.limitless.data.ViewModels.NutritionViewModel
 import java.time.LocalDate
@@ -62,9 +58,6 @@ class SignUp : AppCompatActivity() {
                 currentUser!!.SetCalorieWallet(2000.0)
                 nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
                 activityViewModel = ActivityViewModel(LocalDate.now())
-
-                val service = Intent(this@SignUp, StepCounterService::class.java)
-                startService(service)
 
                 val intent = Intent(this, User_Details::class.java)
                 startActivity(intent)

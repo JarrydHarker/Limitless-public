@@ -97,9 +97,6 @@ class Login : AppCompatActivity() {
                 nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
                 activityViewModel = ActivityViewModel(LocalDate.now())
 
-                val service = Intent(this@Login, StepCounterService::class.java)
-                startService(service)
-
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }else {
@@ -113,9 +110,6 @@ class Login : AppCompatActivity() {
             // Initialize ViewModel with calorieWallet from currentUser
             nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
             activityViewModel = ActivityViewModel(LocalDate.now())
-
-            val service = Intent(this@Login, StepCounterService::class.java)
-            startService(service)
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -140,9 +134,6 @@ class Login : AppCompatActivity() {
                     )
 
                     handleSignIn(result){ isNewUser ->
-                        val service = Intent(this@Login, StepCounterService::class.java)
-                        startService(service)
-
                         if(isNewUser){
                             val intent = Intent(this@Login, User_Details::class.java)
                             startActivity(intent)// Handle the sign-in result
@@ -150,7 +141,6 @@ class Login : AppCompatActivity() {
                             val intent = Intent(this@Login, MainActivity::class.java)
                             startActivity(intent)// Handle the sign-in result
                         }
-
                     }
 
                 } catch (e: GetCredentialException) {
