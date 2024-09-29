@@ -32,6 +32,10 @@ class NutritionViewModel(val currentDate: LocalDate , var calorieWallet: Double,
         }
     }
 
+    fun LoadUserData(){
+        arrMeals = mutableListOf()
+        arrMeals!!.addAll(dbAccess.GetUserMealsByDate(currentUser!!.userId, currentDate))
+    }
 
     fun ChangeWallet(newWallet: Double){
         calorieWallet = newWallet

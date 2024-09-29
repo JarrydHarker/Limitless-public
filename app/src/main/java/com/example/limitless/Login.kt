@@ -95,6 +95,10 @@ class Login : AppCompatActivity() {
                     nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
                     activityViewModel = ActivityViewModel(LocalDate.now())
 
+                    nutritionViewModel.LoadUserData()
+                    activityViewModel.LoadUserData()
+                    currentUser?.LoadUserData()
+
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }else {
