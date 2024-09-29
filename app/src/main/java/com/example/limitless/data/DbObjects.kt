@@ -138,23 +138,35 @@ class Day(
 }
 
 class Workout(
-    var workoutId: String = "",
-    var date: String,  // Use String or LocalDate depending on your needs
+    var workoutId: Int? = 0,
+    var date: LocalDate,  // Use String or LocalDate depending on your needs
 ){
     var arrExercises: MutableList<Exercise> = mutableListOf()
 }
 
 class Exercise(
-    var exerciseId: String = "",
+    var exerciseId: Int? = 0,
     var movement: Movement,
 
 ){
+    fun GetName(): String {
+        return movement.name
+    }
+
+    override fun toString(): String {
+        if(strength != null){
+            return "${movement.name}\t${strength!!.sets}x${strength!!.repetitions}"
+        }else{
+            return movement.name
+        }
+    }
+
     var cardio: Cardio? = null
     var strength: Strength? = null
 }
 
 class Movement(
-    var movementId: Int = 0,
+    var movementId: Int? = 0,
     var name: String = "",
     var description: String? = null,
     var type: String = "",

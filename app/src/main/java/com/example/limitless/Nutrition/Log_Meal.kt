@@ -63,7 +63,7 @@ class Log_Meal : AppCompatActivity() {
             meal.arrFoods = mealFoods
             meal.userId = currentUser?.userId
 
-            nutritionViewModel.calorieCounter.CreateMeal(meal)
+            nutritionViewModel.CreateMeal(meal)
 
             val intent = Intent(this, Diet_Activity::class.java)
             startActivity(intent)
@@ -124,7 +124,7 @@ class Log_Meal : AppCompatActivity() {
                         foodAdapter.add(food.description)
                     }
 
-                    if (foodAdapter.isEmpty()) {
+                    if (foodAdapter.isEmpty) {
                         foodAdapter.add("No food found") // Show no results
                     }
 

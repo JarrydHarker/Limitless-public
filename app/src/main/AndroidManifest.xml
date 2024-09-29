@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Limitless"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".User_DailySteps"
             android:exported="false" />
@@ -56,7 +57,7 @@
             android:name=".User_Height"
             android:exported="false" />
         <activity
-            android:name=".Exercise.Add_Exercise"
+            android:name=".Exercise.New_Workout"
             android:exported="false" />
         <activity
             android:name=".Nutrition.Log_Meal"
