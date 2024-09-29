@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Spinner
 import android.widget.Toast
@@ -55,7 +56,8 @@ class New_Workout : AppCompatActivity() {
             insets
         }
         val btnCreateExercise = findViewById<Button>(R.id.btnCreateExercise_AE)
-        val spinCategory: Spinner  = findViewById(R.id.spinCategory)
+       // val spinCategory: Spinner  = findViewById(R.id.spinCategory)
+        val back: ImageView = findViewById(R.id.NW_Back)
         val workoutExercises: MutableList<Exercise> = mutableListOf()
         val db = DbAccess.GetInstance()
         val categories = db.GetCategories()
@@ -63,8 +65,13 @@ class New_Workout : AppCompatActivity() {
         val newWorkoutAdapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line)
         val btnAddWorkout: Button = findViewById(R.id.btnAddWorkout_AE)
 
+        back.setOnClickListener {
+            val intent = Intent(this, exerciseCategory::class.java)
+            startActivity(intent)
+        }
+
         lvNewWorkout.adapter = newWorkoutAdapter
-        spinCategory.adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, categories)
+        //spinCategory.adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, categories)
 
         btnCreateExercise.setOnClickListener {
             ShowDialog(workoutExercises){

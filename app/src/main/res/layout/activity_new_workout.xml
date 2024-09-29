@@ -33,7 +33,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="0.835" />
 
     <Spinner
         android:id="@+id/spinExercise"
@@ -47,21 +47,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.358" />
-
-    <Spinner
-        android:id="@+id/spinCategory"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/buttonbackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.219" />
+        app:layout_constraintVertical_bias="0.247" />
 
     <TextView
         android:id="@+id/textView37"
@@ -76,22 +62,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fragmentContainerView11"
-        app:layout_constraintVertical_bias="0.304" />
-
-    <TextView
-        android:id="@+id/textView38"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="10dp"
-        android:text="Filter by Category"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fragmentContainerView11"
-        app:layout_constraintVertical_bias="0.17" />
+        app:layout_constraintVertical_bias="0.187" />
 
     <ListView
         android:id="@+id/lvNewWorkout"
@@ -104,7 +75,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fragmentContainerView11"
-        app:layout_constraintVertical_bias="0.753" />
+        app:layout_constraintVertical_bias="0.576" />
 
     <Button
         android:id="@+id/btnCreateExercise_AE"
@@ -147,5 +118,16 @@
         app:navigationIconTint="#FFDA1616">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <ImageView
+        android:id="@+id/NW_Back"
+        android:layout_width="42dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.081"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lvNewWorkout"
+        app:srcCompat="@drawable/baseline_arrow_back_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
