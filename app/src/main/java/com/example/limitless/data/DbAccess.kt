@@ -37,6 +37,7 @@ class DbAccess private constructor(){
     private val epFood = "/Food"
     private val epMovement = "/Movement"
     private val epWorkout = "/Workout"
+    private val epRatios = "/Ratios"
 
     //Create//
     fun CreateUser(user: User, onComplete: (String) -> Unit) {
@@ -553,6 +554,48 @@ class DbAccess private constructor(){
         return user // Return the deserialized User object (if any)
     }
 
+    fun GetRatio(userId: String): Ratios? {
+        val executor = Executors.newSingleThreadExecutor()
+
+        var ratios: Ratios? = null
+
+        executor.execute {
+            try {
+                // Construct URL with query parameter
+                val url = URL( apiUrl + epRatios + "?userId=$userId")
+                val connection = url.openConnection() as HttpURLConnection
+
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText()
+
+                        // Deserialize JSON response into User object
+                        val gson = Gson()
+                        ratios = gson.fromJson(jsonResponse, Ratios::class.java)
+                    }
+                } else {
+                    // Handle error if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        val errorMessage = reader.readText()
+                        Log.e("GetUserError", "Error: $errorMessage")
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetUserError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return ratios // Return the deserialized User object (if any)
+    }
+
     fun GetUserByEmail(email: String, onComplete: (User?) -> Unit) {
         val executor = Executors.newSingleThreadExecutor()
         var user: User? = null
@@ -840,6 +883,48 @@ class DbAccess private constructor(){
         return strength // Return the list of users (could be empty if request fails)
     }
 
+    fun GetUserInfo(userId: String): UserInfo? {
+        val executor = Executors.newSingleThreadExecutor()
+
+        var userInfo: UserInfo? = null
+
+        executor.execute {
+            try {
+                // Construct URL with query parameter
+                val url = URL( apiUrl + epUserInfo + "?userId=$userId")
+                val connection = url.openConnection() as HttpURLConnection
+
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText()
+
+                        // Deserialize JSON response into User object
+                        val gson = Gson()
+                        userInfo = gson.fromJson(jsonResponse, UserInfo::class.java)
+                    }
+                } else {
+                    // Handle error if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        val errorMessage = reader.readText()
+                        Log.e("GetUserError", "Error: $errorMessage")
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetUserError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return userInfo // Return the deserialized User object (if any)
+    }
+
     fun GetAllMeals(): List<Meal> {
         val executor = Executors.newSingleThreadExecutor()
         var meals: List<Meal> = emptyList()
@@ -1029,6 +1114,129 @@ class DbAccess private constructor(){
 
             return@withContext movements
         }
+    }
+
+    fun GetUserMealsByDate(userId: String, currentDate: LocalDate): List<Meal> {
+        val executor = Executors.newSingleThreadExecutor()
+        var meals: List<Meal> = emptyList()
+
+        executor.execute {
+            try {
+                // Construct the URL for the GET request
+                val url = URL(apiUrl + epMeal + "/User/Date?userId=$userId&date=$currentDate") // Assuming the endpoint is something like /users
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to GET
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val gson = Gson()
+
+                        // Deserialize the JSON array into a List<User>
+                        meals = gson.fromJson(jsonResponse, Array<Meal>::class.java).toList()
+                    }
+                } else {
+                    // Handle error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("GetAllMealsError", reader.readText())
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetAllMealsError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return meals // Return the list of users (could be empty if request fails)
+    }
+
+    fun GetUserWorkouts(userId: String): List<Workout> {
+        val executor = Executors.newSingleThreadExecutor()
+        var workout: List<Workout> = emptyList()
+
+        executor.execute {
+            try {
+                // Construct the URL for the GET request
+                val url = URL(apiUrl + epWorkout + "/User?userId=$userId") // Assuming the endpoint is something like /users
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to GET
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val gson = Gson()
+
+                        // Deserialize the JSON array into a List<User>
+                        workout = gson.fromJson(jsonResponse, Array<Workout>::class.java).toList()
+                    }
+                } else {
+                    // Handle error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("GetAllWorkoutError", reader.readText())
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetAllWorkoutError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return workout // Return the list of users (could be empty if request fails)
+    }
+
+    fun GetUserWorkoutsByDate(userId: String, date: LocalDate): List<Workout> {
+        val executor = Executors.newSingleThreadExecutor()
+        var workout: List<Workout> = emptyList()
+
+        executor.execute {
+            try {
+                // Construct the URL for the GET request
+                val url = URL(apiUrl + epWorkout + "/User?userId=$userId&date=$date") // Assuming the endpoint is something like /users
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to GET
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val gson = Gson()
+
+                        // Deserialize the JSON array into a List<User>
+                        workout = gson.fromJson(jsonResponse, Array<Workout>::class.java).toList()
+                    }
+                } else {
+                    // Handle error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("GetAllWorkoutError", reader.readText())
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetAllWorkoutError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return workout // Return the list of users (could be empty if request fails)
     }
 
     fun GetAllWorkouts(): List<Workout> {

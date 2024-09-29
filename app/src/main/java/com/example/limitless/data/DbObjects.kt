@@ -81,7 +81,12 @@ class User(
         //TODO Equation for women
         //447.593 + (9.247 * userInfo.weightGoal!!) + (3.098 * userInfo.height!!) - (4.330 * 25)//TODO Change to age
     }
+
+    fun LoadUserData() {
+        dbAccess.GetUserInfo(userId)
+    }
 }
+
 
 data class UserInfo(
     var userId: String? = null,

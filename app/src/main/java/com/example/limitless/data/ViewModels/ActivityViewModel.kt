@@ -1,8 +1,10 @@
 package com.example.limitless.data.ViewModels
 
 import android.util.Log
+import com.example.limitless.currentUser
 import com.example.limitless.data.DbAccess
 import com.example.limitless.data.Workout
+import com.example.limitless.data.dbAccess
 import java.time.LocalDate
 
 class ActivityViewModel(val currentDate: LocalDate) {
@@ -22,5 +24,10 @@ class ActivityViewModel(val currentDate: LocalDate) {
 
     fun GetWorkouts(): List<Workout>?{
         return arrWorkouts
+    }
+
+    fun LoadUserData() {
+        arrWorkouts = mutableListOf()
+        arrWorkouts!!.addAll(dbAccess.GetUserWorkoutsByDate(currentUser?.userId!!, currentDate))
     }
 }
