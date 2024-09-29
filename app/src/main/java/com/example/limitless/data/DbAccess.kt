@@ -555,6 +555,48 @@ class DbAccess private constructor(){
         return user // Return the deserialized User object (if any)
     }
 
+    fun GetUserByEmail(email: String): User?{
+        val executor = Executors.newSingleThreadExecutor()
+
+        var user: User? = null
+
+        executor.execute {
+            try {
+                // Construct URL with query parameter
+                val url = URL( apiUrl + epUser + "/Email?email=$email")
+                val connection = url.openConnection() as HttpURLConnection
+
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText()
+
+                        // Deserialize JSON response into User object
+                        val gson = Gson()
+                        user = gson.fromJson(jsonResponse, User::class.java)
+                    }
+                } else {
+                    // Handle error if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        val errorMessage = reader.readText()
+                        Log.e("GetUserError", "Error: $errorMessage")
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetUserError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return user // Return the deserialized User object (if any)
+    }
+
     fun GetAllUsers(): List<User> {
         val executor = Executors.newSingleThreadExecutor()
         var users: List<User> = emptyList()

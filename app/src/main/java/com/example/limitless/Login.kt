@@ -25,6 +25,7 @@ import com.example.limitless.data.PasswordHasher
 import com.example.limitless.data.User
 import com.example.limitless.data.ViewModels.ActivityViewModel
 import com.example.limitless.data.ViewModels.NutritionViewModel
+import com.example.limitless.data.dbAccess
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
@@ -114,10 +115,6 @@ class Login : AppCompatActivity() {
         }
 
         btnGoogle.setOnClickListener {
-            /*val signInWithGoogleOption: GetSignInWithGoogleOption = GetSignInWithGoogleOption.Builder("677746774102-0mfqbkl5q7k3b207q7dmutj3mv6s81rq.apps.googleusercontent.com")
-                .setNonce(GenerateNonce())  // Add any nonce generation logic here
-                .build()
-*/
             val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
                 .setFilterByAuthorizedAccounts(true)
                 .setServerClientId("651564228412-8jnt2ktgb86rcdsh1kbh7loak5244hdm.apps.googleusercontent.com")
@@ -134,14 +131,12 @@ class Login : AppCompatActivity() {
                         request = request,
                         context = activityContext,  // Ensure activityContext is defined
                     )
-                    handleSignIn(result)  // Handle the sign-in result
+                    handleSignIn(result)
+                    val intent = Intent(this@Login, MainActivity::class.java)
+                    startActivity(intent)// Handle the sign-in result
                 } catch (e: GetCredentialException) {
                     if (e is NoCredentialException) {
                         // Retry without filtering by authorized accounts
-                        /*val signInWithGoogleOptionRetry: GetSignInWithGoogleOption = GetSignInWithGoogleOption.Builder("677746774102-0mfqbkl5q7k3b207q7dmutj3mv6s81rq.apps.googleusercontent.com")
-                            .setNonce(GenerateNonce())
-                            .build()*/
-
                         val googleIdOptionRetry: GetGoogleIdOption = GetGoogleIdOption.Builder()
                             .setFilterByAuthorizedAccounts(false)
                             .setServerClientId("651564228412-8jnt2ktgb86rcdsh1kbh7loak5244hdm.apps.googleusercontent.com")
@@ -156,7 +151,7 @@ class Login : AppCompatActivity() {
                                 request = requestRetry,
                                 context = activityContext,
                             )
-                            handleSignIn(resultRetry)
+                            handleSignup(resultRetry)
                         } catch (retryException: GetCredentialException) {
                             handleFailure("retry",retryException)
                         }
@@ -167,6 +162,38 @@ class Login : AppCompatActivity() {
             }
         }
     }
+
+    private fun handleSignup(result: GetCredentialResponse) {
+        // Handle the successfully returned credential.
+        val credential = result.credential
+
+        when (credential) {
+            is CustomCredential -> {
+                if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
+                    try {
+                        val gId = GoogleIdTokenCredential
+                            .createFrom(credential.data)
+
+                        currentUser = User(name = gId.givenName.toString(), surname = gId.familyName.toString(), email = gId.id)
+                        currentUser!!.GenerateID()
+                        activityViewModel = ActivityViewModel(LocalDate.now())
+                        nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+
+                    } catch (e: GoogleIdTokenParsingException) {
+                        Log.e(TAG, "Received an invalid google id token response", e)
+                    }
+
+                }else {
+                    // Catch any unrecognized credential type here.
+                    Log.e(TAG, "Unexpected type of credential")
+                }
+            }else -> {
+            // Catch any unrecognized credential type here.
+            Log.e(TAG, "Unexpected type of credential")
+            }
+        }
+    }
+}
 
     fun LoginUser(context: Context, username: String, password: String): User?{
         val dbAccess = DbAccess.GetInstance()
@@ -206,7 +233,9 @@ class Login : AppCompatActivity() {
                         val googleIdTokenCredential = GoogleIdTokenCredential
                             .createFrom(credential.data)
 
-                        Log.d("GoogleId", googleIdTokenCredential.id)
+                        currentUser = dbAccess.GetUserByEmail(googleIdTokenCredential.id)
+                        activityViewModel = ActivityViewModel(LocalDate.now())
+                        nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
 
                     } catch (e: GoogleIdTokenParsingException) {
                         Log.e(TAG, "Received an invalid google id token response", e)
@@ -219,8 +248,6 @@ class Login : AppCompatActivity() {
             }else -> {
             // Catch any unrecognized credential type here.
             Log.e(TAG, "Unexpected type of credential")
-        }
+            }
         }
     }
-
-}
