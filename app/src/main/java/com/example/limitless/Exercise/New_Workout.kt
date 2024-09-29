@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isNotEmpty
 import com.example.limitless.Login
 import com.example.limitless.Nutrition.Diet_Activity
 import com.example.limitless.MainActivity
@@ -57,18 +58,12 @@ class New_Workout : AppCompatActivity() {
         }
         val btnCreateExercise = findViewById<Button>(R.id.btnCreateExercise_AE)
        // val spinCategory: Spinner  = findViewById(R.id.spinCategory)
-        val back: ImageView = findViewById(R.id.NW_Back)
         val workoutExercises: MutableList<Exercise> = mutableListOf()
         val db = DbAccess.GetInstance()
         val categories = db.GetCategories()
         val lvNewWorkout: ListView = findViewById(R.id.lvNewWorkout)
         val newWorkoutAdapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line)
         val btnAddWorkout: Button = findViewById(R.id.btnAddWorkout_AE)
-
-        back.setOnClickListener {
-            val intent = Intent(this, exerciseCategory::class.java)
-            startActivity(intent)
-        }
 
         lvNewWorkout.adapter = newWorkoutAdapter
         //spinCategory.adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, categories)
@@ -83,11 +78,18 @@ class New_Workout : AppCompatActivity() {
         }
 
         btnAddWorkout.setOnClickListener{
-            val workout = Workout(null, activityViewModel.currentDate)
-            activityViewModel.AddWorkout(workout)
+            if(lvNewWorkout.isNotEmpty())
+            {
+                val workout = Workout(null, activityViewModel.currentDate)
+                activityViewModel.AddWorkout(workout)
 
-            val intent = Intent(this, Exercise_Activity::class.java)
-            startActivity(intent)
+                val intent = Intent(this, Exercise_Activity::class.java)
+                startActivity(intent)
+            }
+            else
+            {
+                Toast.makeText(this, "Please add new exercises before adding a workout", Toast.LENGTH_SHORT).show()
+            }
         }
 
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
@@ -109,6 +111,10 @@ class New_Workout : AppCompatActivity() {
                 }
                 R.id.ic_settings -> {
                     navigateToActivityRight(Settings::class.java)
+                    true
+                }
+                R.id.ic_workouts -> {
+                    startActivity(Intent(this, Exercise_Activity::class.java))
                     true
                 }
                 else -> false

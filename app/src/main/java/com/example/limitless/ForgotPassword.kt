@@ -3,6 +3,8 @@ package com.example.limitless
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -19,10 +21,25 @@ class ForgotPassword : AppCompatActivity() {
             insets
         }
         val btnCancel: Button = findViewById(R.id.btnCancel)
+        val Email: EditText = findViewById(R.id.edtFPEmail)
+        val btnReset: Button = findViewById(R.id.btnResetPassword)
 
         btnCancel.setOnClickListener{
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
+
+        btnReset.setOnClickListener{
+            if(Email.text.isEmpty())
+            {
+                Toast.makeText(this, "Please Input Valid Email", Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+
+            }
+        }
+
+
     }
 }

@@ -41,6 +41,7 @@ class SignUp : AppCompatActivity() {
         val txtEmail: EditText = findViewById(R.id.SU_txtUsername)
         val txtPassword: EditText = findViewById(R.id.SU_txtPassword)
         val test: Button = findViewById(R.id.btnTest)
+        val btnBack: Button = findViewById(R.id.SU_btnBack)
 
         textView3.startAnimation(ttb)
         SU_lblEmail.startAnimation(btt)
@@ -48,7 +49,12 @@ class SignUp : AppCompatActivity() {
         SU_lblPassword.startAnimation(btt2)
         txtPassword.startAnimation(btt2)
         btnSignUp.startAnimation(btt3)
+        btnBack.startAnimation(btt3)
 
+        btnBack.setOnClickListener{
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+        }
 
         test.setOnClickListener{
             val intent = Intent(this, User_Details::class.java)
