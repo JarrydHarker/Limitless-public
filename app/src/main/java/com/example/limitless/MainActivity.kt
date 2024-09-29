@@ -55,8 +55,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }else{
             checkAndRequestPermissions()
-            val service = Intent(this, StepCounterService::class.java)
-            startService(service)
         }
 
         //Nicks Animation things
@@ -190,10 +188,9 @@ class MainActivity : AppCompatActivity() {
 
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             for ((index, permission) in permissions.withIndex()) {
-                if (grantResults[index] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "$permission granted", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "$permission denied", Toast.LENGTH_SHORT).show()
+                if (permission == Manifest.permission.FOREGROUND_SERVICE && grantResults[index] == PackageManager.PERMISSION_GRANTED) {
+                    val service = Intent(this, StepCounterService::class.java)
+                    startService(service)
                 }
             }
         }
