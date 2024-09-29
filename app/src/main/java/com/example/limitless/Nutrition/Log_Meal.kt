@@ -15,6 +15,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +26,7 @@ import com.example.limitless.currentUser
 import com.example.limitless.data.DbAccess
 import com.example.limitless.data.Food
 import com.example.limitless.data.Meal
+import com.example.limitless.data.dbAccess
 import com.example.limitless.nutritionViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -54,8 +56,18 @@ class Log_Meal : AppCompatActivity() {
         val btnCreateMeal = findViewById<Button>(R.id.btnCreateMeal_LM)
         val lblMealTitle = findViewById<TextView>(R.id.lblMealTitle_LM)
         val mealFoods: MutableList<Food> = mutableListOf()
-        lblMealTitle.text = mealTitle
+        val spinMeals: Spinner = findViewById(R.id.spinPrevFoods_LM)
+        val mealsAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
 
+        val meals = dbAccess.GetUserMeals(currentUser?.userId!!)
+
+        for(meal in meals){
+            mealsAdapter.add(meal.name)
+        }
+
+        spinMeals.adapter = mealsAdapter
+
+        lblMealTitle.text = mealTitle
 
         btnLog.setOnClickListener {
             // Create a new meal with the provided foods
@@ -72,7 +84,6 @@ class Log_Meal : AppCompatActivity() {
         btnCreateMeal.setOnClickListener {
             showDialog(mealFoods)
         }
-
     }
 
     fun showDialog(mealFoods: MutableList<Food>) {
@@ -158,7 +169,7 @@ class Log_Meal : AppCompatActivity() {
         }
 
         add.setOnClickListener {
-            var mealDescription = ""
+            var mealDescription: String
 
             for(food in mealFoods){
                 mealDescription = "${mealFoods.indexOf(food) + 1}. ${food.description}: ${food.calories} kcal"

@@ -54,7 +54,6 @@ class Login : AppCompatActivity() {
         }
 
         val btnForgotPassword: Button = findViewById(R.id.Btn2ForgotPassword)
-
         val btnLogin: Button = findViewById(R.id.btnLogin_LG)
         val btnSignup: Button = findViewById(R.id.btnSignup_LG)
         val btnSkip: Button = findViewById(R.id.btnSkip)
@@ -89,19 +88,21 @@ class Login : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val user = LoginUser(this, username, password)
+            LoginUser(this, username, password){user ->
+                if(user != null){
+                    currentUser = user
 
-            if(user != null){
-                currentUser = user
+                    nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                    activityViewModel = ActivityViewModel(LocalDate.now())
 
-                nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
-                activityViewModel = ActivityViewModel(LocalDate.now())
-
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }else {
-                Toast.makeText(this, "User not found, please sign up", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }else {
+                    Toast.makeText(this, "User not found, please sign up", Toast.LENGTH_LONG).show()
+                }
             }
+
+
         }
 
         btnSkip.setOnClickListener{
@@ -211,20 +212,20 @@ class Login : AppCompatActivity() {
     }
 }
 
-    fun LoginUser(context: Context, username: String, password: String): User?{
+    fun LoginUser(context: Context, username: String, password: String, onComplete: (User?) -> Unit) {
         val dbAccess = DbAccess.GetInstance()
         val hasher = PasswordHasher()
 
-        val user = dbAccess.GetUser(username)
-        val hashedPW = hasher.HashPassword(password)
+        dbAccess.GetUserByEmail(username){user ->
+            val hashedPW = hasher.HashPassword(password)
 
-        if(user != null){
-            if(user.password == hashedPW){
-                return user
-            }else Toast.makeText(context, "Incorrect username or password", Toast.LENGTH_LONG).show()
+            if(user != null){
+                if(user.password == hashedPW){
+                    onComplete(user)
+                }else Toast.makeText(context, "Incorrect username or password", Toast.LENGTH_LONG).show()
+            }
+            onComplete(null)
         }
-
-        return null
     }
 
     private fun handleFailure(type: String, e: GetCredentialException) {
@@ -249,7 +250,9 @@ class Login : AppCompatActivity() {
                         val gId = GoogleIdTokenCredential
                             .createFrom(credential.data)
 
-                        currentUser = dbAccess.GetUserByEmail(gId.id)
+                        dbAccess.GetUserByEmail(gId.id){ user ->
+                             currentUser = user
+                        }
 
                         if(currentUser != null){
                             activityViewModel = ActivityViewModel(LocalDate.now())
