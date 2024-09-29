@@ -55,7 +55,7 @@ class SignUp : AppCompatActivity() {
             val response = SignUpUser(email, password)
 
             if(response == "Success"){
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, User_Height::class.java)
                 startActivity(intent)
 
                 // Initialize ViewModel with calorieWallet from currentUser
