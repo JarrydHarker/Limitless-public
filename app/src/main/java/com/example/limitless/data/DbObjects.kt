@@ -85,6 +85,10 @@ class User(
     fun LoadUserData() {
         dbAccess.GetUserInfo(userId)
     }
+
+    fun LogOut(){
+
+    }
 }
 
 
