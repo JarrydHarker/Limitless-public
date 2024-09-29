@@ -152,6 +152,8 @@ class Login : AppCompatActivity() {
                                 context = activityContext,
                             )
                             handleSignup(resultRetry)
+                            val intent = Intent(this@Login, MainActivity::class.java)
+                            startActivity(intent)
                         } catch (retryException: GetCredentialException) {
                             handleFailure("retry",retryException)
                         }
