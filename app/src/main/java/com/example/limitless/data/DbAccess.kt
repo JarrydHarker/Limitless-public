@@ -41,7 +41,7 @@ class DbAccess private constructor(){
     private val epWorkout = "/Workout"
 
     //Create//
-    fun CreateUser(user: User): String {
+    fun CreateUser(user: User, onComplete: (String) -> Unit) {
         val executor = Executors.newSingleThreadExecutor()
 
         var responseMessage = ""
@@ -85,7 +85,7 @@ class DbAccess private constructor(){
             }
         }
 
-        return responseMessage
+        onComplete(responseMessage)
     }
 
     fun CreateUserInfo(user: UserInfo): String {

@@ -1,4 +1,5 @@
 package com.example.limitless.data
+import android.util.Log
 import java.time.LocalDate
 
 val dbAccess = DbAccess.GetInstance()
@@ -29,38 +30,61 @@ class User(
         this.userInfo.calorieWallet = wallet
     }
 
-    fun SetStepGoal(goal: Double) {
-        this.userInfo.stepGoal = goal
-    }
-
     fun GetCalorieWallet(): Double{
         return userInfo.calorieWallet
     }
 
-    fun GetStepGoal(): Double {
+    fun GetStepGoal(): Int {
         return userInfo.stepGoal
     }
 
-    fun SignUpUser(): String{
+    fun SignUpUser(onComplete: (String) -> Unit) {
         val pwHasher = PasswordHasher()
         val hashedPW = pwHasher.HashPassword(password)
         password = hashedPW
         GenerateID()
         if(userId.isNotEmpty() && name.isNotEmpty() && surname.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()){
-            return dbAccess.CreateUser(this)
-        }else return "Invalid user"
+             dbAccess.CreateUser(this){ response ->
+                 onComplete(response)
+
+            }
+        }else {
+            onComplete("Invalid user")
+        }
+    }
+
+    fun SetHeight(height: Double){
+        this.userInfo.height = height
+    }
+
+    fun SetWeight(weight: Double){
+        this.userInfo.weight = weight
+    }
+
+    fun SetWeightGoal(weight: Double){
+        this.userInfo.weightGoal = weight
+    }
+
+    fun SetStepGoal(steps: Int){
+        this.userInfo.stepGoal = steps
+    }
+
+    fun CalcCalorieWallet(){
+        //TODO Equation for men
+        userInfo.calorieWallet = 88.362 + (13.397 * userInfo.weightGoal!!) + (4.799 * userInfo.height!!) - (5.677 * 25)//TODO Change to age
+
+        //TODO Equation for women
+        //447.593 + (9.247 * userInfo.weightGoal!!) + (3.098 * userInfo.height!!) - (4.330 * 25)//TODO Change to age
     }
 }
 
-class UserInfo(
+data class UserInfo(
     var height: Double? = null,
     var weight: Double? = null,
     var weightGoal: Double? = null,
     var calorieWallet: Double = 2000.0,
-    var stepGoal: Double = 10000.0
-){
-
-}
+    var stepGoal: Int = 10000
+)
 
 class Ratios(
     var protein: Double = 0.35,
@@ -159,6 +183,7 @@ class Day(
 class Workout(
     var workoutId: Int? = 0,
     var date: LocalDate,  // Use String or LocalDate depending on your needs
+    var name: String? = "",
 ){
     var arrExercises: MutableList<Exercise> = mutableListOf()
 }

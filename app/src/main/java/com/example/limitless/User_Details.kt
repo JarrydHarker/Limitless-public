@@ -9,6 +9,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.limitless.data.ViewModels.ActivityViewModel
+import com.example.limitless.data.ViewModels.NutritionViewModel
+import java.time.LocalDate
 
 class User_Details : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +29,21 @@ class User_Details : AppCompatActivity() {
         val btnConfirm = findViewById<Button>(R.id.btnConfirm_UD)
 
         btnConfirm.setOnClickListener {
-            if(txtName.text.isNotEmpty() && txtSurname.text.isNotEmpty()){
+            val name = txtName.text.toString()
+            val surname = txtSurname.text.toString()
+
+            if(name.isNotEmpty() && surname.isNotEmpty()){
+                currentUser?.name = name
+                currentUser?.surname = surname
+
+                currentUser?.SignUpUser{ response ->
+                    if(response == "Success"){
+                        // Initialize ViewModel with calorieWallet from currentUser
+                        nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                        activityViewModel = ActivityViewModel(LocalDate.now())
+                    }
+                }
+
                 val intent = Intent(this, User_Height::class.java)
                 startActivity(intent)
             }else{

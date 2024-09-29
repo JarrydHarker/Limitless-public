@@ -176,17 +176,6 @@ class MainActivity : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
-
-        /*if (permissionsToRequest.isNotEmpty()) {
-            ActivityCompat.requestPermissions(
-                this,
-                permissionsToRequest.toTypedArray(),
-                REQUEST_CODE_PERMISSIONS
-            )
-        } else {
-            // All permissions granted, start the service
-            startStepCounterService()
-        }*/
     }
 
     private fun startStepCounterService() {
