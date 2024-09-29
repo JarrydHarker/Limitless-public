@@ -177,7 +177,7 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        if (permissionsToRequest.isNotEmpty()) {
+        /*if (permissionsToRequest.isNotEmpty()) {
             ActivityCompat.requestPermissions(
                 this,
                 permissionsToRequest.toTypedArray(),
@@ -186,7 +186,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             // All permissions granted, start the service
             startStepCounterService()
-        }
+        }*/
     }
 
     private fun startStepCounterService() {
@@ -211,6 +211,24 @@ class MainActivity : AppCompatActivity() {
                 .show()
         } else {
             ActivityCompat.requestPermissions(this, arrayOf(permission), requestCode)
+        }
+    }
+
+    // Handle the result of the permission request
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            val permissionsGranted = permissions.indices.all { grantResults[it] == PackageManager.PERMISSION_GRANTED }
+
+            if (permissionsGranted) {
+                // All required permissions were granted, now start the service
+                startStepCounterService()
+            }
         }
     }
 }
