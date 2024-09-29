@@ -30,10 +30,11 @@ import com.example.limitless.Exercise.Workout_Planner
 import com.example.limitless.Nutrition.Diet_Activity
 import com.example.limitless.data.ViewModels.ActivityViewModel
 import com.example.limitless.data.ViewModels.NutritionViewModel
+import java.time.LocalDate
 
 var  currentUser: User? = null
 lateinit var nutritionViewModel: NutritionViewModel
-lateinit var activityViewModel: ActivityViewModel
+var activityViewModel = ActivityViewModel(LocalDate.now())
 
 class MainActivity : AppCompatActivity() {
 
