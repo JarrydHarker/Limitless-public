@@ -14,32 +14,41 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ListView
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.limitless.Login
 import com.example.limitless.Nutrition.Diet_Activity
 import com.example.limitless.MainActivity
 import com.example.limitless.R
 import com.example.limitless.Report_Activity
 import com.example.limitless.Settings
+import com.example.limitless.activityViewModel
+import com.example.limitless.data.Cardio
 import com.example.limitless.data.DbAccess
+import com.example.limitless.data.Exercise
 import com.example.limitless.data.Movement
+import com.example.limitless.data.Strength
+import com.example.limitless.data.Workout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.Locale
 
-class Add_Exercise : AppCompatActivity() {
+class New_Workout : AppCompatActivity() {
 
     var currentMove = Movement()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_add_exercise)
+        setContentView(R.layout.activity_new_workout)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -47,14 +56,31 @@ class Add_Exercise : AppCompatActivity() {
         }
         val btnCreateExercise = findViewById<Button>(R.id.btnCreateExercise_AE)
         val spinCategory: Spinner  = findViewById(R.id.spinCategory)
-        val  arrExerciseMoves: MutableList<Movement> = mutableListOf()
+        val workoutExercises: MutableList<Exercise> = mutableListOf()
         val db = DbAccess.GetInstance()
         val categories = db.GetCategories()
+        val lvNewWorkout: ListView = findViewById(R.id.lvNewWorkout)
+        val newWorkoutAdapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line)
+        val btnAddWorkout: Button = findViewById(R.id.btnAddWorkout_AE)
 
+        lvNewWorkout.adapter = newWorkoutAdapter
         spinCategory.adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, categories)
 
         btnCreateExercise.setOnClickListener {
-            ShowDialog(arrExerciseMoves)
+            ShowDialog(workoutExercises){
+                for(we in workoutExercises){
+                    newWorkoutAdapter.add(we.toString())
+                }
+                newWorkoutAdapter.notifyDataSetChanged()
+            }
+        }
+
+        btnAddWorkout.setOnClickListener{
+            val workout = Workout(null, activityViewModel.currentDate)
+            activityViewModel.AddWorkout(workout)
+
+            val intent = Intent(this, Exercise_Activity::class.java)
+            startActivity(intent)
         }
 
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
@@ -98,8 +124,8 @@ class Add_Exercise : AppCompatActivity() {
         startActivity(intent, options.toBundle())
     }
 
-    fun ShowDialog(exerciseMoves: MutableList<Movement>){
-        val dialog = Dialog(this@Add_Exercise)
+    fun ShowDialog(workoutExercises: MutableList<Exercise>, onComplete: () -> Unit){
+        val dialog = Dialog(this@New_Workout)
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.window!!.attributes.windowAnimations= R.style.dialogAnimation
@@ -127,19 +153,25 @@ class Add_Exercise : AppCompatActivity() {
             }
 
             private fun fetchExerciseSuggestions(search: String) {
-                val moveAdapter = ArrayAdapter<Movement>(this@Add_Exercise, android.R.layout.simple_dropdown_item_1line, mutableListOf())
+                val moveAdapter = ArrayAdapter<String>(this@New_Workout, android.R.layout.simple_dropdown_item_1line, mutableListOf())
                 // Start a coroutine in the Main (UI) thread
                 CoroutineScope(Dispatchers.Main).launch {
                     val db = DbAccess.GetInstance()
                     val arrFetchMoves = db.SearchForMovements(search)
                     arrMoves = arrFetchMoves.toMutableList()
                     for (move in arrFetchMoves) {
-                        moveAdapter.add(move)
+                        moveAdapter.add(move.name)
                     }
+
+                    if (moveAdapter.isEmpty) {
+                        moveAdapter.add("No exercise found") // Show no results
+                    }
+
+                    Log.d("MoveAdapter", "arrMoves: ${arrFetchMoves.size}")
 
                     moveAdapter.notifyDataSetChanged()
                     txtAddExercise.setAdapter(moveAdapter)
-                    Log.d("FoodAdapter", "MoveAdapter after notify: ${moveAdapter.count}")
+                    Log.d("MoveAdapter", "MoveAdapter after notify: ${moveAdapter.count}")
                     txtAddExercise.showDropDown()
                 }
             }
@@ -148,28 +180,61 @@ class Add_Exercise : AppCompatActivity() {
         txtAddExercise.setOnItemClickListener { parent, view, position, id ->
             // Get the index of the item clicked
             val itemIndex = position
-
-
             currentMove = arrMoves[itemIndex]
 
-            val exercisepreviewAdapter = ArrayAdapter<String>(this@Add_Exercise, android.R.layout.simple_list_item_1, mutableListOf())
+            val exercisepreviewAdapter = ArrayAdapter<String>(this@New_Workout, android.R.layout.simple_list_item_1, mutableListOf())
 
-            for (move in exerciseMoves) {
-                exercisepreviewAdapter.add(move.description)
+            for (exercise in workoutExercises) {
+                exercisepreviewAdapter.add(exercise.GetName())
             }
 
             //lvMealPreview.adapter = exercisepreviewAdapter
-
-            txtAddExercise.text.clear()
             txtAddExercise.dismissDropDown()
         }
 
         btnAddMovement.setOnClickListener {
-            exerciseMoves.add(currentMove)
+            val sets = txtSets.text.toString()
+            val reps = txtReps.text.toString()
+
+            if(txtAddExercise.text.isEmpty()){
+                Toast.makeText(this@New_Workout, "Please select an exercise to add to your workout", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            val exercise = Exercise(null, currentMove)
+
+            if (currentMove.type.lowercase(Locale.getDefault()) == "cardio") {
+                exercise.cardio = Cardio()
+            } else {
+                if (sets.isEmpty()) {
+                    Toast.makeText(
+                        this@New_Workout,
+                        "Please enter the number of sets for this exercise",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    return@setOnClickListener
+                }
+
+                if (reps.isEmpty()) {
+                    Toast.makeText(
+                        this@New_Workout,
+                        "Please enter the number of reps for this exercise",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    return@setOnClickListener
+                }
+
+                exercise.strength = Strength(sets.toInt(), reps.toInt())
+            }
+
+            workoutExercises.add(exercise)
+            dialog.dismiss()
+            onComplete()
         }
 
         btnClose.setOnClickListener {
             dialog.dismiss()
+            onComplete()
         }
         dialog.show()
     }

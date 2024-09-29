@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.example.limitless.Nutrition.Diet_Activity
 import com.example.limitless.R
+import com.example.limitless.activityViewModel
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -38,11 +41,23 @@ class Exercises_Fragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_exercises_, container, false)
+        val btnAddWorkout: Button = view.findViewById(R.id.btnAddWorkout_EF)
+        val lvExercises: ListView = view.findViewById(R.id.listExercises_EF)
+        val workoutAdapter = ArrayAdapter<String>(requireActivity(), android.R.layout.simple_dropdown_item_1line)
+        val arrExercises: MutableList<String> = mutableListOf()
 
-        val btnAddWorkout_EF: Button = view.findViewById(R.id.btnAddWorkout_EF)
+        val workouts = activityViewModel.GetWorkouts()
+        if(workouts != null){
+            for(workout in workouts){
+                workoutAdapter.add(workout.toString())
+            }
 
-        btnAddWorkout_EF.setOnClickListener {
-            val intent = Intent(requireActivity(), exerciseCategory::class.java)
+            workoutAdapter.notifyDataSetChanged()
+            lvExercises.adapter = workoutAdapter
+        }
+
+        btnAddWorkout.setOnClickListener {
+            val intent = Intent(requireActivity(), New_Workout::class.java)
             startActivity(intent)
         }
         return view

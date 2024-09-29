@@ -2,6 +2,8 @@ package com.example.limitless.Exercise
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -26,6 +28,7 @@ class Exercise_Activity : AppCompatActivity() {
             insets
         }
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
+
 
         ThemeManager.updateNavBarColor(this, bottomNavBar)
 

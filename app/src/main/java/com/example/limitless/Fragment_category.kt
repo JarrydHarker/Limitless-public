@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
-import com.example.limitless.Exercise.Add_Exercise
+import com.example.limitless.Exercise.New_Workout
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,27 +53,27 @@ class Fragment_category : Fragment() {
             startActivity(intent)
         }
         cat2.setOnClickListener{
-            val intent = Intent(requireActivity(), Add_Exercise::class.java)
+            val intent = Intent(requireActivity(), New_Workout::class.java)
             startActivity(intent)
         }
         cat3.setOnClickListener{
-            val intent = Intent(requireActivity(), Add_Exercise::class.java)
+            val intent = Intent(requireActivity(), New_Workout::class.java)
             startActivity(intent)
         }
         cat4.setOnClickListener{
-            val intent = Intent(requireActivity(), Add_Exercise::class.java)
+            val intent = Intent(requireActivity(), New_Workout::class.java)
             startActivity(intent)
         }
         cat5.setOnClickListener{
-            val intent = Intent(requireActivity(), Add_Exercise::class.java)
+            val intent = Intent(requireActivity(), New_Workout::class.java)
             startActivity(intent)
         }
         cat6.setOnClickListener {
-            val intent = Intent(requireActivity(), Add_Exercise::class.java)
+            val intent = Intent(requireActivity(), New_Workout::class.java)
             startActivity(intent)
         }
         cat7.setOnClickListener{
-            val intent = Intent(requireActivity(), Add_Exercise::class.java)
+            val intent = Intent(requireActivity(), New_Workout::class.java)
             startActivity(intent)
         }
         return view
