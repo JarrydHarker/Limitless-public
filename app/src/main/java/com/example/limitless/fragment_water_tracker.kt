@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import androidx.constraintlayout.widget.ConstraintAttribute
+import androidx.constraintlayout.widget.ConstraintLayout
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +37,20 @@ class fragment_water_tracker : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_water_tracker, container, false)
+        val view = inflater.inflate(R.layout.fragment_water_tracker, container, false)
+
+        //val ttb = AnimationUtils.loadAnimation(view.context, R.anim.ttb)
+        //val stb = AnimationUtils.loadAnimation(view.context, R.anim.stb)
+        //val btt = AnimationUtils.loadAnimation(view.context, R.anim.btt)
+        //val btt2 = AnimationUtils.loadAnimation(view.context, R.anim.btt2)
+        //val btt3 = AnimationUtils.loadAnimation(view.context, R.anim.btt3)
+        val btt4 = AnimationUtils.loadAnimation(view.context, R.anim.btt4)
+
+        val WaterCL = view.findViewById<ConstraintLayout>(R.id.WaterCL)
+
+        WaterCL.startAnimation(btt4)
+
+        return view
     }
 
     companion object {

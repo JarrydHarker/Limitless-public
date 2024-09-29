@@ -2,8 +2,10 @@ package com.example.limitless
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -27,10 +29,28 @@ class SignUp : AppCompatActivity() {
             insets
         }
 
+        val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
+        //val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
+        val btt = AnimationUtils.loadAnimation(this, R.anim.btt)
+        val btt2 = AnimationUtils.loadAnimation(this, R.anim.btt2)
+        val btt3 = AnimationUtils.loadAnimation(this, R.anim.btt3)
+        //val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
+
         val btnSignUp: Button = findViewById(R.id.SU_btnSignIn)
+        val SU_lblEmail = findViewById<TextView>(R.id.SU_lblEmail)
+        val textView3 = findViewById<TextView>(R.id.textView3)
+        val SU_lblPassword = findViewById<TextView>(R.id.SU_lblPassword)
         val txtEmail: EditText = findViewById(R.id.SU_txtUsername)
         val txtPassword: EditText = findViewById(R.id.SU_txtPassword)
         val test: Button = findViewById(R.id.btnTest)
+
+        textView3.startAnimation(ttb)
+        SU_lblEmail.startAnimation(btt)
+        txtEmail.startAnimation(btt)
+        SU_lblPassword.startAnimation(btt2)
+        txtPassword.startAnimation(btt2)
+        btnSignUp.startAnimation(btt3)
+
 
         test.setOnClickListener{
             val intent = Intent(this, User_Height::class.java)

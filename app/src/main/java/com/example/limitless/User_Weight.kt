@@ -2,7 +2,9 @@ package com.example.limitless
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.Toast
@@ -21,6 +23,17 @@ class User_Weight : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
+        val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
+        val btt = AnimationUtils.loadAnimation(this, R.anim.btt)
+        val btt2 = AnimationUtils.loadAnimation(this, R.anim.btt2)
+        //val btt3 = AnimationUtils.loadAnimation(this, R.anim.btt3)
+        //val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
+
+        val textView42 = findViewById<TextView>(R.id.textView42)
+        val UW_Linear = findViewById<LinearLayout>(R.id.UW_Linear)
+
+
         val next: Button = findViewById(R.id.UW_btnNext)
         val skip: Button = findViewById(R.id.UW_btnSkip)
 
@@ -34,6 +47,11 @@ class User_Weight : AppCompatActivity() {
 
         val npText: TextView = findViewById(R.id.UW_txtUnit)
         npText.text = "kg"
+
+        textView42.startAnimation(ttb)
+        UW_Linear.startAnimation(stb)
+        next.startAnimation(btt)
+        next.startAnimation(btt2)
 
         next.setOnClickListener{
             if(npMain.value != 0)
