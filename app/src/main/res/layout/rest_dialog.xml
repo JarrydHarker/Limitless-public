@@ -18,8 +18,8 @@
 
     <TextView
         android:id="@+id/lblTimer_RD"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_width="392dp"
+        android:layout_height="59dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="152dp"
         android:layout_marginEnd="40dp"
@@ -58,19 +58,35 @@
 
     <Button
         android:id="@+id/btnStart_RD"
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
+        android:layout_width="303dp"
+        android:layout_height="57dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="108dp"
         android:layout_marginEnd="40dp"
         android:backgroundTint="#6d61da"
         android:text="Start"
+        android:textAlignment="center"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMinus_RD" />
+
+    <Button
+        android:id="@+id/btnReset_RD"
+        android:layout_width="303dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="#6d61da"
+        android:text="Reset"
+        android:textAlignment="center"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnMinus_RD"
-        app:layout_constraintVertical_bias="0.23" />
+        app:layout_constraintTop_toBottomOf="@+id/btnStart_RD"
+        app:layout_constraintVertical_bias="0.328" />
 
     <Button
         android:id="@+id/btnClose_RD"

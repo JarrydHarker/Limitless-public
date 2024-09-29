@@ -48,7 +48,7 @@ class Login : AppCompatActivity() {
         val btnMap = findViewById<Button>(R.id.btnMap)
 
         btnMap.setOnClickListener {
-            val intent = Intent(this, Log_Exercise::class.java)
+            val intent = Intent(this, Map_Activity::class.java)
             startActivity(intent)
         }
 
