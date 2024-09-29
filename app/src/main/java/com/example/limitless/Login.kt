@@ -131,9 +131,12 @@ class Login : AppCompatActivity() {
                         request = request,
                         context = activityContext,  // Ensure activityContext is defined
                     )
-                    handleSignIn(result)
-                    val intent = Intent(this@Login, MainActivity::class.java)
-                    startActivity(intent)// Handle the sign-in result
+
+                    handleSignIn(result){
+                        val intent = Intent(this@Login, MainActivity::class.java)
+                        startActivity(intent)// Handle the sign-in result
+                    }
+
                 } catch (e: GetCredentialException) {
                     if (e is NoCredentialException) {
                         // Retry without filtering by authorized accounts
@@ -151,9 +154,12 @@ class Login : AppCompatActivity() {
                                 request = requestRetry,
                                 context = activityContext,
                             )
-                            handleSignup(resultRetry)
-                            val intent = Intent(this@Login, MainActivity::class.java)
-                            startActivity(intent)
+
+                            handleSignup(resultRetry){
+                                val intent = Intent(this@Login, MainActivity::class.java)
+                                startActivity(intent)
+                            }
+
                         } catch (retryException: GetCredentialException) {
                             handleFailure("retry",retryException)
                         }
@@ -165,7 +171,7 @@ class Login : AppCompatActivity() {
         }
     }
 
-    private fun handleSignup(result: GetCredentialResponse) {
+    private fun handleSignup(result: GetCredentialResponse, onComplete: () -> Unit) {
         // Handle the successfully returned credential.
         val credential = result.credential
 
@@ -180,6 +186,8 @@ class Login : AppCompatActivity() {
                         currentUser!!.GenerateID()
                         activityViewModel = ActivityViewModel(LocalDate.now())
                         nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+
+                        onComplete()
 
                     } catch (e: GoogleIdTokenParsingException) {
                         Log.e(TAG, "Received an invalid google id token response", e)
@@ -224,7 +232,7 @@ class Login : AppCompatActivity() {
         return Base64.getEncoder().encodeToString(byteArray)
     }
 
-    fun handleSignIn(result: GetCredentialResponse) {
+    fun handleSignIn(result: GetCredentialResponse, onComplete: () -> Unit) {
         // Handle the successfully returned credential.
         val credential = result.credential
 
@@ -239,6 +247,7 @@ class Login : AppCompatActivity() {
                         activityViewModel = ActivityViewModel(LocalDate.now())
                         nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
 
+                        onComplete()
                     } catch (e: GoogleIdTokenParsingException) {
                         Log.e(TAG, "Received an invalid google id token response", e)
                     }
