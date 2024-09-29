@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import androidx.fragment.app.Fragment
+import com.example.limitless.Nutrition.Diet_Activity
 import com.example.limitless.R
 import com.example.limitless.activityViewModel
 
@@ -59,7 +60,6 @@ class Exercises_Fragment : Fragment() {
             val intent = Intent(requireActivity(), New_Workout::class.java)
             startActivity(intent)
         }
-
         return view
     }
 
