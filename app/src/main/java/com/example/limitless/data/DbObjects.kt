@@ -69,6 +69,11 @@ class User(
         this.userInfo.stepGoal = steps
     }
 
+    fun SaveUserInfo(){
+        userInfo.userId = userId
+        dbAccess.CreateUserInfo(userInfo)
+    }
+
     fun CalcCalorieWallet(){
         //TODO Equation for men
         userInfo.calorieWallet = 88.362 + (13.397 * userInfo.weightGoal!!) + (4.799 * userInfo.height!!) - (5.677 * 25)//TODO Change to age
@@ -79,6 +84,7 @@ class User(
 }
 
 data class UserInfo(
+    var userId: String? = null,
     var height: Double? = null,
     var weight: Double? = null,
     var weightGoal: Double? = null,

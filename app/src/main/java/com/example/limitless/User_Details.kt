@@ -36,13 +36,7 @@ class User_Details : AppCompatActivity() {
                 currentUser?.name = name
                 currentUser?.surname = surname
 
-                currentUser?.SignUpUser{ response ->
-                    if(response == "Success"){
-                        // Initialize ViewModel with calorieWallet from currentUser
-                        nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
-                        activityViewModel = ActivityViewModel(LocalDate.now())
-                    }
-                }
+                currentUser?.SignUpUser{}
 
                 val intent = Intent(this, User_Height::class.java)
                 startActivity(intent)

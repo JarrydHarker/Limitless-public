@@ -7,12 +7,12 @@ import com.example.limitless.currentUser
 import com.example.limitless.data.DbAccess
 import com.example.limitless.data.Meal
 import com.example.limitless.data.Ratios
+import com.example.limitless.data.dbAccess
 import com.example.limitless.nutritionViewModel
 import java.time.LocalDate
 
 class NutritionViewModel(val currentDate: LocalDate , var calorieWallet: Double, var ratio: Ratios): ViewModel() {
 
-    val db = DbAccess.GetInstance()
     var carbWallet = calorieWallet*ratio.carbs
     var proteinWallet = calorieWallet*ratio.protein
     var fibreWallet = calorieWallet*ratio.fibre
@@ -21,7 +21,7 @@ class NutritionViewModel(val currentDate: LocalDate , var calorieWallet: Double,
     var arrMeals: MutableList<Meal>? = null
 
     fun CreateMeal(meal: Meal) {
-        db.CreateMeal(meal)
+        dbAccess.CreateMeal(meal)
 
         // Add the meal to the calorie counter's meal list
         if (arrMeals == null) {
