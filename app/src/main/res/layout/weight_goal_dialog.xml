@@ -21,7 +21,7 @@
         android:id="@+id/txtWeightGoal_WD"
         android:layout_width="256dp"
         android:layout_height="65dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Weight Goal"
         android:inputType="number"
@@ -29,30 +29,5 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView60" />
-
-    <Button
-        android:id="@+id/btnClose_WGD"
-        android:layout_width="97dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="76dp"
-        android:text="Close"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtWeightGoal_WD"
-        app:layout_constraintVertical_bias="0.166" />
-
-    <Button
-        android:id="@+id/btnConfirm_WGD"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="68dp"
-        android:text="Confirm"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.859"
-        app:layout_constraintStart_toEndOf="@+id/btnClose_WGD"
-        app:layout_constraintTop_toBottomOf="@+id/txtWeightGoal_WD"
-        app:layout_constraintVertical_bias="0.046" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
