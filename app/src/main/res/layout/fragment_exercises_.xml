@@ -92,7 +92,6 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageView14"
                     android:layout_width="match_parent"
                     android:layout_height="57dp"
                     android:src="@drawable/run_icon" />
