@@ -232,7 +232,7 @@ class Login : AppCompatActivity() {
         return Base64.getEncoder().encodeToString(byteArray)
     }
 
-    fun handleSignIn(result: GetCredentialResponse, onComplete: () -> Unit) {
+    fun handleSignIn(result: GetCredentialResponse, onComplete: (Boolean) -> Unit) {
         // Handle the successfully returned credential.
         val credential = result.credential
 
@@ -248,11 +248,15 @@ class Login : AppCompatActivity() {
                         if(currentUser != null){
                             activityViewModel = ActivityViewModel(LocalDate.now())
                             nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                            onComplete(true)
                         }else{
                             currentUser = User(name = gId.givenName.toString(), surname = gId.familyName.toString(), email = gId.id)
+                            activityViewModel = ActivityViewModel(LocalDate.now())
+                            nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                            onComplete(true)//TODO Please change
                         }
 
-                        onComplete()
+
                     } catch (e: GoogleIdTokenParsingException) {
                         Log.e(TAG, "Received an invalid google id token response", e)
                     }
