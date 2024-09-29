@@ -10,14 +10,16 @@
 
     <ImageView
         android:id="@+id/imageView10"
-        android:layout_width="0dp"
-        android:layout_height="194dp"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_marginTop="-50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/gymequipment" />
 
     <ImageView
         android:id="@+id/imageView11"
@@ -138,39 +140,17 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="91dp"
+        android:layout_width="wrap_content"
         android:layout_height="33dp"
         android:fontFamily="sans-serif"
-        android:text="Sing Up /"
+        android:text="Sign Up"
         android:textColor="#000000"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.368" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="88dp"
-        android:layout_height="36dp"
-        android:backgroundTint="#00FFFFFF"
-        android:fontFamily="sans-serif"
-        android:paddingLeft="0dp"
-        android:paddingTop="0dp"
-        android:paddingRight="0dp"
-        android:paddingBottom="0dp"
-        android:text="Login"
-        android:textColor="@color/black"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.647"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.365" />
+        app:layout_constraintVertical_bias="0.363" />
 
     <Button
         android:id="@+id/btnTest"

@@ -211,7 +211,7 @@
                 android:layout_weight="1"
                 android:paddingTop="16dp"
                 android:paddingBottom="8dp"
-                android:text="Goals"
+                android:text="Set Goals"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="26dp"

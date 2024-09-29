@@ -5,8 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -46,17 +50,46 @@ class Login : AppCompatActivity() {
             insets
         }
 
-        val btnMap = findViewById<Button>(R.id.btnMap)
 
-        btnMap.setOnClickListener {
-            val intent = Intent(this, Map_Activity::class.java)
-            startActivity(intent)
-        }
+        val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
+        //val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
+        val btt = AnimationUtils.loadAnimation(this, R.anim.btt)
+        val btt2 = AnimationUtils.loadAnimation(this, R.anim.btt2)
+        val btt3 = AnimationUtils.loadAnimation(this, R.anim.btt3)
+        val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
+
+        val textView22 = findViewById<TextView>(R.id.textView22)
+        val textView21 = findViewById<TextView>(R.id.textView21)
+        val txtUsername_LG = findViewById<EditText>(R.id.txtUsername_LG)
+        val textView18 = findViewById<TextView>(R.id.textView18)
+        val txtPassword_LG = findViewById<EditText>(R.id.txtPassword_LG)
+        val btnLogin_LG = findViewById<Button>(R.id.btnLogin_LG)
+        val btnSignup_LG = findViewById<Button>(R.id.btnSignup_LG)
+        val Btn2ForgotPassword = findViewById<Button>(R.id.Btn2ForgotPassword)
+        val left_line = findViewById<View>(R.id.left_line)
+        val right_line = findViewById<View>(R.id.right_line)
+        val text_or = findViewById<TextView>(R.id.text_or)
+        val google_sso_button = findViewById<Button>(R.id.google_sso_button)
+        val btnSkip = findViewById<Button>(R.id.btnSkip)
+
+        textView22.startAnimation(ttb)
+        textView21.startAnimation(btt)
+        txtUsername_LG.startAnimation(btt)
+        textView18.startAnimation(btt2)
+        txtPassword_LG.startAnimation(btt2)
+        btnLogin_LG.startAnimation(btt3)
+        btnSignup_LG.startAnimation(btt3)
+        Btn2ForgotPassword.startAnimation(btt3)
+        left_line.startAnimation(btt4)
+        right_line.startAnimation(btt4)
+        text_or.startAnimation(btt4)
+        google_sso_button.startAnimation(btt4)
+        btnSkip.startAnimation(btt4)
 
         val btnForgotPassword: Button = findViewById(R.id.Btn2ForgotPassword)
         val btnLogin: Button = findViewById(R.id.btnLogin_LG)
         val btnSignup: Button = findViewById(R.id.btnSignup_LG)
-        val btnSkip: Button = findViewById(R.id.btnSkip)
+
         val txtUsername: EditText = findViewById(R.id.txtUsername_LG)
         val txtPassword: EditText = findViewById(R.id.txtPassword_LG)
         val btnGoogle: Button = findViewById(R.id.google_sso_button)
