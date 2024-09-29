@@ -34,7 +34,7 @@ class SignUp : AppCompatActivity() {
         val test: Button = findViewById(R.id.btnTest)
 
         test.setOnClickListener{
-            val intent = Intent(this, User_Height::class.java)
+            val intent = Intent(this, User_Details::class.java)
             startActivity(intent)
         }
 
