@@ -33,7 +33,7 @@ class User_DailySteps : AppCompatActivity() {
         //val btt3 = AnimationUtils.loadAnimation(this, R.anim.btt3)
         //val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
 
-        val textView42 = findViewById<TextView>(R.id.textView42)
+        val textView42 = findViewById<TextView>(R.id.textView60)
         val UDS_txtSteps = findViewById<EditText>(R.id.UDS_txtSteps)
         val UDS_txtUnit = findViewById<TextView>(R.id.UDS_txtUnit)
 

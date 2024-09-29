@@ -38,7 +38,7 @@ class User_Height : AppCompatActivity() {
         //val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
 
         val UH_Linear = findViewById<LinearLayout>(R.id.UH_Linear)
-        val textView42 = findViewById<TextView>(R.id.textView42)
+        val textView42 = findViewById<TextView>(R.id.textView47)
 
         val next: Button = findViewById(R.id.UH_btnNext)
         val skip:Button = findViewById(R.id.UH_btnSkip)

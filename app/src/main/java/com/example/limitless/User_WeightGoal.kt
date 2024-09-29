@@ -33,7 +33,7 @@ class User_WeightGoal : AppCompatActivity() {
         //val btt3 = AnimationUtils.loadAnimation(this, R.anim.btt3)
         //val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
 
-        val textView42 = findViewById<TextView>(R.id.textView42)
+        val textView42 = findViewById<TextView>(R.id.textView60)
         val UWG_Linear = findViewById<LinearLayout>(R.id.UWG_Linear)
 
         val next: Button = findViewById(R.id.UWG_btnNext)
