@@ -46,77 +46,74 @@ class Goal_page : AppCompatActivity() {
     }
 
 
-    fun showStepDialog(){
-        val dialog = Dialog(this@Goal_page)
+    fun showStepDialog() {
+        val builder = AlertDialog.Builder(this@Goal_page)
+        val inflater = layoutInflater
+        val dialogView = inflater.inflate(R.layout.step_goal_dialog, null)
+        builder.setView(dialogView)
 
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.step_goal_dialog)
-        dialog.window!!.attributes.windowAnimations=R.style.dialogAnimation
-        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
-        dialog.window!!.setGravity(Gravity.BOTTOM)
-
-        val btnClose = dialog.findViewById<Button>(R.id.btnClose_SD)
-        val btnConfirm = dialog.findViewById<Button>(R.id.btnConfirm_SD)
-
-        btnClose.setOnClickListener {
+        builder.setPositiveButton("Confirm") { dialog, _ ->
+            // Handle confirm button click
             dialog.dismiss()
         }
 
-        btnConfirm.setOnClickListener {
-
+        builder.setNegativeButton("Close") { dialog, _ ->
+            dialog.dismiss()
         }
 
-
+        val dialog = builder.create()
+        dialog.window!!.attributes.windowAnimations = R.style.dialogAnimation
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
+        dialog.window!!.setGravity(Gravity.BOTTOM)
         dialog.show()
     }
 
-    fun showWeightDialog(){
-        val dialog = Dialog(this@Goal_page)
 
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.weight_goal_dialog)
-        dialog.window!!.attributes.windowAnimations=R.style.dialogAnimation
-        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
-        dialog.window!!.setGravity(Gravity.BOTTOM)
+    fun showWeightDialog() {
+        val builder = AlertDialog.Builder(this@Goal_page)
+        val inflater = layoutInflater
+        val dialogView = inflater.inflate(R.layout.weight_goal_dialog, null)
+        builder.setView(dialogView)
 
-        val btnClose = dialog.findViewById<Button>(R.id.btnClose_WGD)
-        val btnConfirm = dialog.findViewById<Button>(R.id.btnConfirm_WGD)
-
-        btnClose.setOnClickListener {
+        builder.setPositiveButton("Confirm") { dialog, _ ->
+            // Handle confirm button click
             dialog.dismiss()
         }
 
-        btnConfirm.setOnClickListener {
-
+        builder.setNegativeButton("Close") { dialog, _ ->
+            dialog.dismiss()
         }
 
+        val dialog = builder.create()
+        dialog.window!!.attributes.windowAnimations = R.style.dialogAnimation
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
+        dialog.window!!.setGravity(Gravity.BOTTOM)
         dialog.show()
     }
 
-    fun showCalorieDialog(){
-        val dialog = Dialog(this@Goal_page)
 
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.calorie_goal_dialog)
-        dialog.window!!.attributes.windowAnimations=R.style.dialogAnimation
-        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
-        dialog.window!!.setGravity(Gravity.BOTTOM)
+    fun showCalorieDialog() {
+        val builder = AlertDialog.Builder(this@Goal_page)
+        val inflater = layoutInflater
+        val dialogView = inflater.inflate(R.layout.calorie_goal_dialog, null)
+        builder.setView(dialogView)
 
-        val btnClose = dialog.findViewById<Button>(R.id.btnClose_CD)
-        val btnConfirm = dialog.findViewById<Button>(R.id.btnConfirm_CD)
-
-        btnClose.setOnClickListener {
+        builder.setPositiveButton("Confirm") { dialog, _ ->
+            // Handle confirm button click
             dialog.dismiss()
         }
 
-        btnConfirm.setOnClickListener {
-
+        builder.setNegativeButton("Close") { dialog, _ ->
+            dialog.dismiss()
         }
 
+        val dialog = builder.create()
+        dialog.window!!.attributes.windowAnimations = R.style.dialogAnimation
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
+        dialog.window!!.setGravity(Gravity.BOTTOM)
+        dialog.show()
     }
+
 
     private fun Goals(){
         // Inflate the custom layout
@@ -142,7 +139,6 @@ class Goal_page : AppCompatActivity() {
 
         // Build and show the dialog
         AlertDialog.Builder(this)
-            .setTitle("Set Goal")
             .setView(dialogView) // Set the custom view
             .setPositiveButton("Confirm") { dialog, which ->
                 showCalorieDialog()
