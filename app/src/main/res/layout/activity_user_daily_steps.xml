@@ -43,7 +43,7 @@
 
 
     <TextView
-        android:id="@+id/textView42"
+        android:id="@+id/textView60"
         android:layout_width="284dp"
         android:layout_height="59dp"
         android:text="Add your Daily Steps Goal"
