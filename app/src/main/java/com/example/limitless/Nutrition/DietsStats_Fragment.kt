@@ -61,10 +61,11 @@ class DietsStats_Fragment : Fragment() {
 
         lblFood.setText(nutritionViewModel.CalculateTotalCalories().toString())
         lblGoal.setText(nutritionViewModel.calorieWallet.toString())
-        lblProtein.setText(nutritionViewModel.GetTotalProtein().toString())
-        lblFibre.setText(nutritionViewModel.GetTotalFibre().toString())
-        lblCarbs.setText(nutritionViewModel.GetTotalCarbs().toString())
-        lblFats.setText(nutritionViewModel.GetTotalFat().toString())
+        lblProtein.setText(String.format("%.2f g", nutritionViewModel.GetTotalProtein().toDouble()))
+        lblFibre.setText(String.format("%.2f g", nutritionViewModel.GetTotalFibre().toDouble()))
+        lblCarbs.setText(String.format("%.2f g", nutritionViewModel.GetTotalCarbs().toDouble()))
+        lblFats.setText(String.format("%.2f g", nutritionViewModel.GetTotalFat().toDouble()))
+
         DrawMiniCircle(cgFibre, nutritionViewModel.fibreWallet.toFloat(), nutritionViewModel.GetTotalFibre().toFloat())
         DrawMiniCircle(cgCarbs, nutritionViewModel.carbWallet.toFloat(), nutritionViewModel.GetTotalCarbs().toFloat())
         DrawMiniCircle(cgFats, nutritionViewModel.fatWallet.toFloat(), nutritionViewModel.GetTotalFat().toFloat())
