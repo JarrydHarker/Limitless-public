@@ -1,6 +1,8 @@
 package com.example.limitless.data
 import java.time.LocalDate
 
+val dbAccess = DbAccess.GetInstance()
+
 class User(
     var userId: String = "",
     var name: String = "",
@@ -14,6 +16,13 @@ class User(
 
     fun InitialiseUserInfo(userInfo: UserInfo){
         this.userInfo = userInfo
+    }
+
+    fun GenerateID(){
+        val pwHasher = PasswordHasher()
+        val id = pwHasher.HashPassword(name + surname)
+
+        this.userId = id.substring(0, 10)
     }
 
     fun SetCalorieWallet(wallet: Double){
@@ -30,6 +39,16 @@ class User(
 
     fun GetStepGoal(): Double {
         return userInfo.stepGoal
+    }
+
+    fun SignUpUser(): String{
+        val pwHasher = PasswordHasher()
+        val hashedPW = pwHasher.HashPassword(password)
+        password = hashedPW
+        GenerateID()
+        if(userId.isNotEmpty() && name.isNotEmpty() && surname.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()){
+            return dbAccess.CreateUser(this)
+        }else return "Invalid user"
     }
 }
 
