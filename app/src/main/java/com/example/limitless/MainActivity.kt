@@ -176,23 +176,25 @@ class MainActivity : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
+
+        if (permissionsToRequest.isNotEmpty()) {
+            ActivityCompat.requestPermissions(
+                this,
+                permissionsToRequest.toTypedArray(),
+                REQUEST_CODE_PERMISSIONS
+            )
+        } else {
+            // All permissions granted, start the service
+            startStepCounterService()
+        }
     }
 
-    // Handle the result of the permission request
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            for ((index, permission) in permissions.withIndex()) {
-                if (permission == Manifest.permission.FOREGROUND_SERVICE && grantResults[index] == PackageManager.PERMISSION_GRANTED) {
-                    val service = Intent(this, StepCounterService::class.java)
-                    startService(service)
-                }
-            }
+    private fun startStepCounterService() {
+        val service = Intent(this, StepCounterService::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(service)  // For Android O and above
+        } else {
+            startService(service)  // For older versions
         }
     }
 
