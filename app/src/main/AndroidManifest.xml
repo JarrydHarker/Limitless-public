@@ -22,6 +22,9 @@
         android:theme="@style/Theme.Limitless"
         tools:targetApi="31">
         <activity
+            android:name=".User_Details"
+            android:exported="false" />
+        <activity
             android:name=".User_DailySteps"
             android:exported="false" />
         <activity

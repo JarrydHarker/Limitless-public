@@ -63,7 +63,7 @@ class Add_Exercise : AppCompatActivity() {
         bottomNavBar.setOnNavigationItemSelectedListener{item ->
             when (item.itemId){
                 R.id.ic_home -> {
-                    navigateToActivityLeft(MainActivity::class.java)
+                    navigateToActivityRight(MainActivity::class.java)
                     true
                 }
                 R.id.ic_nutrition -> {
