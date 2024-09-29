@@ -48,8 +48,9 @@ class Exercises_Fragment : Fragment() {
 
         val workouts = activityViewModel.GetWorkouts()
         if(workouts != null){
+
             for(workout in workouts){
-                workoutAdapter.add(workout.toString())
+                workoutAdapter.add(workout.name)
             }
 
             workoutAdapter.notifyDataSetChanged()

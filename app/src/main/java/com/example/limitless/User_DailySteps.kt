@@ -36,26 +36,22 @@ class User_DailySteps : AppCompatActivity() {
         next.setOnClickListener{
             if(userStepsGoal.text.isNotEmpty())
             {
-                Toast.makeText(this, "Calorie Wallet Captured: ${userStepsGoal.text} ${npText.text}", Toast.LENGTH_SHORT).show()
-                currentUser = User()
+                try{
+                    val steps = userStepsGoal.text.toString()
+                    currentUser?.SetStepGoal(steps.toInt())
 
-                // Initialize ViewModel with calorieWallet from currentUser
-                nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
-                activityViewModel = ActivityViewModel(LocalDate.now())
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }catch (ex: Exception){
+                    Toast.makeText(this, "Please enter a valid number", Toast.LENGTH_SHORT).show()
+                }
             }
             else{
                 Toast.makeText(this, "Please fill in field or press Skip to continue", Toast.LENGTH_SHORT).show()
-
             }
         }
-        skip.setOnClickListener{
-            currentUser = User()
 
-            // Initialize ViewModel with calorieWallet from currentUser
-            nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
-            activityViewModel = ActivityViewModel(LocalDate.now())
+        skip.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

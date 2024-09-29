@@ -45,7 +45,9 @@ class User_Height : AppCompatActivity() {
         next.setOnClickListener{
             if(npMain.value != 0)
             {
-                Toast.makeText(this, "Height Captured: ${npMain.value}, ${npSecondary.value} ${npText.text}", Toast.LENGTH_SHORT).show()
+                val height: Double = (npMain.value + (npSecondary.value/10)).toDouble()
+                currentUser?.SetHeight(height)
+
                 val intent = Intent(this, User_Weight::class.java)
                 startActivity(intent)
             }

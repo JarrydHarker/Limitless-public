@@ -38,7 +38,9 @@ class User_Weight : AppCompatActivity() {
         next.setOnClickListener{
             if(npMain.value != 0)
             {
-                Toast.makeText(this, "Weight Captured: ${npMain.value}, ${npSecondary.value} ${npText.text}", Toast.LENGTH_SHORT).show()
+                val weight: Double = (npMain.value + (npSecondary.value/10)).toDouble()
+                currentUser?.SetWeight(weight)
+
                 val intent = Intent(this, User_WeightGoal::class.java)
                 startActivity(intent)
             }
