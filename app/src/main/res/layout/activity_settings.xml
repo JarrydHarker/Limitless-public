@@ -28,7 +28,7 @@
         android:background="@android:color/darker_gray"
         android:contentDescription="Profile Image"
         android:scaleType="centerCrop"
-        android:src="@drawable/defaultpic"
+        android:src="@drawable/supp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
