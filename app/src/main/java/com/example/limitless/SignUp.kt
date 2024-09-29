@@ -52,7 +52,9 @@ class SignUp : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val response = SignUpUser(email, password)
+            currentUser?.email = email
+            currentUser?.password = password
+            val response = currentUser?.SignUpUser()
 
             if(response == "Success"){
                 val intent = Intent(this, MainActivity::class.java)
@@ -68,16 +70,5 @@ class SignUp : AppCompatActivity() {
         }
     }
 
-    fun SignUpUser(email: String, password: String): String{
-        val dbAccess = DbAccess.GetInstance()
-        val user = User()
-        val pwHasher = PasswordHasher()
 
-        val hashedPW = pwHasher.HashPassword(password)
-
-        user.email = email
-        user.password = hashedPW
-
-        return dbAccess.CreateUser(user)
-    }
 }
