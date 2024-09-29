@@ -52,17 +52,23 @@ class Settings : AppCompatActivity() {
             startActivity(intent)
         }
 
-        BackgroundImage.startAnimation(ttb)
-        profileImage.startAnimation(stb)
-        linearLayout7.startAnimation(btt)
+        //BackgroundImage.startAnimation(ttb)
+        //profileImage.startAnimation(stb)
+       // linearLayout7.startAnimation(btt)
         //till here
        // sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
+        ThemeManager.applyTheme(this)
+
+        //setContentView(R.layout.activity_settings)
+
         bottomNavBar = findViewById(R.id.NavBar)
+        val switchTheme: Switch = findViewById(R.id.switchTheme)
 
         // Apply the saved theme before setting the content view
        // applyTheme()
 
-
+        ThemeManager.updateNavBarColor(this, bottomNavBar)
         /*switchTheme.isChecked = isDarkModeEnabled()
 
         switchTheme.setOnCheckedChangeListener { _, isChecked ->
@@ -71,19 +77,21 @@ class Settings : AppCompatActivity() {
             recreate() // Recreate the activity to apply the new theme
         }*/
         //val switchTheme: Switch = findViewById(R.id.switchTheme)
-        ThemeManager.updateNavBarColor(this, bottomNavBar)
-        val switchTheme: Switch = findViewById(R.id.switchTheme)
+
+
         // Setup switchTheme and listen for changes
         switchTheme.isChecked = ThemeManager.isDarkModeEnabled(this)
+
         switchTheme.setOnCheckedChangeListener { _, isChecked ->
             if (ThemeManager.isDarkModeEnabled(this) != isChecked) {
                 // Only apply the theme if there's an actual change
                 ThemeManager.saveDarkModeState(this, isChecked)
 
                 // Delay theme application slightly to prevent flickering
-                switchTheme.postDelayed({
-                    ThemeManager.applyTheme(this)
-                }, 200) // Delay in milliseconds (200ms should be smooth)
+                //switchTheme.postDelayed({
+                    recreateActivitySmoothly()
+
+                //}, 200) // Delay in milliseconds (200ms should be smooth)
             }
         }
         bottomNavBar.setSelectedItemId(R.id.ic_settings)
@@ -113,6 +121,29 @@ class Settings : AppCompatActivity() {
             }
         }
     }
+    fun recreateActivitySmoothly() {
+       /* val intent = Intent(this, this::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out) // Use smooth transition animations
+        finish()*/
+        val intent = Intent(this, this::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        startActivity(intent)
+
+        // Use smooth fade-in, fade-out animations
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+
+        // Add a short delay to ensure smooth nav bar update
+        window.decorView.postDelayed({
+            val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
+            ThemeManager.updateNavBarColor(this, bottomNavBar)
+        }, 100) // Delay by 100ms to avoid immediate flickering
+
+        finish()
+    }
+
     // Helper function to navigate to another activity with transition
     private fun navigateToActivityLeft(activityClass: Class<*>) {
         val intent = Intent(this, activityClass)

@@ -12,6 +12,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.limitless.data.ViewModels.ActivityViewModel
+import com.example.limitless.data.ViewModels.NutritionViewModel
+import java.time.LocalDate
 
 class User_WeightGoal : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,8 +59,17 @@ class User_WeightGoal : AppCompatActivity() {
         next.setOnClickListener{
             if(npMain.value != 0)
             {
-                Toast.makeText(this, "Weight Goal Captured: ${npMain.value}, ${npSecondary.value} ${npText.text}", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, User_CalorieWallet::class.java)
+                val weight: Double = (npMain.value + (npSecondary.value/10)).toDouble()
+                currentUser?.SetWeightGoal(weight)
+
+                currentUser?.CalcCalorieWallet()
+                currentUser?.SaveUserInfo()
+
+                // Initialize ViewModel with calorieWallet from currentUser
+                nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                activityViewModel = ActivityViewModel(LocalDate.now())
+
+                val intent = Intent(this, User_DailySteps::class.java)
                 startActivity(intent)
             }
             else{
@@ -65,7 +77,7 @@ class User_WeightGoal : AppCompatActivity() {
             }
         }
         skip.setOnClickListener{
-            val intent = Intent(this, User_CalorieWallet::class.java)
+            val intent = Intent(this, User_DailySteps::class.java)
             startActivity(intent)
         }
 

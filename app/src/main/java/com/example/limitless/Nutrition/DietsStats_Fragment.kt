@@ -51,6 +51,7 @@ class DietsStats_Fragment : Fragment() {
         val cgFats: CircleGraphic = view.findViewById(R.id.cgFats)
         val cgFibre: CircleGraphic = view.findViewById(R.id.cgFibre)
         val cgProtein: CircleGraphic = view.findViewById(R.id.cgProtein)
+
         val constraintLayout11 = view.findViewById<ConstraintLayout>(R.id.constraintLayout11)
         val ttb = AnimationUtils.loadAnimation(view.context, R.anim.ttb)
         val stb = AnimationUtils.loadAnimation(view.context, R.anim.stb)
@@ -70,6 +71,12 @@ class DietsStats_Fragment : Fragment() {
         constraintLayout8.startAnimation(btt4)
 
 
+        val lblProtein: TextView = view.findViewById(R.id.lblProtein_RSF)
+        val lblFibre : TextView = view.findViewById(R.id.lblCalories_RSF)
+        val lblCarbs: TextView = view.findViewById(R.id.lblCarbs_RSF)
+        val lblFats: TextView = view.findViewById(R.id.lblFats_RSF)
+
+
         cgTotalCalories.setGoal(nutritionViewModel.calorieWallet!!.toFloat())
         cgTotalCalories.setProgress(nutritionViewModel.CalculateTotalCalories().toFloat())
         cgTotalCalories.setSize(370f,370f)
@@ -78,6 +85,11 @@ class DietsStats_Fragment : Fragment() {
 
         lblFood.setText(nutritionViewModel.CalculateTotalCalories().toString())
         lblGoal.setText(nutritionViewModel.calorieWallet.toString())
+        lblProtein.setText(String.format("%.2f g", nutritionViewModel.GetTotalProtein().toDouble()))
+        lblFibre.setText(String.format("%.2f g", nutritionViewModel.GetTotalFibre().toDouble()))
+        lblCarbs.setText(String.format("%.2f g", nutritionViewModel.GetTotalCarbs().toDouble()))
+        lblFats.setText(String.format("%.2f g", nutritionViewModel.GetTotalFat().toDouble()))
+
         DrawMiniCircle(cgFibre, nutritionViewModel.fibreWallet.toFloat(), nutritionViewModel.GetTotalFibre().toFloat())
         DrawMiniCircle(cgCarbs, nutritionViewModel.carbWallet.toFloat(), nutritionViewModel.GetTotalCarbs().toFloat())
         DrawMiniCircle(cgFats, nutritionViewModel.fatWallet.toFloat(), nutritionViewModel.GetTotalFat().toFloat())

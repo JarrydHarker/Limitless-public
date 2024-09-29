@@ -30,10 +30,11 @@ import com.example.limitless.Exercise.Workout_Planner
 import com.example.limitless.Nutrition.Diet_Activity
 import com.example.limitless.data.ViewModels.ActivityViewModel
 import com.example.limitless.data.ViewModels.NutritionViewModel
+import java.time.LocalDate
 
 var  currentUser: User? = null
 lateinit var nutritionViewModel: NutritionViewModel
-lateinit var activityViewModel: ActivityViewModel
+var activityViewModel = ActivityViewModel(LocalDate.now())
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,8 +55,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }else{
             checkAndRequestPermissions()
-            val intent = Intent(this, StepCounterService::class.java)
-            startService(intent)
         }
 
         //Nicks Animation things
@@ -179,22 +178,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Handle the result of the permission request
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            for ((index, permission) in permissions.withIndex()) {
-                if (grantResults[index] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "$permission granted", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "$permission denied", Toast.LENGTH_SHORT).show()
-                }
-            }
+    private fun startStepCounterService() {
+        val service = Intent(this, StepCounterService::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(service)  // For Android O and above
+        } else {
+            startService(service)  // For older versions
         }
     }
 
@@ -211,6 +200,24 @@ class MainActivity : AppCompatActivity() {
                 .show()
         } else {
             ActivityCompat.requestPermissions(this, arrayOf(permission), requestCode)
+        }
+    }
+
+    // Handle the result of the permission request
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            val permissionsGranted = permissions.indices.all { grantResults[it] == PackageManager.PERMISSION_GRANTED }
+
+            if (permissionsGranted) {
+                // All required permissions were granted, now start the service
+                startStepCounterService()
+            }
         }
     }
 }

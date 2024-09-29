@@ -26,9 +26,11 @@ import androidx.lifecycle.lifecycleScope
 import com.example.limitless.Exercise.Log_Exercise
 import com.example.limitless.data.DbAccess
 import com.example.limitless.data.PasswordHasher
+import com.example.limitless.data.StepCounterService
 import com.example.limitless.data.User
 import com.example.limitless.data.ViewModels.ActivityViewModel
 import com.example.limitless.data.ViewModels.NutritionViewModel
+import com.example.limitless.data.dbAccess
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
@@ -47,6 +49,7 @@ class Login : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
 
         val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
         //val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
@@ -84,7 +87,6 @@ class Login : AppCompatActivity() {
         btnSkip.startAnimation(btt4)
 
         val btnForgotPassword: Button = findViewById(R.id.Btn2ForgotPassword)
-
         val btnLogin: Button = findViewById(R.id.btnLogin_LG)
         val btnSignup: Button = findViewById(R.id.btnSignup_LG)
 
@@ -119,19 +121,21 @@ class Login : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val user = LoginUser(this, username, password)
+            LoginUser(this, username, password){user ->
+                if(user != null){
+                    currentUser = user
 
-            if(user != null){
-                currentUser = user
+                    nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                    activityViewModel = ActivityViewModel(LocalDate.now())
 
-                nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
-                activityViewModel = ActivityViewModel(LocalDate.now())
-
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }else {
-                Toast.makeText(this, "User not found, please sign up", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }else {
+                    Toast.makeText(this, "User not found, please sign up", Toast.LENGTH_LONG).show()
+                }
             }
+
+
         }
 
         btnSkip.setOnClickListener{
@@ -146,10 +150,6 @@ class Login : AppCompatActivity() {
         }
 
         btnGoogle.setOnClickListener {
-            /*val signInWithGoogleOption: GetSignInWithGoogleOption = GetSignInWithGoogleOption.Builder("677746774102-0mfqbkl5q7k3b207q7dmutj3mv6s81rq.apps.googleusercontent.com")
-                .setNonce(GenerateNonce())  // Add any nonce generation logic here
-                .build()
-*/
             val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
                 .setFilterByAuthorizedAccounts(true)
                 .setServerClientId("651564228412-8jnt2ktgb86rcdsh1kbh7loak5244hdm.apps.googleusercontent.com")
@@ -166,14 +166,20 @@ class Login : AppCompatActivity() {
                         request = request,
                         context = activityContext,  // Ensure activityContext is defined
                     )
-                    handleSignIn(result)  // Handle the sign-in result
+
+                    handleSignIn(result){ isNewUser ->
+                        if(isNewUser){
+                            val intent = Intent(this@Login, User_Details::class.java)
+                            startActivity(intent)// Handle the sign-in result
+                        }else{
+                            val intent = Intent(this@Login, MainActivity::class.java)
+                            startActivity(intent)// Handle the sign-in result
+                        }
+                    }
+
                 } catch (e: GetCredentialException) {
                     if (e is NoCredentialException) {
                         // Retry without filtering by authorized accounts
-                        /*val signInWithGoogleOptionRetry: GetSignInWithGoogleOption = GetSignInWithGoogleOption.Builder("677746774102-0mfqbkl5q7k3b207q7dmutj3mv6s81rq.apps.googleusercontent.com")
-                            .setNonce(GenerateNonce())
-                            .build()*/
-
                         val googleIdOptionRetry: GetGoogleIdOption = GetGoogleIdOption.Builder()
                             .setFilterByAuthorizedAccounts(false)
                             .setServerClientId("651564228412-8jnt2ktgb86rcdsh1kbh7loak5244hdm.apps.googleusercontent.com")
@@ -188,7 +194,12 @@ class Login : AppCompatActivity() {
                                 request = requestRetry,
                                 context = activityContext,
                             )
-                            handleSignIn(resultRetry)
+
+                            handleSignup(resultRetry){
+                                val intent = Intent(this@Login, MainActivity::class.java)
+                                startActivity(intent)
+                            }
+
                         } catch (retryException: GetCredentialException) {
                             handleFailure("retry",retryException)
                         }
@@ -200,20 +211,54 @@ class Login : AppCompatActivity() {
         }
     }
 
-    fun LoginUser(context: Context, username: String, password: String): User?{
+    private fun handleSignup(result: GetCredentialResponse, onComplete: () -> Unit) {
+        // Handle the successfully returned credential.
+        val credential = result.credential
+
+        when (credential) {
+            is CustomCredential -> {
+                if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
+                    try {
+                        val gId = GoogleIdTokenCredential
+                            .createFrom(credential.data)
+
+                        currentUser = User(name = gId.givenName.toString(), surname = gId.familyName.toString(), email = gId.id)
+                        currentUser!!.GenerateID()
+                        activityViewModel = ActivityViewModel(LocalDate.now())
+                        nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+
+                        onComplete()
+
+                    } catch (e: GoogleIdTokenParsingException) {
+                        Log.e(TAG, "Received an invalid google id token response", e)
+                    }
+
+                }else {
+                    // Catch any unrecognized credential type here.
+                    Log.e(TAG, "Unexpected type of credential")
+                }
+            }else -> {
+            // Catch any unrecognized credential type here.
+            Log.e(TAG, "Unexpected type of credential")
+            }
+        }
+    }
+}
+
+    fun LoginUser(context: Context, username: String, password: String, onComplete: (User?) -> Unit) {
         val dbAccess = DbAccess.GetInstance()
         val hasher = PasswordHasher()
 
-        val user = dbAccess.GetUser(username)
-        val hashedPW = hasher.HashPassword(password)
+        dbAccess.GetUserByEmail(username){user ->
+            val hashedPW = hasher.HashPassword(password)
 
-        if(user != null){
-            if(user.password == hashedPW){
-                return user
-            }else Toast.makeText(context, "Incorrect username or password", Toast.LENGTH_LONG).show()
+            if(user != null){
+                if(user.password == hashedPW){
+                    onComplete(user)
+                }else Toast.makeText(context, "Incorrect username or password", Toast.LENGTH_LONG).show()
+            }
+            onComplete(null)
         }
-
-        return null
     }
 
     private fun handleFailure(type: String, e: GetCredentialException) {
@@ -227,7 +272,7 @@ class Login : AppCompatActivity() {
         return Base64.getEncoder().encodeToString(byteArray)
     }
 
-    fun handleSignIn(result: GetCredentialResponse) {
+    fun handleSignIn(result: GetCredentialResponse, onComplete: (Boolean) -> Unit) {
         // Handle the successfully returned credential.
         val credential = result.credential
 
@@ -235,10 +280,24 @@ class Login : AppCompatActivity() {
             is CustomCredential -> {
                 if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
                     try {
-                        val googleIdTokenCredential = GoogleIdTokenCredential
+                        val gId = GoogleIdTokenCredential
                             .createFrom(credential.data)
 
-                        Log.d("GoogleId", googleIdTokenCredential.id)
+                        dbAccess.GetUserByEmail(gId.id){ user ->
+                             currentUser = user
+                        }
+
+                        if(currentUser != null){
+                            activityViewModel = ActivityViewModel(LocalDate.now())
+                            nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                            onComplete(false)
+                        }else{
+                            currentUser = User(name = gId.givenName.toString(), surname = gId.familyName.toString(), email = gId.id)
+                            activityViewModel = ActivityViewModel(LocalDate.now())
+                            nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                            onComplete(true)
+                        }
+
 
                     } catch (e: GoogleIdTokenParsingException) {
                         Log.e(TAG, "Received an invalid google id token response", e)
@@ -251,8 +310,6 @@ class Login : AppCompatActivity() {
             }else -> {
             // Catch any unrecognized credential type here.
             Log.e(TAG, "Unexpected type of credential")
-        }
+            }
         }
     }
-
-}

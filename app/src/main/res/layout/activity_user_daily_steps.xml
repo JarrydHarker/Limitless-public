@@ -80,8 +80,8 @@
         app:layout_constraintVertical_bias="0.589" />
 
     <TextView
-        android:id="@+id/textView42"
         android:layout_width="wrap_content"
+        android:id="@+id/textView60"
         android:layout_height="59dp"
         android:text="Add your Daily Steps Goal"
         android:textSize="24sp"
