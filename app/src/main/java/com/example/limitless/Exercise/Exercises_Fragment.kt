@@ -57,7 +57,7 @@ class Exercises_Fragment : Fragment() {
         }
 
         btnAddWorkout.setOnClickListener {
-            val intent = Intent(requireActivity(), New_Workout::class.java)
+            val intent = Intent(requireActivity(), exerciseCategory::class.java)
             startActivity(intent)
         }
         return view
