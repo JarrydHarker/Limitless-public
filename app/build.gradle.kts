@@ -15,6 +15,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -34,9 +35,7 @@ android {
         jvmTarget = "1.8"
     }
 }
-
 dependencies {
-
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -48,7 +47,6 @@ dependencies {
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.googleid)
     implementation(libs.gson)
-
     implementation(libs.androidx.media)
     implementation(libs.play.services.auth)
     implementation(libs.androidx.security.crypto)

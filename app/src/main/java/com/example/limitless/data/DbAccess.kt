@@ -17,12 +17,15 @@ class DbAccess private constructor(){
     companion object {
         private var instance: DbAccess? = null
 
+
         fun GetInstance(): DbAccess {
             if (instance == null) {
                 instance = DbAccess()
             }
             return instance!!
         }
+
+
     }
 
     private val apiUrl = "https://opscapi-cnbqbvc2g7e4hyec.switzerlandnorth-01.azurewebsites.net/api/Limitless"

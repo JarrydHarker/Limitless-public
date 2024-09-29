@@ -201,7 +201,7 @@ class MealFood(
 }
 
 class Meal(
-    var mealId: Int = 0,
+    var mealId: Int? = 0,
     var date: LocalDate? = null,  // Use String or LocalDate depending on your needs
     var userId: String? = null,
     var name: String = ""
@@ -210,7 +210,7 @@ class Meal(
 }
 
 class Food(
-    var foodId: Int = 0,
+    var foodId: Int? = 0,
     var mealId: String? = null,
     var category: String? = null,
     var description: String? = null,
