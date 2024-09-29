@@ -68,6 +68,7 @@
                 android:id="@+id/lblGoalSteps_GP"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
+                android:text="Click to Add"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
@@ -75,6 +76,7 @@
                 android:id="@+id/lblGoalWeight_GP"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
+                android:text="Click to Add"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
@@ -82,6 +84,8 @@
                 android:id="@+id/lblGoalCalorie_GP"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
+                android:text="Click to Add"
+                android:textAlignment="center"
                 android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>

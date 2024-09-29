@@ -43,8 +43,6 @@ class Map_Activity : AppCompatActivity() {
         btnShow.setOnClickListener{
             showDialog()
         }
-
-
     }
 
     private fun showDialog(){
@@ -58,7 +56,7 @@ class Map_Activity : AppCompatActivity() {
         dialog.setContentView(R.layout.timer_dialog)
         dialog.window!!.attributes.windowAnimations=R.style.dialogAnimation
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.window!!.setGravity(Gravity.BOTTOM)
+
 
         val cancel = dialog.findViewById<Button>(R.id.btnClose)
         val go = dialog.findViewById<Button>(R.id.btnGO)
@@ -83,7 +81,6 @@ class Map_Activity : AppCompatActivity() {
                     runOnUiThread {
                         lblTime1.text = Ticktimer.getTime2()
                     }
-                    //showChart(Ticktimer.get(), time)
                 } catch (e: Exception) {
                     Log.e("Error", "Error: ${e.message}")
                 }

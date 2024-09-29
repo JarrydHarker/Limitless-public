@@ -62,6 +62,11 @@ class Timer(val endTime: Long) {
         return formatTime(time)
     }
 
+    fun getRemainingTime(): Long {
+        update()
+        return time
+    }
+
     fun getTime2(): String{
         update2()
         return formatTime(time)
