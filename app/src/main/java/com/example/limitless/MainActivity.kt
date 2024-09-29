@@ -54,8 +54,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }else{
             checkAndRequestPermissions()
-            val intent = Intent(this, StepCounterService::class.java)
-            startService(intent)
+
         }
 
         //Nicks Animation things

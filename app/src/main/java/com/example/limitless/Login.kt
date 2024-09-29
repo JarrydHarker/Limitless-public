@@ -22,6 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.limitless.Exercise.Log_Exercise
 import com.example.limitless.data.DbAccess
 import com.example.limitless.data.PasswordHasher
+import com.example.limitless.data.StepCounterService
 import com.example.limitless.data.User
 import com.example.limitless.data.ViewModels.ActivityViewModel
 import com.example.limitless.data.ViewModels.NutritionViewModel
@@ -96,6 +97,9 @@ class Login : AppCompatActivity() {
                 nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
                 activityViewModel = ActivityViewModel(LocalDate.now())
 
+                val service = Intent(this@Login, StepCounterService::class.java)
+                startService(service)
+
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }else {
@@ -109,6 +113,9 @@ class Login : AppCompatActivity() {
             // Initialize ViewModel with calorieWallet from currentUser
             nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
             activityViewModel = ActivityViewModel(LocalDate.now())
+
+            val service = Intent(this@Login, StepCounterService::class.java)
+            startService(service)
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -132,9 +139,18 @@ class Login : AppCompatActivity() {
                         context = activityContext,  // Ensure activityContext is defined
                     )
 
-                    handleSignIn(result){
-                        val intent = Intent(this@Login, MainActivity::class.java)
-                        startActivity(intent)// Handle the sign-in result
+                    handleSignIn(result){ isNewUser ->
+                        val service = Intent(this@Login, StepCounterService::class.java)
+                        startService(service)
+
+                        if(isNewUser){
+                            val intent = Intent(this@Login, User_Details::class.java)
+                            startActivity(intent)// Handle the sign-in result
+                        }else{
+                            val intent = Intent(this@Login, MainActivity::class.java)
+                            startActivity(intent)// Handle the sign-in result
+                        }
+
                     }
 
                 } catch (e: GetCredentialException) {
@@ -248,12 +264,12 @@ class Login : AppCompatActivity() {
                         if(currentUser != null){
                             activityViewModel = ActivityViewModel(LocalDate.now())
                             nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
-                            onComplete(true)
+                            onComplete(false)
                         }else{
                             currentUser = User(name = gId.givenName.toString(), surname = gId.familyName.toString(), email = gId.id)
                             activityViewModel = ActivityViewModel(LocalDate.now())
                             nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
-                            onComplete(true)//TODO Please change
+                            onComplete(true)
                         }
 
 
