@@ -240,12 +240,18 @@ class Login : AppCompatActivity() {
             is CustomCredential -> {
                 if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
                     try {
-                        val googleIdTokenCredential = GoogleIdTokenCredential
+                        val gId = GoogleIdTokenCredential
                             .createFrom(credential.data)
 
-                        currentUser = dbAccess.GetUserByEmail(googleIdTokenCredential.id)
-                        activityViewModel = ActivityViewModel(LocalDate.now())
-                        nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                        currentUser = dbAccess.GetUserByEmail(gId.id)
+
+                        if(currentUser != null){
+                            activityViewModel = ActivityViewModel(LocalDate.now())
+                            nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                        }else{
+                            currentUser = User(name = gId.givenName.toString(), surname = gId.familyName.toString(), email = gId.id)
+                        }
+
 
                         onComplete()
                     } catch (e: GoogleIdTokenParsingException) {
