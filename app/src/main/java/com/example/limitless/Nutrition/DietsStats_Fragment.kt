@@ -50,17 +50,17 @@ class DietsStats_Fragment : Fragment() {
         val cgProtein: CircleGraphic = view.findViewById(R.id.cgProtein)
 
         cgTotalCalories.setGoal(nutritionViewModel.calorieWallet!!.toFloat())
-        cgTotalCalories.setProgress(nutritionViewModel.calorieCounter.CalculateTotalCalories().toFloat())
+        cgTotalCalories.setProgress(nutritionViewModel.CalculateTotalCalories().toFloat())
         cgTotalCalories.setSize(370f,370f)
         cgTotalCalories.setThickness(20f)
         cgTotalCalories.setType("circle")
 
-        lblFood.setText(nutritionViewModel.GetTotalCalories().toString())
+        lblFood.setText(nutritionViewModel.CalculateTotalCalories().toString())
         lblGoal.setText(nutritionViewModel.calorieWallet.toString())
-        DrawMiniCircle(cgFibre, nutritionViewModel.fibreWallet.toFloat(), nutritionViewModel.calorieCounter.GetTotalFibre().toFloat())
-        DrawMiniCircle(cgCarbs, nutritionViewModel.carbWallet.toFloat(), nutritionViewModel.calorieCounter.GetTotalCarbs().toFloat())
-        DrawMiniCircle(cgFats, nutritionViewModel.fatWallet.toFloat(), nutritionViewModel.calorieCounter.GetTotalFat().toFloat())
-        DrawMiniCircle(cgProtein, nutritionViewModel.proteinWallet.toFloat(), nutritionViewModel.calorieCounter.GetTotalProtein().toFloat())
+        DrawMiniCircle(cgFibre, nutritionViewModel.fibreWallet.toFloat(), nutritionViewModel.GetTotalFibre().toFloat())
+        DrawMiniCircle(cgCarbs, nutritionViewModel.carbWallet.toFloat(), nutritionViewModel.GetTotalCarbs().toFloat())
+        DrawMiniCircle(cgFats, nutritionViewModel.fatWallet.toFloat(), nutritionViewModel.GetTotalFat().toFloat())
+        DrawMiniCircle(cgProtein, nutritionViewModel.proteinWallet.toFloat(), nutritionViewModel.GetTotalProtein().toFloat())
 
         // Inflate the layout for this fragment
         return view

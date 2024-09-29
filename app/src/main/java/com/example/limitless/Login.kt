@@ -183,6 +183,7 @@ class Login : AppCompatActivity() {
 
         return null
     }
+
     private fun handleFailure(type: String, e: GetCredentialException) {
         Log.e("Fuck", type + "|" + e.toString())
     }
@@ -201,12 +202,12 @@ class Login : AppCompatActivity() {
         when (credential) {
             is CustomCredential -> {
                 if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
-
                     try {
-                        // Use googleIdTokenCredential and extract id to validate and
-                        // authenticate on your server.
                         val googleIdTokenCredential = GoogleIdTokenCredential
                             .createFrom(credential.data)
+
+                        Log.d("GoogleId", googleIdTokenCredential.id)
+
                     } catch (e: GoogleIdTokenParsingException) {
                         Log.e(TAG, "Received an invalid google id token response", e)
                     }

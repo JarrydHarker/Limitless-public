@@ -1,6 +1,8 @@
 package com.example.limitless.data
 import java.time.LocalDate
 
+val dbAccess = DbAccess.GetInstance()
+
 class User(
     var userId: String = "",
     var name: String = "",
@@ -14,6 +16,13 @@ class User(
 
     fun InitialiseUserInfo(userInfo: UserInfo){
         this.userInfo = userInfo
+    }
+
+    fun GenerateID(){
+        val pwHasher = PasswordHasher()
+        val id = pwHasher.HashPassword(name + surname)
+
+        this.userId = id.substring(0, 10)
     }
 
     fun SetCalorieWallet(wallet: Double){
@@ -30,6 +39,16 @@ class User(
 
     fun GetStepGoal(): Double {
         return userInfo.stepGoal
+    }
+
+    fun SignUpUser(): String{
+        val pwHasher = PasswordHasher()
+        val hashedPW = pwHasher.HashPassword(password)
+        password = hashedPW
+        GenerateID()
+        if(userId.isNotEmpty() && name.isNotEmpty() && surname.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()){
+            return dbAccess.CreateUser(this)
+        }else return "Invalid user"
     }
 }
 
@@ -138,23 +157,35 @@ class Day(
 }
 
 class Workout(
-    var workoutId: String = "",
-    var date: String,  // Use String or LocalDate depending on your needs
+    var workoutId: Int? = 0,
+    var date: LocalDate,  // Use String or LocalDate depending on your needs
 ){
     var arrExercises: MutableList<Exercise> = mutableListOf()
 }
 
 class Exercise(
-    var exerciseId: String = "",
+    var exerciseId: Int? = 0,
     var movement: Movement,
 
 ){
+    fun GetName(): String {
+        return movement.name
+    }
+
+    override fun toString(): String {
+        if(strength != null){
+            return "${movement.name}\t${strength!!.sets}x${strength!!.repetitions}"
+        }else{
+            return movement.name
+        }
+    }
+
     var cardio: Cardio? = null
     var strength: Strength? = null
 }
 
 class Movement(
-    var movementId: Int = 0,
+    var movementId: Int? = 0,
     var name: String = "",
     var description: String? = null,
     var type: String = "",
@@ -189,7 +220,7 @@ class MealFood(
 }
 
 class Meal(
-    var mealId: Int = 0,
+    var mealId: Int? = 0,
     var date: LocalDate? = null,  // Use String or LocalDate depending on your needs
     var userId: String? = null,
     var name: String = ""
@@ -198,7 +229,7 @@ class Meal(
 }
 
 class Food(
-    var foodId: Int = 0,
+    var foodId: Int? = 0,
     var mealId: String? = null,
     var category: String? = null,
     var description: String? = null,

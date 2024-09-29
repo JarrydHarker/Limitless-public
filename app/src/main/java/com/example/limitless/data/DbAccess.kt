@@ -17,12 +17,15 @@ class DbAccess private constructor(){
     companion object {
         private var instance: DbAccess? = null
 
+
         fun GetInstance(): DbAccess {
             if (instance == null) {
                 instance = DbAccess()
             }
             return instance!!
         }
+
+
     }
 
     private val apiUrl = "https://opscapi-cnbqbvc2g7e4hyec.switzerlandnorth-01.azurewebsites.net/api/Limitless"
@@ -844,7 +847,7 @@ class DbAccess private constructor(){
             var food: List<Food> = emptyList()
 
             try {
-                val url = URL(apiUrl + epFood + "/Search?strSearch=$strSearch")
+                val url = URL("$apiUrl$epFood/Search?strSearch=$strSearch")
                 val connection = url.openConnection() as HttpURLConnection
 
                 connection.requestMethod = "GET"
@@ -935,12 +938,14 @@ class DbAccess private constructor(){
                     }
                 } else {
                     InputStreamReader(connection.errorStream).use { reader ->
-                        Log.e("SearchForFood", reader.readText())
+                        Log.e("SearchForMoves", reader.readText())
                     }
                 }
             } catch (ex: Exception) {
-                Log.e("SearchForFood", ex.toString())
+                Log.e("SearchForMoves", ex.toString())
             }
+
+            Log.d("SearchForMoves", movements.size.toString())
 
             return@withContext movements
         }
