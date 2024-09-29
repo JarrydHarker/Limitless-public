@@ -2,8 +2,11 @@ package com.example.limitless
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -24,9 +27,21 @@ class User_Details : AppCompatActivity() {
             insets
         }
 
+        val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
+        val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
+        val btt = AnimationUtils.loadAnimation(this, R.anim.btt)
+        val btt2 = AnimationUtils.loadAnimation(this, R.anim.btt2)
+
         val txtName = findViewById<EditText>(R.id.txtName_UD)
         val txtSurname= findViewById<EditText>(R.id.txtSurname_UD)
         val btnConfirm = findViewById<Button>(R.id.btnConfirm_UD)
+
+        val DetailsLL = findViewById<LinearLayout>(R.id.DetailsLL)
+        val textView60 = findViewById<TextView>(R.id.textView60)
+
+        btnConfirm.startAnimation(btt)
+        DetailsLL.startAnimation(stb)
+        textView60.startAnimation(ttb)
 
         btnConfirm.setOnClickListener {
             val name = txtName.text.toString()
