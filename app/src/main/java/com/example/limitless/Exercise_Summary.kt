@@ -38,6 +38,7 @@ class Exercise_Summary : AppCompatActivity() {
         val lblDifficulty = findViewById<TextView>(R.id.lblDifficulty_ES)
         val lblDescription = findViewById<TextView>(R.id.lblDescription_ES)
 
+        //lblType.setText(activityViewModel.currentWorkout)
 
         btnStart.setOnClickListener {
             if(lblType.text == "Cardio"){

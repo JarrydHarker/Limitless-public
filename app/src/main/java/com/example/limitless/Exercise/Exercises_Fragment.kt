@@ -27,6 +27,7 @@ import com.example.limitless.activityViewModel
 import com.example.limitless.currentUser
 import com.example.limitless.data.Workout
 import com.example.limitless.data.dbAccess
+import com.example.limitless.nutritionViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -67,10 +68,8 @@ class Exercises_Fragment : Fragment() {
         val workoutAdapter = ArrayAdapter<String>(requireActivity(), android.R.layout.simple_dropdown_item_1line)
         val arrWorkouts: MutableList<Workout> = mutableListOf()
 
-        dbAccess.GetUserWorkouts(currentUser?.userId!!) { workouts ->
+        dbAccess.GetUserWorkoutsByDate(currentUser?.userId!!, nutritionViewModel.currentDate) { workouts ->
             arrWorkouts.addAll(workouts)
-
-            Log.d("Fuck", "${workouts.size}")
 
             for (workout in arrWorkouts) {
                 workoutAdapter.add(workout.name)
@@ -81,8 +80,13 @@ class Exercises_Fragment : Fragment() {
         }
 
         lvWorkouts.setOnItemClickListener { parent, view, position, id ->
-            val intent = Intent(requireActivity(), Exercise_Summary::class.java)
-            startActivity(intent)
+            activityViewModel.currentWorkout = arrWorkouts[position]
+
+            dbAccess.GetExercisesByWorkoutId(activityViewModel.currentWorkout?.workoutId){ exercises ->
+                activityViewModel.currentWorkout?.AddExercises(exercises)
+                val intent = Intent(requireActivity(), Start_Workout::class.java)
+                startActivity(intent)
+            }
         }
 
         val ttb = AnimationUtils.loadAnimation(view.context, R.anim.ttb)

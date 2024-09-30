@@ -102,6 +102,9 @@
             android:name=".SignUp"
             android:exported="false" />
         <activity
+            android:name=".Exercise.Start_Workout"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
