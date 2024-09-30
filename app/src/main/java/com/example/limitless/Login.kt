@@ -171,7 +171,7 @@ class Login : AppCompatActivity() {
 
                     handleSignIn(result){ isNewUser ->
                         if(isNewUser){
-                            val intent = Intent(this@Login, User_Details::class.java)
+                            val intent = Intent(this@Login, User_Password::class.java)
                             startActivity(intent)// Handle the sign-in result
                         }else{
                             val intent = Intent(this@Login, MainActivity::class.java)
