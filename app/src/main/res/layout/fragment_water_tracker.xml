@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".fragment_water_tracker">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/WaterCL"
-        android:layout_width="match_parent"
-        android:layout_height="201dp"
+        android:layout_width="401dp"
+        android:layout_height="613dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/waterbox"
         android:elevation="5dp"
@@ -22,28 +22,27 @@
 
         <com.example.limitless.data.Graphics.BarGraphic
             android:id="@+id/bgWater"
-            android:layout_width="match_parent"
-            android:layout_height="84dp"
-            android:text="This is a barchart"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="398dp"
+            android:layout_height="167dp"
+            app:layout_constraintBottom_toTopOf="@id/addWater"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/addWater"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:backgroundTint="#2196F3"
             android:text="+ 250ml"
+            android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bgWater"
-            app:layout_constraintVertical_bias="0.768" />
+            app:layout_constraintTop_toBottomOf="@id/bgWater" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
