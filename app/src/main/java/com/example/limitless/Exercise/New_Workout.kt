@@ -48,6 +48,7 @@ import java.util.Locale
 class New_Workout : AppCompatActivity() {
 
     var currentMove = Movement()
+    val workoutExercises : MutableList<Exercise> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +61,6 @@ class New_Workout : AppCompatActivity() {
         }
         val btnCreateExercise = findViewById<Button>(R.id.btnCreateExercise_AE)
        // val spinCategory: Spinner  = findViewById(R.id.spinCategory)
-        val workoutExercises: MutableList<Exercise> = mutableListOf()
         val db = DbAccess.GetInstance()
         val categories = db.GetCategories()
         val lvNewWorkout: ListView = findViewById(R.id.lvNewWorkout)
@@ -80,7 +80,7 @@ class New_Workout : AppCompatActivity() {
         lvNewWorkout.adapter = newWorkoutAdapter
 
         btnCreateExercise.setOnClickListener {
-            ShowDialog(workoutExercises){
+            ShowDialog(){
                 for(we in workoutExercises){
                     newWorkoutAdapter.add(we.toString())
                 }
@@ -149,7 +149,7 @@ class New_Workout : AppCompatActivity() {
         startActivity(intent, options.toBundle())
     }
 
-    fun ShowDialog(workoutExercises: MutableList<Exercise>, onComplete: () -> Unit){
+    fun ShowDialog(onComplete: () -> Unit){
         val dialog = Dialog(this@New_Workout)
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

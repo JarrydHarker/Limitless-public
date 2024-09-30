@@ -2,7 +2,9 @@ package com.example.limitless.Exercise
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ListView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -24,14 +26,25 @@ class Start_Workout : AppCompatActivity() {
 
         val lvStart_Workout: ListView = findViewById(R.id.listExercises_WIP)
         val listAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
+        val btnSartWorkout: Button = findViewById(R.id.btnStart_WIP)
+        val lblWorkout: TextView = findViewById(R.id.lblWorkoutName)
 
         if(activityViewModel.currentWorkout != null){
+            lblWorkout.setText(activityViewModel.currentWorkout?.name)
+
             for(exercise in activityViewModel.currentWorkout!!.arrExercises){
                 listAdapter.add(exercise.toString())
             }
+
+
+
         }
 
         lvStart_Workout.adapter = listAdapter
 
+
+        btnSartWorkout.setOnClickListener {
+
+        }
     }
 }

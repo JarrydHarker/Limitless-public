@@ -51,7 +51,7 @@ class ActivityViewModel(val currentDate: LocalDate) {
     fun SaveWorkout(currentWorkout: Workout) {
         for(exercise in currentWorkout.arrExercises){
             exercise.workoutId = currentWorkout.workoutId!!
-            dbAccess.CreateExercise(exercise){
+            dbAccess.CreateExercise(exercise){ response ->
                 if(exercise.strength != null){
                     dbAccess.CreateStrength(exercise.strength!!)
                 }
