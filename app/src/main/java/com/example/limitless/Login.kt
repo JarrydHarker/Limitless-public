@@ -70,7 +70,7 @@ class Login : AppCompatActivity() {
         val right_line = findViewById<View>(R.id.right_line)
         val text_or = findViewById<TextView>(R.id.text_or)
         val google_sso_button = findViewById<Button>(R.id.google_sso_button)
-        val btnSkip = findViewById<Button>(R.id.btnSkip)
+
 
         textView22.startAnimation(ttb)
         textView21.startAnimation(btt)
@@ -84,7 +84,6 @@ class Login : AppCompatActivity() {
         right_line.startAnimation(btt4)
         text_or.startAnimation(btt4)
         google_sso_button.startAnimation(btt4)
-        btnSkip.startAnimation(btt4)
 
         val btnForgotPassword: Button = findViewById(R.id.Btn2ForgotPassword)
         val btnLogin: Button = findViewById(R.id.btnLogin_LG)
@@ -140,17 +139,6 @@ class Login : AppCompatActivity() {
             }
 
 
-        }
-
-        btnSkip.setOnClickListener{
-            currentUser = User()
-
-            // Initialize ViewModel with calorieWallet from currentUser
-            nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
-            activityViewModel = ActivityViewModel(LocalDate.now())
-
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
         }
 
         btnGoogle.setOnClickListener {

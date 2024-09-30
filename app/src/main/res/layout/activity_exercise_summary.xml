@@ -19,9 +19,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="300dp"
+        android:layout_width="0dp"
         android:layout_height="436dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="30dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,12 +98,16 @@
             android:id="@+id/btnStart_ES"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Start" />
+            android:backgroundTint="#6d61da"
+            android:text="Start"
+            app:cornerRadius="10dp" />
 
         <Button
             android:id="@+id/btnBack_ES"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Back" />
+            android:backgroundTint="#00FF0000"
+            android:text="Back"
+            android:textColor="@color/black" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
