@@ -48,7 +48,7 @@ class fragment_water_tracker : Fragment() {
         waterGraph.setType("exp")
         waterGraph.invalidate()
         waterGraph.setProgress(currentIntake)
-        waterGraph.setSize(400f, 400f)
+        waterGraph.setSize(900f, 200f)
         waterGraph.setThickness(50f)
         waterGraph.setLevel(5)
         waterGraph.setBarHeight(20f)

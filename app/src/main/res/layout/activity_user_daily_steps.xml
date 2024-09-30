@@ -48,8 +48,8 @@
 
     <EditText
         android:id="@+id/UDS_txtSteps"
-        android:layout_width="195dp"
-        android:layout_height="35dp"
+        android:layout_width="196dp"
+        android:layout_height="43dp"
         android:layout_weight="1"
         android:background="@drawable/onboarding_box"
         android:ems="5"
