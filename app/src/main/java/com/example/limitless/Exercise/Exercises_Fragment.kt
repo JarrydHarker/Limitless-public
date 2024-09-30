@@ -83,6 +83,7 @@ class Exercises_Fragment : Fragment() {
             activityViewModel.currentWorkout = arrWorkouts[position]
 
             dbAccess.GetExercisesByWorkoutId(activityViewModel.currentWorkout?.workoutId){ exercises ->
+                Log.d("Fuck", "exercises: ${exercises.size}")
                 activityViewModel.currentWorkout?.AddExercises(exercises)
                 val intent = Intent(requireActivity(), Start_Workout::class.java)
                 startActivity(intent)

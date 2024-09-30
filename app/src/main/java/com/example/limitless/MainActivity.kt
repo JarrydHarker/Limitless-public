@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }else{
             checkAndRequestPermissions()
+            startStepCounterService()
         }
 
         //Nicks Animation things
@@ -216,7 +217,7 @@ class MainActivity : AppCompatActivity() {
 
             if (permissionsGranted) {
                 // All required permissions were granted, now start the service
-                startStepCounterService()
+
             }
         }
     }
