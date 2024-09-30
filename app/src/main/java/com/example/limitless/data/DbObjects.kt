@@ -46,7 +46,6 @@ class User(
         if(userId.isNotEmpty() && name.isNotEmpty() && surname.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()){
              dbAccess.CreateUser(this){ response ->
                  onComplete(response)
-
             }
         }else {
             onComplete("Invalid user")
@@ -82,15 +81,24 @@ class User(
         //447.593 + (9.247 * userInfo.weightGoal!!) + (3.098 * userInfo.height!!) - (4.330 * 25)//TODO Change to age
     }
 
-    fun LoadUserData() {
-        dbAccess.GetUserInfo(userId)
+    fun LoadUserData(onComplete: () -> Unit) {
+        dbAccess.GetUserInfo(userId){ info ->
+
+            Log.d("Fuck", "${info?.calorieWallet}")
+
+            if(info != null){
+                userInfo = info
+                onComplete()
+            }
+
+            onComplete()
+        }
     }
 
     fun LogOut(){
 
     }
 }
-
 
 data class UserInfo(
     var userId: String? = null,

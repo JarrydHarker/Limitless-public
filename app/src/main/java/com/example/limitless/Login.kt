@@ -4,6 +4,8 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -125,12 +127,15 @@ class Login : AppCompatActivity() {
                 if(user != null){
                     currentUser = user
 
-                    nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
-                    activityViewModel = ActivityViewModel(LocalDate.now())
+                    currentUser?.LoadUserData{
+                        nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                        activityViewModel = ActivityViewModel(LocalDate.now())
 
-                    nutritionViewModel.LoadUserData()
-                    activityViewModel.LoadUserData()
-                    currentUser?.LoadUserData()
+                        nutritionViewModel.LoadUserData()
+                        activityViewModel.LoadUserData()
+                    }
+
+
 
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
@@ -249,23 +254,29 @@ class Login : AppCompatActivity() {
     }
 }
 
-    fun LoginUser(context: Context, username: String, password: String, onComplete: (User?) -> Unit) {
-        val dbAccess = DbAccess.GetInstance()
-        val hasher = PasswordHasher()
+fun LoginUser(context: Context, username: String, password: String, onComplete: (User?) -> Unit) {
+    val hasher = PasswordHasher()
 
-        dbAccess.GetUserByEmail(username){user ->
-            val hashedPW = hasher.HashPassword(password)
+    dbAccess.GetUserByEmail(username) { user ->
+        val hashedPW = hasher.HashPassword(password)
 
-            if(user != null){
-                if(user.password == hashedPW){
-                    onComplete(user)
-                }else Toast.makeText(context, "Incorrect username or password", Toast.LENGTH_LONG).show()
+        if (user != null) {
+            if (user.password == hashedPW) {
+                onComplete(user)
+            } else {
+                // Ensure the Toast runs on the main/UI thread
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(context, "Incorrect username or password", Toast.LENGTH_LONG).show()
+                }
             }
+        } else {
             onComplete(null)
         }
     }
+}
 
-    private fun handleFailure(type: String, e: GetCredentialException) {
+
+private fun handleFailure(type: String, e: GetCredentialException) {
         Log.e("Fuck", type + "|" + e.toString())
     }
 
