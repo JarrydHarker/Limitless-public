@@ -2,8 +2,11 @@ package com.example.limitless
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +25,17 @@ class User_Password : AppCompatActivity() {
         }
         val Next: Button = findViewById(R.id.UP_btnNext)
         val Password: EditText = findViewById(R.id.UP_txtPassword)
+        val PasswordLL: LinearLayout = findViewById(R.id.PasswordLL)
+        val textView60: TextView = findViewById(R.id.textView60)
+
+        val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
+        val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
+        val btt = AnimationUtils.loadAnimation(this, R.anim.btt)
+        val btt2 = AnimationUtils.loadAnimation(this, R.anim.btt2)
+
+        Next.startAnimation(btt)
+        PasswordLL.startAnimation(stb)
+        textView60.startAnimation(ttb)
 
         Next.setOnClickListener{
             if(Password.text.isNotEmpty()){
