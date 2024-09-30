@@ -2,8 +2,10 @@ package com.example.limitless
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +25,19 @@ class ForgotPassword : AppCompatActivity() {
         val btnCancel: Button = findViewById(R.id.btnCancel)
         val Email: EditText = findViewById(R.id.edtFPEmail)
         val btnReset: Button = findViewById(R.id.btnResetPassword)
+        val textView2: TextView = findViewById(R.id.textView2)
+        val textView: TextView = findViewById(R.id.textView)
+
+        val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
+        val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
+        val btt = AnimationUtils.loadAnimation(this, R.anim.btt)
+        val btt2 = AnimationUtils.loadAnimation(this, R.anim.btt2)
+
+        textView2.startAnimation(ttb)
+        textView.startAnimation(ttb)
+        Email.startAnimation(stb)
+        btnReset.startAnimation(btt)
+        btnCancel.startAnimation(btt2)
 
         btnCancel.setOnClickListener{
             val intent = Intent(this, Login::class.java)

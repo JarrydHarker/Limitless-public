@@ -37,7 +37,6 @@ class Settings : AppCompatActivity() {
 //        val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
 
         val BackgroundImage = findViewById(R.id.BackgroundImage) as ImageView
-        val profileImage = findViewById(R.id.profileImage) as ImageView
         val linearLayout7 = findViewById(R.id.linearLayout7) as LinearLayout
         val goals: LinearLayout = findViewById(R.id.ll4)
         val logout: LinearLayout = findViewById(R.id.ll5)
@@ -56,7 +55,6 @@ class Settings : AppCompatActivity() {
         }
 
         BackgroundImage.startAnimation(ttb)
-        profileImage.startAnimation(stb)
         linearLayout7.startAnimation(btt)
         //till here
 
