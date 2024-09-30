@@ -163,14 +163,12 @@ class New_Workout : AppCompatActivity() {
         val txtReps: EditText = dialog.findViewById(R.id.txtReps_WD)
         var arrMoves: MutableList<Movement> = mutableListOf()
         val txtName: TextView = dialog.findViewById(R.id.txtName)
-        val txtDesc: TextView = dialog.findViewById(R.id.txtDescription)
         val txtType: TextView = dialog.findViewById(R.id.txtType)
         val txtBodypart: TextView = dialog.findViewById(R.id.txtBodypart)
         val txtEquipment: TextView = dialog.findViewById(R.id.txtEquipment)
         val txtDifficulty: TextView = dialog.findViewById(R.id.txtDifficulty)
 
         txtName.setText("-")
-        txtDesc.setText("-")
         txtType.setText("-")
         txtBodypart.setText("-")
         txtEquipment.setText("-")
@@ -226,7 +224,6 @@ class New_Workout : AppCompatActivity() {
             }
 
             txtName.setText(currentMove.name)
-            txtDesc.setText(currentMove.description)
             txtType.setText(currentMove.type)
             txtBodypart.setText(currentMove.bodypart)
             txtEquipment.setText(currentMove.equipment)
