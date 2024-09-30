@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +35,17 @@ class fragment_workout_process : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_workout_process, container, false)
+        val view = inflater.inflate(R.layout.fragment_workout_process, container, false)
+
+        val lblSteps: TextView = view.findViewById(R.id.WP_txtSteps)
+        val lblCalories: TextView = view.findViewById(R.id.WP_txtCalories)
+        val lblStreak: TextView = view.findViewById(R.id.WP_txtStreak)
+        val lblGym: TextView = view.findViewById(R.id.WP_txtToLet)
+
+        lblSteps.setText(nutritionViewModel.steps.toString())
+        lblCalories.setText((nutritionViewModel.calorieWallet - nutritionViewModel.CalculateTotalCalories()).toString())
+
+        return view
     }
 
     companion object {

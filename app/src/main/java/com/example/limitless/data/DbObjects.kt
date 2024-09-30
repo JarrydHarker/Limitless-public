@@ -293,7 +293,9 @@ class Strength(
 
 class MealFood(
     var mealId: Int = 0,
-    var foodId: Int = 0
+    var foodId: Int = 0,
+    var date: LocalDate,
+    var userId: String = ""
 ){
 
 }
