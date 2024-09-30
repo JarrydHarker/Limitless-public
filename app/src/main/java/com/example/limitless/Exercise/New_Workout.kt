@@ -81,6 +81,7 @@ class New_Workout : AppCompatActivity() {
 
         btnCreateExercise.setOnClickListener {
             ShowDialog(){
+                newWorkoutAdapter.clear()
                 for(we in workoutExercises){
                     newWorkoutAdapter.add(we.toString())
                 }
