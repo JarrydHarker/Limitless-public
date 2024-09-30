@@ -313,6 +313,7 @@ private fun handleFailure(type: String, e: GetCredentialException) {
                                     currentUser!!.currentDay = day
                                 }
                             }
+
                             onComplete(false)
                         }else{//Sign Up from SSO
                             currentUser = User(name = gId.givenName.toString(), surname = gId.familyName.toString(), email = gId.id)
