@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.limitless.currentUser
 import com.example.limitless.data.DbAccess
+import com.example.limitless.data.Food
 import com.example.limitless.data.Meal
 import com.example.limitless.data.MealFood
 import com.example.limitless.data.Ratios
@@ -12,7 +13,7 @@ import com.example.limitless.data.dbAccess
 import com.example.limitless.nutritionViewModel
 import java.time.LocalDate
 
-class NutritionViewModel(val currentDate: LocalDate , var calorieWallet: Double, var ratio: Ratios): ViewModel() {
+class NutritionViewModel(val currentDate: LocalDate = LocalDate.now() , var calorieWallet: Double = 2000.0, var ratio: Ratios = Ratios()): ViewModel() {
 
     val weight: Double? = null
     val water: Double = 0.0
@@ -144,5 +145,11 @@ class NutritionViewModel(val currentDate: LocalDate , var calorieWallet: Double,
         proteinWallet = calorieWallet*ratio.protein
         fibreWallet = calorieWallet*ratio.fibre
         fatWallet = calorieWallet*ratio.fat
+    }
+
+    fun GetMealFoods(mealId: Int, onComplete: (List<Food>) -> Unit) {
+        dbAccess.GetFoodsByMeal(mealId){ foods ->
+            onComplete(foods)
+        }
     }
 }
