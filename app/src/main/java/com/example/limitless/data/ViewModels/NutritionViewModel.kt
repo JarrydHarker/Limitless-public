@@ -36,8 +36,6 @@ class NutritionViewModel(val currentDate: LocalDate = LocalDate.now() , var calo
             }
         }
 
-
-
         // Add the meal to the calorie counter's meal list
         arrMeals.add(meal)
     }

@@ -1277,6 +1277,52 @@ class DbAccess private constructor(){
         return meals // Return the list of users (could be empty if request fails)
     }
 
+    fun GetExercisesByWorkoutId(workoutId: Int?, onComplete: (List<Exercise>) -> Unit) {
+        val executor = Executors.newSingleThreadExecutor()
+        var exercises: List<Exercise> = emptyList()
+
+        executor.execute {
+            try {
+                // Construct the URL for the GET request
+                val url = URL(apiUrl + epExercise + "/Workout?workoutId=$workoutId") // Assuming the endpoint is something like /users
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to GET
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val gson = GsonBuilder()
+                            .registerTypeAdapter(LocalDate::class.java, LocalDateSerializer())  // Register LocalDate serializer
+                            .registerTypeAdapter(LocalDate::class.java, LocalDateDeserializer())
+                            .create()
+
+                        // Deserialize the JSON array into a List<User>
+                        exercises = gson.fromJson(jsonResponse, Array<Exercise>::class.java).toList()
+                    }
+                } else {
+                    // Handle error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("GetAllWorkoutError", reader.readText())
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetAllWorkoutError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+
+            Handler(Looper.getMainLooper()).post {
+                onComplete(exercises)
+            }
+        }
+    }
+
     fun GetUserWorkouts(userId: String, onComplete: (List<Workout>) -> Unit) {
         val executor = Executors.newSingleThreadExecutor()
         var workout: List<Workout> = emptyList()
@@ -1318,7 +1364,6 @@ class DbAccess private constructor(){
             }
 
             Handler(Looper.getMainLooper()).post {
-                Log.d("Fuck", "Num Workouts: ${workout.size}")
                 onComplete(workout)
             }
         }
@@ -1363,7 +1408,9 @@ class DbAccess private constructor(){
                 Log.e("GetAllWorkoutError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
-            onComplete(workout)
+            Handler(Looper.getMainLooper()).post {
+                onComplete(workout)
+            }
         }
     }
 
