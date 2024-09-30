@@ -61,7 +61,7 @@ class Log_Meal : AppCompatActivity() {
         val spinMeals: AutoCompleteTextView = findViewById(R.id.spinPrevFoods_LM)
         var meal = Meal()
         val Back: ImageView = findViewById(R.id.LM_ivBack)
-        val prevMeals: MutableList<Meal> = mutableListOf()
+        var prevMeals: MutableList<Meal> = mutableListOf()
 
         Back.setOnClickListener{
             val intent = Intent(this, MealTracker::class.java)
@@ -72,7 +72,8 @@ class Log_Meal : AppCompatActivity() {
             dbAccess.GetUserMeals(currentUser?.userId!!) { meals ->
                 val mealsAdapter = ArrayAdapter<String>(this@Log_Meal, android.R.layout.simple_list_item_1)
 
-                Log.d("Fuck", "Meals adapter:${meals.size}")
+                prevMeals.addAll(meals)
+
                 for (meal in meals) {
                     mealsAdapter.add(meal.name)
                 }
@@ -86,11 +87,20 @@ class Log_Meal : AppCompatActivity() {
         spinMeals.setOnItemClickListener { adapterView: AdapterView<*>, view2: View, i: Int, l: Long ->
             meal = prevMeals[i]
 
-            mealListAdapter.clear()
-            for (food in meal.arrFoods) {
-                mealListAdapter.add(food.toString())
-            }
-            mealListAdapter.notifyDataSetChanged()
+                val mealsAdapter =
+                    ArrayAdapter<String>(this@Log_Meal, android.R.layout.simple_list_item_1)
+
+                nutritionViewModel.GetMealFoods(meal.mealId!!) { foods ->
+                    Log.d("Fuck", "Num Foods: ${foods.size}")
+                    meal.arrFoods.addAll(foods)
+
+                    for (food in meal.arrFoods) {
+                        mealsAdapter.add(food.description)
+                    }
+                    mealsAdapter.notifyDataSetChanged()
+                    listView.adapter = mealsAdapter
+                }
+
         }
 
         spinMeals.setOnClickListener{
@@ -120,6 +130,9 @@ class Log_Meal : AppCompatActivity() {
         }
 
         btnCreateMeal.setOnClickListener {
+            mealFoods.clear()
+            mealListAdapter.clear()
+            listView.adapter = mealListAdapter
             showDialog(mealFoods)
         }
     }
@@ -204,6 +217,7 @@ class Log_Meal : AppCompatActivity() {
         }
 
         add.setOnClickListener {
+            mealListAdapter.clear()
             val name = txtMealName.text.toString()
 
             if(name.isNotEmpty()){
