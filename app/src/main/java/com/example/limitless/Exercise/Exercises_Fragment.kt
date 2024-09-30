@@ -121,16 +121,20 @@ class Exercises_Fragment : Fragment() {
         btnCreate.setOnClickListener {
             val name = txtName.text.toString()
 
-            if(name.isEmpty()){
-                Toast.makeText(requireActivity(), "Please enter a workout name to continue", Toast.LENGTH_SHORT).show()
-            }
+            if(name.isNotEmpty()) {
+                val workout = Workout(null, LocalDate.now(), name, currentUser!!.userId)
 
-            val workout = Workout(null, LocalDate.now(), name, currentUser!!.userId)
-
-            activityViewModel.AddWorkout(workout){ id ->
-                val intent = Intent(requireActivity(), New_Workout::class.java)
-                intent.putExtra("workoutId", id)
-                startActivity(intent)
+                activityViewModel.AddWorkout(workout) { id ->
+                    val intent = Intent(requireActivity(), New_Workout::class.java)
+                    intent.putExtra("workoutId", id)
+                    startActivity(intent)
+                }
+            }else{
+                Toast.makeText(
+                    requireActivity(),
+                    "Please enter a workout name to continue",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 

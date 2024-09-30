@@ -100,18 +100,23 @@ class Log_Meal : AppCompatActivity() {
         lblMealTitle.text = mealTitle
 
         btnLog.setOnClickListener {
-            // Create a new meal with the provided foods
-            meal.date = nutritionViewModel.currentDate
-            meal.arrFoods = mealFoods
-            meal.userId = currentUser?.userId
-            meal.name = mealname
 
-            if(meal.name.isNotEmpty()){
+            // Create a new meal with the provided foods
+            if(listView.adapter.count != 0){
+                meal.date = nutritionViewModel.currentDate
+                meal.arrFoods = mealFoods
+                meal.userId = currentUser?.userId
+                
+              if(meal.name.isNotEmpty()){
                 nutritionViewModel.CreateMeal(meal)
+              }
+               
+                val intent = Intent(this, Diet_Activity::class.java)
+                startActivity(intent)
+            }else{
+                Toast.makeText(this, "Please add food to the meal!", Toast.LENGTH_SHORT).show()
             }
 
-            val intent = Intent(this, Diet_Activity::class.java)
-            startActivity(intent)
         }
 
         btnCreateMeal.setOnClickListener {
@@ -210,15 +215,16 @@ class Log_Meal : AppCompatActivity() {
 
             var mealDescription: String
 
-            for(food in mealFoods){
-                mealDescription = "${mealFoods.indexOf(food) + 1}. ${food.description}: ${food.calories} kcal"
-                mealListAdapter.add(mealDescription)
+            if(txtMealName.text.isNotEmpty() && txtFoodSearch.text.isNotEmpty()){
+                for(food in mealFoods){
+                    mealDescription = "${mealFoods.indexOf(food) + 1}. ${food.description}: ${food.calories} kcal"
+                    mealListAdapter.add(mealDescription)
+                }
+                mealListAdapter.notifyDataSetChanged()
+                dialog.dismiss()
+            }else{
+                Toast.makeText(this, "Please enter meal name and food!!", Toast.LENGTH_SHORT).show()
             }
-
-
-
-            mealListAdapter.notifyDataSetChanged()
-            dialog.dismiss()
         }
     }
 }
