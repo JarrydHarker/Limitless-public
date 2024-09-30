@@ -36,6 +36,9 @@ class Log_Exercise : AppCompatActivity() {
 
         val btnRestTimer = findViewById<Button>(R.id.btnRestTimer_LE)
         val lvExercises: ListView = findViewById(R.id.listSets_LE)
+        val btnAddSet = findViewById<Button>(R.id.btnAddSet_LE)
+        val btnLogSet = findViewById<Button>(R.id.btnLogSet_LE)
+
         val workoutId = intent.getIntExtra("workoutId", -1)
         val currentWorkout = activityViewModel.GetWorkout(workoutId)
 
@@ -54,7 +57,20 @@ class Log_Exercise : AppCompatActivity() {
 
             val exerciseAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, exerciseDetails)
             lvExercises.adapter = exerciseAdapter
+
+            btnLogSet.setOnClickListener {
+                if (exerciseAdapter.count > 0) {
+                    // Remove the first item from the arrExercises list
+                    currentWorkout.arrExercises.removeAt(0)
+                    // Remove the first item from the adapter
+                    exerciseAdapter.remove(exerciseAdapter.getItem(0))
+                    exerciseAdapter.notifyDataSetChanged()
+                } else {
+                    Toast.makeText(this, "No exercises to remove", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
+
 
 
 
