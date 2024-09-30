@@ -236,6 +236,8 @@ class DbAccess private constructor(){
                 Log.e("DbAccessError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
+            Log.d("Fuck", "Bruh: $responseMessage")
+
             onComplete(responseMessage)
         }
     }
