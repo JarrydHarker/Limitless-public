@@ -52,8 +52,11 @@ class ActivityViewModel(val currentDate: LocalDate) {
         for(exercise in currentWorkout.arrExercises){
             exercise.workoutId = currentWorkout.workoutId!!
             dbAccess.CreateExercise(exercise){ response ->
+                Log.d("Fuck", "${exercise.strength?.sets}")
                 if(exercise.strength != null){
-                    dbAccess.CreateStrength(exercise.strength!!)
+                    dbAccess.CreateStrength(exercise.strength!!){ response ->
+                        Log.d("Fuck", response)
+                    }
                 }
 
                 if(exercise.cardio != null){
