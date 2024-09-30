@@ -13,28 +13,26 @@ import java.time.LocalDate
 
 class NutritionViewModel(val currentDate: LocalDate , var calorieWallet: Double, var ratio: Ratios): ViewModel() {
 
+    val weight: Double? = null
+    val water: Double = 0.0
+    var steps: Int = 0
     var carbWallet = calorieWallet*ratio.carbs
     var proteinWallet = calorieWallet*ratio.protein
     var fibreWallet = calorieWallet*ratio.fibre
     var fatWallet = calorieWallet*ratio.fat
 
-    var arrMeals: MutableList<Meal>? = null
+    var arrMeals: MutableList<Meal> = mutableListOf()
 
     fun CreateMeal(meal: Meal) {
         dbAccess.CreateMeal(meal)
 
         // Add the meal to the calorie counter's meal list
-        if (arrMeals == null) {
-            arrMeals = mutableListOf(meal)
-            Log.d("Food", "Number of meals: ${arrMeals?.count()}")
-        }else{
-            arrMeals?.add(meal)
-        }
+        arrMeals.add(meal)
     }
 
     fun LoadUserData(){
         arrMeals = mutableListOf()
-        arrMeals!!.addAll(dbAccess.GetUserMealsByDate(currentUser!!.userId, currentDate))
+        arrMeals.addAll(dbAccess.GetUserMealsByDate(currentUser!!.userId, currentDate))
     }
 
     fun ChangeWallet(newWallet: Double){
@@ -44,18 +42,16 @@ class NutritionViewModel(val currentDate: LocalDate , var calorieWallet: Double,
     fun CalculateTotalCalories(): Double{
         var totalCalories = 0.0
 
-        if(arrMeals != null){
-            Log.d("Food", "arrMeals is not null")
-            for(meal in arrMeals!!){
-                var mealCalories = 0.0
+        Log.d("Food", "arrMeals is not null")
+        for(meal in arrMeals){
+            var mealCalories = 0.0
 
-                for(food in meal.arrFoods){
-                    mealCalories += food.calories
-                    Log.d("Food", "${food.description}|${food.calories}")
-                }
-
-                totalCalories += mealCalories
+            for(food in meal.arrFoods){
+                mealCalories += food.calories
+                Log.d("Food", "${food.description}|${food.calories}")
             }
+
+            totalCalories += mealCalories
         }
 
         return totalCalories
@@ -64,16 +60,14 @@ class NutritionViewModel(val currentDate: LocalDate , var calorieWallet: Double,
     fun GetTotalCarbs(): Double{
         var totalCarbs = 0.0
 
-        if(arrMeals != null){
-            for(meal in arrMeals!!){
-                var mealCarbs = 0.0
+        for(meal in arrMeals){
+            var mealCarbs = 0.0
 
-                for(food in meal.arrFoods){
-                    mealCarbs += food.carbohydrates!!
-                }
-
-                totalCarbs += mealCarbs
+            for(food in meal.arrFoods){
+                mealCarbs += food.carbohydrates!!
             }
+
+            totalCarbs += mealCarbs
         }
 
         return totalCarbs
@@ -82,16 +76,14 @@ class NutritionViewModel(val currentDate: LocalDate , var calorieWallet: Double,
     fun GetTotalFat(): Double {
         var totalFats = 0.0
 
-        if (arrMeals != null) {
-            for (meal in arrMeals!!) {
-                var mealFats = 0.0
+        for (meal in arrMeals) {
+            var mealFats = 0.0
 
-                for (food in meal.arrFoods) {
-                    mealFats += food.fat!!
-                }
-
-                totalFats += mealFats
+            for (food in meal.arrFoods) {
+                mealFats += food.fat!!
             }
+
+            totalFats += mealFats
         }
 
         return totalFats
@@ -100,16 +92,14 @@ class NutritionViewModel(val currentDate: LocalDate , var calorieWallet: Double,
     fun GetTotalProtein(): Double {
         var totalProteins = 0.0
 
-        if (arrMeals != null) {
-            for (meal in arrMeals!!) {
-                var mealProteins = 0.0
+        for (meal in arrMeals) {
+            var mealProteins = 0.0
 
-                for (food in meal.arrFoods) {
-                    mealProteins += food.protein!!
-                }
-
-                totalProteins += mealProteins
+            for (food in meal.arrFoods) {
+                mealProteins += food.protein!!
             }
+
+            totalProteins += mealProteins
         }
 
         return totalProteins
@@ -118,16 +108,14 @@ class NutritionViewModel(val currentDate: LocalDate , var calorieWallet: Double,
     fun GetTotalFibre(): Double {
         var totalFibre = 0.0
 
-        if (arrMeals != null) {
-            for (meal in arrMeals!!) {
-                var mealFibre = 0.0
+        for (meal in arrMeals) {
+            var mealFibre = 0.0
 
-                for (food in meal.arrFoods) {
-                    mealFibre += food.fibre!!
-                }
-
-                totalFibre += mealFibre
+            for (food in meal.arrFoods) {
+                mealFibre += food.fibre!!
             }
+
+            totalFibre += mealFibre
         }
 
         return totalFibre

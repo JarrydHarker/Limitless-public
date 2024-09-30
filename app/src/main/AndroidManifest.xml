@@ -58,7 +58,7 @@
             android:foregroundServiceType="health" />
 
         <receiver
-            android:name=".data.StepResetReceiver"
+            android:name=".data.ResetReceiver"
             android:exported="true"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED" />
 

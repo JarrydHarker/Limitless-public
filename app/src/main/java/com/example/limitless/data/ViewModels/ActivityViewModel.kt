@@ -8,17 +8,20 @@ import com.example.limitless.data.dbAccess
 import java.time.LocalDate
 
 class ActivityViewModel(val currentDate: LocalDate) {
-    var arrWorkouts: MutableList<Workout>? = null
+    var arrWorkouts: MutableList<Workout> = mutableListOf()
     var steps = 0
     var db = DbAccess.GetInstance()
 
-    fun AddWorkout(workout: Workout) {
-        db.CreateWorkout(workout)
 
-        if (arrWorkouts == null) {
-            arrWorkouts = mutableListOf(workout)
-        }else{
-            arrWorkouts?.add(workout)
+    fun AddWorkout(workout: Workout, onComplete: (Int?) -> Unit) {
+        dbAccess.CreateWorkout(workout){ response ->
+            dbAccess.GetWorkoutByName(workout.name!!, currentDate){ dbWorkout->
+                workout.workoutId = dbWorkout?.workoutId
+
+                arrWorkouts.add(workout)
+
+                onComplete(workout.workoutId)
+            }
         }
     }
 
@@ -28,6 +31,20 @@ class ActivityViewModel(val currentDate: LocalDate) {
 
     fun LoadUserData() {
         arrWorkouts = mutableListOf()
-        arrWorkouts!!.addAll(dbAccess.GetUserWorkoutsByDate(currentUser?.userId!!, currentDate))
+
+        dbAccess.GetUserWorkoutsByDate(currentUser?.userId!!, currentDate){workouts ->
+            arrWorkouts.addAll(workouts)
+        }
+
+    }
+
+    fun GetWorkout(workoutId: Int): Workout? {
+        for(workout in arrWorkouts){
+            if(workout.workoutId == workoutId){
+                return workout
+            }
+        }
+
+        return null
     }
 }

@@ -69,6 +69,8 @@ class User_WeightGoal : AppCompatActivity() {
                 nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
                 activityViewModel = ActivityViewModel(LocalDate.now())
 
+                currentUser?.CreateDay()
+
                 val intent = Intent(this, User_DailySteps::class.java)
                 startActivity(intent)
             }
