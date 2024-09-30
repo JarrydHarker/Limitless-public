@@ -51,9 +51,9 @@ class BarGraphic @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        Log.d("BarGraphic", "onDraw called with type: $type")
+
         if (type == 0) {
-            Log.d("BarGraphic", "onDraw called with width: $width, height: $height")
+
             drawExpBar(canvas)
         } else if (type == 1) {
             drawBarChart(canvas)
@@ -212,7 +212,7 @@ class BarGraphic @JvmOverloads constructor(
     }
 
     private fun drawExpBar(canvas: Canvas){
-                val endX = (progress/goal)*width
+        val endX = (progress/goal)*width
         val topY = (height/2) + barHeight
         val bottomY = (height/2) - barHeight
 
@@ -220,7 +220,7 @@ class BarGraphic @JvmOverloads constructor(
         paint.color = Color.LTGRAY
         canvas.drawRoundRect(endX - 20f, topY, width - 20f, bottomY, 15f, 15f, paint)
 
-        paint.color = Color.GREEN
+        paint.color = Color.BLUE
         canvas.drawRoundRect(20f, topY, endX, bottomY,15f, 15f, paint)
 
         if(level != 0) {
