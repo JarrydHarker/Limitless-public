@@ -12,7 +12,8 @@
         android:layout_height="149dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/statsbox"
+        android:background="@drawable/box"
+        android:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.548"
@@ -86,19 +87,21 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout7"
-            android:layout_width="165dp"
+            android:layout_width="151dp"
             android:layout_height="86dp"
-            android:background="@drawable/statsbox"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/box"
+            android:elevation="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/constraintLayout8"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.768">
+            app:layout_constraintVertical_bias="0.762">
 
             <LinearLayout
                 android:id="@+id/linearLayout6"
-                android:layout_width="100dp"
+                android:layout_width="85dp"
                 android:layout_height="75dp"
                 android:layout_marginTop="4dp"
                 android:orientation="vertical"
@@ -121,23 +124,25 @@
                     android:text="-" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/fatsIMG"
+            <com.example.limitless.data.Graphics.CircleGraphic
+                android:id="@+id/cgFats"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:paddingLeft="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/linearLayout6"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout8"
-            android:layout_width="165dp"
+            android:layout_width="151dp"
             android:layout_height="83dp"
-            android:background="@drawable/statsbox"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/box"
+            android:elevation="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -147,7 +152,7 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout5"
-                android:layout_width="100dp"
+                android:layout_width="85dp"
                 android:layout_height="72dp"
                 android:layout_marginTop="4dp"
                 android:orientation="vertical"
@@ -170,24 +175,26 @@
                     android:text="-" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/carbIMG"
+            <com.example.limitless.data.Graphics.CircleGraphic
+                android:id="@+id/cgCarbs"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:paddingLeft="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.454"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintVertical_bias="0.454" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/calorieCL"
-            android:layout_width="165dp"
+            android:layout_width="151dp"
             android:layout_height="82dp"
-            android:background="@drawable/statsbox"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/box"
+            android:elevation="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.005"
@@ -197,7 +204,7 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout4"
-                android:layout_width="100dp"
+                android:layout_width="85dp"
                 android:layout_height="72dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -219,23 +226,25 @@
                     android:text="-" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/CaloriesIMG"
+            <com.example.limitless.data.Graphics.CircleGraphic
+                android:id="@+id/cgFibre"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:paddingLeft="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.01"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ProteinCL"
-            android:layout_width="165dp"
+            android:layout_width="151dp"
             android:layout_height="84dp"
-            android:background="@drawable/statsbox"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/box"
+            android:elevation="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -244,7 +253,7 @@
             app:layout_constraintVertical_bias="0.186">
 
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="85dp"
                 android:layout_height="72dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -266,16 +275,16 @@
                     android:text="-" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/ProteinIMG"
+            <com.example.limitless.data.Graphics.CircleGraphic
+                android:id="@+id/cgProtein"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:paddingLeft="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
