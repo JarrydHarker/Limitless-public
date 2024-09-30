@@ -8,8 +8,8 @@ The Limitless Fitness App is a comprehensive mobile application designed to help
 
 - [Overview](#overview)
 - [Features](#features)
-- [Installation](#installation)
 - [Navigating the Menu](#navigating-the-menu)
+- [Automated Testing](#automated-testing)
 - [License](#license)
 
 
@@ -61,6 +61,9 @@ Specify the target period (e.g., weeks or months).
 
 3. **Follow the Prompts**: Each page provides prompts for interacting with the app. For example, in **Nutrition**, Click the add meal and fill in the form with your food details and submit.
 
+
+## Automated Testing
+We use GitHub Actions for automated testing and continuous integration. Our workflow automatically runs tests on every push or pull request to ensure that changes do not break the existing functionality.
 
 ## License
 
