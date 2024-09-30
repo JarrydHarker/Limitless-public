@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.SeekBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +34,8 @@ class Goal_page : AppCompatActivity() {
         val lblWeightGoal = findViewById<TextView>(R.id.lblGoalWeight_GP)
         val lblCalorieGoal = findViewById<TextView>(R.id.lblGoalCalorie_GP)
         val Back: ImageView = findViewById(R.id.GP_ivBack)
+        checker(lblStepGoal, lblWeightGoal, lblCalorieGoal)
+
 
         Back.setOnClickListener{
             val intent = Intent(this, Settings::class.java)
@@ -40,29 +43,43 @@ class Goal_page : AppCompatActivity() {
         }
 
         lblStepGoal.setOnClickListener {
-            showStepDialog()
+            showStepDialog(lblStepGoal)
         }
 
         lblWeightGoal.setOnClickListener {
-            showWeightDialog()
+            showWeightDialog(lblWeightGoal)
         }
 
         lblCalorieGoal.setOnClickListener {
-           Goals()
+            if(lblCalorieGoal.text != "Click to Add"){
+                Goals(lblCalorieGoal)
+            }else{
+                Toast.makeText(this, "Please enter a weight goal first", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
 
 
-    fun showStepDialog() {
+    fun showStepDialog(lblStepGoal:TextView) {
         val builder = AlertDialog.Builder(this@Goal_page)
         val inflater = layoutInflater
         val dialogView = inflater.inflate(R.layout.step_goal_dialog, null)
         builder.setView(dialogView)
 
+        val txtSteps = dialogView.findViewById<TextView>(R.id.txtStepGoal_SD)
+
         builder.setPositiveButton("Confirm") { dialog, _ ->
-            // Handle confirm button click
-            dialog.dismiss()
+            val txtStepsText: String = txtSteps.text.toString()
+            val steps: Int = txtStepsText.toIntOrNull() ?: 0
+
+            if (txtSteps.text.isNotEmpty()) {
+                currentUser!!.SetStepGoal(steps)
+                lblStepGoal.text = currentUser!!.GetStepGoal().toString()
+                dialog.dismiss()
+            } else {
+                Toast.makeText(this, "Please enter step goal!", Toast.LENGTH_SHORT).show()
+            }
         }
 
         builder.setNegativeButton("Close") { dialog, _ ->
@@ -77,14 +94,19 @@ class Goal_page : AppCompatActivity() {
     }
 
 
-    fun showWeightDialog() {
+    fun showWeightDialog(lblWeightGoal: TextView) {
         val builder = AlertDialog.Builder(this@Goal_page)
         val inflater = layoutInflater
         val dialogView = inflater.inflate(R.layout.weight_goal_dialog, null)
         builder.setView(dialogView)
 
+        val txtWeightView: TextView = dialogView.findViewById(R.id.txtWeightGoal_WD)
+
         builder.setPositiveButton("Confirm") { dialog, _ ->
-            // Handle confirm button click
+            val txtWeightText: String = txtWeightView.text.toString()
+            val txtWeight: Double = txtWeightText.toDoubleOrNull() ?: 0.0
+            currentUser!!.SetWeightGoal(txtWeight)
+            lblWeightGoal.text = currentUser!!.GetWeightGoal().toString()
             dialog.dismiss()
         }
 
@@ -100,14 +122,19 @@ class Goal_page : AppCompatActivity() {
     }
 
 
-    fun showCalorieDialog() {
+    fun showCalorieDialog(lblCalorieGoal: TextView) {
         val builder = AlertDialog.Builder(this@Goal_page)
         val inflater = layoutInflater
         val dialogView = inflater.inflate(R.layout.calorie_goal_dialog, null)
         builder.setView(dialogView)
+        val txtCalorie = dialogView.findViewById<TextView>(R.id.txtCalorie_CD)
+
 
         builder.setPositiveButton("Confirm") { dialog, _ ->
-            // Handle confirm button click
+            val txtCalorieText: String = txtCalorie.text.toString()
+            val calories: Double = txtCalorieText.toDoubleOrNull() ?: 0.0
+            currentUser!!.SetCalorieWallet(calories)
+            lblCalorieGoal.text = currentUser!!.GetCalorieWallet().toString()
             dialog.dismiss()
         }
 
@@ -123,7 +150,7 @@ class Goal_page : AppCompatActivity() {
     }
 
 
-    private fun Goals(){
+    private fun Goals(lblCalorieGoal: TextView){
         // Inflate the custom layout
         val inflater = layoutInflater
         val dialogView = inflater.inflate(R.layout.layout_set_goal, null)
@@ -149,7 +176,7 @@ class Goal_page : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setView(dialogView) // Set the custom view
             .setPositiveButton("Confirm") { dialog, which ->
-                showCalorieDialog()
+                showCalorieDialog(lblCalorieGoal)
             }
             .setNegativeButton("Cancel") { dialog, which ->
                 dialog.dismiss()
@@ -157,6 +184,18 @@ class Goal_page : AppCompatActivity() {
             }
             .create()
             .show()
+    }
+
+    fun checker(lblStepGoal: TextView, lblWeightGoal: TextView, lblCalorieGoal: TextView){
+        if(currentUser!!.GetStepGoal() != 0){
+            lblStepGoal.text = currentUser!!.GetStepGoal().toString()
+        }
+        if(currentUser!!.GetWeightGoal() != 0.0){
+            lblWeightGoal.text = currentUser!!.GetWeightGoal().toString()
+        }
+        if(currentUser!!.GetCalorieWallet() != 0.0){
+            lblCalorieGoal.text = currentUser!!.GetCalorieWallet().toString()
+        }
     }
 
 
