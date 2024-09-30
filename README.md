@@ -4,6 +4,16 @@
 
 The Limitless Fitness App is a comprehensive mobile application designed to help users track their fitness progress, set goals, and monitor nutrition intake. This Android app provides a range of features to support users in their fitness journey, including calorie counting, personalized goal setting, and exercise tracking.
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
+- [Navigating the Menu](#navigating-the-menu)
+- [License](#license)
+
+
+
 ## Features
 
 - **Calorie Counter**: Track daily calorie intake by scanning barcodes, searching for food, or adding custom meals.
@@ -36,4 +46,40 @@ Navigate to the Add Food section to input custom food items along with their nut
 On the first launch or within the Goals section, set your desired fitness goals:
 Choose between Weight Loss or Weight Gain.
 Specify the target period (e.g., weeks or months).
+
+## Installation
+
+1. **Clone the Repository**:
+    ```bash
+    git clone https://github.com/VCNMB/vcnmb-opsc-2024-poe-limitless.git
+    ```
+
+2. **Install Dependencies**:
+    ```bash
+    dotnet restore
+    ```
+
+3. **Run the Application**:
+    ```bash
+    dotnet run
+    ```
+
+
+## Navigating the Menu
+
+1. **Home Page**: 
+    - Upon launching the app, you'll be taken to the **Login** page, where you can login in and access the main features of the application.
+    
+2. **Menu Items**:
+    - **Home**: This page will show all the basic features of tracking the user stats.
+    - **Nutrition**: This page is where you can add food to track calories.
+    - **Exercise**: This page is where you can add Exercises to track your exercise routine.
+    - **Settings**: The settings page is where the all the settings of the app are show and where users can personalize the app byu setting goals and light/dark mode.
+
+3. **Follow the Prompts**: Each page provides prompts for interacting with the app. For example, in **Nutrition**, Click the add meal and fill in the form with your food details and submit.
+
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
