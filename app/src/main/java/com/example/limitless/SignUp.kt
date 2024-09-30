@@ -74,7 +74,7 @@ class SignUp : AppCompatActivity() {
             currentUser?.email = email
             currentUser?.password = password
 
-            val intent = Intent(this, User_Details::class.java)
+            val intent = Intent(this, User_Password::class.java)
             startActivity(intent)
         }
     }
