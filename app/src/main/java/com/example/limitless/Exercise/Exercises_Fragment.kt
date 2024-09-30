@@ -21,6 +21,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import com.example.limitless.Exercise_Summary
 import com.example.limitless.R
 import com.example.limitless.activityViewModel
 import com.example.limitless.currentUser
@@ -79,6 +80,11 @@ class Exercises_Fragment : Fragment() {
             lvWorkouts.adapter = workoutAdapter
         }
 
+        lvWorkouts.setOnItemClickListener { parent, view, position, id ->
+            val intent = Intent(requireActivity(), Exercise_Summary::class.java)
+            startActivity(intent)
+        }
+
         val ttb = AnimationUtils.loadAnimation(view.context, R.anim.ttb)
         val stb = AnimationUtils.loadAnimation(view.context, R.anim.stb)
         val btt = AnimationUtils.loadAnimation(view.context, R.anim.btt)
@@ -121,16 +127,20 @@ class Exercises_Fragment : Fragment() {
         btnCreate.setOnClickListener {
             val name = txtName.text.toString()
 
-            if(name.isEmpty()){
-                Toast.makeText(requireActivity(), "Please enter a workout name to continue", Toast.LENGTH_SHORT).show()
-            }
+            if(name.isNotEmpty()) {
+                val workout = Workout(null, LocalDate.now(), name, currentUser!!.userId)
 
-            val workout = Workout(null, LocalDate.now(), name, currentUser!!.userId)
-
-            activityViewModel.AddWorkout(workout){ id ->
-                val intent = Intent(requireActivity(), New_Workout::class.java)
-                intent.putExtra("workoutId", id)
-                startActivity(intent)
+                activityViewModel.AddWorkout(workout) { id ->
+                    val intent = Intent(requireActivity(), New_Workout::class.java)
+                    intent.putExtra("workoutId", id)
+                    startActivity(intent)
+                }
+            }else{
+                Toast.makeText(
+                    requireActivity(),
+                    "Please enter a workout name to continue",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
