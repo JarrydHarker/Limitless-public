@@ -2,6 +2,7 @@ package com.example.limitless
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
@@ -12,6 +13,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.limitless.data.User
 
 class User_Password : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +42,7 @@ class User_Password : AppCompatActivity() {
         Next.setOnClickListener{
             val pw = Password.text.toString()
             if(pw.isNotEmpty()){
+                currentUser = User()
                 currentUser?.password = pw
 
                 val intent = Intent(this, User_Details::class.java)
