@@ -62,7 +62,8 @@ class User(
         currentDay.activeTime = 0 //TODO Implement active time
         currentDay.weight = nutritionViewModel.weight
 
-        dbAccess.CreateDay(currentDay)
+        dbAccess.CreateDay(currentDay){response ->
+        }
     }
 
     fun SetHeight(height: Double){
@@ -224,6 +225,7 @@ class Workout(
     var workoutId: Int? = 0,
     var date: LocalDate,  // Use String or LocalDate depending on your needs
     var name: String? = "",
+    var userId: String = ""
 ){
     var arrExercises: MutableList<Exercise> = mutableListOf()
 

@@ -125,10 +125,9 @@ class Exercises_Fragment : Fragment() {
                 Toast.makeText(requireActivity(), "Please enter a workout name to continue", Toast.LENGTH_SHORT).show()
             }
 
-            val workout = Workout(null, LocalDate.now(), name)
+            val workout = Workout(null, LocalDate.now(), name, currentUser!!.userId)
 
             activityViewModel.AddWorkout(workout){ id ->
-                Log.d("Fuck", id.toString())
                 val intent = Intent(requireActivity(), New_Workout::class.java)
                 intent.putExtra("workoutId", id)
                 startActivity(intent)

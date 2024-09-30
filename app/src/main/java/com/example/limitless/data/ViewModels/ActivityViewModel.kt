@@ -17,7 +17,7 @@ class ActivityViewModel(val currentDate: LocalDate) {
         dbAccess.CreateWorkout(workout){ response ->
             dbAccess.GetWorkoutByName(workout.name!!, currentDate){ dbWorkout->
                 workout.workoutId = dbWorkout?.workoutId
-
+                Log.d("Fuck", "Workout ID: ${workout.workoutId.toString()}")
                 arrWorkouts.add(workout)
 
                 onComplete(workout.workoutId)

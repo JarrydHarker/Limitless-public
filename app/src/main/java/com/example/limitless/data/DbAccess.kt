@@ -4,13 +4,22 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonDeserializationContext
+import com.google.gson.JsonDeserializer
+import com.google.gson.JsonElement
+import com.google.gson.JsonPrimitive
+import com.google.gson.JsonSerializationContext
+import com.google.gson.JsonSerializer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
+import java.lang.reflect.Type
 import java.net.HttpURLConnection
 import java.net.URL
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.concurrent.Executors
 
 
@@ -136,7 +145,7 @@ class DbAccess private constructor(){
         return responseMessage
     }
 
-    fun CreateDay(day: Day): String {
+    fun CreateDay(day: Day, onComplete: (String) -> Unit) {
         val executor = Executors.newSingleThreadExecutor()
 
         var responseMessage = ""
@@ -151,7 +160,11 @@ class DbAccess private constructor(){
                 connection.doOutput = true
 
                 // Serialize user object to JSON using Gson
-                val gson = Gson()
+                val gson = GsonBuilder()
+                    .registerTypeAdapter(LocalDate::class.java, LocalDateSerializer())  // Register LocalDate serializer
+                    .registerTypeAdapter(LocalDate::class.java, LocalDateDeserializer())
+                    .create()
+
                 val jsonInputString = gson.toJson(day)
 
                 // Write the JSON data to the output stream
@@ -178,9 +191,8 @@ class DbAccess private constructor(){
                 Log.e("DbAccessError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
+            onComplete(responseMessage)
         }
-
-        return responseMessage
     }
 
     fun CreateExercise(exercise: Exercise): String {
@@ -480,7 +492,11 @@ class DbAccess private constructor(){
                 connection.doOutput = true
 
                 // Serialize user object to JSON using Gson
-                val gson = Gson()
+                val gson = GsonBuilder()
+                    .registerTypeAdapter(LocalDate::class.java, LocalDateSerializer())  // Register LocalDate serializer
+                    .registerTypeAdapter(LocalDate::class.java, LocalDateDeserializer())
+                    .create()
+
                 val jsonInputString = gson.toJson(workout)
 
                 // Write the JSON data to the output stream
@@ -507,6 +523,7 @@ class DbAccess private constructor(){
                 Log.e("DbAccessError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
+            Log.d("Fuck", responseMessage)
             onComplete(responseMessage)
         }
     }
@@ -1135,7 +1152,10 @@ class DbAccess private constructor(){
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     InputStreamReader(connection.inputStream).use { reader ->
                         val jsonResponse = reader.readText() // Read the server's JSON response
-                        val gson = Gson()
+                        val gson = GsonBuilder()
+                            .registerTypeAdapter(LocalDate::class.java, LocalDateSerializer())  // Register LocalDate serializer
+                            .registerTypeAdapter(LocalDate::class.java, LocalDateDeserializer())
+                            .create()
 
                         // Deserialize the JSON array into a List<User>
                         meals = gson.fromJson(jsonResponse, Array<Meal>::class.java).toList()
@@ -1176,7 +1196,10 @@ class DbAccess private constructor(){
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     InputStreamReader(connection.inputStream).use { reader ->
                         val jsonResponse = reader.readText() // Read the server's JSON response
-                        val gson = Gson()
+                        val gson = GsonBuilder()
+                            .registerTypeAdapter(LocalDate::class.java, LocalDateSerializer())  // Register LocalDate serializer
+                            .registerTypeAdapter(LocalDate::class.java, LocalDateDeserializer())
+                            .create()
 
                         // Deserialize the JSON array into a List<User>
                         workout = gson.fromJson(jsonResponse, Array<Workout>::class.java).toList()
@@ -1207,7 +1230,7 @@ class DbAccess private constructor(){
         executor.execute {
             try {
                 // Construct the URL for the GET request
-                val url = URL(apiUrl + epWorkout + "/User?userId=$userId&date=$date") // Assuming the endpoint is something like /users
+                val url = URL(apiUrl + epWorkout + "/User?userId=$userId&date=${date.year}-${date.monthValue}-${date.dayOfMonth}") // Assuming the endpoint is something like /users
                 val connection = url.openConnection() as HttpURLConnection
 
                 // Set the request method to GET
@@ -1219,7 +1242,10 @@ class DbAccess private constructor(){
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     InputStreamReader(connection.inputStream).use { reader ->
                         val jsonResponse = reader.readText() // Read the server's JSON response
-                        val gson = Gson()
+                        val gson = GsonBuilder()
+                            .registerTypeAdapter(LocalDate::class.java, LocalDateSerializer())  // Register LocalDate serializer
+                            .registerTypeAdapter(LocalDate::class.java, LocalDateDeserializer())
+                            .create()
 
                         // Deserialize the JSON array into a List<User>
                         workout = gson.fromJson(jsonResponse, Array<Workout>::class.java).toList()
@@ -1240,14 +1266,14 @@ class DbAccess private constructor(){
         }
     }
 
-    fun GetWorkoutByName(userId: String, date: LocalDate, onComplete: (Workout?) -> Unit) {
+    fun GetWorkoutByName(name: String, date: LocalDate, onComplete: (Workout?) -> Unit) {
         val executor = Executors.newSingleThreadExecutor()
         var workout: Workout? = null
 
         executor.execute {
             try {
                 // Construct the URL for the GET request
-                val url = URL(apiUrl + epWorkout + "/User?userId=$userId&date=$date") // Assuming the endpoint is something like /users
+                val url = URL(apiUrl + epWorkout + "/Name?name=$name&date=${date.year}-${date.monthValue}-${date.dayOfMonth}") // Assuming the endpoint is something like /users
                 val connection = url.openConnection() as HttpURLConnection
 
                 // Set the request method to GET
@@ -1259,7 +1285,10 @@ class DbAccess private constructor(){
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     InputStreamReader(connection.inputStream).use { reader ->
                         val jsonResponse = reader.readText() // Read the server's JSON response
-                        val gson = Gson()
+                        val gson = GsonBuilder()
+                            .registerTypeAdapter(LocalDate::class.java, LocalDateSerializer())  // Register LocalDate serializer
+                            .registerTypeAdapter(LocalDate::class.java, LocalDateDeserializer())
+                            .create()
 
                         // Deserialize the JSON array into a List<User>
                         workout = gson.fromJson(jsonResponse, Workout::class.java)
@@ -1267,13 +1296,13 @@ class DbAccess private constructor(){
                 } else {
                     // Handle error message if request fails
                     InputStreamReader(connection.errorStream).use { reader ->
-                        Log.e("GetAllWorkoutError", reader.readText())
+                        Log.e("GetWorkoutByNameError", reader.readText())
                     }
                 }
 
             } catch (ex: Exception) {
                 // Handle exceptions appropriately
-                Log.e("GetAllWorkoutError", ex.toString())
+                Log.e("GetWorkoutByNameError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
             onComplete(workout) // Return the list of users (could be empty if request fails)
@@ -1370,7 +1399,7 @@ class DbAccess private constructor(){
         executor.execute {
             try {
                 // Construct URL with query parameter
-                val url = URL( apiUrl + epDay + "?year=${date.year}&month=${date.month}&day=${date.dayOfMonth}&dayOfWeek=${date.dayOfWeek}&userId=${userId}")
+                val url = URL( apiUrl + epDay + "?date=${date.year}-${date.monthValue}-${date.dayOfMonth}&userId=${userId}")
                 val connection = url.openConnection() as HttpURLConnection
 
                 connection.requestMethod = "GET"
@@ -1383,7 +1412,11 @@ class DbAccess private constructor(){
                         val jsonResponse = reader.readText()
 
                         // Deserialize JSON response into User object
-                        val gson = Gson()
+                        val gson = GsonBuilder()
+                            .registerTypeAdapter(LocalDate::class.java, LocalDateSerializer())  // Register LocalDate serializer
+                            .registerTypeAdapter(LocalDate::class.java, LocalDateDeserializer())
+                            .create()
+
                         day = gson.fromJson(jsonResponse, Day::class.java)
                     }
                 } else {
@@ -1763,7 +1796,11 @@ class DbAccess private constructor(){
                 connection.doOutput = true
 
                 // Serialize the User object to JSON using Gson
-                val gson = Gson()
+                val gson = GsonBuilder()
+                    .registerTypeAdapter(LocalDate::class.java, LocalDateSerializer())  // Register LocalDate serializer
+                    .registerTypeAdapter(LocalDate::class.java, LocalDateDeserializer())
+                    .create()
+
                 val jsonInputString = gson.toJson(day)
 
                 // Write the JSON data to the output stream
@@ -2177,7 +2214,7 @@ class DbAccess private constructor(){
         executor.execute {
             try {
                 // Construct URL for deleting the user with the userId
-                val url = URL(apiUrl + epDay + "?year=${date.year}&month=${date.month}&day=${date.dayOfMonth}&dayOfWeek=${date.dayOfWeek}&userId=${userId}")
+                val url = URL(apiUrl + epDay + "?date=${date.year}-${date.monthValue}-${date.dayOfMonth}&userId=${userId}")
                 val connection = url.openConnection() as HttpURLConnection
 
                 // Set the request method to DELETE
@@ -2429,4 +2466,29 @@ class DbAccess private constructor(){
         return responseMessage // Return the server's response (success or error message)
     }
     //Delete//
+
+
+
+    // LocalDate Serializer
+    class LocalDateSerializer : JsonSerializer<LocalDate> {
+        override fun serialize(
+            src: LocalDate,
+            typeOfSrc: Type?,
+            context: JsonSerializationContext?
+        ): JsonElement {
+            return JsonPrimitive(src.format(DateTimeFormatter.ISO_LOCAL_DATE))  // "yyyy-MM-dd"
+        }
+    }
+
+    // LocalDate Deserializer
+    class LocalDateDeserializer : JsonDeserializer<LocalDate> {
+        override fun deserialize(
+            json: JsonElement,
+            typeOfT: Type?,
+            context: JsonDeserializationContext?
+        ): LocalDate {
+            return LocalDate.parse(json.asString, DateTimeFormatter.ISO_LOCAL_DATE)
+        }
+    }
+
 }

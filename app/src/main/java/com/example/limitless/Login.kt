@@ -133,15 +133,15 @@ class Login : AppCompatActivity() {
                         nutritionViewModel.LoadUserData()
                         activityViewModel.LoadUserData()
 
-
-                        dbAccess.GetDay(LocalDate.now(), userId = currentUser?.userId!!){ day ->
+                        dbAccess.GetDay(LocalDate.now(), currentUser?.userId!!){ day ->
                             if(day == null){
                                 currentUser?.CreateDay()
+                            }else{
+                                currentUser!!.currentDay = day
                             }
                         }
+
                     }
-
-
 
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
@@ -149,8 +149,6 @@ class Login : AppCompatActivity() {
                     Toast.makeText(this, "User not found, please sign up", Toast.LENGTH_LONG).show()
                 }
             }
-
-
         }
 
         btnGoogle.setOnClickListener {
@@ -234,6 +232,8 @@ class Login : AppCompatActivity() {
                         dbAccess.GetDay(LocalDate.now(), userId = currentUser?.userId!!){ day ->
                             if(day == null){
                                 currentUser?.CreateDay()
+                            }else{
+                                currentUser!!.currentDay = day
                             }
                         }
 
@@ -278,7 +278,6 @@ fun LoginUser(context: Context, username: String, password: String, onComplete: 
 
 
 private fun handleFailure(type: String, e: GetCredentialException) {
-        Log.e("Fuck", type + "|" + e.toString())
     }
 
     fun GenerateNonce(length: Int = 16): String {
@@ -307,23 +306,20 @@ private fun handleFailure(type: String, e: GetCredentialException) {
                             activityViewModel = ActivityViewModel(LocalDate.now())
                             nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
 
-
                             dbAccess.GetDay(LocalDate.now(), userId = currentUser?.userId!!){ day ->
                                 if(day == null){
                                     currentUser?.CreateDay()
+                                }else{
+                                    currentUser!!.currentDay = day
                                 }
                             }
                             onComplete(false)
-                        }else{
+                        }else{//Sign Up from SSO
                             currentUser = User(name = gId.givenName.toString(), surname = gId.familyName.toString(), email = gId.id)
                             activityViewModel = ActivityViewModel(LocalDate.now())
                             nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                            currentUser?.CreateDay()
 
-                            dbAccess.GetDay(LocalDate.now(), userId = currentUser?.userId!!){ day ->
-                                if(day == null){
-                                    currentUser?.CreateDay()
-                                }
-                            }
                             onComplete(true)
                         }
 
