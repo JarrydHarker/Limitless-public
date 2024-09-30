@@ -18,6 +18,7 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -77,15 +78,20 @@ class Log_Meal : AppCompatActivity() {
         lblMealTitle.text = mealTitle
 
         btnLog.setOnClickListener {
+
             // Create a new meal with the provided foods
-            meal.date = nutritionViewModel.currentDate
-            meal.arrFoods = mealFoods
-            meal.userId = currentUser?.userId
+            if(listView.adapter.count != 0){
+                meal.date = nutritionViewModel.currentDate
+                meal.arrFoods = mealFoods
+                meal.userId = currentUser?.userId
 
-            nutritionViewModel.CreateMeal(meal)
+                nutritionViewModel.CreateMeal(meal)
+                val intent = Intent(this, Diet_Activity::class.java)
+                startActivity(intent)
+            }else{
+                Toast.makeText(this, "Please add food to the meal!", Toast.LENGTH_SHORT).show()
+            }
 
-            val intent = Intent(this, Diet_Activity::class.java)
-            startActivity(intent)
         }
 
         btnCreateMeal.setOnClickListener {
@@ -178,13 +184,16 @@ class Log_Meal : AppCompatActivity() {
         add.setOnClickListener {
             var mealDescription: String
 
-            for(food in mealFoods){
-                mealDescription = "${mealFoods.indexOf(food) + 1}. ${food.description}: ${food.calories} kcal"
-                mealListAdapter.add(mealDescription)
+            if(txtMealName.text.isNotEmpty() && txtFoodSearch.text.isNotEmpty()){
+                for(food in mealFoods){
+                    mealDescription = "${mealFoods.indexOf(food) + 1}. ${food.description}: ${food.calories} kcal"
+                    mealListAdapter.add(mealDescription)
+                }
+                mealListAdapter.notifyDataSetChanged()
+                dialog.dismiss()
+            }else{
+                Toast.makeText(this, "Please enter meal name and food!!", Toast.LENGTH_SHORT).show()
             }
-
-            mealListAdapter.notifyDataSetChanged()
-            dialog.dismiss()
         }
     }
 }
