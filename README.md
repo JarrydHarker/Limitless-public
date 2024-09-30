@@ -37,5 +37,3 @@ On the first launch or within the Goals section, set your desired fitness goals:
 Choose between Weight Loss or Weight Gain.
 Specify the target period (e.g., weeks or months).
 
-📧 Email: support@limitlessfitness.com
-🐛 Issues: GitHub Issues
