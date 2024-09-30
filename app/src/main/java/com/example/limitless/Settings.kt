@@ -45,6 +45,7 @@ class Settings : AppCompatActivity() {
         logout.setOnClickListener{
             currentUser?.LogOut()
 
+
             currentUser = null
 
             val intent = Intent(this, Login::class.java)
