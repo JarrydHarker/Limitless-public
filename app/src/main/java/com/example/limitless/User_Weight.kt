@@ -51,7 +51,7 @@ class User_Weight : AppCompatActivity() {
         textView42.startAnimation(ttb)
         UW_Linear.startAnimation(stb)
         next.startAnimation(btt)
-        next.startAnimation(btt2)
+        skip.startAnimation(btt2)
 
         next.setOnClickListener{
             if(npMain.value != 0)
