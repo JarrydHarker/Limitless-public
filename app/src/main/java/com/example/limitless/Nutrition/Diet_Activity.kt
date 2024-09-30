@@ -14,6 +14,7 @@ import com.example.limitless.R
 import com.example.limitless.Report_Activity
 import com.example.limitless.Settings
 import com.example.limitless.ThemeManager
+import com.example.limitless.fragment_water_tracker
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Diet_Activity : AppCompatActivity() {
@@ -22,7 +23,11 @@ class Diet_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_diet)
-
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView9, fragment_water_tracker())
+                .commitNow()
+        }
         // Apply window insets for system bars padding
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
