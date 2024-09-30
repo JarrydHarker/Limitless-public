@@ -94,12 +94,15 @@ class Login : AppCompatActivity() {
                 if(user != null){
                     currentUser = user
 
-                    nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
-                    activityViewModel = ActivityViewModel(LocalDate.now())
+                    currentUser?.LoadUserData{
+                        nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                        activityViewModel = ActivityViewModel(LocalDate.now())
 
-                    nutritionViewModel.LoadUserData()
-                    activityViewModel.LoadUserData()
-                    currentUser?.LoadUserData()
+                        nutritionViewModel.LoadUserData()
+                        activityViewModel.LoadUserData()
+                    }
+
+
 
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)

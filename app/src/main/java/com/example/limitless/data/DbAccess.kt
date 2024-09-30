@@ -883,7 +883,7 @@ class DbAccess private constructor(){
         return strength // Return the list of users (could be empty if request fails)
     }
 
-    fun GetUserInfo(userId: String): UserInfo? {
+    fun GetUserInfo(userId: String, onComplete: (UserInfo?) -> Unit) {
         val executor = Executors.newSingleThreadExecutor()
 
         var userInfo: UserInfo? = null
@@ -911,18 +911,17 @@ class DbAccess private constructor(){
                     // Handle error if request fails
                     InputStreamReader(connection.errorStream).use { reader ->
                         val errorMessage = reader.readText()
-                        Log.e("GetUserError", "Error: $errorMessage")
+                        Log.e("GetUserInfoError", "Error: $errorMessage")
                     }
                 }
 
             } catch (ex: Exception) {
                 // Handle exceptions appropriately
-                Log.e("GetUserError", ex.toString())
+                Log.e("GetUserInfoError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
+            onComplete(userInfo) // Return the deserialized User object (if any)
         }
-
-        return userInfo // Return the deserialized User object (if any)
     }
 
     fun GetAllMeals(): List<Meal> {
