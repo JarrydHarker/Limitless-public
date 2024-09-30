@@ -1,10 +1,10 @@
-#Limitless Fitness App
+# Limitless Fitness App
 
-##Overview
+## Overview
 
 The Limitless Fitness App is a comprehensive mobile application designed to help users track their fitness progress, set goals, and monitor nutrition intake. This Android app provides a range of features to support users in their fitness journey, including calorie counting, personalized goal setting, and exercise tracking.
 
-##Features
+## Features
 
 Calorie Counter: Track daily calorie intake by scanning barcodes, searching for food, or adding custom meals.
 Personalized Goals: Set fitness goals such as weight loss or gain and specify a time period to achieve them.
@@ -13,7 +13,7 @@ Exercise Tracking: Log and categorize various types of exercises.
 Custom Workouts: Add and manage custom workout routines.
 Visual Progress: Track fitness and nutritional progress with visual indicators and graphs.
 
-##Usage
+## Usage
 1. Launching the App
 Open the project in Android Studio.
 Sync the Gradle project.
