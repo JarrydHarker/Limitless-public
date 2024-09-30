@@ -33,7 +33,7 @@ import com.example.limitless.data.ViewModels.NutritionViewModel
 import java.time.LocalDate
 
 var  currentUser: User? = null
-lateinit var nutritionViewModel: NutritionViewModel
+var nutritionViewModel = NutritionViewModel()
 var activityViewModel = ActivityViewModel(LocalDate.now())
 
 class MainActivity : AppCompatActivity() {

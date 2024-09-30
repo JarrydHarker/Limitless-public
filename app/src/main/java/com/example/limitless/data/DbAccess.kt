@@ -341,6 +341,50 @@ class DbAccess private constructor(){
         return responseMessage
     }
 
+    fun GetFoodsByMeal(mealId: Int, onComplete: (List<Food>) -> Unit) {
+        val executor = Executors.newSingleThreadExecutor()
+        val mainHandler = Handler(Looper.getMainLooper())
+        var food: List<Food> = emptyList()
+
+        executor.execute {
+            try {
+                // Construct the URL for the GET request
+                val url = URL(apiUrl + epFood + "/Meal?mealId=$mealId") // Assuming the endpoint is something like /users
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to GET
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val gson = Gson()
+
+                        // Deserialize the JSON array into a List<User>
+                        food = gson.fromJson(jsonResponse, Array<Food>::class.java).toList()
+                    }
+                } else {
+                    // Handle error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("GetAllFoodError", reader.readText())
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetAllFoodError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+            mainHandler.post{
+                onComplete(food)
+            }
+
+        }
+    }
+
     fun CreateStrength(strength: Strength): String {
         val executor = Executors.newSingleThreadExecutor()
 
