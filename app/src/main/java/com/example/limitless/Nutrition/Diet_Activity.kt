@@ -40,6 +40,7 @@ class Diet_Activity : AppCompatActivity() {
             startActivity(intent, options.toBundle())
         }
 
+        ThemeManager.applyTheme(this)
         // Initialize bottom navigation bar
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
         ThemeManager.updateNavBarColor(this, bottomNavBar)
@@ -55,10 +56,7 @@ class Diet_Activity : AppCompatActivity() {
                     navigateToActivityLeft(MainActivity::class.java)
                     true
                 }
-                R.id.ic_Report -> {
-                    navigateToActivityLeft(Report_Activity::class.java)
-                    true
-                }
+
                 R.id.ic_settings -> {
                     navigateToActivityRight(Settings::class.java)
                     true

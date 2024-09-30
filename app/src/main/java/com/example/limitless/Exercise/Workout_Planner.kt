@@ -62,10 +62,7 @@ class Workout_Planner : AppCompatActivity() {
                     startActivity(Intent(this, MainActivity::class.java))
                     true
                 }
-                R.id.ic_Report -> {
-                    startActivity(Intent(this, Report_Activity::class.java))
-                    true
-                }
+
                 R.id.ic_settings -> {
                     startActivity(Intent(this, Settings::class.java))
                     true
