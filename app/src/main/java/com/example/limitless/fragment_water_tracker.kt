@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.constraintlayout.widget.ConstraintAttribute
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.limitless.data.Graphics.BarGraphic
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,10 +46,18 @@ class fragment_water_tracker : Fragment() {
         //val btt2 = AnimationUtils.loadAnimation(view.context, R.anim.btt2)
         //val btt3 = AnimationUtils.loadAnimation(view.context, R.anim.btt3)
         val btt4 = AnimationUtils.loadAnimation(view.context, R.anim.btt4)
-
+        val waterGraph: BarGraphic = view.findViewById(R.id.bgWater)
         val WaterCL = view.findViewById<ConstraintLayout>(R.id.WaterCL)
 
         WaterCL.startAnimation(btt4)
+
+        waterGraph.setGoal(3f)
+        waterGraph.setType("exp")
+        waterGraph.setProgress(1.25f)
+        waterGraph.setSize(400f, 400f)
+        waterGraph.setThickness(50f)
+        waterGraph.setLevel(5)
+        waterGraph.update()
 
         return view
     }
