@@ -16,7 +16,7 @@ import java.time.LocalDate
 class NutritionViewModel(val currentDate: LocalDate = LocalDate.now() , var calorieWallet: Double = 2000.0, var ratio: Ratios = Ratios()): ViewModel() {
 
     val weight: Double? = null
-    val water: Double = 0.0
+    var water: Double = 0.0
     var steps: Int = 0
     var carbWallet = calorieWallet*ratio.carbs
     var proteinWallet = calorieWallet*ratio.protein
@@ -44,7 +44,13 @@ class NutritionViewModel(val currentDate: LocalDate = LocalDate.now() , var calo
         arrMeals = mutableListOf()
         arrMeals.addAll(dbAccess.GetUserMealsByDate(currentUser!!.userId, currentDate))
     }
+    fun setWaterIntake(intake: Double) {
+        water = intake
+    }
 
+    fun getWaterIntake(): Double {
+        return water
+    }
     fun ChangeWallet(newWallet: Double){
         calorieWallet = newWallet
     }
