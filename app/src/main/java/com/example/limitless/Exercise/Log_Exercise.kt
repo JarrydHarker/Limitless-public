@@ -28,6 +28,7 @@ class Log_Exercise : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_log_exercise)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -38,26 +39,28 @@ class Log_Exercise : AppCompatActivity() {
         val lvExercises: ListView = findViewById(R.id.listSets_LE)
         val workoutId = intent.getIntExtra("workoutId", -1)
         val currentWorkout = activityViewModel.GetWorkout(workoutId)
+        val lblCurrentExercise_LE: TextView = findViewById(R.id.lblCurrentExercise_LE)
 
         if (currentWorkout == null) {
             Toast.makeText(this, "Workout not found", Toast.LENGTH_SHORT).show()
             finish()
         } else {
-
             if (currentWorkout.arrExercises == null) {
                 currentWorkout.arrExercises = mutableListOf()
             }
 
+            // Get the exercise name for the TextView
+            val firstExercise = currentWorkout.arrExercises.firstOrNull()
+            lblCurrentExercise_LE.text = firstExercise?.GetName() ?: "No exercise available"
+
+            // Prepare the details for the ListView
             val exerciseDetails = currentWorkout.arrExercises.map {
-                "Exercise: ${it.GetName()}, Sets: ${it.strength?.sets ?: 0}, Reps: ${it.strength?.repetitions ?: 0}"
+                "Sets: ${it.strength?.sets ?: 0}, \nReps: ${it.strength?.repetitions ?: 0}"
             }
 
             val exerciseAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, exerciseDetails)
             lvExercises.adapter = exerciseAdapter
         }
-
-
-
 
         btnRestTimer.setOnClickListener {
             ShowDialog()
