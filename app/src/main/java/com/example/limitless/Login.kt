@@ -72,14 +72,6 @@ class Login : AppCompatActivity() {
         val right_line = findViewById<View>(R.id.right_line)
         val text_or = findViewById<TextView>(R.id.text_or)
         val google_sso_button = findViewById<Button>(R.id.google_sso_button)
-        val btnSkip: Button = findViewById(R.id.button3)
-
-        btnSkip.setOnClickListener {
-            currentUser = User()
-
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
 
         textView22.startAnimation(ttb)
         textView21.startAnimation(btt)
