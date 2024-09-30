@@ -35,9 +35,6 @@
             android:name=".User_DailySteps"
             android:exported="false" />
         <activity
-            android:name=".User_CalorieWallet"
-            android:exported="false" />
-        <activity
             android:name=".User_WeightGoal"
             android:exported="false" />
         <activity
