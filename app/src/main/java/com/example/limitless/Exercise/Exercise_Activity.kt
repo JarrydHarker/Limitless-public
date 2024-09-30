@@ -1,9 +1,17 @@
 package com.example.limitless.Exercise
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Gravity
+import android.view.Window
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ListView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -15,7 +23,11 @@ import com.example.limitless.R
 import com.example.limitless.Report_Activity
 import com.example.limitless.Settings
 import com.example.limitless.ThemeManager
+import com.example.limitless.activityViewModel
+import com.example.limitless.data.Exercise
+import com.example.limitless.data.Workout
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.time.LocalDate
 
 class Exercise_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,9 +39,10 @@ class Exercise_Activity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
+
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
-
-
         ThemeManager.updateNavBarColor(this, bottomNavBar)
 
         bottomNavBar.setSelectedItemId(R.id.ic_workouts)

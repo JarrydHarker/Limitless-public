@@ -1,5 +1,6 @@
 package com.example.limitless.data
 import android.util.Log
+import com.example.limitless.nutritionViewModel
 import java.time.LocalDate
 
 val dbAccess = DbAccess.GetInstance()
@@ -13,7 +14,7 @@ class User(
 ){
     var userInfo = UserInfo()
     var ratios = Ratios()
-    var currentDay = Day(LocalDate.now())
+    var currentDay = Day(LocalDate.now(), userId = userId)
 
     fun InitialiseUserInfo(userInfo: UserInfo){
         this.userInfo = userInfo
@@ -52,6 +53,18 @@ class User(
         }
     }
 
+    fun CreateDay(){
+        currentDay.date = nutritionViewModel.currentDate
+        currentDay.calories = nutritionViewModel.CalculateTotalCalories()
+        currentDay.steps = nutritionViewModel.steps
+        currentDay.water = nutritionViewModel.water
+        currentDay.userId = userId
+        currentDay.activeTime = 0 //TODO Implement active time
+        currentDay.weight = nutritionViewModel.weight
+
+        dbAccess.CreateDay(currentDay)
+    }
+
     fun SetHeight(height: Double){
         this.userInfo.height = height
     }
@@ -83,9 +96,6 @@ class User(
 
     fun LoadUserData(onComplete: () -> Unit) {
         dbAccess.GetUserInfo(userId){ info ->
-
-            Log.d("Fuck", "${info?.calorieWallet}")
-
             if(info != null){
                 userInfo = info
                 onComplete()
@@ -96,7 +106,17 @@ class User(
     }
 
     fun LogOut(){
+        SaveUserInfo()
 
+        currentDay.date = nutritionViewModel.currentDate
+        currentDay.calories = nutritionViewModel.CalculateTotalCalories()
+        currentDay.steps = nutritionViewModel.steps
+        currentDay.water = nutritionViewModel.water
+        currentDay.userId = userId
+        currentDay.activeTime = 0 //TODO Implement active time
+        currentDay.weight = nutritionViewModel.weight
+
+        dbAccess.UpdateDay(currentDay)
     }
 }
 
@@ -197,11 +217,8 @@ class Day(
     var weight: Double? = null,
     var activeTime: Int = 0,
     var water: Double = 0.0,
-
-){
-    var arrMeals: MutableList<Meal> = mutableListOf() // Initialize empty mutable list for meals
-    var arrWorkouts: MutableList<Workout> = mutableListOf() // Initialize empty mutable list for workouts
-}
+    var userId: String,
+)
 
 class Workout(
     var workoutId: Int? = 0,
@@ -209,6 +226,16 @@ class Workout(
     var name: String? = "",
 ){
     var arrExercises: MutableList<Exercise> = mutableListOf()
+
+    fun AddExercise() {
+
+    }
+
+    fun AddExercises(exercises: List<Exercise>) {
+        arrExercises.addAll(exercises)
+    }
+
+
 }
 
 class Exercise(

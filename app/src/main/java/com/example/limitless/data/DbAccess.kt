@@ -1,5 +1,7 @@
 package com.example.limitless.data
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -463,7 +465,7 @@ class DbAccess private constructor(){
         return responseMessage
     }
 
-    fun CreateWorkout(workout: Workout): String {
+    fun CreateWorkout(workout: Workout, onComplete: (String) -> Unit) {
         val executor = Executors.newSingleThreadExecutor()
 
         var responseMessage = ""
@@ -505,9 +507,8 @@ class DbAccess private constructor(){
                 Log.e("DbAccessError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
+            onComplete(responseMessage)
         }
-
-        return responseMessage
     }
     //Create//
 
@@ -1156,7 +1157,7 @@ class DbAccess private constructor(){
         return meals // Return the list of users (could be empty if request fails)
     }
 
-    fun GetUserWorkouts(userId: String): List<Workout> {
+    fun GetUserWorkouts(userId: String, onComplete: (List<Workout>) -> Unit) {
         val executor = Executors.newSingleThreadExecutor()
         var workout: List<Workout> = emptyList()
 
@@ -1192,12 +1193,14 @@ class DbAccess private constructor(){
                 Log.e("GetAllWorkoutError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
-        }
 
-        return workout // Return the list of users (could be empty if request fails)
+            Handler(Looper.getMainLooper()).post {
+                onComplete(workout)
+            }
+        }
     }
 
-    fun GetUserWorkoutsByDate(userId: String, date: LocalDate): List<Workout> {
+    fun GetUserWorkoutsByDate(userId: String, date: LocalDate, onComplete: (List<Workout>) -> Unit) {
         val executor = Executors.newSingleThreadExecutor()
         var workout: List<Workout> = emptyList()
 
@@ -1233,9 +1236,48 @@ class DbAccess private constructor(){
                 Log.e("GetAllWorkoutError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
+            onComplete(workout)
         }
+    }
 
-        return workout // Return the list of users (could be empty if request fails)
+    fun GetWorkoutByName(userId: String, date: LocalDate, onComplete: (Workout?) -> Unit) {
+        val executor = Executors.newSingleThreadExecutor()
+        var workout: Workout? = null
+
+        executor.execute {
+            try {
+                // Construct the URL for the GET request
+                val url = URL(apiUrl + epWorkout + "/User?userId=$userId&date=$date") // Assuming the endpoint is something like /users
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to GET
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val gson = Gson()
+
+                        // Deserialize the JSON array into a List<User>
+                        workout = gson.fromJson(jsonResponse, Workout::class.java)
+                    }
+                } else {
+                    // Handle error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("GetAllWorkoutError", reader.readText())
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetAllWorkoutError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+            onComplete(workout) // Return the list of users (could be empty if request fails)
+        }
     }
 
     fun GetAllWorkouts(): List<Workout> {

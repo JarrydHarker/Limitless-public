@@ -43,6 +43,9 @@ class Settings : AppCompatActivity() {
         val logout: LinearLayout = findViewById(R.id.ll5)
 
         logout.setOnClickListener{
+            currentUser?.LogOut()
+
+            currentUser = null
 
             val intent = Intent(this, Login::class.java)
             startActivity(intent)

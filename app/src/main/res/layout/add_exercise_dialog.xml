@@ -146,13 +146,15 @@
                 android:background="@drawable/buttonbackground"
                 android:padding="5dp">
 
-                <ListView
+                <TextView
+                    android:id="@+id/txtEquipment"
                     android:layout_width="match_parent"
                     android:layout_height="127dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
@@ -192,7 +194,7 @@
                             app:layout_constraintVertical_bias="0.171" />
 
                         <TextView
-                            android:id="@+id/textView50"
+                            android:id="@+id/txtDifficulty"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="-"
@@ -231,7 +233,7 @@
                             app:layout_constraintVertical_bias="0.108" />
 
                         <TextView
-                            android:id="@+id/textView48"
+                            android:id="@+id/txtBodypart"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="-"
@@ -287,7 +289,7 @@
                             app:layout_constraintVertical_bias="0.0">
 
                             <TextView
-                                android:id="@+id/textView51"
+                                android:id="@+id/txtName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Placeholder"
@@ -315,7 +317,7 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <TextView
-                                android:id="@+id/textView52"
+                                android:id="@+id/txtType"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="placeholder"
@@ -345,7 +347,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
-                            android:id="@+id/textView53"
+                            android:id="@+id/txtDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Description Placeholder"
