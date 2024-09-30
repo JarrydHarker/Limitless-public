@@ -19,13 +19,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/txtCalorie_CD"
         android:layout_width="256dp"
         android:layout_height="65dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Calorie Goal"
-        android:inputType="text"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"

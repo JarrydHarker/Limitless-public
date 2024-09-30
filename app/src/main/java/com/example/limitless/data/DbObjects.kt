@@ -39,6 +39,10 @@ class User(
         return userInfo.stepGoal
     }
 
+    fun GetWeightGoal(): Double? {
+        return userInfo.weightGoal
+    }
+
     fun SignUpUser(onComplete: (String) -> Unit) {
         val pwHasher = PasswordHasher()
         val hashedPW = pwHasher.HashPassword(password)
