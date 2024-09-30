@@ -133,7 +133,12 @@ class Login : AppCompatActivity() {
                         nutritionViewModel.LoadUserData()
                         activityViewModel.LoadUserData()
 
-                        currentUser?.CreateDay()
+
+                        dbAccess.GetDay(LocalDate.now(), userId = currentUser?.userId!!){ day ->
+                            if(day == null){
+                                currentUser?.CreateDay()
+                            }
+                        }
                     }
 
 
@@ -226,6 +231,12 @@ class Login : AppCompatActivity() {
                         activityViewModel = ActivityViewModel(LocalDate.now())
                         nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
 
+                        dbAccess.GetDay(LocalDate.now(), userId = currentUser?.userId!!){ day ->
+                            if(day == null){
+                                currentUser?.CreateDay()
+                            }
+                        }
+
                         onComplete()
 
                     } catch (e: GoogleIdTokenParsingException) {
@@ -295,11 +306,24 @@ private fun handleFailure(type: String, e: GetCredentialException) {
                         if(currentUser != null){
                             activityViewModel = ActivityViewModel(LocalDate.now())
                             nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+
+
+                            dbAccess.GetDay(LocalDate.now(), userId = currentUser?.userId!!){ day ->
+                                if(day == null){
+                                    currentUser?.CreateDay()
+                                }
+                            }
                             onComplete(false)
                         }else{
                             currentUser = User(name = gId.givenName.toString(), surname = gId.familyName.toString(), email = gId.id)
                             activityViewModel = ActivityViewModel(LocalDate.now())
                             nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+
+                            dbAccess.GetDay(LocalDate.now(), userId = currentUser?.userId!!){ day ->
+                                if(day == null){
+                                    currentUser?.CreateDay()
+                                }
+                            }
                             onComplete(true)
                         }
 

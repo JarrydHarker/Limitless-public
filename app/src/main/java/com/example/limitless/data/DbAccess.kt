@@ -1362,7 +1362,7 @@ class DbAccess private constructor(){
         return categories // Return the list of users (could be empty if request fails)
     }
 
-    fun GetDay(date: LocalDate, userId: String): Day?{
+    fun GetDay(date: LocalDate, userId: String, onComplete: (Day?) -> Unit) {
         val executor = Executors.newSingleThreadExecutor()
 
         var day: Day? = null
@@ -1399,9 +1399,8 @@ class DbAccess private constructor(){
                 Log.e("GetUserError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
+            onComplete(day)
         }
-
-        return day // Return the deserialized User object (if any)
     }
 
     fun GetExercise(exerciseId: String): Exercise?{
