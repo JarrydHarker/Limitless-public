@@ -632,9 +632,9 @@ class DbAccess private constructor(){
                 Log.e("GetUserError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
-        }
 
-        onComplete(user)  // Return the deserialized User object (if any)
+            onComplete(user)  // Return the deserialized User object (if any)
+        }
     }
 
     fun GetAllUsers(): List<User> {
