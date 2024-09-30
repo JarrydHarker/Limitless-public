@@ -24,10 +24,9 @@ class User_Password : AppCompatActivity() {
         val Password: EditText = findViewById(R.id.UP_txtPassword)
 
         Next.setOnClickListener{
-            if(Password.text.isNotEmpty()){
-
-
-
+            val pw = Password.text.toString()
+            if(pw.isNotEmpty()){
+                currentUser?.password = pw
 
                 val intent = Intent(this, User_Details::class.java)
                 startActivity(intent)
