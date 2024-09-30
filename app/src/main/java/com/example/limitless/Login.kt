@@ -133,6 +133,8 @@ class Login : AppCompatActivity() {
 
                         nutritionViewModel.LoadUserData()
                         activityViewModel.LoadUserData()
+
+                        currentUser?.CreateDay()
                     }
 
 

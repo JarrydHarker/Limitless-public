@@ -1,21 +1,36 @@
 package com.example.limitless.Exercise
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.EditText
 import android.widget.HorizontalScrollView
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import com.example.limitless.Nutrition.Diet_Activity
 import com.example.limitless.R
 import com.example.limitless.activityViewModel
+import com.example.limitless.currentUser
+import com.example.limitless.data.Workout
+import com.example.limitless.data.dbAccess
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -39,6 +54,7 @@ class Exercises_Fragment : Fragment() {
 
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,9 +62,22 @@ class Exercises_Fragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_exercises_, container, false)
         val btnAddWorkout: Button = view.findViewById(R.id.btnAddWorkout_EF)
-        val lvExercises: ListView = view.findViewById(R.id.listExercises_EF)
+        val lvWorkouts: ListView = view.findViewById(R.id.listExercises_EF)
         val workoutAdapter = ArrayAdapter<String>(requireActivity(), android.R.layout.simple_dropdown_item_1line)
-        val arrExercises: MutableList<String> = mutableListOf()
+        val arrWorkouts: MutableList<Workout> = mutableListOf()
+
+        dbAccess.GetUserWorkouts(currentUser?.userId!!) { workouts ->
+            arrWorkouts.addAll(workouts)
+
+            Log.d("Fuck", "${workouts.size}")
+
+            for (workout in arrWorkouts) {
+                workoutAdapter.add(workout.name)
+            }
+
+            workoutAdapter.notifyDataSetChanged()
+            lvWorkouts.adapter = workoutAdapter
+        }
 
         val ttb = AnimationUtils.loadAnimation(view.context, R.anim.ttb)
         val stb = AnimationUtils.loadAnimation(view.context, R.anim.stb)
@@ -60,31 +89,55 @@ class Exercises_Fragment : Fragment() {
         val constraintLayout8 = view.findViewById<ConstraintLayout>(R.id.constraintLayout8)
         val horizontalScrollViewCategories = view.findViewById<HorizontalScrollView>(R.id.horizontalScrollViewCategories)
         val textView31 = view.findViewById<TextView>(R.id.textView31)
-        val listExercises_EF = view.findViewById<ListView>(R.id.listExercises_EF)
 
         constraintLayout8.startAnimation(stb)
         horizontalScrollViewCategories.startAnimation(btt)
         textView31.startAnimation(btt2)
-        listExercises_EF.startAnimation(btt3)
-
-        val workouts = activityViewModel.GetWorkouts()
-        if(workouts != null){
-
-            for(workout in workouts){
-                workoutAdapter.add(workout.name)
-            }
-
-            workoutAdapter.notifyDataSetChanged()
-            lvExercises.adapter = workoutAdapter
-        }
+        lvWorkouts.startAnimation(btt3)
 
         btnAddWorkout.setOnClickListener {
-            val intent = Intent(requireActivity(), New_Workout::class.java)
-            startActivity(intent)
+            ShowDialog()
         }
 
-
         return view
+    }
+
+    fun ShowDialog() {
+        val dialog = Dialog(requireActivity())
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window!!.attributes.windowAnimations = R.style.dialogAnimation
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.new_workout_dialog)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
+        dialog.window!!.setGravity(Gravity.BOTTOM)
+
+        dialog.show()
+
+        val txtName: EditText = dialog.findViewById(R.id.txtWorkoutName)
+        val btnCreate: Button = dialog.findViewById(R.id.btnCreateWorkout)
+        val btnCancel: Button = dialog.findViewById(R.id.btnCancelWorkout)
+
+        btnCreate.setOnClickListener {
+            val name = txtName.text.toString()
+
+            if(name.isEmpty()){
+                Toast.makeText(requireActivity(), "Please enter a workout name to continue", Toast.LENGTH_SHORT).show()
+            }
+
+            val workout = Workout(null, LocalDate.now(), name)
+
+            activityViewModel.AddWorkout(workout){ id ->
+                Log.d("Fuck", id.toString())
+                val intent = Intent(requireActivity(), New_Workout::class.java)
+                intent.putExtra("workoutId", id)
+                startActivity(intent)
+            }
+        }
+
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 
     companion object {

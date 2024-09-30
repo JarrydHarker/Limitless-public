@@ -17,6 +17,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -64,9 +65,18 @@ class New_Workout : AppCompatActivity() {
         val lvNewWorkout: ListView = findViewById(R.id.lvNewWorkout)
         val newWorkoutAdapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line)
         val btnAddWorkout: Button = findViewById(R.id.btnAddWorkout_AE)
+        val txtName: TextView = findViewById(R.id.txtName)
+        val workoutId = intent.getIntExtra("workoutId", -1)
+        val currentWorkout = activityViewModel.GetWorkout(workoutId)
 
+        if(currentWorkout == null){
+            Toast.makeText(this, "If you can see this, the app is fucked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, Exercise_Activity::class.java)
+            startActivity(intent)
+        }
+
+        txtName.setText(currentWorkout?.name)
         lvNewWorkout.adapter = newWorkoutAdapter
-        //spinCategory.adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, categories)
 
         btnCreateExercise.setOnClickListener {
             ShowDialog(workoutExercises){
@@ -80,8 +90,7 @@ class New_Workout : AppCompatActivity() {
         btnAddWorkout.setOnClickListener{
             if(lvNewWorkout.isNotEmpty())
             {
-                val workout = Workout(null, activityViewModel.currentDate)
-                activityViewModel.AddWorkout(workout)
+                currentWorkout!!.AddExercises(workoutExercises)
 
                 val intent = Intent(this, Exercise_Activity::class.java)
                 startActivity(intent)
@@ -153,6 +162,19 @@ class New_Workout : AppCompatActivity() {
         val txtSets: EditText = dialog.findViewById(R.id.txtSets_WD)
         val txtReps: EditText = dialog.findViewById(R.id.txtReps_WD)
         var arrMoves: MutableList<Movement> = mutableListOf()
+        val txtName: TextView = dialog.findViewById(R.id.txtName)
+        val txtDesc: TextView = dialog.findViewById(R.id.txtDescription)
+        val txtType: TextView = dialog.findViewById(R.id.txtType)
+        val txtBodypart: TextView = dialog.findViewById(R.id.txtBodypart)
+        val txtEquipment: TextView = dialog.findViewById(R.id.txtEquipment)
+        val txtDifficulty: TextView = dialog.findViewById(R.id.txtDifficulty)
+
+        txtName.setText("-")
+        txtDesc.setText("-")
+        txtType.setText("-")
+        txtBodypart.setText("-")
+        txtEquipment.setText("-")
+        txtDifficulty.setText("-")
 
         txtAddExercise.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -201,7 +223,13 @@ class New_Workout : AppCompatActivity() {
                 exercisepreviewAdapter.add(exercise.GetName())
             }
 
-            //lvMealPreview.adapter = exercisepreviewAdapter
+            txtName.setText(currentMove.name)
+            txtDesc.setText(currentMove.description)
+            txtType.setText(currentMove.type)
+            txtBodypart.setText(currentMove.bodypart)
+            txtEquipment.setText(currentMove.equipment)
+            txtDifficulty.setText(currentMove.difficultyLevel)
+
             txtAddExercise.dismissDropDown()
         }
 

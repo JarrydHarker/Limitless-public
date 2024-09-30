@@ -13,6 +13,7 @@ import androidx.core.app.NotificationCompat
 import com.example.limitless.MainActivity
 import com.example.limitless.R
 import com.example.limitless.activityViewModel
+import com.example.limitless.nutritionViewModel
 import java.util.Calendar
 
 class StepCounterService : Service() {
@@ -57,12 +58,13 @@ class StepCounterService : Service() {
     private fun startTrackingSteps() {
         pedometer.startListening { currentSteps ->
             updateNotification(currentSteps)
+            nutritionViewModel.steps = currentSteps.toInt()
         }
     }
 
     private fun scheduleMidnightReset() {
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, StepResetReceiver::class.java) // This is your BroadcastReceiver
+        val intent = Intent(this, ResetReceiver::class.java) // This is your BroadcastReceiver
         val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
         // Calculate the time until midnight
