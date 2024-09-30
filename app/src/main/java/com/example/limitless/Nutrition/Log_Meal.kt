@@ -9,14 +9,15 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.view.Window
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ListView
-import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -25,7 +26,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.limitless.R
 import com.example.limitless.currentUser
-import com.example.limitless.data.DbAccess
 import com.example.limitless.data.Food
 import com.example.limitless.data.Meal
 import com.example.limitless.data.dbAccess
@@ -39,7 +39,7 @@ private val mealDescriptions = mutableListOf<String>()
 
 class Log_Meal : AppCompatActivity() {
 
-    val meal = Meal()
+    var mealname = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,22 +58,44 @@ class Log_Meal : AppCompatActivity() {
         val btnCreateMeal = findViewById<Button>(R.id.btnCreateMeal_LM)
         val lblMealTitle = findViewById<TextView>(R.id.lblMealTitle_LM)
         val mealFoods: MutableList<Food> = mutableListOf()
-        val spinMeals: Spinner = findViewById(R.id.spinPrevFoods_LM)
-        val mealsAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
+        val spinMeals: AutoCompleteTextView = findViewById(R.id.spinPrevFoods_LM)
+        var meal = Meal()
         val Back: ImageView = findViewById(R.id.LM_ivBack)
+        val prevMeals: MutableList<Meal> = mutableListOf()
 
         Back.setOnClickListener{
             val intent = Intent(this, MealTracker::class.java)
             startActivity(intent)
         }
 
-        val meals = dbAccess.GetUserMeals(currentUser?.userId!!)
+        CoroutineScope(Dispatchers.Main).launch {
+            dbAccess.GetUserMeals(currentUser?.userId!!) { meals ->
+                val mealsAdapter = ArrayAdapter<String>(this@Log_Meal, android.R.layout.simple_list_item_1)
 
-        for(meal in meals){
-            mealsAdapter.add(meal.name)
+                Log.d("Fuck", "Meals adapter:${meals.size}")
+                for (meal in meals) {
+                    mealsAdapter.add(meal.name)
+                }
+
+                spinMeals.setAdapter(mealsAdapter)
+                mealsAdapter.notifyDataSetChanged()
+                spinMeals.showDropDown()
+            }
         }
 
-        spinMeals.adapter = mealsAdapter
+        spinMeals.setOnItemClickListener { adapterView: AdapterView<*>, view2: View, i: Int, l: Long ->
+            meal = prevMeals[i]
+
+            mealListAdapter.clear()
+            for (food in meal.arrFoods) {
+                mealListAdapter.add(food.toString())
+            }
+            mealListAdapter.notifyDataSetChanged()
+        }
+
+        spinMeals.setOnClickListener{
+            spinMeals.showDropDown()
+        }
 
         lblMealTitle.text = mealTitle
 
@@ -84,8 +106,11 @@ class Log_Meal : AppCompatActivity() {
                 meal.date = nutritionViewModel.currentDate
                 meal.arrFoods = mealFoods
                 meal.userId = currentUser?.userId
-
+                
+              if(meal.name.isNotEmpty()){
                 nutritionViewModel.CreateMeal(meal)
+              }
+               
                 val intent = Intent(this, Diet_Activity::class.java)
                 startActivity(intent)
             }else{
@@ -118,8 +143,6 @@ class Log_Meal : AppCompatActivity() {
         var arrFoods: MutableList<Food> = mutableListOf()
         val txtMealName: EditText = dialog.findViewById(R.id.txtMealName_LMD)
 
-        meal.name = txtMealName.text.toString()
-
         txtFoodSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -139,8 +162,7 @@ class Log_Meal : AppCompatActivity() {
                 )
                 // Start a coroutine in the Main (UI) thread
                 CoroutineScope(Dispatchers.Main).launch {
-                    val db = DbAccess.GetInstance()
-                    val arrFetchFoods = db.SearchForFood(search)
+                    val arrFetchFoods = dbAccess.SearchForFood(search)
                     arrFoods = arrFetchFoods.toMutableList()
                     foodAdapter.clear()
 
@@ -182,6 +204,15 @@ class Log_Meal : AppCompatActivity() {
         }
 
         add.setOnClickListener {
+            val name = txtMealName.text.toString()
+
+            if(name.isNotEmpty()){
+                mealname = name
+            }else {
+                Toast.makeText(this, "Please enter meal name", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             var mealDescription: String
 
             if(txtMealName.text.isNotEmpty() && txtFoodSearch.text.isNotEmpty()){

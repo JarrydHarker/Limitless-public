@@ -49,6 +49,7 @@ class DbAccess private constructor(){
     private val epMovement = "/Movement"
     private val epWorkout = "/Workout"
     private val epRatios = "/Ratios"
+    private val epMealFood = "/MealFood"
 
     //Create//
     fun CreateUser(user: User, onComplete: (String) -> Unit) {
@@ -289,6 +290,57 @@ class DbAccess private constructor(){
         return responseMessage
     }
 
+    fun CreateMealFood(mealfood: MealFood): String {
+        val executor = Executors.newSingleThreadExecutor()
+
+        var responseMessage = ""
+
+        executor.execute{
+            try{
+                val url = URL(apiUrl + epMealFood)
+                val connection = url.openConnection() as HttpURLConnection
+
+                connection.requestMethod = "POST"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+                connection.doOutput = true
+
+                // Serialize user object to JSON using Gson
+                val gson = GsonBuilder()
+                    .registerTypeAdapter(LocalDate::class.java, LocalDateSerializer())  // Register LocalDate serializer
+                    .registerTypeAdapter(LocalDate::class.java, LocalDateDeserializer())
+                    .create()
+
+                val jsonInputString = gson.toJson(mealfood)
+
+                // Write the JSON data to the output stream
+                OutputStreamWriter(connection.outputStream).use { writer ->
+                    writer.write(jsonInputString)
+                    writer.flush()
+                }
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        responseMessage = reader.readText() // Get the server's response message
+                    }
+                } else {
+                    // Read error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        responseMessage = reader.readText()
+                    }
+                }
+
+            }catch (ex: Exception){
+                // Handle exceptions appropriately
+                Log.e("DbAccessError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+        }
+
+        return responseMessage
+    }
+
     fun CreateStrength(strength: Strength): String {
         val executor = Executors.newSingleThreadExecutor()
 
@@ -336,7 +388,7 @@ class DbAccess private constructor(){
         return responseMessage
     }
 
-    fun CreateMeal(meal: Meal): String {
+    fun CreateMeal(meal: Meal, onComplete: (String) -> Unit){
         val executor = Executors.newSingleThreadExecutor()
 
         var responseMessage = ""
@@ -378,9 +430,10 @@ class DbAccess private constructor(){
                 Log.e("DbAccessError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
+            Log.d("Fuck", "Create meal response: $responseMessage")
+            onComplete(responseMessage)
         }
 
-        return responseMessage
     }
 
     fun CreateFood(food: Food): String {
@@ -819,8 +872,9 @@ class DbAccess private constructor(){
         return cardio // Return the list of users (could be empty if request fails)
     }
 
-    fun GetUserMeals(userId: String): List<Meal> {
+    fun GetUserMeals(userId: String, onComplete: (List<Meal>) -> Unit) {
         val executor = Executors.newSingleThreadExecutor()
+        val mainHandler = Handler(Looper.getMainLooper())
         var meals: List<Meal> = emptyList()
 
         executor.execute {
@@ -855,9 +909,11 @@ class DbAccess private constructor(){
                 Log.e("GetAllMealsError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
-        }
 
-        return meals // Return the list of users (could be empty if request fails)
+            mainHandler.post {
+                onComplete(meals)
+            }
+        }
     }
 
     fun GetAllStrength(): List<Strength> {
@@ -1218,6 +1274,7 @@ class DbAccess private constructor(){
             }
 
             Handler(Looper.getMainLooper()).post {
+                Log.d("Fuck", "Num Workouts: ${workout.size}")
                 onComplete(workout)
             }
         }
@@ -1306,6 +1363,49 @@ class DbAccess private constructor(){
                 ex.printStackTrace() // For debugging purposes
             }
             onComplete(workout) // Return the list of users (could be empty if request fails)
+        }
+    }
+
+    fun GetMealByName(name: String, date: LocalDate, onComplete: (Meal?) -> Unit) {
+        val executor = Executors.newSingleThreadExecutor()
+        var meal: Meal? = null
+
+        executor.execute {
+            try {
+                // Construct the URL for the GET request
+                val url = URL(apiUrl + epMeal + "/Name?name=$name&date=${date.year}-${date.monthValue}-${date.dayOfMonth}") // Assuming the endpoint is something like /users
+                val connection = url.openConnection() as HttpURLConnection
+
+                // Set the request method to GET
+                connection.requestMethod = "GET"
+                connection.setRequestProperty("Content-Type", "application/json; utf-8")
+
+                // Read the response message from the input stream
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader(connection.inputStream).use { reader ->
+                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val gson = GsonBuilder()
+                            .registerTypeAdapter(LocalDate::class.java, LocalDateSerializer())  // Register LocalDate serializer
+                            .registerTypeAdapter(LocalDate::class.java, LocalDateDeserializer())
+                            .create()
+
+                        // Deserialize the JSON array into a List<User>
+                        meal = gson.fromJson(jsonResponse, Meal::class.java)
+                    }
+                } else {
+                    // Handle error message if request fails
+                    InputStreamReader(connection.errorStream).use { reader ->
+                        Log.e("GetMealByNameError", reader.readText())
+                    }
+                }
+
+            } catch (ex: Exception) {
+                // Handle exceptions appropriately
+                Log.e("GetMealByNameError", ex.toString())
+                ex.printStackTrace() // For debugging purposes
+            }
+            onComplete(meal) // Return the list of users (could be empty if request fails)
         }
     }
 

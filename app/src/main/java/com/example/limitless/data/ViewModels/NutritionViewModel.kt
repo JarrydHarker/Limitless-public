@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.limitless.currentUser
 import com.example.limitless.data.DbAccess
 import com.example.limitless.data.Meal
+import com.example.limitless.data.MealFood
 import com.example.limitless.data.Ratios
 import com.example.limitless.data.dbAccess
 import com.example.limitless.nutritionViewModel
@@ -24,7 +25,17 @@ class NutritionViewModel(val currentDate: LocalDate , var calorieWallet: Double,
     var arrMeals: MutableList<Meal> = mutableListOf()
 
     fun CreateMeal(meal: Meal) {
-        dbAccess.CreateMeal(meal)
+        dbAccess.CreateMeal(meal){
+            dbAccess.GetMealByName(meal.name, currentDate){ DBmeal ->
+                if (DBmeal != null) {
+                    for(food in meal.arrFoods){
+                        dbAccess.CreateMealFood(MealFood(mealId = DBmeal.mealId!!,date = currentDate, foodId = food.foodId!!, userId = currentUser?.userId!!))
+                    }
+                }
+            }
+        }
+
+
 
         // Add the meal to the calorie counter's meal list
         arrMeals.add(meal)

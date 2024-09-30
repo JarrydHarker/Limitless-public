@@ -322,8 +322,6 @@ private fun handleFailure(type: String, e: GetCredentialException) {
 
                             onComplete(true)
                         }
-
-
                     } catch (e: GoogleIdTokenParsingException) {
                         Log.e(TAG, "Received an invalid google id token response", e)
                     }
