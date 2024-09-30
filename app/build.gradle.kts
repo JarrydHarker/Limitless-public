@@ -61,5 +61,10 @@ dependencies {
     implementation ("com.google.android.gms:play-services-auth:20.7.0")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation("com.github.1902shubh:SendMail:1.0.0")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.mockito:mockito-core:5.2.1")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
+    testImplementation ("org.robolectric:robolectric:4.9")
+
 
 }

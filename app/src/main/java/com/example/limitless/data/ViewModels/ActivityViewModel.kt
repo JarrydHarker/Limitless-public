@@ -10,7 +10,7 @@ import java.time.LocalDate
 class ActivityViewModel(val currentDate: LocalDate) {
     var arrWorkouts: MutableList<Workout>? = null
     var steps = 0
-    val db = DbAccess.GetInstance()
+    var db = DbAccess.GetInstance()
 
     fun AddWorkout(workout: Workout) {
         db.CreateWorkout(workout)
