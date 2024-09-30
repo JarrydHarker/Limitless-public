@@ -6,12 +6,12 @@ The Limitless Fitness App is a comprehensive mobile application designed to help
 
 ## Features
 
-Calorie Counter: Track daily calorie intake by scanning barcodes, searching for food, or adding custom meals.
-Personalized Goals: Set fitness goals such as weight loss or gain and specify a time period to achieve them.
-Nutritional Tracking: Monitor macronutrients (protein, fiber, carbs, fats) with values rounded to two decimal places.
-Exercise Tracking: Log and categorize various types of exercises.
-Custom Workouts: Add and manage custom workout routines.
-Visual Progress: Track fitness and nutritional progress with visual indicators and graphs.
+- **Calorie Counter**: Track daily calorie intake by scanning barcodes, searching for food, or adding custom meals.
+- **Personalized Goals**: Set fitness goals such as weight loss or gain and specify a time period to achieve them.
+- **Nutritional Tracking**: Monitor macronutrients (protein, fiber, carbs, fats) with values rounded to two decimal places.
+- **Exercise Tracking**: Log and categorize various types of exercises.
+- **Custom Workouts**: Add and manage custom workout routines.
+- **Visual Progress**: Track fitness and nutritional progress with visual indicators and graphs.
 
 ## Usage
 1. Launching the App
