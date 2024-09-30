@@ -1,12 +1,14 @@
 package com.example.limitless
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.Window
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.SeekBar
 import android.widget.TextView
@@ -30,6 +32,12 @@ class Goal_page : AppCompatActivity() {
         val lblStepGoal = findViewById<TextView>(R.id.lblGoalSteps_GP)
         val lblWeightGoal = findViewById<TextView>(R.id.lblGoalWeight_GP)
         val lblCalorieGoal = findViewById<TextView>(R.id.lblGoalCalorie_GP)
+        val Back: ImageView = findViewById(R.id.GP_ivBack)
+
+        Back.setOnClickListener{
+            val intent = Intent(this, Settings::class.java)
+            startActivity(intent)
+        }
 
         lblStepGoal.setOnClickListener {
             showStepDialog()
