@@ -10,6 +10,7 @@ import android.view.Gravity
 import android.view.Window
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
@@ -20,10 +21,15 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.limitless.R
 import com.example.limitless.Timer
 import com.example.limitless.activityViewModel
+import com.example.limitless.data.Strength
+import com.example.limitless.data.ViewModels.ActivityViewModel
+import com.example.limitless.data.Workout
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 class Log_Exercise : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -38,9 +44,9 @@ class Log_Exercise : AppCompatActivity() {
         val lvExercises: ListView = findViewById(R.id.listSets_LE)
         val btnAddSet = findViewById<Button>(R.id.btnAddSet_LE)
         val btnLogSet = findViewById<Button>(R.id.btnLogSet_LE)
-
         val workoutId = intent.getIntExtra("workoutId", -1)
         val currentWorkout = activityViewModel.GetWorkout(workoutId)
+
 
         if (currentWorkout == null) {
             Toast.makeText(this, "Workout not found", Toast.LENGTH_SHORT).show()
@@ -69,6 +75,12 @@ class Log_Exercise : AppCompatActivity() {
                     Toast.makeText(this, "No exercises to remove", Toast.LENGTH_SHORT).show()
                 }
             }
+
+            btnAddSet.setOnClickListener{
+                Toast.makeText(this, "This is still in development", Toast.LENGTH_SHORT).show()
+            }
+
+
         }
 
 
@@ -140,6 +152,47 @@ class Log_Exercise : AppCompatActivity() {
 
         btnReset.setOnClickListener {
             Ticktimer.reset(time)
+        }
+
+        dialog.show()
+    }
+
+    private fun ShowDialogAddSet(exerciseAdapter: ArrayAdapter<String>, currentWorkout: Workout) {
+        val dialog = Dialog(this@Log_Exercise)
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.add_set_dialog)
+        dialog.window!!.attributes.windowAnimations = R.style.dialogAnimation
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
+        dialog.window!!.setGravity(Gravity.BOTTOM)
+
+        val txtReps = dialog.findViewById<EditText>(R.id.txtReps_AS)
+        val btnAddSet = dialog.findViewById<Button>(R.id.btnAddSet_AS)
+
+        btnAddSet.setOnClickListener {
+            val reps = txtReps.text.toString().toIntOrNull()
+            if (reps != null && currentWorkout!!.arrExercises.isNotEmpty()) {
+                val exercise = currentWorkout.arrExercises[0] // Assuming you want to add to the first exercise
+                exercise.strength?.let {
+                    it.sets += 1
+                    it.repetitions += reps
+                } ?: run {
+                    exercise.strength = Strength(sets = 1, repetitions = reps)
+                }
+
+                // Update the ListView
+                val exerciseDetails = currentWorkout.arrExercises.map {
+                    "Exercise: ${it.GetName()}, Sets: ${it.strength?.sets ?: 0}, Reps: ${it.strength?.repetitions ?: 0}"
+                }
+                exerciseAdapter.clear()
+                exerciseAdapter.addAll(exerciseDetails)
+                exerciseAdapter.notifyDataSetChanged()
+
+                dialog.dismiss()
+            } else {
+                Toast.makeText(this, "Please enter valid reps", Toast.LENGTH_SHORT).show()
+            }
         }
 
         dialog.show()
