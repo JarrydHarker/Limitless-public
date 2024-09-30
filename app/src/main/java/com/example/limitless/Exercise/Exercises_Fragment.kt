@@ -71,7 +71,7 @@ class Exercises_Fragment : Fragment() {
         dbAccess.GetUserWorkoutsByDate(currentUser?.userId!!, nutritionViewModel.currentDate) { workouts ->
             arrWorkouts.addAll(workouts)
 
-            for (workout in arrWorkouts) {
+            for (workout in activityViewModel.arrWorkouts) {
                 workoutAdapter.add(workout.name)
             }
 
@@ -80,14 +80,13 @@ class Exercises_Fragment : Fragment() {
         }
 
         lvWorkouts.setOnItemClickListener { parent, view, position, id ->
-            activityViewModel.currentWorkout = arrWorkouts[position]
+            activityViewModel.currentWorkout = activityViewModel.arrWorkouts[position] //arrWorkouts[position]
 
-            dbAccess.GetExercisesByWorkoutId(activityViewModel.currentWorkout?.workoutId){ exercises ->
-                Log.d("Fuck", "exercises: ${exercises.size}")
-                activityViewModel.currentWorkout?.AddExercises(exercises)
-                val intent = Intent(requireActivity(), Start_Workout::class.java)
+            //dbAccess.GetExercisesByWorkoutId(activityViewModel.currentWorkout?.workoutId){ exercises ->
+                //activityViewModel.currentWorkout?.AddExercises(exercises)
+                val intent = Intent(requireActivity(), Log_Exercise::class.java)
                 startActivity(intent)
-            }
+            //}
         }
 
         val ttb = AnimationUtils.loadAnimation(view.context, R.anim.ttb)
