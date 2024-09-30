@@ -21,6 +21,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import com.example.limitless.Exercise_Summary
 import com.example.limitless.R
 import com.example.limitless.activityViewModel
 import com.example.limitless.currentUser
@@ -77,6 +78,11 @@ class Exercises_Fragment : Fragment() {
 
             workoutAdapter.notifyDataSetChanged()
             lvWorkouts.adapter = workoutAdapter
+        }
+
+        lvWorkouts.setOnItemClickListener { parent, view, position, id ->
+            val intent = Intent(requireActivity(), Exercise_Summary::class.java)
+            startActivity(intent)
         }
 
         val ttb = AnimationUtils.loadAnimation(view.context, R.anim.ttb)
