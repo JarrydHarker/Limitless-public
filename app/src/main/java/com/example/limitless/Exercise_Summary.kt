@@ -14,6 +14,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.limitless.Exercise.Exercise_Activity
 import com.example.limitless.Exercise.Log_Exercise
 import com.example.limitless.data.Exercise
 import java.util.concurrent.Executors
@@ -48,12 +49,9 @@ class Exercise_Summary : AppCompatActivity() {
         }
 
         btnBack.setOnClickListener {
-            val intent = Intent(this, Exercise::class.java)
+            val intent = Intent(this, Exercise_Activity::class.java)
             startActivity(intent)
         }
-
-
-
 
     }
 
