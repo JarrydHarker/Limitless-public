@@ -47,23 +47,6 @@ On the first launch or within the Goals section, set your desired fitness goals:
 Choose between Weight Loss or Weight Gain.
 Specify the target period (e.g., weeks or months).
 
-## Installation
-
-1. **Clone the Repository**:
-    ```bash
-    git clone https://github.com/VCNMB/vcnmb-opsc-2024-poe-limitless.git
-    ```
-
-2. **Install Dependencies**:
-    ```bash
-    dotnet restore
-    ```
-
-3. **Run the Application**:
-    ```bash
-    dotnet run
-    ```
-
 
 ## Navigating the Menu
 
