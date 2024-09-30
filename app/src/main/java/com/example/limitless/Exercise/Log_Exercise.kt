@@ -1,20 +1,25 @@
 package com.example.limitless.Exercise
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.Window
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.limitless.R
 import com.example.limitless.Timer
+import com.example.limitless.activityViewModel
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
@@ -30,10 +35,35 @@ class Log_Exercise : AppCompatActivity() {
         }
 
         val btnRestTimer = findViewById<Button>(R.id.btnRestTimer_LE)
+        val lvExercises: ListView = findViewById(R.id.listSets_LE)
+        val workoutId = intent.getIntExtra("workoutId", -1)
+        val currentWorkout = activityViewModel.GetWorkout(workoutId)
+
+        if (currentWorkout == null) {
+            Toast.makeText(this, "Workout not found", Toast.LENGTH_SHORT).show()
+            finish()
+        } else {
+
+            if (currentWorkout.arrExercises == null) {
+                currentWorkout.arrExercises = mutableListOf()
+            }
+
+            val exerciseDetails = currentWorkout.arrExercises.map {
+                "Exercise: ${it.GetName()}, Sets: ${it.strength?.sets ?: 0}, Reps: ${it.strength?.repetitions ?: 0}"
+            }
+
+            val exerciseAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, exerciseDetails)
+            lvExercises.adapter = exerciseAdapter
+        }
+
+
+
 
         btnRestTimer.setOnClickListener {
             ShowDialog()
         }
+
+
     }
 
     fun ShowDialog(){
