@@ -60,6 +60,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Nicks Animation things
+        val btnGo = findViewById<Button>(R.id.btnGo)
+        btnGo.setOnClickListener{
+        val intent = Intent(this,Exercise_Activity::class.java)
+        startActivity(intent)
+        }
+
+
         val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
 //        val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
         val btt = AnimationUtils.loadAnimation(this, R.anim.btt)

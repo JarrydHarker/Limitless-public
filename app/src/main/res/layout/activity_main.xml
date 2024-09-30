@@ -122,18 +122,102 @@
                 android:text="Popular Exercises"
                 android:textSize="20sp" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout2"
+            <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_height="162dp">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/PE_ListExercises"
-                    android:layout_width="match_parent"
-                    android:layout_height="144dp" />
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="340dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/exerciselistbox">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout15"
+                            android:layout_width="204dp"
+                            android:layout_height="163dp"
+                            android:layout_marginStart="10dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/imageView21"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="1.0">
+
+                            <TextView
+                                android:id="@+id/textView51"
+                                android:layout_width="match_parent"
+                                android:layout_height="56dp"
+                                android:paddingTop="20dp"
+                                android:text="Leons Leg Day"
+                                android:textSize="20sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="38dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/textView52"
+                                    android:layout_width="18dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:text="30m"
+                                    android:textAlignment="viewStart" />
+
+                                <TextView
+                                    android:id="@+id/textView53"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:text=""
+                                    android:textAlignment="center" />
+                            </LinearLayout>
+
+                            <Button
+                                android:id="@+id/btnGo"
+                                android:layout_width="136dp"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="#fff"
+                                android:text="Go"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/imageView21"
+                            android:layout_width="130dp"
+                            android:layout_height="161dp"
+                            android:layout_weight="1"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="1.0"
+                            tools:src="@drawable/headphones_icon" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/PE_ListExercises"
+                        android:layout_width="match_parent"
+                        android:layout_height="144dp" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
 
             <TextView
                 android:id="@+id/textView20"
