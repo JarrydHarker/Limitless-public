@@ -229,7 +229,7 @@ class Log_Meal : AppCompatActivity() {
 
             var mealDescription: String
 
-            if(txtMealName.text.isNotEmpty() && txtFoodSearch.text.isNotEmpty()){
+            if(txtMealName.text.isNotEmpty()){
                 for(food in mealFoods){
                     mealDescription = "${mealFoods.indexOf(food) + 1}. ${food.description}: ${food.calories} kcal"
                     mealListAdapter.add(mealDescription)

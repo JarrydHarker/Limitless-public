@@ -196,9 +196,8 @@ class DbAccess private constructor(){
         }
     }
 
-    fun CreateExercise(exercise: Exercise): String {
+    fun CreateExercise(exercise: Exercise, onComplete: (String) -> Unit) {
         val executor = Executors.newSingleThreadExecutor()
-
         var responseMessage = ""
 
         executor.execute{
@@ -232,15 +231,13 @@ class DbAccess private constructor(){
                         responseMessage = reader.readText()
                     }
                 }
-
             }catch (ex: Exception){
                 // Handle exceptions appropriately
                 Log.e("DbAccessError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
+            onComplete(responseMessage)
         }
-
-        return responseMessage
     }
 
     fun CreateCardio(cardio: Cardio): String {
@@ -1316,7 +1313,6 @@ class DbAccess private constructor(){
                 Log.e("GetAllWorkoutError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
-
             Handler(Looper.getMainLooper()).post {
                 onComplete(exercises)
             }

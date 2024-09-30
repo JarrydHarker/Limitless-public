@@ -47,4 +47,19 @@ class ActivityViewModel(val currentDate: LocalDate) {
 
         return null
     }
+
+    fun SaveWorkout(currentWorkout: Workout) {
+        for(exercise in currentWorkout.arrExercises){
+            exercise.workoutId = currentWorkout.workoutId!!
+            dbAccess.CreateExercise(exercise){
+                if(exercise.strength != null){
+                    dbAccess.CreateStrength(exercise.strength!!)
+                }
+
+                if(exercise.cardio != null){
+                    dbAccess.CreateCardio(exercise.cardio!!)
+                }
+            }
+        }
+    }
 }

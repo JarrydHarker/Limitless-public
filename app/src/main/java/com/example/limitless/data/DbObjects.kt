@@ -243,7 +243,7 @@ class Workout(
 class Exercise(
     var exerciseId: Int? = 0,
     var movement: Movement,
-
+    var workoutId: Int = 0
 ){
     fun GetName(): String {
         return movement.name

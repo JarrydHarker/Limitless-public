@@ -38,6 +38,7 @@ import com.example.limitless.data.Exercise
 import com.example.limitless.data.Movement
 import com.example.limitless.data.Strength
 import com.example.limitless.data.Workout
+import com.example.limitless.nutritionViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -91,6 +92,8 @@ class New_Workout : AppCompatActivity() {
             if(lvNewWorkout.isNotEmpty())
             {
                 currentWorkout!!.AddExercises(workoutExercises)
+
+                activityViewModel.SaveWorkout(currentWorkout)
 
                 val intent = Intent(this, Exercise_Activity::class.java)
                 startActivity(intent)
@@ -213,6 +216,8 @@ class New_Workout : AppCompatActivity() {
         })
 
         txtAddExercise.setOnItemClickListener { parent, view, position, id ->
+
+
             // Get the index of the item clicked
             val itemIndex = position
             currentMove = arrMoves[itemIndex]
