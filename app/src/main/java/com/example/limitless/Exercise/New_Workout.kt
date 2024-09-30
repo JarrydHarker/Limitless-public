@@ -71,7 +71,7 @@ class New_Workout : AppCompatActivity() {
         val currentWorkout = activityViewModel.GetWorkout(workoutId)
 
         if(currentWorkout == null){
-            Toast.makeText(this, "If you can see this, the app is fucked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Invalid Workout", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, Exercise_Activity::class.java)
             startActivity(intent)
         }

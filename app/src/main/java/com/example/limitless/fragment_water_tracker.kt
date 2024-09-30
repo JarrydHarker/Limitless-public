@@ -50,7 +50,7 @@ class fragment_water_tracker : Fragment() {
         waterGraph.setBarHeight(20f)
         waterGraph.update()
 
-        txtViewWater.text = "0 L drank"
+        txtViewWater.text = "$currentIntake L drank"
         waterGraph.visibility = View.VISIBLE
 
         val addWaterButton: Button = view.findViewById(R.id.addWater)
