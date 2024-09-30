@@ -384,7 +384,7 @@ class DbAccess private constructor(){
         }
     }
 
-    fun CreateStrength(strength: Strength): String {
+    fun CreateStrength(strength: Strength, onComplete: (String) -> Unit) {
         val executor = Executors.newSingleThreadExecutor()
 
         var responseMessage = ""
@@ -426,9 +426,8 @@ class DbAccess private constructor(){
                 Log.e("DbAccessError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
+            onComplete(responseMessage)
         }
-
-        return responseMessage
     }
 
     fun CreateMeal(meal: Meal, onComplete: (String) -> Unit){
