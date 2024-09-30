@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/ic_Report"
-        android:icon="@drawable/baseline_assignment_24"
-        android:title="Report"/>
+        android:id="@+id/ic_home"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home"/>
     <item
         android:id="@+id/ic_workouts"
         android:icon="@drawable/workout"
         android:title="Workout"/>
-    <item
-        android:id="@+id/ic_home"
-        android:icon="@drawable/baseline_home_24"
-        android:title="Home"/>
     <item
         android:id="@+id/ic_nutrition"
         android:icon="@drawable/nutrition"

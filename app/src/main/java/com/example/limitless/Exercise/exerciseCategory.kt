@@ -31,10 +31,7 @@ class exerciseCategory : AppCompatActivity() {
                     navigateToActivityRight(Diet_Activity::class.java)
                     true
                 }
-                R.id.ic_Report -> {
-                    navigateToActivityLeft(Report_Activity::class.java)
-                    true
-                }
+
                 R.id.ic_settings -> {
                     navigateToActivityRight(Settings::class.java)
                     true

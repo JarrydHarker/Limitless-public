@@ -76,6 +76,8 @@ class MainActivity : AppCompatActivity() {
         LinearLayout3.startAnimation(btt)
         //till here
 
+        ThemeManager.applyTheme(this)
+
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
         val dailyActivity: CardView = findViewById(R.id.dailyActivityCard)
         val workout: CardView = findViewById(R.id.workoutsCard)
@@ -87,17 +89,14 @@ class MainActivity : AppCompatActivity() {
         bottomNavBar.setOnNavigationItemSelectedListener{item ->
             when (item.itemId){
                 R.id.ic_workouts -> {
-                    navigateToActivityLeft(Exercise_Activity::class.java)
+                    navigateToActivityRight(Exercise_Activity::class.java)
                     true
                 }
                 R.id.ic_nutrition -> {
                     navigateToActivityRight(Diet_Activity::class.java)
                     true
                 }
-                R.id.ic_Report -> {
-                    navigateToActivityLeft(Report_Activity::class.java)
-                    true
-                }
+
                 R.id.ic_settings -> {
                     navigateToActivityRight(Settings::class.java)
                     true

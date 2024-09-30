@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.limitless.R
+import com.example.limitless.ThemeManager
 import com.example.limitless.currentUser
 import com.example.limitless.data.Food
 import com.example.limitless.data.Meal

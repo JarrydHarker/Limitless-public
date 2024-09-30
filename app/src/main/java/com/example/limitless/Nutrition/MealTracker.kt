@@ -19,6 +19,8 @@ class MealTracker : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meal_tracker)
 
+
+
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
 
         ThemeManager.updateNavBarColor(this, bottomNavBar)
@@ -34,10 +36,7 @@ class MealTracker : AppCompatActivity() {
                     navigateToActivityLeft(MainActivity::class.java)
                     true
                 }
-                R.id.ic_Report -> {
-                    navigateToActivityLeft(Report_Activity::class.java)
-                    true
-                }
+
                 R.id.ic_settings -> {
                     navigateToActivityRight(Settings::class.java)
                     true

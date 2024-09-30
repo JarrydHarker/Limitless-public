@@ -25,7 +25,7 @@ class Report_Activity : AppCompatActivity() {
 
         ThemeManager.updateNavBarColor(this, bottomNavBar)
 
-        bottomNavBar.setSelectedItemId(R.id.ic_Report)
+        //bottomNavBar.setSelectedItemId(R.id.ic_Report)
         bottomNavBar.setOnNavigationItemSelectedListener{item ->
             when (item.itemId){
                 R.id.ic_nutrition -> {

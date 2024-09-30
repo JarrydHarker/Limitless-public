@@ -10,5 +10,8 @@
     <style name="CustomBottomNavigation" parent="Widget.Design.BottomNavigationView">
         <item name="background">@color/lightBackground</item>
     </style>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowBackground">@color/lightBackground</item>
+    </style>
 </resources>
 

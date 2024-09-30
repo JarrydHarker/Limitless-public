@@ -88,11 +88,6 @@ class Settings : AppCompatActivity() {
                     true
                 }
 
-                R.id.ic_Report -> {
-                    navigateToActivityLeft(Report_Activity::class.java)
-                    true
-                }
-
                 R.id.ic_home -> {
                     navigateToActivityLeft(MainActivity::class.java)
                     true
