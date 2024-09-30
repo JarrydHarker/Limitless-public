@@ -80,13 +80,12 @@ class Exercises_Fragment : Fragment() {
         }
 
         lvWorkouts.setOnItemClickListener { parent, view, position, id ->
-            activityViewModel.currentWorkout = activityViewModel.arrWorkouts[position] //arrWorkouts[position]
+            val selectedWorkout = activityViewModel.arrWorkouts[position]
+            activityViewModel.currentWorkout = selectedWorkout
 
-            //dbAccess.GetExercisesByWorkoutId(activityViewModel.currentWorkout?.workoutId){ exercises ->
-                //activityViewModel.currentWorkout?.AddExercises(exercises)
-                val intent = Intent(requireActivity(), Log_Exercise::class.java)
-                startActivity(intent)
-            //}
+            val intent = Intent(requireActivity(), Log_Exercise::class.java)
+            intent.putExtra("workoutId", selectedWorkout.workoutId)
+            startActivity(intent)
         }
 
         val ttb = AnimationUtils.loadAnimation(view.context, R.anim.ttb)
