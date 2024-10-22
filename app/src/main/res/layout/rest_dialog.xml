@@ -36,7 +36,7 @@
         android:layout_height="47dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="120dp"
-        android:backgroundTint="#6d61da"
+        android:backgroundTint="#FF934E"
         android:text="-10"
         app:cornerRadius="10dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
         android:layout_marginEnd="40dp"
-        android:backgroundTint="#6d61da"
+        android:backgroundTint="#FF934E"
         android:text="+10"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,13 +63,14 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="108dp"
         android:layout_marginEnd="40dp"
-        android:backgroundTint="#6d61da"
+        android:backgroundTint="#FF934E"
         android:text="Start"
         android:textAlignment="center"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnMinus_RD" />
+        app:layout_constraintTop_toBottomOf="@+id/btnMinus_RD"
+        app:strokeWidth="1dp" />
 
     <Button
         android:id="@+id/btnReset_RD"
@@ -77,7 +78,7 @@
         android:layout_height="57dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:backgroundTint="#6d61da"
+        android:backgroundTint="#FF934E"
         android:text="Reset"
         android:textAlignment="center"
         app:cornerRadius="10dp"
@@ -86,7 +87,8 @@
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnStart_RD"
-        app:layout_constraintVertical_bias="0.328" />
+        app:layout_constraintVertical_bias="0.328"
+        app:strokeWidth="1dp" />
 
     <Button
         android:id="@+id/btnClose_RD"
