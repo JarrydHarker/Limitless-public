@@ -57,7 +57,7 @@
                     android:id="@+id/textView5"
                     android:layout_width="match_parent"
                     android:layout_height="29dp"
-                    android:text="Goal"
+                    android:text="@string/goal"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
@@ -73,7 +73,7 @@
                     android:id="@+id/textView7"
                     android:layout_width="match_parent"
                     android:layout_height="31dp"
-                    android:text="Food"
+                    android:text="@string/food"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
@@ -89,7 +89,7 @@
                     android:id="@+id/textView9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Exercise"
+                    android:text="@string/exercise"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
@@ -107,7 +107,7 @@
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Calories"
+            android:text="@string/calories"
             android:textColor="@color/white"
             android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -121,7 +121,7 @@
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Remaining = Goal - Food + Exercise"
+            android:text="@string/remaining_goal_food_exercise"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -178,7 +178,7 @@
                     android:id="@+id/Fatstxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Fats" />
+                    android:text="@string/fats" />
 
                 <TextView
                     android:id="@+id/lblFats_RSF"
@@ -229,7 +229,7 @@
                     android:id="@+id/carbtxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Carbs" />
+                    android:text="@string/carbs" />
 
                 <TextView
                     android:id="@+id/lblCarbs_RSF"
@@ -280,7 +280,7 @@
                     android:id="@+id/fibretxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Fibre" />
+                    android:text="@string/fibre" />
 
                 <TextView
                     android:id="@+id/lblCalories_RSF"
@@ -329,7 +329,7 @@
                     android:id="@+id/proteintxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Protein" />
+                    android:text="@string/protein" />
 
                 <TextView
                     android:id="@+id/lblProtein_RSF"

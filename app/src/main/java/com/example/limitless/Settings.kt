@@ -1,12 +1,17 @@
 package com.example.limitless
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Switch
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
@@ -14,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.limitless.Exercise.Exercise_Activity
 import com.example.limitless.Nutrition.Diet_Activity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.Locale
 
 class Settings : AppCompatActivity() {
     lateinit var bottomNavBar: BottomNavigationView
@@ -28,10 +34,13 @@ class Settings : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        LoadLocate()
         //Nicks Animation things
         val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
         val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
         val btt = AnimationUtils.loadAnimation(this, R.anim.btt)
+
+        val btnLanguage = findViewById<Button>(R.id.btnLanguage_ST)
 //        val btt2 = AnimationUtils.loadAnimation(this, R.anim.btt2)
 //        val btt3 = AnimationUtils.loadAnimation(this, R.anim.btt3)
 //        val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
@@ -74,6 +83,10 @@ class Settings : AppCompatActivity() {
                 ThemeManager.saveDarkModeState(this, isChecked)
                 recreateActivitySmoothly()
             }
+        }
+
+        btnLanguage.setOnClickListener {
+            showDialog()
         }
         bottomNavBar.setSelectedItemId(R.id.ic_settings)
         bottomNavBar.setOnNavigationItemSelectedListener { item ->
@@ -122,5 +135,43 @@ class Settings : AppCompatActivity() {
             this, R.anim.slide_in_left, R.anim.slide_out_right
         )
         startActivity(intent, options.toBundle())
+    }
+
+    private fun showDialog(){
+        val languages = arrayOf("English", "Afrikaans")
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Select Language")
+        builder.setSingleChoiceItems(languages, -1){ dialog, which ->
+            if(which == 0){
+                setLocate("en")
+                recreate()
+            }else if(which == 1){
+                setLocate("af")
+                recreate()
+            }
+
+            dialog.dismiss()
+
+        }
+        val dai = builder.create()
+        dai.show()
+    }
+
+    private fun setLocate(lang: String){
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+        val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+        editor.putString("My_Lang", lang)
+        editor.apply()
+    }
+
+    private fun LoadLocate(){
+        val sharedPreference = getSharedPreferences("Settings", Activity.MODE_PRIVATE)
+        val language = sharedPreference.getString("My_Lang", "")
+        setLocate(language!!)
     }
 }

@@ -44,7 +44,6 @@ class ActivityViewModel(val currentDate: LocalDate) {
                 return workout
             }
         }
-
         return null
     }
 

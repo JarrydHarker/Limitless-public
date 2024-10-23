@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
                 android:paddingBottom="16dp"
-                android:text="Recent Activities"
+                android:text="@string/recent_activities"
                 android:textSize="20sp" />
 
             <LinearLayout
@@ -74,7 +74,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Daily Activity"
+                            android:text="@string/daily_activity1"
                             android:textColor="@android:color/white"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -106,7 +106,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Workouts"
+                            android:text="@string/workouts"
                             android:textColor="@android:color/white"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -119,7 +119,7 @@
                 android:layout_gravity="left"
                 android:paddingLeft="20dp"
                 android:paddingBottom="16dp"
-                android:text="Popular Exercises"
+                android:text="@string/popular_exercises"
                 android:textSize="20sp" />
 
             <HorizontalScrollView
@@ -224,7 +224,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:text="Overview"
+                android:text="@string/overview"
                 android:textSize="20sp" />
 
             <androidx.fragment.app.FragmentContainerView

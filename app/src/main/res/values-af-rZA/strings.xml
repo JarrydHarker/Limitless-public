@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="daily_activity">Daaglikse Aktiwieteit</string>
+    <string name="add_workout">Voeg Oefensessie By</string>
+    <string name="cardio">Kardio</string>
+    <string name="plyometrics">Pliometrie</string>
+    <string name="stretching">Strek</string>
+    <string name="exercises">Oefening</string>
+    <string name="go">Gaan</string>
+    <string name="listData" />
+    <string name="listData2" />
+
+    <string name="notifications">Kennisgewings</string>
+    <string name="terms_amp_conditions"><![CDATA[Bepalings en voorwaardes]]></string>
+    <string name="dark_mode">Donker modus</string>
+    <string name="language">Taal</string>
+    <string name="privacy_policy">Privaatheidsbeleid</string>
+    <string name="set_goals">Stel doelwitte</string>
+    <string name="logout">Teken uit</string>
+
+    <string name="today">Vandag</string>
+    <string name="add_meal">Voeg maaltyd by</string>
+    <string name="calories">Kalorieë</string>
+    <string name="exercise">Oefening</string>
+    <string name="food">Kos</string>
+    <string name="goal">Doelwit</string>
+    <string name="fibre">Vesel</string>
+    <string name="carbs">Koolhidrate</string>
+    <string name="fats">Vette</string>
+    <string name="protein">Protiene</string>
+    <string name="remaining_goal_food_exercise">Oorbly = Doelwit - Kos + Oefening</string>
+    <string name="water_intake">Water Inname</string>
+
+    <!-- exercise category -->
+    <string name="recent_exercise">Onlangse Oefening</string>
+    <string name="go1">Gaan</string>
+    <string name="pick_a_category">Kies n katogorie</string>
+    <string name="cardio1">Kardio</string>
+    <string name="plyometrics1">Pliometrie</string>
+    <string name="stretching1">Streke</string>
+    <string name="strength">Krag</string>
+    <string name="powerlifting">Kragoptel</string>
+    <string name="strongman">Sterkman</string>
+    <string name="olympic_weightlifting">Olimpiese Gewigstoot</string>
+
+    <!-- exercise summary -->
+    <string name="focused_body_parts">Gefokusde liggaamsdele</string>
+    <string name="difficulty">Moeilikheid</string>
+    <string name="description">Beskrywing</string>
+    <string name="start">Begin</string>
+    <string name="back">Terug</string>
+    <string name="exercise_type">Oefening Tiepe</string>
+
+    <!-- Forgot password -->
+    <string name="forgot_password">Vergeet Wagwoord</string>
+    <string name="email">e-pos</string>
+    <string name="enter_email">Voer e-pos in</string>
+    <string name="cancel">Kanseleer</string>
+    <string name="reset_password">Herstel Wagwoord</string>
+
+    <!-- Goal Page -->
+    <string name="weight">Gewig</string>
+    <string name="calorie1">Kalorie</string>
+    <string name="steps">stappe</string>
+    <string name="click_to_add">Klik Hier</string>
+    <string name="click_to_add1">Klik Hier</string>
+    <string name="click_to_add2">Klik Hier</string>
+
+    <!-- Log exercise -->
+    <string name="goals1">Doelwitte</string>
+    <string name="rest_timer">Rus Timer</string>
+    <string name="add_set">Voeg stel by</string>
+    <string name="edit_sets">Wysig stelle</string>
+    <string name="log_set">Log Stel</string>
+
+    <!-- Log Meal -->
+    <string name="list_of_foods">Lys van voedsel:</string>
+    <string name="select_meal">Kies Maaltyd:</string>
+    <string name="log_meal">Log Ete</string>
+    <string name="create_new_meal">Skep nuwe maaltyd</string>
+
+    <!-- Login -->
+    <string name="login">Teken in</string>
+    <string name="username">Gebruikersnaam</string>
+    <string name="username1">Gebruikersnaam</string>
+    <string name="password">Wagwoord</string>
+    <string name="password1">Wagwoord</string>
+    <string name="login1">Teken in</string>
+    <string name="create_an_account">Skep n rekening</string>
+    <string name="forgot_password1">Vergete Wagwoord?</string>
+    <string name="or">of</string>
+    <string name="continue_with_google">Gaan voort met Google</string>
+
+    <!-- Main -->
+    <string name="recent_activities">Onlangse aktiwiteite</string>
+    <string name="daily_activity1">Daaglikse aktiwiteit</string>
+    <string name="workouts">Oefensessies</string>
+    <string name="popular_exercises">Gewilde Oefeninge</string>
+    <string name="overview">Oorsig</string>
+
+    <string name="show_timer">Wys timer</string>
+
+    <!-- Meal Tracker -->
+    <string name="add">Voeg by</string>
+    <string name="add1">Voeg by</string>
+    <string name="add2">Voeg by</string>
+    <string name="breakfast">Ontbuit</string>
+    <string name="lunch">Middagete</string>
+    <string name="dinner">Aandete</string>
+    <string name="recommended_600_1000_calories">Aanbevole 600-1000 kalorieë</string>
+    <string name="recommended_500_800_calories">Aanbevole 500-800 kalorieë</string>
+    <string name="recommended_600_1000_calories1">Aanbevole 600-1000 kalorieë</string>
+
+    <!-- New Workout -->
+    <string name="create_exercise">Skep oefening</string>
+    <string name="new_workout">Nuwe Oefensessie</string>
+    <string name="pick_an_exercise">Kies n Oefening</string>
+    <string name="add_workout1">Voeg Oefensessie By</string>
+
+    <!-- Report Stats -->
+    <string name="consumed_today">Vandag Verbruik</string>
+    <string name="calc">Kal</string>
+    <string name="calories2">Kalorieë</string>
+    <string name="protein1">Protiene</string>
+    <string name="carbs1">Koolhidrate</string>
+    <string name="fats1">Vette</string>
+
+    <!-- Sign Up -->
+    <string name="sign_up">Meld aan</string>
+    <string name="email2">E-pos</string>
+    <string name="email3">E-pos</string>
+    <string name="password2">Wagwoord</string>
+    <string name="password3">Wagwoord</string>
+    <string name="sign_up1">Meld aan</string>
+    <string name="back1">Terug</string>
+
+    <!-- SSO password -->
+    <string name="confirm_password">Bevestig Wagwoord</string>
+    <string name="confirm">Bevestig</string>
+    <string name="enter_password">Voer Wagwoord In:</string>
+    <string name="back2">Terug</string>
+
+
+</resources>

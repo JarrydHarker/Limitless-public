@@ -2,4 +2,147 @@
     <string name="app_name">Limitless</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="daily_activity">Daily Activity</string>
+    <string name="add_workout">Add Workout</string>
+    <string name="cardio">Cardio</string>
+    <string name="plyometrics">Plyometrics</string>
+    <string name="stretching">Stretching</string>
+    <string name="exercises">Exercises</string>
+    <string name="go">Go</string>
+    <string name="listData" />
+    <string name="listData2" />
+
+    <!-- settings page -->
+    <string name="notifications">Notifications</string>
+    <string name="terms_amp_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="language">Language</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="set_goals">Set Goals</string>
+    <string name="logout">Logout</string>
+
+    <!-- diet stats page -->
+    <string name="today">Today</string>
+    <string name="add_meal">Add Meal</string>
+    <string name="calories">Calories</string>
+    <string name="exercise">Exercise</string>
+    <string name="food">Food</string>
+    <string name="goal">Goal</string>
+    <string name="fibre">Fibre</string>
+    <string name="carbs">Carbs</string>
+    <string name="fats">Fats</string>
+    <string name="protein">Protein</string>
+    <string name="remaining_goal_food_exercise">Remaining = Goal - Food + Exercise</string>
+    <string name="water_intake">Water Intake</string>
+
+    <!-- exercise category -->
+    <string name="recent_exercise">Recent Exercise</string>
+    <string name="go1">Go</string>
+    <string name="pick_a_category">Pick a category</string>
+    <string name="cardio1">Cardio</string>
+    <string name="plyometrics1">Plyometrics</string>
+    <string name="stretching1">Stretching</string>
+    <string name="strength">Strength</string>
+    <string name="powerlifting">Powerlifting</string>
+    <string name="strongman">Strongman</string>
+    <string name="olympic_weightlifting">Olympic Weightlifting</string>
+
+    <!-- exercise summary -->
+    <string name="focused_body_parts">Focused Body Parts</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="description">Description</string>
+    <string name="start">Start</string>
+    <string name="back">Back</string>
+    <string name="exercise_type">Exercise Type</string>
+
+    <!-- Forgot password -->
+    <string name="forgot_password">Forgot Password</string>
+    <string name="email">Email</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="cancel">Cancel</string>
+    <string name="reset_password">Reset Password</string>
+
+    <!-- Goal Page -->
+    <string name="weight">Weight</string>
+    <string name="calorie1">Calorie</string>
+    <string name="steps">Steps</string>
+    <string name="click_to_add">Click to Add</string>
+    <string name="click_to_add1">Click to Add</string>
+    <string name="click_to_add2">Click to Add</string>
+
+    <!-- Log exercise -->
+    <string name="goals1">Goals</string>
+    <string name="rest_timer">Rest Timer</string>
+    <string name="add_set">Add Set</string>
+    <string name="edit_sets">Edit Sets</string>
+    <string name="log_set">Log Set</string>
+
+    <!-- Log Meal -->
+    <string name="list_of_foods">List of Foods:</string>
+    <string name="select_meal">Select Meal:</string>
+    <string name="log_meal">Log Meal</string>
+    <string name="create_new_meal">Create New Meal</string>
+
+    <!-- Login -->
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="username1">Username</string>
+    <string name="password">Password</string>
+    <string name="password1">Password</string>
+    <string name="login1">Login</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="forgot_password1">Forgot Password?</string>
+    <string name="or">or</string>
+    <string name="continue_with_google">Continue with Google</string>
+
+    <!-- Main -->
+    <string name="recent_activities">Recent Activities</string>
+    <string name="daily_activity1">Daily Activity</string>
+    <string name="workouts">Workouts</string>
+    <string name="popular_exercises">Popular Exercises</string>
+    <string name="overview">Overview</string>
+
+    <string name="show_timer">Show Timer</string>
+
+    <!-- Meal Tracker -->
+    <string name="add">Add</string>
+    <string name="add1">Add</string>
+    <string name="add2">Add</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="lunch">Lunch</string>
+    <string name="dinner">Dinner</string>
+    <string name="recommended_600_1000_calories">Recommended 600-1000 calories</string>
+    <string name="recommended_500_800_calories">Recommended 500-800 calories</string>
+    <string name="recommended_600_1000_calories1">Recommended 600-1000 calories</string>
+
+    <!-- New Workout -->
+    <string name="create_exercise">Create Exercise</string>
+    <string name="new_workout">New Workout</string>
+    <string name="pick_an_exercise">Pick an Exercise</string>
+    <string name="add_workout1">Add Workout</string>
+
+    <!-- Report Stats -->
+    <string name="consumed_today">Consumed Today</string>
+    <string name="calc">Calc</string>
+    <string name="calories2">Calories</string>
+    <string name="protein1">Protein</string>
+    <string name="carbs1">Carbs</string>
+    <string name="fats1">Fats</string>
+
+    <!-- Sign Up -->
+    <string name="sign_up">Sign Up</string>
+    <string name="email2">Email</string>
+    <string name="email3">Email</string>
+    <string name="password2">Password</string>
+    <string name="password3">Password</string>
+    <string name="sign_up1">Sign Up</string>
+    <string name="back1">Back</string>
+
+    <!-- SSO password -->
+    <string name="confirm_password">Confirm Password</string>
+    <string name="confirm">Confirm</string>
+    <string name="enter_password">Enter Password:</string>
+    <string name="back2">Back</string>
+
+
 </resources>

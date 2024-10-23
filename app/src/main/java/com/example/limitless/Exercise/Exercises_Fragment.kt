@@ -66,7 +66,10 @@ class Exercises_Fragment : Fragment() {
         val btnAddWorkout: Button = view.findViewById(R.id.btnAddWorkout_EF)
         val lvWorkouts: ListView = view.findViewById(R.id.listExercises_EF)
         val workoutAdapter = ArrayAdapter<String>(requireActivity(), android.R.layout.simple_dropdown_item_1line)
+
         val arrWorkouts: MutableList<Workout> = mutableListOf()
+        val adapter = Exercide_Adapter(requireActivity(), arrWorkouts)
+
 
         dbAccess.GetUserWorkoutsByDate(currentUser?.userId!!, nutritionViewModel.currentDate) { workouts ->
             arrWorkouts.addAll(workouts)
@@ -75,9 +78,12 @@ class Exercises_Fragment : Fragment() {
                 workoutAdapter.add(workout.name)
             }
 
-            workoutAdapter.notifyDataSetChanged()
-            lvWorkouts.adapter = workoutAdapter
+            adapter.notifyDataSetChanged()
+           //lvWorkouts.adapter = workoutAdapter
+            lvWorkouts.adapter = adapter
         }
+
+
 
         lvWorkouts.setOnItemClickListener { parent, view, position, id ->
             val selectedWorkout = activityViewModel.arrWorkouts[position]

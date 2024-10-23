@@ -40,7 +40,7 @@
             android:layout_marginTop="22dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="8dp"
-            android:text="Daily Activity"
+            android:text="@string/daily_activity"
             android:textAlignment="viewStart"
             android:textColor="@color/white"
             android:textSize="30sp"
@@ -56,7 +56,7 @@
             android:layout_marginEnd="35dp"
             android:layout_marginBottom="29dp"
             android:backgroundTint="#fff"
-            android:text="Add Workout"
+            android:text="@string/add_workout"
             android:textColor="#6d61da"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +99,7 @@
                     android:id="@+id/textView24"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cardio"
+                    android:text="@string/cardio"
                     android:textAlignment="center"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -122,7 +122,7 @@
                     android:id="@+id/textView25"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Plyometrics"
+                    android:text="@string/plyometrics"
                     android:textAlignment="center"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -145,7 +145,7 @@
                     android:id="@+id/textView26"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Stretching"
+                    android:text="@string/stretching"
                     android:textAlignment="center"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -253,10 +253,9 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
         android:paddingTop="10dp"
-        android:text="Exercises"
+        android:text="@string/exercises"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/listExercises_EF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -265,17 +264,16 @@
 
     <ListView
         android:id="@+id/listExercises_EF"
-        android:layout_width="0dp"
-        android:layout_height="292dp"
+        android:layout_width="355dp"
+        android:layout_height="242dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollViewCategories"
-        app:layout_constraintVertical_bias="0.943" />
+        app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
