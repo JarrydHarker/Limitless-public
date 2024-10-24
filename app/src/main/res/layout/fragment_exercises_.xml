@@ -168,7 +168,7 @@
                     android:id="@+id/textView27"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Strength"
+                    android:text="@string/strength1"
                     android:textAlignment="center"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -191,7 +191,7 @@
                     android:id="@+id/textView28"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Powerlifting"
+                    android:text="@string/powerlifting1"
                     android:textAlignment="center"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -214,7 +214,7 @@
                     android:id="@+id/textView29"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Strongman"
+                    android:text="@string/strongman1"
                     android:textAlignment="center"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -236,7 +236,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Olympic Weightlifting"
+                    android:text="@string/olympic_weightlifting1"
                     android:textAlignment="center"
                     android:textSize="14sp" />
             </LinearLayout>

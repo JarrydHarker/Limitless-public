@@ -23,7 +23,7 @@
             android:id="@+id/textView51"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reps"
+            android:text="@string/reps1"
             android:textAlignment="center"
             android:textSize="20sp" />
 
@@ -32,19 +32,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Enter Reps"
+            android:hint="@string/enter_reps"
             android:inputType="text" />
 
         <Button
             android:id="@+id/btnAddSet_AS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Set" />
+            android:text="@string/add_set1" />
 
         <Button
             android:id="@+id/btnClose_AS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Close" />
+            android:text="@string/close" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -144,5 +144,141 @@
     <string name="enter_password">Enter Password:</string>
     <string name="back2">Back</string>
 
+    <!-- Start Workout -->
+    <string name="today_s_workout">Today\'s Workout</string>
+    <string name="add_exercise">Add Exercise</string>
+    <string name="get_started">Get Started</string>
+
+    <!-- user calorie wallet -->
+    <string name="add_your_calorie_wallet">Add your Calorie Wallet</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+
+    <!-- user daily steps -->
+    <string name="add_your_daily_steps_goal">Add your Daily Steps Goal</string>
+    <string name="next1">Next</string>
+    <string name="skip1">Skip</string>
+
+    <!-- user details -->
+    <string name="details">Details</string>
+    <string name="name">Name</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="surname">Surname</string>
+    <string name="enter_surname">Enter Surname</string>
+    <string name="next2">Next</string>
+
+    <!-- user height -->
+    <string name="add_your_height">Add your Height</string>
+    <string name="next3">Next</string>
+    <string name="skip2">Skip</string>
+
+    <!-- user password -->
+    <string name="password4">Password</string>
+    <string name="password5">Password</string>
+    <string name="password6">Password</string>
+    <string name="next4">Next</string>
+
+    <!-- user weight -->
+    <string name="add_your_weight">Add your Weight</string>
+    <string name="next6">Next</string>
+    <string name="skip3">Skip</string>
+
+    <!-- user weight goal -->
+    <string name="add_your_weight_goal">Add your Weight Goal</string>
+    <string name="next7">Next</string>
+    <string name="skip4">Skip</string>
+
+    <string name="workout_planner">Workout Planner</string>
+
+    <!-- exercise dialog -->
+    <string name="add_exercise1">Add Exercise</string>
+    <string name="add_exercise3">Add Exercise</string>
+    <string name="difficulty1">Difficulty</string>
+    <string name="focus_zone">Focus Zone</string>
+    <string name="sets">Sets</string>
+    <string name="reps">Reps</string>
+    <string name="add_to_workout">Add to Workout</string>
+
+    <!-- set dialog -->
+    <string name="reps1">Reps</string>
+    <string name="enter_reps">Enter Reps</string>
+    <string name="add_set1">Add Set</string>
+    <string name="close">Close</string>
+
+    <!-- calorie goal dialog -->
+    <string name="calorie_goal">Calorie Goal</string>
+    <string name="calorie_wallet">Calorie Wallet</string>
+
+    <!-- create meal dialog -->
+    <string name="create_meal">Create Meal</string>
+    <string name="meal_name">Meal Name</string>
+    <string name="search_food">Search Food</string>
+    <string name="add_meal1">Add Meal</string>
+    <string name="close1">Close</string>
+
+    <!-- exercise list -->
+    <string name="weight1">Weight</string>
+    <string name="reps2">Reps</string>
+
+    <!-- AI -->
+    <string name="need_assistance">Need Assistance?</string>
+
+    <!-- Calorie Frag -->
+    <string name="search_for_food">Search for Food</string>
+    <string name="enter_food_name">Enter food name</string>
+    <string name="search">Search</string>
+    <string name="add_custom_food">Add Custom Food</string>
+    <string name="enter_food_name1">Enter food name</string>
+    <string name="enter_calories">Enter calories</string>
+    <string name="add_custom_food1">Add Custom Food</string>
+
+
+    <string name="strength1">Strength</string>
+    <string name="powerlifting1">Powerlifting</string>
+    <string name="strongman1">Strongman</string>
+    <string name="olympic_weightlifting1">Olympic Weightlifting</string>
+
+    <!-- graph -->
+    <string name="best_exercises">Best Exercises</string>
+    <string name="steps1">Steps</string>
+
+    <!-- recent act -->
+    <string name="recent_activities1">Recent Activities</string>
+    <string name="daily_activity2">Daily Activity</string>
+    <string name="workouts3">Workouts</string>
+    <string name="popular_exercises1">Popular Exercises</string>
+
+    <!-- workout progress -->
+    <string name="steps2">Steps</string>
+    <string name="calories3">Calories</string>
+    <string name="streak">Streak</string>
+    <string name="gym">Gym</string>
+
+    <!-- set goal-->
+    <string name="set_your_goal">Set Your Goal</string>
+    <string name="lose_weight">Lose Weight</string>
+    <string name="gain_weight">Gain Weight</string>
+    <string name="select_time_period_weeks">Select Time Period (weeks):</string>
+    <string name="time_period_0_weeks">Time Period: 0 weeks</string>
+
+    <!-- new workout dialog -->
+    <string name="new_workout1">New Workout</string>
+    <string name="workout_name">Workout Name</string>
+    <string name="create_workout">Create Workout</string>
+    <string name="cancel1">Cancel</string>
+
+    <!-- timer dialog -->
+    <string name="step_goal">Step Goal</string>
+    <string name="steps_goal1">Steps Goal</string>
+
+    <!-- step goal dialog -->
+    <string name="go2">Go</string>
+    <string name="stop">Stop</string>
+    <string name="close2">Close</string>
+
+    <!-- weight goal dialog -->
+    <string name="weight_goal">Weight Goal</string>
+    <string name="weight_goal1">Weight Goal</string>
+
 
 </resources>

@@ -30,7 +30,7 @@
                 android:id="@+id/textView39"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
-                android:text="Reps"
+                android:text="@string/reps2"
                 android:textAlignment="center" />
 
             <TextView
@@ -50,7 +50,7 @@
                 android:id="@+id/textView41"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
-                android:text="Weight"
+                android:text="@string/weight1"
                 android:textAlignment="center" />
 
             <TextView
