@@ -280,5 +280,10 @@
     <string name="weight_goal">Weight Goal</string>
     <string name="weight_goal1">Weight Goal</string>
 
+    <!-- rest dialog -->
+    <string name="start1">Start</string>
+    <string name="reset">Reset</string>
+    <string name="rest_timer1">Rest Timer</string>
+
 
 </resources>
