@@ -63,7 +63,7 @@
             android:id="@+id/textView46"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name" />
+            android:text="@string/name" />
 
         <EditText
             android:id="@+id/txtName_UD"
@@ -71,7 +71,7 @@
             android:layout_height="50dp"
             android:background="@drawable/buttonbackground"
             android:ems="10"
-            android:hint="Enter Name"
+            android:hint="@string/enter_name"
             android:inputType="text"
             android:paddingLeft="10dp" />
 
@@ -80,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
-            android:text="Surname" />
+            android:text="@string/surname" />
 
         <EditText
             android:id="@+id/txtSurname_UD"
@@ -88,7 +88,7 @@
             android:layout_height="50dp"
             android:background="@drawable/buttonbackground"
             android:ems="10"
-            android:hint="Enter Surname"
+            android:hint="@string/enter_surname"
             android:inputType="text"
             android:paddingLeft="10dp" />
 
@@ -98,7 +98,7 @@
         android:id="@+id/textView60"
         android:layout_width="189dp"
         android:layout_height="54dp"
-        android:text="Details"
+        android:text="@string/details"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -114,7 +114,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:backgroundTint="#FF934E"
-        android:text="Next"
+        android:text="@string/next2"
         android:textColorLink="#FFFFFF"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"

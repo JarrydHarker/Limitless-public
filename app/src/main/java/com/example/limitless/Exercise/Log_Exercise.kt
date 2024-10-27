@@ -51,7 +51,7 @@ class Log_Exercise : AppCompatActivity() {
 
 
         if (currentWorkout == null) {
-            Toast.makeText(this, "Workout not found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.workout_not_found), Toast.LENGTH_SHORT).show()
             finish()
         } else {
             if (currentWorkout.arrExercises == null) {
@@ -78,12 +78,14 @@ class Log_Exercise : AppCompatActivity() {
                     exerciseAdapter.remove(exerciseAdapter.getItem(0))
                     exerciseAdapter.notifyDataSetChanged()
                 } else {
-                    Toast.makeText(this, "No exercises to remove", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,
+                        getString(R.string.no_exercises_to_remove), Toast.LENGTH_SHORT).show()
                 }
             }
 
             btnAddSet.setOnClickListener{
-                Toast.makeText(this, "This is still in development", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    getString(R.string.this_is_still_in_development), Toast.LENGTH_SHORT).show()
             }
 
 

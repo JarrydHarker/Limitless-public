@@ -38,7 +38,7 @@
         android:layout_width="174dp"
         android:layout_height="41dp"
         android:layout_marginStart="30dp"
-        android:text="Workout Planner"
+        android:text="@string/workout_planner"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

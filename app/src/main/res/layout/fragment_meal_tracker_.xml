@@ -46,14 +46,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Breakfast"
+                    android:text="@string/breakfast"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Recommended 600-1000 calories"
+                    android:text="@string/recommended_600_1000_calories"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="14sp" />
 
@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
 
                     android:backgroundTint="#FF934E"
-                    android:text="Add"
+                    android:text="@string/add"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -101,14 +101,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lunch"
+                    android:text="@string/lunch"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Recommended 500-800 calories"
+                    android:text="@string/recommended_500_800_calories"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="14sp" />
 
@@ -118,7 +118,7 @@
                     android:layout_height="wrap_content"
 
                     android:backgroundTint="#FF934E"
-                    android:text="Add"
+                    android:text="@string/add1"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -148,14 +148,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dinner"
+                    android:text="@string/dinner"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Recommended 600-1000 calories"
+                    android:text="@string/recommended_600_1000_calories1"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="14sp" />
 
@@ -164,7 +164,7 @@
                     android:layout_width="115dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#FF934E"
-                    android:text="Add"
+                    android:text="@string/add2"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 

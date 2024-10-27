@@ -10,7 +10,7 @@
         android:id="@+id/tv_goal_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Set Your Goal"
+        android:text="@string/set_your_goal"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -34,20 +34,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:text="Lose Weight" />
+            android:text="@string/lose_weight" />
 
         <RadioButton
             android:id="@+id/rbGainWeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gain Weight" />
+            android:text="@string/gain_weight" />
 
     </RadioGroup>
     <TextView
         android:id="@+id/lblTimePeriod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Time Period (weeks):"
+        android:text="@string/select_time_period_weeks"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/rgGoal"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +70,7 @@
         android:id="@+id/lblSelectPeriod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Time Period: 0 weeks"
+        android:text="@string/time_period_0_weeks"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/seekbarTime"
         app:layout_constraintStart_toStartOf="parent"

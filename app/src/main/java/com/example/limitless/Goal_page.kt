@@ -54,7 +54,8 @@ class Goal_page : AppCompatActivity() {
             if(lblCalorieGoal.text != "Click to Add"){
                 Goals(lblCalorieGoal)
             }else{
-                Toast.makeText(this, "Please enter a weight goal first", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    getString(R.string.please_enter_a_weight_goal_first), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -78,7 +79,7 @@ class Goal_page : AppCompatActivity() {
                 lblStepGoal.text = currentUser!!.GetStepGoal().toString()
                 dialog.dismiss()
             } else {
-                Toast.makeText(this, "Please enter step goal!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.please_enter_step_goal), Toast.LENGTH_SHORT).show()
             }
         }
 

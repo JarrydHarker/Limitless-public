@@ -35,9 +35,9 @@
             android:id="@+id/textView57"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:text="Exercise Type"
+            android:text="@string/exercise_type"
             android:textAlignment="center"
-            android:textSize="18sp" />
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/lblType_ES"
@@ -51,7 +51,7 @@
             android:id="@+id/textView59"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:text="Focused Body Parts"
+            android:text="@string/focused_body_parts"
             android:textAlignment="center"
             android:textSize="18sp" />
 
@@ -67,7 +67,7 @@
             android:id="@+id/textView64"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:text="Difficulty"
+            android:text="@string/difficulty"
             android:textAlignment="center"
             android:textSize="18sp" />
 
@@ -83,7 +83,7 @@
             android:id="@+id/textView62"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:text="Description"
+            android:text="@string/description"
             android:textAlignment="center"
             android:textSize="18sp" />
 
@@ -99,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#FF934E"
-            android:text="Start"
+            android:text="@string/start"
             app:cornerRadius="10dp"
             app:strokeColor="#000000"
             app:strokeWidth="1dp" />
@@ -109,7 +109,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#00FF0000"
-            android:text="Back"
+            android:text="@string/back"
             android:textColor="@color/black" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

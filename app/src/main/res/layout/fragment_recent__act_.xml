@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="177dp"
         android:layout_height="42dp"
-        android:text="Popular Exercises"
+        android:text="@string/popular_exercises1"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
     <TextView
         android:layout_width="166dp"
         android:layout_height="44dp"
-        android:text="Recent Activities"
+        android:text="@string/recent_activities1"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +70,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Daily Activity"
+                    android:text="@string/daily_activity2"
                     android:textColor="@android:color/white"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -103,7 +103,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Workouts"
+                    android:text="@string/workouts3"
                     android:textColor="@android:color/white"
                     android:textSize="16sp" />
             </LinearLayout>

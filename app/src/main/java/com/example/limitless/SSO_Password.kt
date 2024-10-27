@@ -29,7 +29,8 @@ class SSO_Password : AppCompatActivity() {
             if(txtPassword.text.length >= 8 && txtPassword.text.equals(txtConfirmPass.text.toString())){
 
             }else{
-                Toast.makeText(this, "Make sure password is correct and more than 8 letters", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    getString(R.string.make_sure_password_is_correct_and_more_than_8_letters), Toast.LENGTH_SHORT).show()
             }
         }
 

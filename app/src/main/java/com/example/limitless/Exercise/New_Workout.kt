@@ -71,7 +71,7 @@ class New_Workout : AppCompatActivity() {
         val currentWorkout = activityViewModel.GetWorkout(workoutId)
 
         if(currentWorkout == null){
-            Toast.makeText(this, "Invalid Workout", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.invalid_workout), Toast.LENGTH_SHORT).show()
             val intent = Intent(this, Exercise_Activity::class.java)
             startActivity(intent)
         }
@@ -101,7 +101,8 @@ class New_Workout : AppCompatActivity() {
             }
             else
             {
-                Toast.makeText(this, "Please add new exercises before adding a workout", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    getString(R.string.please_add_new_exercises_before_adding_a_workout), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -238,7 +239,8 @@ class New_Workout : AppCompatActivity() {
             val reps = txtReps.text.toString()
 
             if(txtAddExercise.text.isEmpty()){
-                Toast.makeText(this@New_Workout, "Please select an exercise to add to your workout", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@New_Workout,
+                    getString(R.string.please_select_an_exercise_to_add_to_your_workout), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
@@ -250,7 +252,7 @@ class New_Workout : AppCompatActivity() {
                 if (sets.isEmpty()) {
                     Toast.makeText(
                         this@New_Workout,
-                        "Please enter the number of sets for this exercise",
+                        getString(R.string.please_enter_the_number_of_sets_for_this_exercise),
                         Toast.LENGTH_LONG
                     ).show()
                     return@setOnClickListener
@@ -259,7 +261,7 @@ class New_Workout : AppCompatActivity() {
                 if (reps.isEmpty()) {
                     Toast.makeText(
                         this@New_Workout,
-                        "Please enter the number of reps for this exercise",
+                        getString(R.string.please_enter_the_number_of_reps_for_this_exercise),
                         Toast.LENGTH_LONG
                     ).show()
                     return@setOnClickListener

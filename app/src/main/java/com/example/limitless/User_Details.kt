@@ -57,7 +57,8 @@ class User_Details : AppCompatActivity() {
                 val intent = Intent(this, User_Height::class.java)
                 startActivity(intent)
             }else{
-                Toast.makeText(this, "Please enter name and surname!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    getString(R.string.please_enter_name_and_surname), Toast.LENGTH_SHORT).show()
             }
         }
 

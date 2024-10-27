@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="16dp"
                 android:paddingBottom="8dp"
-                android:text="Notifications"
+                android:text="@string/notifications"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="16dp"
                 android:paddingBottom="8dp"
-                android:text="Terms &amp; Conditions"
+                android:text="@string/terms_amp_conditions"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="26dp"
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="16dp"
                 android:paddingBottom="8dp"
-                android:text="Dark Mode"
+                android:text="@string/dark_mode"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -144,22 +144,23 @@
             android:paddingLeft="20dp">
 
             <TextView
-                android:layout_width="172dp"
+                android:layout_width="219dp"
                 android:layout_height="wrap_content"
                 android:paddingTop="16dp"
                 android:paddingBottom="8dp"
-                android:text="Language"
+                android:text="@string/language"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="26dp"
                 tools:layout_editor_absoluteY="301dp" />
 
-            <Spinner
-                android:id="@+id/spnLanguage"
-                android:layout_width="159dp"
+            <Button
+                android:id="@+id/btnLanguage_ST"
+                android:layout_width="138dp"
                 android:layout_height="wrap_content"
-                tools:layout_editor_absoluteX="26dp"
-                tools:layout_editor_absoluteY="301dp" />
+                android:layout_weight="1"
+                android:text="Change" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -174,7 +175,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="16dp"
                 android:paddingBottom="8dp"
-                android:text="Privacy Policy"
+                android:text="@string/privacy_policy"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="26dp"
@@ -195,7 +196,7 @@
                 android:layout_weight="1"
                 android:paddingTop="16dp"
                 android:paddingBottom="8dp"
-                android:text="Set Goals"
+                android:text="@string/set_goals"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="26dp"
@@ -216,7 +217,7 @@
                 android:layout_weight="1"
                 android:paddingTop="16dp"
                 android:paddingBottom="8dp"
-                android:text="Logout"
+                android:text="@string/logout"
                 android:textColor="#FF5858"
                 android:textSize="18sp"
                 android:textStyle="bold"

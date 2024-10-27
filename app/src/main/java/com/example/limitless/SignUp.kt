@@ -60,12 +60,12 @@ class SignUp : AppCompatActivity() {
             val password = txtPassword.text.toString()
 
             if(email.isEmpty()){
-                Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.please_enter_email), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
             if(password.isEmpty()){
-                Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.please_enter_password1), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 

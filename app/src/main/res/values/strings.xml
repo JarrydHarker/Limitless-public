@@ -2,4 +2,323 @@
     <string name="app_name">Limitless</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="daily_activity">Daily Activity</string>
+    <string name="add_workout">Add Workout</string>
+    <string name="cardio">Cardio</string>
+    <string name="plyometrics">Plyometrics</string>
+    <string name="stretching">Stretching</string>
+    <string name="exercises">Exercises</string>
+    <string name="go">Go</string>
+    <string name="listData" />
+    <string name="listData2" />
+
+    <!-- settings page -->
+    <string name="notifications">Notifications</string>
+    <string name="terms_amp_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="language">Language</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="set_goals">Set Goals</string>
+    <string name="logout">Logout</string>
+
+    <!-- diet stats page -->
+    <string name="today">Today</string>
+    <string name="add_meal">Add Meal</string>
+    <string name="calories">Calories</string>
+    <string name="exercise">Exercise</string>
+    <string name="food">Food</string>
+    <string name="goal">Goal</string>
+    <string name="fibre">Fibre</string>
+    <string name="carbs">Carbs</string>
+    <string name="fats">Fats</string>
+    <string name="protein">Protein</string>
+    <string name="remaining_goal_food_exercise">Remaining = Goal - Food + Exercise</string>
+    <string name="water_intake">Water Intake</string>
+
+    <!-- exercise category -->
+    <string name="recent_exercise">Recent Exercise</string>
+    <string name="go1">Go</string>
+    <string name="pick_a_category">Pick a category</string>
+    <string name="cardio1">Cardio</string>
+    <string name="plyometrics1">Plyometrics</string>
+    <string name="stretching1">Stretching</string>
+    <string name="strength">Strength</string>
+    <string name="powerlifting">Powerlifting</string>
+    <string name="strongman">Strongman</string>
+    <string name="olympic_weightlifting">Olympic Weightlifting</string>
+
+    <!-- exercise summary -->
+    <string name="focused_body_parts">Focused Body Parts</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="description">Description</string>
+    <string name="start">Start</string>
+    <string name="back">Back</string>
+    <string name="exercise_type">Exercise Type</string>
+
+    <!-- Forgot password -->
+    <string name="forgot_password">Forgot Password</string>
+    <string name="email">Email</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="cancel">Cancel</string>
+    <string name="reset_password">Reset Password</string>
+
+    <!-- Goal Page -->
+    <string name="weight">Weight</string>
+    <string name="calorie1">Calorie</string>
+    <string name="steps">Steps</string>
+    <string name="click_to_add">Click to Add</string>
+    <string name="click_to_add1">Click to Add</string>
+    <string name="click_to_add2">Click to Add</string>
+
+    <!-- Log exercise -->
+    <string name="goals1">Goals</string>
+    <string name="rest_timer">Rest Timer</string>
+    <string name="add_set">Add Set</string>
+    <string name="edit_sets">Edit Sets</string>
+    <string name="log_set">Log Set</string>
+
+    <!-- Log Meal -->
+    <string name="list_of_foods">List of Foods:</string>
+    <string name="select_meal">Select Meal:</string>
+    <string name="log_meal">Log Meal</string>
+    <string name="create_new_meal">Create New Meal</string>
+
+    <!-- Login -->
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="username1">Username</string>
+    <string name="password">Password</string>
+    <string name="password1">Password</string>
+    <string name="login1">Login</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="forgot_password1">Forgot Password?</string>
+    <string name="or">or</string>
+    <string name="continue_with_google">Continue with Google</string>
+
+    <!-- Main -->
+    <string name="recent_activities">Recent Activities</string>
+    <string name="daily_activity1">Daily Activity</string>
+    <string name="workouts">Workouts</string>
+    <string name="popular_exercises">Popular Exercises</string>
+    <string name="overview">Overview</string>
+
+    <string name="show_timer">Show Timer</string>
+
+    <!-- Meal Tracker -->
+    <string name="add">Add</string>
+    <string name="add1">Add</string>
+    <string name="add2">Add</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="lunch">Lunch</string>
+    <string name="dinner">Dinner</string>
+    <string name="recommended_600_1000_calories">Recommended 600-1000 calories</string>
+    <string name="recommended_500_800_calories">Recommended 500-800 calories</string>
+    <string name="recommended_600_1000_calories1">Recommended 600-1000 calories</string>
+
+    <!-- New Workout -->
+    <string name="create_exercise">Create Exercise</string>
+    <string name="new_workout">New Workout</string>
+    <string name="pick_an_exercise">Pick an Exercise</string>
+    <string name="add_workout1">Add Workout</string>
+
+    <!-- Report Stats -->
+    <string name="consumed_today">Consumed Today</string>
+    <string name="calc">Calc</string>
+    <string name="calories2">Calories</string>
+    <string name="protein1">Protein</string>
+    <string name="carbs1">Carbs</string>
+    <string name="fats1">Fats</string>
+
+    <!-- Sign Up -->
+    <string name="sign_up">Sign Up</string>
+    <string name="email2">Email</string>
+    <string name="email3">Email</string>
+    <string name="password2">Password</string>
+    <string name="password3">Password</string>
+    <string name="sign_up1">Sign Up</string>
+    <string name="back1">Back</string>
+
+    <!-- SSO password -->
+    <string name="confirm_password">Confirm Password</string>
+    <string name="confirm">Confirm</string>
+    <string name="enter_password">Enter Password:</string>
+    <string name="back2">Back</string>
+
+    <!-- Start Workout -->
+    <string name="today_s_workout">Today\'s Workout</string>
+    <string name="add_exercise">Add Exercise</string>
+    <string name="get_started">Get Started</string>
+
+    <!-- user calorie wallet -->
+    <string name="add_your_calorie_wallet">Add your Calorie Wallet</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+
+    <!-- user daily steps -->
+    <string name="add_your_daily_steps_goal">Add your Daily Steps Goal</string>
+    <string name="next1">Next</string>
+    <string name="skip1">Skip</string>
+
+    <!-- user details -->
+    <string name="details">Details</string>
+    <string name="name">Name</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="surname">Surname</string>
+    <string name="enter_surname">Enter Surname</string>
+    <string name="next2">Next</string>
+
+    <!-- user height -->
+    <string name="add_your_height">Add your Height</string>
+    <string name="next3">Next</string>
+    <string name="skip2">Skip</string>
+
+    <!-- user password -->
+    <string name="password4">Password</string>
+    <string name="password5">Password</string>
+    <string name="password6">Password</string>
+    <string name="next4">Next</string>
+
+    <!-- user weight -->
+    <string name="add_your_weight">Add your Weight</string>
+    <string name="next6">Next</string>
+    <string name="skip3">Skip</string>
+
+    <!-- user weight goal -->
+    <string name="add_your_weight_goal">Add your Weight Goal</string>
+    <string name="next7">Next</string>
+    <string name="skip4">Skip</string>
+
+    <string name="workout_planner">Workout Planner</string>
+
+    <!-- exercise dialog -->
+    <string name="add_exercise1">Add Exercise</string>
+    <string name="add_exercise3">Add Exercise</string>
+    <string name="difficulty1">Difficulty</string>
+    <string name="focus_zone">Focus Zone</string>
+    <string name="sets">Sets</string>
+    <string name="reps">Reps</string>
+    <string name="add_to_workout">Add to Workout</string>
+
+    <!-- set dialog -->
+    <string name="reps1">Reps</string>
+    <string name="enter_reps">Enter Reps</string>
+    <string name="add_set1">Add Set</string>
+    <string name="close">Close</string>
+
+    <!-- calorie goal dialog -->
+    <string name="calorie_goal">Calorie Goal</string>
+    <string name="calorie_wallet">Calorie Wallet</string>
+
+    <!-- create meal dialog -->
+    <string name="create_meal">Create Meal</string>
+    <string name="meal_name">Meal Name</string>
+    <string name="search_food">Search Food</string>
+    <string name="add_meal1">Add Meal</string>
+    <string name="close1">Close</string>
+
+    <!-- exercise list -->
+    <string name="weight1">Weight</string>
+    <string name="reps2">Reps</string>
+
+    <!-- AI -->
+    <string name="need_assistance">Need Assistance?</string>
+
+    <!-- Calorie Frag -->
+    <string name="search_for_food">Search for Food</string>
+    <string name="enter_food_name">Enter food name</string>
+    <string name="search">Search</string>
+    <string name="add_custom_food">Add Custom Food</string>
+    <string name="enter_food_name1">Enter food name</string>
+    <string name="enter_calories">Enter calories</string>
+    <string name="add_custom_food1">Add Custom Food</string>
+
+
+    <string name="strength1">Strength</string>
+    <string name="powerlifting1">Powerlifting</string>
+    <string name="strongman1">Strongman</string>
+    <string name="olympic_weightlifting1">Olympic Weightlifting</string>
+
+    <!-- graph -->
+    <string name="best_exercises">Best Exercises</string>
+    <string name="steps1">Steps</string>
+
+    <!-- recent act -->
+    <string name="recent_activities1">Recent Activities</string>
+    <string name="daily_activity2">Daily Activity</string>
+    <string name="workouts3">Workouts</string>
+    <string name="popular_exercises1">Popular Exercises</string>
+
+    <!-- workout progress -->
+    <string name="steps2">Steps</string>
+    <string name="calories3">Calories</string>
+    <string name="streak">Streak</string>
+    <string name="gym">Gym</string>
+
+    <!-- set goal-->
+    <string name="set_your_goal">Set Your Goal</string>
+    <string name="lose_weight">Lose Weight</string>
+    <string name="gain_weight">Gain Weight</string>
+    <string name="select_time_period_weeks">Select Time Period (weeks):</string>
+    <string name="time_period_0_weeks">Time Period: 0 weeks</string>
+
+    <!-- new workout dialog -->
+    <string name="new_workout1">New Workout</string>
+    <string name="workout_name">Workout Name</string>
+    <string name="create_workout">Create Workout</string>
+    <string name="cancel1">Cancel</string>
+
+    <!-- timer dialog -->
+    <string name="step_goal">Step Goal</string>
+    <string name="steps_goal1">Steps Goal</string>
+
+    <!-- step goal dialog -->
+    <string name="go2">Go</string>
+    <string name="stop">Stop</string>
+    <string name="close2">Close</string>
+
+    <!-- weight goal dialog -->
+    <string name="weight_goal">Weight Goal</string>
+    <string name="weight_goal1">Weight Goal</string>
+
+    <!-- rest dialog -->
+    <string name="start1">Start</string>
+    <string name="reset">Reset</string>
+    <string name="rest_timer1">Rest Timer</string>
+
+
+    <string name="please_input_valid_email">Please Input Valid Email</string>
+    <string name="water_goal_reached">Water goal reached!</string>
+    <string name="cannot_remove_any_more_water">Cannot remove any more water</string>
+    <string name="please_enter_a_weight_goal_first">Please enter a weight goal first</string>
+    <string name="please_enter_step_goal">Please enter step goal!</string>
+
+    <string name="please_enter_username">Please enter username</string>
+    <string name="please_enter_password">Please enter password</string>
+    <string name="user_not_found_please_sign_up">User not found, please sign up</string>
+    <string name="incorrect_username_or_password">Incorrect username or password</string>
+    <string name="please_enter_email">Please enter email</string>
+    <string name="please_enter_password1">Please enter password</string>
+    <string name="make_sure_password_is_correct_and_more_than_8_letters">Make sure password is correct and more than 8 letters</string>
+    <string name="please_enter_a_valid_number">Please enter a valid number</string>
+    <string name="please_fill_in_field_or_press_skip_to_continue">Please fill in field or press Skip to continue</string>
+
+    <string name="please_enter_name_and_surname">Please enter name and surname!</string>
+    <string name="please_fill_in_field_or_press_skip_to_continue1">Please fill in field or press Skip to continue</string>
+    <string name="please_enter_password2">Please enter password!</string>
+    <string name="please_fill_in_field_or_press_skip_to_continue2">Please fill in field or press Skip to continue</string>
+    <string name="please_fill_in_field_or_press_skip_to_continue3">Please fill in field or press Skip to continue</string>
+    <string name="please_add_food_to_the_meal">Please add food to the meal!</string>
+    <string name="please_enter_meal_name">Please enter meal name</string>
+    <string name="please_enter_meal_name_and_food">Please enter meal name and food!!</string>
+    <string name="please_enter_a_workout_name_to_continue">Please enter a workout name to continue</string>
+    <string name="workout_not_found">Workout not found</string>
+    <string name="no_exercises_to_remove">No exercises to remove</string>
+    <string name="this_is_still_in_development">This is still in development</string>
+    <string name="invalid_workout">Invalid Workout</string>
+    <string name="please_add_new_exercises_before_adding_a_workout">Please add new exercises before adding a workout</string>
+    <string name="please_select_an_exercise_to_add_to_your_workout">Please select an exercise to add to your workout</string>
+    <string name="please_enter_the_number_of_sets_for_this_exercise">Please enter the number of sets for this exercise</string>
+    <string name="please_enter_the_number_of_reps_for_this_exercise">Please enter the number of reps for this exercise</string>
+
+
 </resources>

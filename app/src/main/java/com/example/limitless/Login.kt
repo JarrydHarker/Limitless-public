@@ -16,6 +16,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
+import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.credentials.CredentialManager
@@ -40,8 +45,17 @@ import kotlinx.coroutines.launch
 import java.security.SecureRandom
 import java.time.LocalDate
 import java.util.Base64
+import java.util.concurrent.Executor
 
 class Login : AppCompatActivity() {
+
+    lateinit var info: String
+
+    private lateinit var executor: Executor
+    private lateinit var biometricPrompt: BiometricPrompt
+    private lateinit var promptInfo: BiometricPrompt.PromptInfo
+    private  lateinit var btn: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -51,7 +65,6 @@ class Login : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
 
         val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
         //val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
@@ -112,12 +125,12 @@ class Login : AppCompatActivity() {
             val password = txtPassword.text.toString()
 
             if(username.isEmpty()){
-                Toast.makeText(this, "Please enter username", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.please_enter_username), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
             if(password.isEmpty()){
-                Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.please_enter_password), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
@@ -145,7 +158,8 @@ class Login : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }else {
-                    Toast.makeText(this, "User not found, please sign up", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this,
+                        getString(R.string.user_not_found_please_sign_up), Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -252,6 +266,87 @@ class Login : AppCompatActivity() {
             }
         }
     }
+
+//    fun FingerPrint(){
+//        btn = findViewById(R.id.btnFinger)
+//
+//
+//
+//        executor = ContextCompat.getMainExecutor(this)
+//        biometricPrompt = BiometricPrompt(this, executor,
+//            object : BiometricPrompt.AuthenticationCallback() {
+//                override fun onAuthenticationError(
+//                    errorCode: Int,
+//                    errString: CharSequence,
+//                ) {
+//                    super.onAuthenticationError(errorCode, errString)
+//                    Toast.makeText(applicationContext,
+//                        "Authentication error: $errString", Toast.LENGTH_SHORT)
+//                        .show()
+//                }
+//
+//                override fun onAuthenticationSucceeded(
+//                    result: BiometricPrompt.AuthenticationResult,
+//                ) {
+//                    super.onAuthenticationSucceeded(result)
+//                    Toast.makeText(applicationContext,
+//                        "Authentication succeeded!", Toast.LENGTH_SHORT)
+//                        .show()
+//                }
+//
+//                override fun onAuthenticationFailed() {
+//                    super.onAuthenticationFailed()
+//                    Toast.makeText(applicationContext, "Authentication failed",
+//                        Toast.LENGTH_SHORT)
+//                        .show()
+//                }
+//            })
+//
+//        promptInfo = BiometricPrompt.PromptInfo.Builder()
+//            .setTitle("Biometric login for my app")
+//            .setSubtitle("Log in using your biometric credential")
+//            .setNegativeButtonText("Use account password")
+//            .build()
+//
+//        btn.setOnClickListener {
+//            biometricPrompt.authenticate(promptInfo)
+//        }
+//    }
+
+    fun checkDeviceHasBiometric() {
+        val biometricManager = BiometricManager.from(this)
+        when (biometricManager.canAuthenticate(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)) {
+            BiometricManager.BIOMETRIC_SUCCESS -> {
+                Log.d("MY_APP_TAG", "App can authenticate using biometrics.")
+                info = "App can authenticate using biometrics."
+                btn.isEnabled = true
+
+            }
+            BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> {
+                Log.e("MY_APP_TAG", "No biometric features available on this device.")
+                info = "No biometric features available on this device."
+                btn.isEnabled = false
+
+            }
+            BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> {
+                Log.e("MY_APP_TAG", "Biometric features are currently unavailable.")
+                info = "Biometric features are currently unavailable."
+                btn.isEnabled = false
+
+            }
+            BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
+                // Prompts the user to create credentials that your app accepts.
+                val enrollIntent = Intent(android.provider.Settings.ACTION_BIOMETRIC_ENROLL).apply {
+                    putExtra(android.provider.Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
+                        BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
+                }
+                btn.isEnabled = false
+
+                startActivityForResult(enrollIntent, 100)
+            }
+        }
+
+    }
 }
 
 fun LoginUser(context: Context, username: String, password: String, onComplete: (User?) -> Unit) {
@@ -266,7 +361,8 @@ fun LoginUser(context: Context, username: String, password: String, onComplete: 
             } else {
                 // Ensure the Toast runs on the main/UI thread
                 Handler(Looper.getMainLooper()).post {
-                    Toast.makeText(context, "Incorrect username or password", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context,
+                        context.getString(R.string.incorrect_username_or_password), Toast.LENGTH_LONG).show()
                 }
             }
         } else {
@@ -335,4 +431,6 @@ private fun handleFailure(type: String, e: GetCredentialException) {
             Log.e(TAG, "Unexpected type of credential")
             }
         }
+
+
     }

@@ -62,11 +62,13 @@ class User_DailySteps : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }catch (ex: Exception){
-                    Toast.makeText(this, "Please enter a valid number", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,
+                        getString(R.string.please_enter_a_valid_number), Toast.LENGTH_SHORT).show()
                 }
             }
             else{
-                Toast.makeText(this, "Please fill in field or press Skip to continue", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    getString(R.string.please_fill_in_field_or_press_skip_to_continue), Toast.LENGTH_SHORT).show()
             }
         }
 

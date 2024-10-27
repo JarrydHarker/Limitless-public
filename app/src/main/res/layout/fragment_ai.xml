@@ -37,7 +37,7 @@
             android:paddingLeft="30dp"
             android:paddingTop="10dp"
             android:paddingRight="0dp"
-            android:text="Need Assistance?"
+            android:text="@string/need_assistance"
             android:textAlignment="textStart"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"

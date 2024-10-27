@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="daily_activity">Daaglikse Aktiwieteit</string>
+    <string name="add_workout">Voeg Oefensessie By</string>
+    <string name="cardio">Kardio</string>
+    <string name="plyometrics">Pliometrie</string>
+    <string name="stretching">Strek</string>
+    <string name="exercises">Oefening</string>
+    <string name="go">Gaan</string>
+
+    <string name="notifications">Kennisgewings</string>
+    <string name="terms_amp_conditions"><![CDATA[Bepalings en voorwaardes]]></string>
+    <string name="dark_mode">Donker modus</string>
+    <string name="language">Taal</string>
+    <string name="privacy_policy">Privaatheidsbeleid</string>
+    <string name="set_goals">Stel doelwitte</string>
+    <string name="logout">Teken uit</string>
+
+    <string name="today">Vandag</string>
+    <string name="add_meal">Voeg maaltyd by</string>
+    <string name="calories">Kalorieë</string>
+    <string name="exercise">Oefening</string>
+    <string name="food">Kos</string>
+    <string name="goal">Doelwit</string>
+    <string name="fibre">Vesel</string>
+    <string name="carbs">Koolhidrate</string>
+    <string name="fats">Vette</string>
+    <string name="protein">Protiene</string>
+    <string name="remaining_goal_food_exercise">Oorbly = Doelwit - Kos + Oefening</string>
+    <string name="water_intake">Water Inname</string>
+
+    <!-- exercise category -->
+    <string name="recent_exercise">Onlangse Oefening</string>
+    <string name="go1">Gaan</string>
+    <string name="pick_a_category">Kies n katogorie</string>
+    <string name="cardio1">Kardio</string>
+    <string name="plyometrics1">Pliometrie</string>
+    <string name="stretching1">Streke</string>
+    <string name="strength">Krag</string>
+    <string name="powerlifting">Kragoptel</string>
+    <string name="strongman">Sterkman</string>
+    <string name="olympic_weightlifting">Olimpiese Gewigstoot</string>
+
+    <!-- exercise summary -->
+    <string name="focused_body_parts">Gefokusde liggaamsdele</string>
+    <string name="difficulty">Moeilikheid</string>
+    <string name="description">Beskrywing</string>
+    <string name="start">Begin</string>
+    <string name="back">Terug</string>
+    <string name="exercise_type">Oefening Tiepe</string>
+
+    <!-- Forgot password -->
+    <string name="forgot_password">Vergeet Wagwoord</string>
+    <string name="email">e-pos</string>
+    <string name="enter_email">Voer e-pos in</string>
+    <string name="cancel">Kanseleer</string>
+    <string name="reset_password">Herstel Wagwoord</string>
+
+    <!-- Goal Page -->
+    <string name="weight">Gewig</string>
+    <string name="calorie1">Kalorie</string>
+    <string name="steps">stappe</string>
+    <string name="click_to_add">Klik Hier</string>
+    <string name="click_to_add1">Klik Hier</string>
+    <string name="click_to_add2">Klik Hier</string>
+
+    <!-- Log exercise -->
+    <string name="goals1">Doelwitte</string>
+    <string name="rest_timer">Rus Timer</string>
+    <string name="add_set">Voeg stel by</string>
+    <string name="edit_sets">Wysig stelle</string>
+    <string name="log_set">Log Stel</string>
+
+    <!-- Log Meal -->
+    <string name="list_of_foods">Lys van voedsel:</string>
+    <string name="select_meal">Kies Maaltyd:</string>
+    <string name="log_meal">Log Ete</string>
+    <string name="create_new_meal">Skep nuwe maaltyd</string>
+
+    <!-- Login -->
+    <string name="login">Teken in</string>
+    <string name="username">Gebruikersnaam</string>
+    <string name="username1">Gebruikersnaam</string>
+    <string name="password">Wagwoord</string>
+    <string name="password1">Wagwoord</string>
+    <string name="login1">Teken in</string>
+    <string name="create_an_account">Skep n rekening</string>
+    <string name="forgot_password1">Vergete Wagwoord?</string>
+    <string name="or">of</string>
+    <string name="continue_with_google">Gaan voort met Google</string>
+
+    <!-- Main -->
+    <string name="recent_activities">Onlangse aktiwiteite</string>
+    <string name="daily_activity1">Daaglikse aktiwiteit</string>
+    <string name="workouts">Oefensessies</string>
+    <string name="popular_exercises">Gewilde Oefeninge</string>
+    <string name="overview">Oorsig</string>
+
+    <string name="show_timer">Wys timer</string>
+
+    <!-- Meal Tracker -->
+    <string name="add">Voeg by</string>
+    <string name="add1">Voeg by</string>
+    <string name="add2">Voeg by</string>
+    <string name="breakfast">Ontbyt</string>
+    <string name="lunch">Middagete</string>
+    <string name="dinner">Aandete</string>
+    <string name="recommended_600_1000_calories">Aanbevole 600-1000 kalorieë</string>
+    <string name="recommended_500_800_calories">Aanbevole 500-800 kalorieë</string>
+    <string name="recommended_600_1000_calories1">Aanbevole 600-1000 kalorieë</string>
+
+    <!-- New Workout -->
+    <string name="create_exercise">Skep oefening</string>
+    <string name="new_workout">Nuwe Oefensessie</string>
+    <string name="pick_an_exercise">Kies n Oefening</string>
+    <string name="add_workout1">Voeg Oefensessie By</string>
+
+    <!-- Report Stats -->
+    <string name="consumed_today">Vandag Verbruik</string>
+    <string name="calc">Kal</string>
+    <string name="calories2">Kalorieë</string>
+    <string name="protein1">Protiene</string>
+    <string name="carbs1">Koolhidrate</string>
+    <string name="fats1">Vette</string>
+
+    <!-- Sign Up -->
+    <string name="sign_up">Meld aan</string>
+    <string name="email2">E-pos</string>
+    <string name="email3">E-pos</string>
+    <string name="password2">Wagwoord</string>
+    <string name="password3">Wagwoord</string>
+    <string name="sign_up1">Meld aan</string>
+    <string name="back1">Terug</string>
+
+    <!-- SSO password -->
+    <string name="confirm_password">Bevestig Wagwoord</string>
+    <string name="confirm">Bevestig</string>
+    <string name="enter_password">Voer Wagwoord In:</string>
+    <string name="back2">Terug</string>
+
+    <!-- Start Workout -->
+    <string name="today_s_workout">Vandag se Oefensessie</string>
+    <string name="add_exercise">Voeg Oefening By</string>
+    <string name="get_started">Begin</string>
+
+    <!-- user calorie wallet -->
+    <string name="add_your_calorie_wallet">Voeg Jou Kalorie-Beursie By</string>
+    <string name="next">Volgende</string>
+    <string name="skip">Slaan Oor</string>
+
+    <!-- user daily steps -->
+    <string name="add_your_daily_steps_goal">Voeg Jou Daaglikse Stappe-Doelwit By</string>
+    <string name="next1">Volgende</string>
+    <string name="skip1">Slaan Oor</string>
+
+    <!-- user details -->
+    <string name="details">Besonderhede</string>
+    <string name="name">Naam</string>
+    <string name="enter_name">Naam Hier</string>
+    <string name="surname">Van</string>
+    <string name="enter_surname">Van Hier</string>
+    <string name="next2">Volgende</string>
+
+    <!-- user height -->
+    <string name="add_your_height">Voeg Jou Hoogte By</string>
+    <string name="next3">Volgende</string>
+    <string name="skip2">Slaan Oor</string>
+
+    <!-- user password -->
+    <string name="password4">Wagword</string>
+    <string name="password5">Wagword</string>
+    <string name="password6">Wagword</string>
+    <string name="next4">Volgende</string>
+
+    <!-- user weight -->
+    <string name="add_your_weight">Voeg Jou Gewig By</string>
+    <string name="next6">Volgende</string>
+    <string name="skip3">Slaan Oor</string>
+
+    <!-- user weight goal -->
+    <string name="add_your_weight_goal">Voeg Jou Gewig Doelwit By</string>
+    <string name="next7">Volgende</string>
+    <string name="skip4">Slaan Oor</string>
+
+    <string name="workout_planner">Workout Planner</string>
+
+    <!-- exercise dialog -->
+    <string name="add_exercise1">Voeg Oefening By</string>
+    <string name="add_exercise3">Voeg Oefening By</string>
+    <string name="difficulty1">Moeilikheid</string>
+    <string name="focus_zone">Fokus Zone</string>
+    <string name="sets">Stelle</string>
+    <string name="reps">Repetisies</string>
+    <string name="add_to_workout">Voeg By Oefensessie</string>
+
+    <!-- set dialog -->
+    <string name="reps1">Repetisies</string>
+    <string name="enter_reps">Voeg Reps By</string>
+    <string name="add_set1">Voeg Stel By</string>
+    <string name="close">Maak Toe</string>
+
+    <!-- calorie goal dialog -->
+    <string name="calorie_goal">Kalorie Doelwit</string>
+    <string name="calorie_wallet">Kalorie-Beursie</string>
+
+    <!-- create meal dialog -->
+    <string name="create_meal">Skep Maaltyd</string>
+    <string name="meal_name">Maaltyd Naam</string>
+    <string name="search_food">Soek n Kos</string>
+    <string name="add_meal1">Skep Maaltyd</string>
+    <string name="close1">Maak Toe</string>
+
+    <!-- exercise list -->
+    <string name="weight1">Gewig</string>
+    <string name="reps2">Reps</string>
+
+    <!-- AI -->
+    <string name="need_assistance">Nodig Help?</string>
+
+    <!-- Calorie Frag -->
+    <string name="search_for_food">Soek n Kos</string>
+    <string name="enter_food_name">Kos Naam</string>
+    <string name="search">Soek</string>
+    <string name="add_custom_food">Voeg Pasgemaakte Kos By</string>
+    <string name="enter_food_name1">Kos Naam</string>
+    <string name="enter_calories">Kalorieë</string>
+    <string name="add_custom_food1">Plaas Pasgemaakte Kos</string>
+
+    <string name="strength1">Krag</string>
+    <string name="powerlifting1">Kragoptel</string>
+    <string name="strongman1">Sterkman</string>
+    <string name="olympic_weightlifting1">Olimpiese Gewigstoot</string>
+
+    <!-- graph -->
+    <string name="best_exercises">Beste Oefeninge</string>
+    <string name="steps1">Stappe</string>
+
+    <!-- recent act -->
+    <string name="recent_activities1">Onlangse Aktiwiteite</string>
+    <string name="daily_activity2">Daaglikse aktiwiteit</string>
+    <string name="workouts3">Oefensessies</string>
+    <string name="popular_exercises1">Gewilde Oefeninge</string>
+
+    <!-- workout progress -->
+    <string name="steps2">Stappe</string>
+    <string name="calories3">Kalorieë</string>
+    <string name="streak">Streek</string>
+    <string name="gym">Jim</string>
+
+    <!-- set goal-->
+    <string name="set_your_goal">Stel Jou Doelwit</string>
+    <string name="lose_weight">Verloor Gewig</string>
+    <string name="gain_weight">Tel Gewig Op</string>
+    <string name="select_time_period_weeks">Kies Tydsperiode (weke):</string>
+    <string name="time_period_0_weeks">Tydsperiode: 0 weke</string>
+
+    <!-- new workout dialog -->
+    <string name="new_workout1">Nuwe Oefensessie</string>
+    <string name="workout_name">Oefensessie Naam</string>
+    <string name="create_workout">Skep Oefensessie</string>
+    <string name="cancel1">kanselleer</string>
+
+    <!-- timer dialog -->
+    <string name="step_goal">Stap Doelwit</string>
+    <string name="steps_goal1">Stap Doelwit</string>
+
+    <!-- step goal dialog -->
+    <string name="go2">Begin</string>
+    <string name="stop">Stop</string>
+    <string name="close2">Maak Toe</string>
+
+    <!-- weight goal dialog -->
+    <string name="weight_goal">Gewig Doelwit</string>
+    <string name="weight_goal1">Gewig Doelwit</string>
+
+
+    <!-- rest dialog -->
+    <string name="start1">Begin</string>
+    <string name="reset">Begin Oor</string>
+    <string name="rest_timer1">Rus Timer</string>
+
+    <!-- Toasts -->
+    <string name="please_input_valid_email">Gebruik asseblief n geldige e-pos</string>
+    <string name="water_goal_reached">Water doelwit bereik!</string>
+    <string name="cannot_remove_any_more_water">Kan nie meer water verwyder nie</string>
+    <string name="please_enter_a_weight_goal_first">Voer asseblief eers n gewigdoelwit in</string>
+    <string name="please_enter_step_goal">Voer asseblief stapdoel in!</string>
+
+    <string name="please_enter_username">Voer gebruikersnaam in</string>
+    <string name="please_enter_password">Voer wagwoord in</string>
+    <string name="user_not_found_please_sign_up">Gebruiker nie gevind nie, teken asseblief aan</string>
+    <string name="incorrect_username_or_password">Verkeerde gebruikersnaam of wagwoord</string>
+    <string name="please_enter_email">Voer e-pos in</string>
+    <string name="please_enter_password1">Voer wagwoord in</string>
+    <string name="make_sure_password_is_correct_and_more_than_8_letters">Maak seker jou wagwoord is korrek en meer as 8 letters</string>
+    <string name="please_enter_a_valid_number">Voer n geldige nommer in</string>
+    <string name="please_fill_in_field_or_press_skip_to_continue">Vul al velde in of klik Slaan oor om voort te gaan</string>
+
+    <string name="please_enter_name_and_surname">Voeg in naam and van!</string>
+    <string name="please_fill_in_field_or_press_skip_to_continue1">Vul veld in of klik Slaan oor om voort te gaan</string>
+    <string name="please_enter_password2">Voeg in wagwoord!</string>
+    <string name="please_fill_in_field_or_press_skip_to_continue2">Vul veld in of klik Slaan oor om voort te gaan</string>
+    <string name="please_fill_in_field_or_press_skip_to_continue3">Vul veld in of klik Slaan oor om voort te gaan</string>
+    <string name="please_add_food_to_the_meal">Voeg in kos vir maaltyd!</string>
+    <string name="please_enter_meal_name">Voeg maaltyd naam in</string>
+    <string name="please_enter_meal_name_and_food">Voeg maaltyd and kos naam by!!</string>
+    <string name="please_enter_a_workout_name_to_continue">Voer n oefensessienaam in om voort te gaan</string>
+    <string name="workout_not_found">Geen Oefensessie gevind nie</string>
+    <string name="no_exercises_to_remove">Geen oefeninge om te verwyder nie</string>
+    <string name="this_is_still_in_development">Dit is nog in ontwikkeling</string>
+    <string name="invalid_workout">Ongeldige oefensessie</string>
+    <string name="please_add_new_exercises_before_adding_a_workout">Voeg nuwe oefeninge by voordat jy n oefensessie byvoeg</string>
+    <string name="please_select_an_exercise_to_add_to_your_workout">Kies n oefening om by jou oefensessie te voeg</string>
+    <string name="please_enter_the_number_of_sets_for_this_exercise">Voer die aantal stelle vir hierdie oefening in</string>
+    <string name="please_enter_the_number_of_reps_for_this_exercise">Voer die aantal herhalings vir hierdie oefening in</string>
+
+
+</resources>
