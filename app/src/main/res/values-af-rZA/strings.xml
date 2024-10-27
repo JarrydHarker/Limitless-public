@@ -8,8 +8,6 @@
     <string name="stretching">Strek</string>
     <string name="exercises">Oefening</string>
     <string name="go">Gaan</string>
-    <string name="listData" />
-    <string name="listData2" />
 
     <string name="notifications">Kennisgewings</string>
     <string name="terms_amp_conditions"><![CDATA[Bepalings en voorwaardes]]></string>
@@ -275,6 +273,47 @@
     <!-- weight goal dialog -->
     <string name="weight_goal">Gewig Doelwit</string>
     <string name="weight_goal1">Gewig Doelwit</string>
+
+
+    <!-- rest dialog -->
+    <string name="start1">Begin</string>
+    <string name="reset">Begin Oor</string>
+    <string name="rest_timer1">Rus Timer</string>
+
+    <!-- Toasts -->
+    <string name="please_input_valid_email">Gebruik asseblief n geldige e-pos</string>
+    <string name="water_goal_reached">Water doelwit bereik!</string>
+    <string name="cannot_remove_any_more_water">Kan nie meer water verwyder nie</string>
+    <string name="please_enter_a_weight_goal_first">Voer asseblief eers n gewigdoelwit in</string>
+    <string name="please_enter_step_goal">Voer asseblief stapdoel in!</string>
+
+    <string name="please_enter_username">Voer gebruikersnaam in</string>
+    <string name="please_enter_password">Voer wagwoord in</string>
+    <string name="user_not_found_please_sign_up">Gebruiker nie gevind nie, teken asseblief aan</string>
+    <string name="incorrect_username_or_password">Verkeerde gebruikersnaam of wagwoord</string>
+    <string name="please_enter_email">Voer e-pos in</string>
+    <string name="please_enter_password1">Voer wagwoord in</string>
+    <string name="make_sure_password_is_correct_and_more_than_8_letters">Maak seker jou wagwoord is korrek en meer as 8 letters</string>
+    <string name="please_enter_a_valid_number">Voer n geldige nommer in</string>
+    <string name="please_fill_in_field_or_press_skip_to_continue">Vul al velde in of klik Slaan oor om voort te gaan</string>
+
+    <string name="please_enter_name_and_surname">Voeg in naam and van!</string>
+    <string name="please_fill_in_field_or_press_skip_to_continue1">Vul veld in of klik Slaan oor om voort te gaan</string>
+    <string name="please_enter_password2">Voeg in wagwoord!</string>
+    <string name="please_fill_in_field_or_press_skip_to_continue2">Vul veld in of klik Slaan oor om voort te gaan</string>
+    <string name="please_fill_in_field_or_press_skip_to_continue3">Vul veld in of klik Slaan oor om voort te gaan</string>
+    <string name="please_add_food_to_the_meal">Voeg in kos vir maaltyd!</string>
+    <string name="please_enter_meal_name">Voeg maaltyd naam in</string>
+    <string name="please_enter_meal_name_and_food">Voeg maaltyd and kos naam by!!</string>
+    <string name="please_enter_a_workout_name_to_continue">Voer n oefensessienaam in om voort te gaan</string>
+    <string name="workout_not_found">Geen Oefensessie gevind nie</string>
+    <string name="no_exercises_to_remove">Geen oefeninge om te verwyder nie</string>
+    <string name="this_is_still_in_development">Dit is nog in ontwikkeling</string>
+    <string name="invalid_workout">Ongeldige oefensessie</string>
+    <string name="please_add_new_exercises_before_adding_a_workout">Voeg nuwe oefeninge by voordat jy n oefensessie byvoeg</string>
+    <string name="please_select_an_exercise_to_add_to_your_workout">Kies n oefening om by jou oefensessie te voeg</string>
+    <string name="please_enter_the_number_of_sets_for_this_exercise">Voer die aantal stelle vir hierdie oefening in</string>
+    <string name="please_enter_the_number_of_reps_for_this_exercise">Voer die aantal herhalings vir hierdie oefening in</string>
 
 
 </resources>

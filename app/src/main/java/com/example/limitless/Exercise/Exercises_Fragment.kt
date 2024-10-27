@@ -147,7 +147,7 @@ class Exercises_Fragment : Fragment() {
             }else{
                 Toast.makeText(
                     requireActivity(),
-                    "Please enter a workout name to continue",
+                    getString(R.string.please_enter_a_workout_name_to_continue),
                     Toast.LENGTH_SHORT
                 ).show()
             }

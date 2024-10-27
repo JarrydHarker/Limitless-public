@@ -48,7 +48,7 @@ class User_Password : AppCompatActivity() {
                 val intent = Intent(this, User_Details::class.java)
                 startActivity(intent)
             }else{
-                Toast.makeText(this, "Please enter password!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.please_enter_password2), Toast.LENGTH_SHORT).show()
             }
         }
     }

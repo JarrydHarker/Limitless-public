@@ -125,7 +125,8 @@ class Log_Meal : AppCompatActivity() {
                 val intent = Intent(this, Diet_Activity::class.java)
                 startActivity(intent)
             }else{
-                Toast.makeText(this, "Please add food to the meal!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    getString(R.string.please_add_food_to_the_meal), Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -224,7 +225,7 @@ class Log_Meal : AppCompatActivity() {
             if(name.isNotEmpty()){
                 mealname = name
             }else {
-                Toast.makeText(this, "Please enter meal name", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.please_enter_meal_name), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -238,7 +239,8 @@ class Log_Meal : AppCompatActivity() {
                 mealListAdapter.notifyDataSetChanged()
                 dialog.dismiss()
             }else{
-                Toast.makeText(this, "Please enter meal name and food!!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    getString(R.string.please_enter_meal_name_and_food), Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -75,7 +75,8 @@ class User_WeightGoal : AppCompatActivity() {
                 startActivity(intent)
             }
             else{
-                Toast.makeText(this, "Please fill in field or press Skip to continue", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    getString(R.string.please_fill_in_field_or_press_skip_to_continue3), Toast.LENGTH_SHORT).show()
             }
         }
         skip.setOnClickListener{

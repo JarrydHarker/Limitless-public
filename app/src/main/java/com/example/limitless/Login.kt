@@ -112,12 +112,12 @@ class Login : AppCompatActivity() {
             val password = txtPassword.text.toString()
 
             if(username.isEmpty()){
-                Toast.makeText(this, "Please enter username", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.please_enter_username), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
             if(password.isEmpty()){
-                Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.please_enter_password), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
@@ -145,7 +145,8 @@ class Login : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }else {
-                    Toast.makeText(this, "User not found, please sign up", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this,
+                        getString(R.string.user_not_found_please_sign_up), Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -266,7 +267,8 @@ fun LoginUser(context: Context, username: String, password: String, onComplete: 
             } else {
                 // Ensure the Toast runs on the main/UI thread
                 Handler(Looper.getMainLooper()).post {
-                    Toast.makeText(context, "Incorrect username or password", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context,
+                        context.getString(R.string.incorrect_username_or_password), Toast.LENGTH_LONG).show()
                 }
             }
         } else {

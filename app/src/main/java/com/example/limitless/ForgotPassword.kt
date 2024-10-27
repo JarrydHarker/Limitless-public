@@ -47,7 +47,8 @@ class ForgotPassword : AppCompatActivity() {
         btnReset.setOnClickListener{
             if(Email.text.isEmpty())
             {
-                Toast.makeText(this, "Please Input Valid Email", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    getString(R.string.please_input_valid_email), Toast.LENGTH_SHORT).show()
             }
             else
             {

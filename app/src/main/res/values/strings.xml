@@ -286,4 +286,39 @@
     <string name="rest_timer1">Rest Timer</string>
 
 
+    <string name="please_input_valid_email">Please Input Valid Email</string>
+    <string name="water_goal_reached">Water goal reached!</string>
+    <string name="cannot_remove_any_more_water">Cannot remove any more water</string>
+    <string name="please_enter_a_weight_goal_first">Please enter a weight goal first</string>
+    <string name="please_enter_step_goal">Please enter step goal!</string>
+
+    <string name="please_enter_username">Please enter username</string>
+    <string name="please_enter_password">Please enter password</string>
+    <string name="user_not_found_please_sign_up">User not found, please sign up</string>
+    <string name="incorrect_username_or_password">Incorrect username or password</string>
+    <string name="please_enter_email">Please enter email</string>
+    <string name="please_enter_password1">Please enter password</string>
+    <string name="make_sure_password_is_correct_and_more_than_8_letters">Make sure password is correct and more than 8 letters</string>
+    <string name="please_enter_a_valid_number">Please enter a valid number</string>
+    <string name="please_fill_in_field_or_press_skip_to_continue">Please fill in field or press Skip to continue</string>
+
+    <string name="please_enter_name_and_surname">Please enter name and surname!</string>
+    <string name="please_fill_in_field_or_press_skip_to_continue1">Please fill in field or press Skip to continue</string>
+    <string name="please_enter_password2">Please enter password!</string>
+    <string name="please_fill_in_field_or_press_skip_to_continue2">Please fill in field or press Skip to continue</string>
+    <string name="please_fill_in_field_or_press_skip_to_continue3">Please fill in field or press Skip to continue</string>
+    <string name="please_add_food_to_the_meal">Please add food to the meal!</string>
+    <string name="please_enter_meal_name">Please enter meal name</string>
+    <string name="please_enter_meal_name_and_food">Please enter meal name and food!!</string>
+    <string name="please_enter_a_workout_name_to_continue">Please enter a workout name to continue</string>
+    <string name="workout_not_found">Workout not found</string>
+    <string name="no_exercises_to_remove">No exercises to remove</string>
+    <string name="this_is_still_in_development">This is still in development</string>
+    <string name="invalid_workout">Invalid Workout</string>
+    <string name="please_add_new_exercises_before_adding_a_workout">Please add new exercises before adding a workout</string>
+    <string name="please_select_an_exercise_to_add_to_your_workout">Please select an exercise to add to your workout</string>
+    <string name="please_enter_the_number_of_sets_for_this_exercise">Please enter the number of sets for this exercise</string>
+    <string name="please_enter_the_number_of_reps_for_this_exercise">Please enter the number of reps for this exercise</string>
+
+
 </resources>

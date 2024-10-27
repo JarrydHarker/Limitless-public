@@ -78,7 +78,8 @@ class fragment_water_tracker : Fragment() {
             saveCurrentIntake(currentIntake)
             nutritionViewModel.setWaterIntake(currentIntake.toDouble())
         } else {
-            Toast.makeText(requireContext(), "Water goal reached!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),
+                getString(R.string.water_goal_reached), Toast.LENGTH_SHORT).show()
         }
     }
     private fun removeWater() {
@@ -89,7 +90,8 @@ class fragment_water_tracker : Fragment() {
             saveCurrentIntake(currentIntake)
             nutritionViewModel.setWaterIntake(currentIntake.toDouble())
         } else {
-            Toast.makeText(requireContext(), "Cannot remove any more water", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),
+                getString(R.string.cannot_remove_any_more_water), Toast.LENGTH_SHORT).show()
         }
     }
 
