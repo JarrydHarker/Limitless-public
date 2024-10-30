@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FDFDF4"
+    android:background="#F5F3E7"
     tools:context=".User_Weight">
 
     <ImageView
@@ -90,7 +90,7 @@
     <TextView
 
         android:id="@+id/textView60"
-  android:layout_width="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_height="54dp"
         android:text="@string/add_your_weight"
         android:textSize="24sp"

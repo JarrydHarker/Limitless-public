@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F3E7"
     tools:context=".Fragment_category">
 
     <LinearLayout
@@ -355,7 +356,7 @@
                 android:layout_marginEnd="15dp"
                 android:backgroundTint="#fff"
                 android:text="@string/go1"
-                android:textColor="#6d61da"
+                android:textColor="#ff934e"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -370,11 +371,11 @@
         android:id="@+id/textView38"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pick_a_category"
         android:autoSizeMaxTextSize="30sp"
         android:autoSizeMinTextSize="12sp"
         android:autoSizeStepGranularity="2sp"
         android:autoSizeTextType="uniform"
+        android:text="@string/pick_a_category"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"

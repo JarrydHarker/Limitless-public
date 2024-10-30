@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F3E7"
     tools:context=".AI_Page">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +28,8 @@
             android:layout_width="45dp"
             android:layout_height="68dp"
             android:layout_weight="1"
-            android:backgroundTint="#00FFFFFF"
+            android:backgroundTint="#efefef"
+            android:padding="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -42,6 +44,7 @@
             android:layout_height="67dp"
             android:layout_weight="1"
             android:background="@drawable/buttonbackground"
+            android:backgroundTint="#FFFFFF"
             android:ems="10"
             android:hint="Search"
             android:inputType="text"
