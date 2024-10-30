@@ -62,7 +62,7 @@
                     android:layout_width="115dp"
                     android:layout_height="wrap_content"
 
-                    android:backgroundTint="#FF934E"
+                    android:backgroundTint="#4863F8"
                     android:text="@string/add"
                     android:textColor="@android:color/white" />
             </LinearLayout>
@@ -117,7 +117,7 @@
                     android:layout_width="115dp"
                     android:layout_height="wrap_content"
 
-                    android:backgroundTint="#FF934E"
+                    android:backgroundTint="#4863F8"
                     android:text="@string/add1"
                     android:textColor="@android:color/white" />
             </LinearLayout>
@@ -163,7 +163,7 @@
                     android:id="@+id/btnAddDinner_MT"
                     android:layout_width="115dp"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#FF934E"
+                    android:backgroundTint="#4863F8"
                     android:text="@string/add2"
                     android:textColor="@android:color/white" />
             </LinearLayout>

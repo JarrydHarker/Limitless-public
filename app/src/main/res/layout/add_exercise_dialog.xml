@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:backgroundTint="#FF934E"
+        android:backgroundTint="#4863F8"
         android:text="@string/add_to_workout"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
