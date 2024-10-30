@@ -88,7 +88,7 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="#6d61da"
+                    app:cardBackgroundColor="#4863F8"
                     app:cardCornerRadius="16dp">
 
                     <LinearLayout
