@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F3E7"
     tools:context=".Exercise_Summary">
 
     <TextView
@@ -37,7 +38,7 @@
             android:layout_height="35dp"
             android:text="@string/exercise_type"
             android:textAlignment="center"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/lblType_ES"
