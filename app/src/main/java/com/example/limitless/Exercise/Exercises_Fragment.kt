@@ -16,12 +16,14 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.HorizontalScrollView
+import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.limitless.Exercise_Summary
+import com.example.limitless.Maps_Activity
 import com.example.limitless.R
 import com.example.limitless.activityViewModel
 import com.example.limitless.currentUser
@@ -66,10 +68,15 @@ class Exercises_Fragment : Fragment() {
         val btnAddWorkout: Button = view.findViewById(R.id.btnAddWorkout_EF)
         val lvWorkouts: ListView = view.findViewById(R.id.listExercises_EF)
         val workoutAdapter = ArrayAdapter<String>(requireActivity(), android.R.layout.simple_dropdown_item_1line)
+        val map: LinearLayout = view.findViewById(R.id.CardioMaps)
 
         val arrWorkouts: MutableList<Workout> = mutableListOf()
         val adapter = Exercide_Adapter(requireActivity(), arrWorkouts)
 
+        map.setOnClickListener{
+            val intent = Intent(activity, Maps_Activity::class.java)
+            startActivity(intent)
+        }
 
         dbAccess.GetUserWorkoutsByDate(currentUser?.userId!!, nutritionViewModel.currentDate) { workouts ->
             arrWorkouts.addAll(workouts)
