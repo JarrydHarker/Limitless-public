@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:backgroundTint="#FF934E"
+        android:backgroundTint="#4863F8"
         android:text="@string/add_meal1"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
