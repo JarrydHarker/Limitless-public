@@ -21,21 +21,28 @@ class Exercide_Adapter(context: Context, private val items: MutableList<Workout>
 
         val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.exercise_listview, parent, false)
         val title = view.findViewById<TextView>(R.id.lblExerciseT)
-        val category = view.findViewById<TextView>(R.id.lblExerciseTime)
+        val date = view.findViewById<TextView>(R.id.lblExerciseTime)
         val go = view.findViewById<Button>(R.id.btnGo_EL)
 
         val item = getItem(position)
         title.text = item?.name
-        category.text = item?.date.toString()
+        date.text = item?.date.toString()
 
 
         go.setOnClickListener {
-            val selectedWorkout = activityViewModel.arrWorkouts[position]
-            activityViewModel.currentWorkout = selectedWorkout
-            val intent = Intent(context, Log_Exercise::class.java)
-            intent.putExtra("workoutId", selectedWorkout.workoutId)
-            context.startActivity(intent)
+            item?.let {
+                activityViewModel.currentWorkout = it
+                val intent = Intent(context, Log_Exercise::class.java)
+                intent.putExtra("workoutId", it.workoutId)
+                context.startActivity(intent)
+            }
         }
         return view
+    }
+
+    fun updateItems(newItems: List<Workout>) {
+        items.clear()
+        items.addAll(newItems)
+        notifyDataSetChanged()
     }
 }

@@ -6,38 +6,37 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="348dp"
-        android:layout_height="135dp"
+        android:layout_width="349dp"
+        android:layout_height="120dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="570dp"
         android:background="@drawable/exerciselistbox"
         android:orientation="horizontal"
         android:paddingLeft="5dp"
         android:paddingTop="10dp"
         android:paddingRight="5dp"
         android:paddingBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="255dp"
-            android:layout_height="match_parent"
+            android:layout_width="278dp"
+            android:layout_height="104dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/lblExerciseT"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:text="@string/listData2" />
+                android:layout_height="31dp"
+                android:text="@string/listData2"
+                android:textAlignment="center"
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
+                android:layout_height="31dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -66,10 +65,11 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:layout_width="67dp"
+            android:layout_height="105dp"
             android:layout_weight="1"
-            tools:srcCompat="@drawable/headphones_icon" />
+            app:srcCompat="@drawable/dumbell_icon" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
