@@ -236,8 +236,6 @@ class DbAccess private constructor(){
                 Log.e("DbAccessError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
-            Log.d("Fuck", "Bruh: $responseMessage")
-
             onComplete(responseMessage)
         }
     }
@@ -1666,7 +1664,7 @@ class DbAccess private constructor(){
         return exercise // Return the deserialized User object (if any)
     }
 
-    fun GetCardio(cardioId: String): Cardio?{
+    fun GetCardio(exerciseId: Int, onComplete: (Cardio?) -> Unit){
         val executor = Executors.newSingleThreadExecutor()
 
         var cardio: Cardio? = null
@@ -1674,7 +1672,7 @@ class DbAccess private constructor(){
         executor.execute {
             try {
                 // Construct URL with query parameter
-                val url = URL( apiUrl + epCardio + "?cardioId=$cardioId")
+                val url = URL( apiUrl + epCardio + "?exerciseId=$exerciseId")
                 val connection = url.openConnection() as HttpURLConnection
 
                 connection.requestMethod = "GET"
@@ -1703,12 +1701,12 @@ class DbAccess private constructor(){
                 Log.e("GetCardioError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
+            onComplete(cardio) // Return the deserialized User object (if any)
         }
-
-        return cardio // Return the deserialized User object (if any)
     }
 
-    fun GetStrength(strengthId: Strength): Strength?{
+    fun GetStrength(exerciseId: Int, onComplete: (Strength?) -> Unit)
+    {
         val executor = Executors.newSingleThreadExecutor()
 
         var strength: Strength? = null
@@ -1716,7 +1714,7 @@ class DbAccess private constructor(){
         executor.execute {
             try {
                 // Construct URL with query parameter
-                val url = URL( apiUrl + epStrength + "?strengthId=$strengthId")
+                val url = URL(apiUrl + epStrength + "?exerciseId=$exerciseId")
                 val connection = url.openConnection() as HttpURLConnection
 
                 connection.requestMethod = "GET"
@@ -1745,9 +1743,8 @@ class DbAccess private constructor(){
                 Log.e("GetStrengthError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
+            onComplete(strength)
         }
-
-        return strength // Return the deserialized User object (if any)
     }
 
     fun GetMeal(mealId: Meal): Meal?{
@@ -1834,7 +1831,7 @@ class DbAccess private constructor(){
         return food // Return the deserialized User object (if any)
     }
 
-    fun GetMovement(movementId: Movement): Movement?{
+    fun GetMovement(movementId: Int, onComplete: (Movement?) -> Unit) {
         val executor = Executors.newSingleThreadExecutor()
 
         var movement: Movement? = null
@@ -1871,9 +1868,8 @@ class DbAccess private constructor(){
                 Log.e("GetMovementError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
             }
+            onComplete(movement)
         }
-
-        return movement // Return the deserialized User object (if any)
     }
 
     fun GetWorkout(workoutId: Workout): Workout?{

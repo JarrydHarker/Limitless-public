@@ -42,7 +42,6 @@ class User_Password : AppCompatActivity() {
         Next.setOnClickListener{
             val pw = Password.text.toString()
             if(pw.isNotEmpty()){
-                currentUser = User()
                 currentUser?.password = pw
 
                 val intent = Intent(this, User_Details::class.java)

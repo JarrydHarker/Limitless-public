@@ -246,9 +246,11 @@ class Workout(
 
 class Exercise(
     var exerciseId: Int? = 0,
-    var movement: Movement,
+    var movementId: Int? = 0,
     var workoutId: Int = 0
 ){
+    var movement = Movement()
+
     fun GetName(): String {
         return movement.name
     }
@@ -281,6 +283,7 @@ class Movement(
 }
 
 class Cardio(
+    var exerciseId: Int? = 0,
     var time: Int = 0,
     var distance: Double = 0.0
 ){
@@ -288,6 +291,7 @@ class Cardio(
 }
 
 class Strength(
+    var exerciseId: Int? = 0,
     var sets: Int = 0,
     var repetitions: Int = 0,
     var favourite: Boolean = false
