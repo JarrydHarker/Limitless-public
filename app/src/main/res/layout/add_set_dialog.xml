@@ -7,10 +7,10 @@
 
     <LinearLayout
         android:id="@+id/linearLayout15"
-        android:layout_width="397dp"
+        android:layout_width="match_parent"
         android:layout_height="563dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,12 +39,17 @@
             android:id="@+id/btnAddSet_AS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add_set1" />
+            android:backgroundTint="#4863F8"
+            android:text="@string/add_set1"
+            app:cornerRadius="6dp"
+            app:strokeWidth="1dp" />
 
         <Button
             android:id="@+id/btnClose_AS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/close" />
+            android:backgroundTint="#003553F8"
+            android:text="@string/close"
+            android:textColor="#4863F8" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

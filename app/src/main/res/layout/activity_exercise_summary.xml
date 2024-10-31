@@ -98,7 +98,7 @@
             android:id="@+id/btnStart_ES"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#FF934E"
+            android:backgroundTint="#4863F8"
             android:text="@string/start"
             app:cornerRadius="10dp"
             app:strokeColor="#000000"
