@@ -38,6 +38,7 @@ import com.example.limitless.data.Exercise
 import com.example.limitless.data.Movement
 import com.example.limitless.data.Strength
 import com.example.limitless.data.Workout
+import com.example.limitless.data.dbAccess
 import com.example.limitless.nutritionViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.CoroutineScope
@@ -80,7 +81,7 @@ class New_Workout : AppCompatActivity() {
         lvNewWorkout.adapter = newWorkoutAdapter
 
         btnCreateExercise.setOnClickListener {
-            ShowDialog(){
+            ShowDialog{
                 newWorkoutAdapter.clear()
                 for(we in workoutExercises){
                     newWorkoutAdapter.add(we.toString())
@@ -191,8 +192,7 @@ class New_Workout : AppCompatActivity() {
                 val moveAdapter = ArrayAdapter<String>(this@New_Workout, android.R.layout.simple_dropdown_item_1line, mutableListOf())
                 // Start a coroutine in the Main (UI) thread
                 CoroutineScope(Dispatchers.Main).launch {
-                    val db = DbAccess.GetInstance()
-                    val arrFetchMoves = db.SearchForMovements(search)
+                    val arrFetchMoves = dbAccess.SearchForMovements(search)
                     arrMoves = arrFetchMoves.toMutableList()
                     for (move in arrFetchMoves) {
                         moveAdapter.add(move.name)
@@ -213,11 +213,11 @@ class New_Workout : AppCompatActivity() {
         })
 
         txtAddExercise.setOnItemClickListener { parent, view, position, id ->
-
-
             // Get the index of the item clicked
             val itemIndex = position
             currentMove = arrMoves[itemIndex]
+
+            Log.d("Fuck", "MovementID: ${currentMove.movementId}")
 
             val exercisepreviewAdapter = ArrayAdapter<String>(this@New_Workout, android.R.layout.simple_list_item_1, mutableListOf())
 
@@ -244,7 +244,8 @@ class New_Workout : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val exercise = Exercise(null, currentMove)
+            val exercise = Exercise(null, currentMove.movementId)
+            exercise.movement = currentMove
 
             if (currentMove.type.lowercase(Locale.getDefault()) == "cardio") {
                 exercise.cardio = Cardio()
@@ -267,7 +268,7 @@ class New_Workout : AppCompatActivity() {
                     return@setOnClickListener
                 }
 
-                exercise.strength = Strength(sets.toInt(), reps.toInt())
+                exercise.strength = Strength(sets = sets.toInt(), repetitions = reps.toInt())
             }
 
             workoutExercises.add(exercise)
