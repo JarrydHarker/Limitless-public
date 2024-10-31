@@ -110,6 +110,13 @@ class Login : AppCompatActivity() {
         // Initialize the CredentialManager
         val credentialManager = CredentialManager.create(this)
 
+        setupBiometricAuthentication()
+
+        btn = findViewById(R.id.btn)
+        btn.setOnClickListener {
+            biometricPrompt.authenticate(promptInfo)
+        }
+
         btnForgotPassword.setOnClickListener{
             val intent = Intent(this, ForgotPassword::class.java)
             startActivity(intent)
@@ -136,6 +143,7 @@ class Login : AppCompatActivity() {
 
             LoginUser(this, username, password){user ->
                 if(user != null){
+                    saveLogin(username, password)
                     currentUser = user
 
                     currentUser?.LoadUserData{
@@ -267,51 +275,99 @@ class Login : AppCompatActivity() {
         }
     }
 
-//    fun FingerPrint(){
-//        btn = findViewById(R.id.btnFinger)
-//
-//
-//
-//        executor = ContextCompat.getMainExecutor(this)
-//        biometricPrompt = BiometricPrompt(this, executor,
-//            object : BiometricPrompt.AuthenticationCallback() {
-//                override fun onAuthenticationError(
-//                    errorCode: Int,
-//                    errString: CharSequence,
-//                ) {
-//                    super.onAuthenticationError(errorCode, errString)
-//                    Toast.makeText(applicationContext,
-//                        "Authentication error: $errString", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
-//
-//                override fun onAuthenticationSucceeded(
-//                    result: BiometricPrompt.AuthenticationResult,
-//                ) {
-//                    super.onAuthenticationSucceeded(result)
-//                    Toast.makeText(applicationContext,
-//                        "Authentication succeeded!", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
-//
-//                override fun onAuthenticationFailed() {
-//                    super.onAuthenticationFailed()
-//                    Toast.makeText(applicationContext, "Authentication failed",
-//                        Toast.LENGTH_SHORT)
-//                        .show()
-//                }
-//            })
-//
-//        promptInfo = BiometricPrompt.PromptInfo.Builder()
-//            .setTitle("Biometric login for my app")
-//            .setSubtitle("Log in using your biometric credential")
-//            .setNegativeButtonText("Use account password")
-//            .build()
-//
-//        btn.setOnClickListener {
-//            biometricPrompt.authenticate(promptInfo)
-//        }
-//    }
+    private fun setupBiometricAuthentication() {
+        val biometricManager = BiometricManager.from(this)
+        if (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG) ==
+            BiometricManager.BIOMETRIC_SUCCESS
+        ) {
+            val executor = ContextCompat.getMainExecutor(this)
+            biometricPrompt = BiometricPrompt(
+                this,
+                executor,
+                object : BiometricPrompt.AuthenticationCallback() {
+                    override fun onAuthenticationError(
+                        errorCode: Int,
+                        errString: CharSequence
+                    ) {
+                        Toast.makeText(
+                            applicationContext,
+                            "Authentication error: $errString",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+
+                        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                        val username = sharedPreferences.getString("username", null)
+                        val password = sharedPreferences.getString("password", null)
+
+                        if (username != null && password != null) {
+                            LoginUser(this@Login, username, password){user ->
+                                if(user != null){
+                                    currentUser = user
+
+                                    currentUser?.LoadUserData{
+                                        nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                                        activityViewModel = ActivityViewModel(LocalDate.now())
+
+                                        nutritionViewModel.LoadUserData()
+                                        activityViewModel.LoadUserData()
+
+                                        dbAccess.GetDay(LocalDate.now(), currentUser?.userId!!){ day ->
+                                            if(day == null){
+                                                currentUser?.CreateDay()
+                                            }else{
+                                                currentUser!!.currentDay = day
+                                            }
+                                        }
+                                    }
+                                    val intent = Intent(this@Login, MainActivity::class.java)
+                                    startActivity(intent)
+                                }
+                            }
+                            val intent = Intent(this@Login, MainActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(
+                                applicationContext,
+                                "User not found",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+
+                    override fun onAuthenticationFailed() {
+                        Toast.makeText(
+                            applicationContext,
+                            "Authentication failed",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                })
+
+            promptInfo = BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Biometric login for my app")
+                .setSubtitle("Log in using your biometric credential")
+                .setNegativeButtonText("Cancel")
+                .build()
+        } else {
+            Toast.makeText(
+                applicationContext,
+                "Biometric authentication is not available.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    fun saveLogin(username: String, password: String) {
+        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("username", username)
+        editor.putString("password", password)
+        editor.apply()
+    }
+
 
     fun checkDeviceHasBiometric() {
         val biometricManager = BiometricManager.from(this)
