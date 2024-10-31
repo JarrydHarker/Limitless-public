@@ -79,15 +79,17 @@ class Exercises_Fragment : Fragment() {
         }
 
         dbAccess.GetUserWorkoutsByDate(currentUser?.userId!!, nutritionViewModel.currentDate) { workouts ->
+            arrWorkouts.clear()
             arrWorkouts.addAll(workouts)
 
             for (workout in activityViewModel.arrWorkouts) {
                 workoutAdapter.add(workout.name)
             }
-
-            adapter.notifyDataSetChanged()
            //lvWorkouts.adapter = workoutAdapter
+
+            adapter.updateItems(workouts)
             lvWorkouts.adapter = adapter
+
         }
 
 
