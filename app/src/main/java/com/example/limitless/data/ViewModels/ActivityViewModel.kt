@@ -11,7 +11,6 @@ import java.time.LocalDate
 class ActivityViewModel(val currentDate: LocalDate) {
     var arrWorkouts: MutableList<Workout> = mutableListOf()
     var steps = 0
-    var db = DbAccess.GetInstance()
     var currentWorkout: Workout? = null
 
     fun AddWorkout(workout: Workout, onComplete: (Int?) -> Unit) {
@@ -37,6 +36,11 @@ class ActivityViewModel(val currentDate: LocalDate) {
                 arrWorkouts.addAll(workouts)
             for(workout in arrWorkouts){
                 dbAccess.GetExercisesByWorkoutId(workout.workoutId){ exercises ->
+                    for(e in exercises){
+                        Log.d("Poes", "ViewModel: Eid:${e.exerciseId}, Mid:${e.movementId}, Wid:${e.workoutId}")
+                        //workout.AddExercise(e)
+                    }
+
                     workout.AddExercises(exercises)
 
                     for(exercise in workout.arrExercises){
