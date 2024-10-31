@@ -21,6 +21,7 @@ import java.net.URL
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.Executors
+import kotlin.math.log
 
 
 class DbAccess private constructor(){
@@ -1299,6 +1300,9 @@ class DbAccess private constructor(){
 
                         // Deserialize the JSON array into a List<User>
                         exercises = gson.fromJson(jsonResponse, Array<Exercise>::class.java).toList()
+                        Handler(Looper.getMainLooper()).post {
+                            onComplete(exercises)
+                        }
                     }
                 } else {
                     // Handle error message if request fails
@@ -1311,9 +1315,6 @@ class DbAccess private constructor(){
                 // Handle exceptions appropriately
                 Log.e("GetAllWorkoutError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
-            }
-            Handler(Looper.getMainLooper()).post {
-                onComplete(exercises)
             }
         }
     }
@@ -1390,6 +1391,9 @@ class DbAccess private constructor(){
 
                         // Deserialize the JSON array into a List<User>
                         workout = gson.fromJson(jsonResponse, Array<Workout>::class.java).toList()
+                        Handler(Looper.getMainLooper()).post {
+                            onComplete(workout)
+                        }
                     }
                 } else {
                     // Handle error message if request fails
@@ -1402,9 +1406,6 @@ class DbAccess private constructor(){
                 // Handle exceptions appropriately
                 Log.e("GetAllWorkoutError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
-            }
-            Handler(Looper.getMainLooper()).post {
-                onComplete(workout)
             }
         }
     }

@@ -227,27 +227,25 @@ class Day(
 
 class Workout(
     var workoutId: Int? = 0,
-    var date: LocalDate,  // Use String or LocalDate depending on your needs
+    var date: LocalDate,
     var name: String? = "",
     var userId: String = ""
 ){
     var arrExercises: MutableList<Exercise> = mutableListOf()
 
-    fun AddExercise() {
-
+    fun AddExercise(exercise: Exercise) {
+        arrExercises.add(exercise)
     }
 
     fun AddExercises(exercises: List<Exercise>) {
         arrExercises.addAll(exercises)
     }
-
-
 }
 
 class Exercise(
-    var exerciseId: Int? = 0,
-    var movementId: Int? = 0,
-    var workoutId: Int = 0
+    var exerciseId: Int? = null,
+    var movementId: Int? = null,
+    var workoutId: Int? = null
 ){
     var movement = Movement()
 

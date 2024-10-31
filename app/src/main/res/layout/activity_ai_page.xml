@@ -37,13 +37,13 @@
             app:srcCompat="@drawable/ic_search" />
 
         <EditText
-            android:id="@+id/txtSearch_AI"
+            android:id="@+id/txtChat_AI"
             android:layout_width="309dp"
             android:layout_height="67dp"
             android:layout_weight="1"
             android:background="@drawable/buttonbackground"
             android:ems="10"
-            android:hint="Search"
+            android:hint="Start a conversation..."
             android:inputType="text"
             android:paddingLeft="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -56,8 +56,8 @@
 
     <ImageView
         android:id="@+id/imageView26"
-        android:layout_width="0dp"
-        android:layout_height="299dp"
+        android:layout_width="357dp"
+        android:layout_height="187dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"
@@ -67,14 +67,26 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/img" />
 
-    <ListView
-        android:id="@+id/listMessages_AI"
-        android:layout_width="0dp"
-        android:layout_height="257dp"
+    <ScrollView
+        android:id="@+id/svMessages_AI"
+        android:layout_width="355dp"
+        android:layout_height="372dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView26" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView26"
+        app:layout_constraintVertical_bias="0.489">
+
+        <LinearLayout
+            android:id="@+id/llMessages_AI"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:orientation="vertical" />
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
