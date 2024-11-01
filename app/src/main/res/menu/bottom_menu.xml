@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_business"
+
+        android:title="Business"
+        android:enabled="true"
+        android:icon="@drawable/cycling_icon"
+        android:iconTint="@color/blue_dark"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_store"
+        android:enabled="true"
+        android:title="Gym"
+        android:icon="@drawable/dumbell_icon"
+        android:iconTint="@color/blue_dark"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_gas"
+        android:enabled="true"
+        android:title="Gas-Station"
+        android:icon="@drawable/run_icon"
+        android:iconTint="@color/blue_dark"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_restaurant"
+        android:enabled="true"
+        android:title="Restaurant"
+        android:icon="@drawable/hamb_icon"
+        android:iconTint="@color/blue_dark"
+        app:showAsAction="ifRoom"/>
+</menu>

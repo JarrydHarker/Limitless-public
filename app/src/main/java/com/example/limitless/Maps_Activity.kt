@@ -1,19 +1,23 @@
 package com.example.limitless
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+//import android.telecom.Call
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
-import com.example.limitless.Exercise.Exercise_Activity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+//import com.android.volley.Response
+import com.example.limitless.databinding.ActivityMapsBinding
+//import com.google.android.gms.common.internal.service.Common
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -26,12 +30,26 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+//import javax.security.auth.callback.Callback
 import com.google.android.gms.maps.model.LatLng
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+//import com.example.locations_ice.LatLng
+import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.widget.Button
+import androidx.annotation.DrawableRes
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.view.isVisible
 import com.example.limitless.MapsData.Common
 import com.example.limitless.MapsData.IGoogleAPIService
 import com.example.limitless.MapsData.MyPlaces
 import com.example.limitless.Nutrition.Diet_Activity
-import com.example.limitless.databinding.ActivityMapsBinding
+import com.google.android.gms.location.*
+import com.google.android.gms.maps.model.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
@@ -42,11 +60,8 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
     private var latitude:Double=0.toDouble()
     private var longitude:Double=0.toDouble()
 
-
     private lateinit var mLastLocation: Location
     private var mMarker: Marker?=null
-
-
 
     //location
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -68,30 +83,7 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
-        ThemeManager.updateNavBarColor(this, bottomNavBar)
-        bottomNavBar.selectedItemId = R.id.ic_workouts
-
-        bottomNavBar.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.ic_nutrition -> {
-                    navigateToActivityRight(Diet_Activity::class.java)
-                    true
-                }
-                R.id.ic_home -> {
-                    navigateToActivityLeft(MainActivity::class.java)
-                    true
-                }
-
-                R.id.ic_settings -> {
-                    navigateToActivityRight(Settings::class.java)
-                    true
-                }
-                else -> false
-            }
-        }
-
-        //val bottom_Navigation_view = findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottom_navigation_view)
+        val bottom_Navigation_view = findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -102,7 +94,7 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
         mServices = Common.googleApiService
 
         //request runtime permission
-        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.M)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             if (checkLocationPermission()) {
                 buildLocationRequest()
                 buildLocationCallBack()
@@ -112,8 +104,7 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
                     locationCallback,
                     Looper.myLooper()
                 )
-            }
-            else{
+            } else {
                 buildLocationRequest()
                 buildLocationCallBack()
                 fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
@@ -124,50 +115,20 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
                 )
             }
 
-        /* bottom_Navigation_view.setOnNavigationItemSelectedListener { item ->
-             if (item.itemId == R.id.action_business) nearByPlace("business")
-             else if (item.itemId == R.id.action_store) nearByPlace("store")
-             else if (item.itemId == R.id.action_gas) nearByPlace("gas_station")
-             else if (item.itemId == R.id.action_restaurant) nearByPlace("restaurant")
-             true
+        bottom_Navigation_view.setOnNavigationItemSelectedListener { item ->
+            if (item.itemId == R.id.action_business) nearByPlace("business")
+            else if (item.itemId == R.id.action_store) nearByPlace("gym")
+            else if (item.itemId == R.id.action_gas) nearByPlace("gas_station")
+            else if (item.itemId == R.id.action_restaurant) nearByPlace("restaurant")
+            true
 
-         }*/
+        }
     }
-
-    // Helper function to navigate to another activity with transition
-    private fun navigateToActivityRight(activityClass: Class<*>) {
-        val intent = Intent(this, activityClass)
-        val options = ActivityOptionsCompat.makeCustomAnimation(
-            this, R.anim.slide_in_right, R.anim.slide_out_left
-        )
-        startActivity(intent, options.toBundle())
-    }
-    private fun navigateToActivityLeft(activityClass: Class<*>) {
-        val intent = Intent(this, activityClass)
-        val options = ActivityOptionsCompat.makeCustomAnimation(
-            this, R.anim.slide_in_left, R.anim.slide_out_right
-        )
-        startActivity(intent, options.toBundle())
-    }
-
-    /* fun getBitmapDescriptorFromVector( @DrawableRes vectorDrawableResourceId: Int): BitmapDescriptor? {
-
-         val vectorDrawable = ContextCompat.getDrawable(this,vectorDrawableResourceId)
-         val bitmap = Bitmap.createBitmap(vectorDrawable!!.intrinsicWidth, vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
-         val canvas = Canvas(bitmap)
-         vectorDrawable.setBounds(0, 0, canvas.width, canvas.height)
-         vectorDrawable.draw(canvas)
-
-         return BitmapDescriptorFactory.fromBitmap(bitmap)
-     }*/
-
-
 
     /*private fun nearByPlace(typePlace: String) {
 
         //clear all marker from map
         mMap.clear()
-
 
         //build url based on location
         val url = getUrl(latitude,longitude,typePlace)
@@ -190,14 +151,15 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
                             markerOptions.title(placeName)
 
                             if (typePlace.equals("business")) {
-                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.baseline_local_hospital_24)).title(placeName)
-                            } else if (typePlace.equals("store")) {
-                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.baseline_account_balance_24)).title(placeName)
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.cycling_icon)).title(placeName)
+                            } else if (typePlace.equals("gym")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.dumbell_icon)).title(placeName)
                             } else if (typePlace.equals("gas_station")) {
-                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.baseline_local_atm_24)).title(placeName)
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.run_icon)).title(placeName)
                             } else if (typePlace.equals("restaurant")) {
-                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.baseline_restaurant_24)).title(placeName)
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.hamb_icon)).title(placeName)
                             }
+
                             else
 
                                 markerOptions.icon(
@@ -211,32 +173,69 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
                             mMap!!.addMarker(markerOptions)
                             //move camera
                             mMap!!.moveCamera(CameraUpdateFactory.newLatLng(latLng))
-                            mMap!!.animateCamera(CameraUpdateFactory.zoomTo(12f))
+                            mMap!!.animateCamera(CameraUpdateFactory.zoomTo(10f))
 
                         }
-
-
                     }
                 }
-
                 override fun onFailure(call: Call<MyPlaces>, t: Throwable) {
                     Toast.makeText(baseContext,""+t!!.message, Toast.LENGTH_SHORT).show()
                 }
-
             })
-
     }*/
+    private fun nearByPlace(typePlace: String) {
+        mMap.clear()
+        val url = getUrl(latitude, longitude, typePlace)
+        Log.d("API_REQUEST", "Request URL: $url")
+        mServices.getNearbyPlaces(url).enqueue(object : Callback<MyPlaces> {
+            override fun onResponse(call: Call<MyPlaces>, response: Response<MyPlaces>) {
+                Log.d("API_RESPONSE", response.body().toString())
+                if (response.isSuccessful) {
+                    currentPlace = response.body()!!
+                    for (i in 0 until currentPlace.results!!.size) {
+                        val markerOptions = MarkerOptions()
+                        val googlePlace = currentPlace.results!![i]
+                        val lat = googlePlace.geometry!!.location!!.lat
+                        val lng = googlePlace.geometry!!.location!!.lng
+                        val placeName = googlePlace.name
+                        val latLng = LatLng(lat, lng)
+                        markerOptions.position(latLng)
+                        markerOptions.title(placeName)
+
+                        when (typePlace) {
+                            "business" -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.cycling_icon)).title(placeName)
+                            "gym" -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.dumbell_icon)).title(placeName)
+                            "gas_station" -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.run_icon)).title(placeName)
+                            "restaurant" -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.hamb_icon)).title(placeName)
+                            else -> markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                        }
+
+                        markerOptions.snippet(latLng.toString())
+                        mMap.addMarker(markerOptions)
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+                        mMap.animateCamera(CameraUpdateFactory.zoomTo(10f))
+                    }
+                } else {
+                    Log.e("API_RESPONSE_ERROR", "Error: ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<MyPlaces>, t: Throwable) {
+                Toast.makeText(baseContext, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Log.e("API_CALL_FAILURE", t.message.toString())
+            }
+        })
+    }
+
 
     private fun getUrl(latitude: Double, longitude: Double, typePlace: String): String {
         val googlePlaceUrl = StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json")
         googlePlaceUrl.append("?keyword=cruise&location=$latitude,$longitude")
         googlePlaceUrl.append("&radius=10000") //10km
         googlePlaceUrl.append("&type=$typePlace")
-        googlePlaceUrl.append("&key=AIzaSyC_xopkz7iknxH9aWelppGsFDvH_eOXGV0")
+        googlePlaceUrl.append("&key=AIzaSyBaM3TheYbKIjGg-kcI2N5PIg5U0NE40Bo")
         Log.d("url_debug",googlePlaceUrl.toString())
         return googlePlaceUrl.toString()
-
-
     }
 
     private fun buildLocationCallBack() {
@@ -255,12 +254,12 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
                 val markerOptions = MarkerOptions()
                     .position(latlng)
                     .title("Your Location")
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
                 mMarker = mMap!!.addMarker(markerOptions)
 
                 //Move Camera
                 mMap!!.moveCamera(CameraUpdateFactory.newLatLng(latlng))
-                mMap!!.animateCamera(CameraUpdateFactory.zoomTo(11f))
+                mMap!!.animateCamera(CameraUpdateFactory.zoomTo(15f))
             }
         }
     }
@@ -271,8 +270,6 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
         locationRequest.interval = 5000
         locationRequest.fastestInterval = 3000
         locationRequest.smallestDisplacement = 10f
-
-
     }
 
     private fun checkLocationPermission():Boolean {
@@ -352,9 +349,6 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
         else
             mMap!!.isMyLocationEnabled = true
         //zoom control
-
-
-
     }
 
 }

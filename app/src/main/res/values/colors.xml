@@ -11,4 +11,5 @@
         <color name="light_text_tint">#000000</color>
     <color name="darkBackground">#121212</color>
     <color name="lightBackground">#FFFFFFFF</color>
+    <color name="blue_dark">#277BC0</color>
 </resources>
