@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.cardview.widget.CardView
 
 // TODO: Rename parameter arguments, choose names that match
@@ -39,7 +40,7 @@ class ai : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_ai, container, false)
 
-        val aibtn: Button = view.findViewById(R.id.AINav)
+        val aibtn: ImageButton = view.findViewById(R.id.AINav)
 
         aibtn.setOnClickListener{
             val intent = Intent(requireActivity(), AI_Page::class.java)
