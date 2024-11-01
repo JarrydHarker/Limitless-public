@@ -77,7 +77,6 @@ class Log_Exercise : AppCompatActivity() {
                 if (exerciseAdapter.count > 1) {
                     // Remove the first item from the arrExercises list
 
-
                     // Remove the first item from the adapter
                     exerciseAdapter.remove(exerciseAdapter.getItem(0))
                     exerciseAdapter.notifyDataSetChanged()
@@ -139,16 +138,16 @@ class Log_Exercise : AppCompatActivity() {
         lblTimer.text = Ticktimer.getTime()
 
         btnMinus10.setOnClickListener {
-            time -= 10 * 1000
-            if (time < 0) time = 0 // Prevent negative time
-            Ticktimer.reset(time) // Update the timer with the new time
-            lblTimer.text = Ticktimer.getTime() // Update the displayed time
+            time = Ticktimer.getRemainingTime() - 10 * 1000
+            if (time < 0) time = 0
+            Ticktimer.reset(time)
+            lblTimer.text = Ticktimer.getTime()
         }
 
         btnAdd10.setOnClickListener {
-            time += 10 * 1000
-            Ticktimer.reset(time) // Update the timer with the new time
-            lblTimer.text = Ticktimer.getTime() // Update the displayed time
+            time = Ticktimer.getRemainingTime() + 10 * 1000
+            Ticktimer.reset(time)
+            lblTimer.text = Ticktimer.getTime()
         }
 
         btnClose.setOnClickListener {
@@ -171,6 +170,7 @@ class Log_Exercise : AppCompatActivity() {
 
         btnReset.setOnClickListener {
             Ticktimer.reset(time)
+            lblTimer.text = Ticktimer.getTime()
         }
 
         dialog.show()

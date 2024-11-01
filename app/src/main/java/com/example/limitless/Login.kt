@@ -143,7 +143,7 @@ class Login : AppCompatActivity() {
 
             LoginUser(this, username, password){user ->
                 if(user != null){
-                    //saveLogin(username, password)
+                    saveLogin(username, password)
                     currentUser = user
 
                     currentUser?.LoadUserData{
