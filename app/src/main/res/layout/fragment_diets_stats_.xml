@@ -150,7 +150,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout7"
-            android:layout_width="151dp"
+            android:layout_width="121dp"
             android:layout_height="86dp"
             android:layout_marginEnd="6dp"
             android:background="@drawable/box"
@@ -164,7 +164,7 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout6"
-                android:layout_width="85dp"
+                android:layout_width="68dp"
                 android:layout_height="75dp"
                 android:layout_marginTop="4dp"
                 android:orientation="vertical"
@@ -201,7 +201,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout8"
-            android:layout_width="151dp"
+            android:layout_width="121dp"
             android:layout_height="83dp"
             android:layout_marginStart="6dp"
             android:background="@drawable/box"
@@ -215,7 +215,7 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout5"
-                android:layout_width="85dp"
+                android:layout_width="68dp"
                 android:layout_height="72dp"
                 android:layout_marginTop="4dp"
                 android:orientation="vertical"
@@ -253,7 +253,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/calorieCL"
-            android:layout_width="151dp"
+            android:layout_width="121dp"
             android:layout_height="82dp"
             android:layout_marginStart="6dp"
             android:background="@drawable/box"
@@ -267,7 +267,7 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout4"
-                android:layout_width="85dp"
+                android:layout_width="68dp"
                 android:layout_height="72dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -303,7 +303,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ProteinCL"
-            android:layout_width="151dp"
+            android:layout_width="121dp"
             android:layout_height="84dp"
             android:layout_marginEnd="6dp"
             android:background="@drawable/box"
@@ -316,7 +316,7 @@
             app:layout_constraintVertical_bias="0.186">
 
             <LinearLayout
-                android:layout_width="85dp"
+                android:layout_width="68dp"
                 android:layout_height="72dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
