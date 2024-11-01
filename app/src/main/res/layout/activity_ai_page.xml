@@ -8,7 +8,7 @@
     tools:context=".AI_Page">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/linearLayoutai"
         android:layout_width="0dp"
         android:layout_height="67dp"
         android:layout_marginStart="30dp"

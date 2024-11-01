@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.limitless.data.AI.AIDecoder
@@ -30,8 +31,8 @@ class AI_Page : AppCompatActivity() {
     private var isDone = true
     private var isBold = false
 
-    val llMessages_AI = findViewById<LinearLayout>(R.id.llMessages_AI)
-    val txtChat: TextView = findViewById(R.id.txtChat_AI)
+    private lateinit var llMessages_AI: LinearLayout
+    private lateinit var txtChat: TextView
     var saveMessages: ((SaveMessagesEventArgs) -> Unit)? = null
 
     init {
@@ -57,7 +58,8 @@ class AI_Page : AppCompatActivity() {
             insets
         }
 
-
+        llMessages_AI = findViewById(com.example.limitless.R.id.llMessages_AI)
+        txtChat = findViewById(R.id.txtChat_AI)
 
         //Nicks Animation things
 //        val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
@@ -68,7 +70,7 @@ class AI_Page : AppCompatActivity() {
 //        val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
 
         val imageView26 = findViewById<ImageView>(R.id.imageView26)
-        val linearLayout2 = findViewById<LinearLayout>(R.id.linearLayout2)
+        val linearLayout2 = findViewById<ConstraintLayout>(R.id.linearLayoutai)
 
         imageView26.startAnimation(stb)
         llMessages_AI.startAnimation(btt)
