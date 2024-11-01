@@ -259,7 +259,7 @@
     <string name="new_workout1">Nuwe Oefensessie</string>
     <string name="workout_name">Oefensessie Naam</string>
     <string name="create_workout">Skep Oefensessie</string>
-    <string name="cancel1">kanselleer</string>
+    <string name="cancel1">Kanselleer</string>
 
     <!-- timer dialog -->
     <string name="step_goal">Stap Doelwit</string>
