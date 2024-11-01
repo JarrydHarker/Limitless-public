@@ -34,60 +34,68 @@
 
     <Button
         android:id="@+id/btnEditSet_LE"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="59dp"
-        android:layout_marginEnd="30dp"
-        android:backgroundTint="#4863F8"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="5dp"
+        android:backgroundTint="#004863F8"
         android:text="@string/edit_sets"
+        android:textColor="#4863F8"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toStartOf="@id/btnAddSet_LE"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.718" />
+        app:layout_constraintVertical_bias="0.706" />
 
     <Button
         android:id="@+id/btnAddSet_LE"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="59dp"
+        android:layout_marginStart="5dp"
         android:layout_marginEnd="30dp"
-        android:backgroundTint="#4863F8"
+        android:backgroundTint="#004863F8"
         android:text="@string/add_set"
+        android:textColor="#4863F8"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnEditSet_LE"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19" />
+        app:layout_constraintVertical_bias="0.706" />
+
 
     <Button
         android:id="@+id/btnRestTimer_LE"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="59dp"
         android:layout_marginStart="30dp"
+        android:layout_marginEnd="5dp"
         android:backgroundTint="#4863F8"
         android:text="@string/rest_timer"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@id/btnLogSet_LE"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.95" />
 
     <Button
         android:id="@+id/btnLogSet_LE"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="59dp"
-        android:backgroundTint="#4863F8"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="#004863F8"
         android:text="@string/log_set"
+        android:textColor="#4863F8"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.904"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnRestTimer_LE"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.952" />
+        app:layout_constraintVertical_bias="0.952"
+        app:strokeColor="#4863F8"
+        app:strokeWidth="1dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
