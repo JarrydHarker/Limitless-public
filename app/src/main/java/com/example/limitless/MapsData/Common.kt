@@ -1,5 +1,7 @@
 package com.example.limitless.MapsData
 
+import com.example.limitless.MapsData.IGoogleAPIService
+
 object Common {
     var currentResult: Results? = null
 

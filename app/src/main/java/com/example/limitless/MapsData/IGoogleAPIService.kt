@@ -5,6 +5,6 @@ import retrofit2.http.GET
 import retrofit2.http.Url
 
 interface IGoogleAPIService {
-    @GET("maps/api/place/nearbysearch/json")
+    @GET
     fun getNearbyPlaces(@Url url: String): Call<MyPlaces>
 }
