@@ -16,7 +16,7 @@ class ActivityViewModel(val currentDate: LocalDate) {
     fun AddWorkout(workout: Workout, onComplete: (Int?) -> Unit) {
         dbAccess.CreateWorkout(workout){ response ->
             dbAccess.GetWorkoutByName(workout.name!!, currentDate){ dbWorkout->
-                workout.workoutId = dbWorkout?.workoutId
+                workout.workoutId = dbWorkout?.workoutId!!
                 Log.d("Fuck", "Workout ID: ${workout.workoutId.toString()}")
                 arrWorkouts.add(workout)
 
@@ -33,18 +33,18 @@ class ActivityViewModel(val currentDate: LocalDate) {
         arrWorkouts = mutableListOf()
 
         dbAccess.GetUserWorkoutsByDate(currentUser?.userId!!, currentDate){workouts ->
-                arrWorkouts.addAll(workouts)
-            for(workout in arrWorkouts){
-                dbAccess.GetExercisesByWorkoutId(workout.workoutId){ exercises ->
-                    for(e in exercises){
-                        Log.d("Poes", "ViewModel: Eid:${e.exerciseId}, Mid:${e.movementId}, Wid:${e.workoutId}")
-                        //workout.AddExercise(e)
-                    }
+                for(w in workouts){
+                    arrWorkouts.add(Workout(w.workoutId, w.date, w.name, w.userId))
+                }
 
-                    workout.AddExercises(exercises)
+                for(workout in arrWorkouts){
+                    dbAccess.GetExercisesByWorkoutId(workout.workoutId){ exercises ->
+                        for(e in exercises){
+                            workout.AddExercise(e)
+                        }
 
                     for(exercise in workout.arrExercises){
-                        dbAccess.GetMovement(exercise.movementId!!){ movement ->
+                        dbAccess.GetMovement(exercise.movementId){ movement ->
                             if (movement != null) {
                                 exercise.movement = movement
                             }

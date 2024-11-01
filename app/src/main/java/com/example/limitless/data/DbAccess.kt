@@ -1301,6 +1301,9 @@ class DbAccess private constructor(){
                         // Deserialize the JSON array into a List<User>
                         exercises = gson.fromJson(jsonResponse, Array<Exercise>::class.java).toList()
                         Handler(Looper.getMainLooper()).post {
+                            for(e in exercises){
+                                Log.d("Poes", "DBAccess: Eid:${e.exerciseId}, Mid:${e.movementId}, Wid:${e.workoutId}")
+                            }
                             onComplete(exercises)
                         }
                     }
