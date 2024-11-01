@@ -59,27 +59,41 @@ class Log_Exercise : AppCompatActivity() {
             }
 
             // Get the exercise name for the TextView
-            val firstExercise = currentWorkout.arrExercises.firstOrNull()
-            lblCurrentExercise_LE.text = firstExercise?.GetName() ?: "No exercise available"
+            var currentExercise = currentWorkout.arrExercises.firstOrNull()
+            lblCurrentExercise_LE.text = currentExercise?.GetName() ?: "No exercise available"
+
+            val exerciseDetails: MutableList<String> = mutableListOf()
 
             // Prepare the details for the ListView
-            val exerciseDetails = currentWorkout.arrExercises.map {
-                "Sets: ${it.strength?.sets ?: 0}, \nReps: ${it.strength?.repetitions ?: 0}"
+            for(set in 1..currentExercise!!.strength!!.sets+1){
+                exerciseDetails.add("Set $set: Reps: ${currentExercise.strength?.repetitions ?: 0}")
             }
 
-            val exerciseAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, exerciseDetails)
+
+            var exerciseAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, exerciseDetails)
             lvExercises.adapter = exerciseAdapter
 
             btnLogSet.setOnClickListener {
-                if (exerciseAdapter.count > 0) {
+                if (exerciseAdapter.count > 1) {
                     // Remove the first item from the arrExercises list
-                    currentWorkout.arrExercises.removeAt(0)
+
+
                     // Remove the first item from the adapter
                     exerciseAdapter.remove(exerciseAdapter.getItem(0))
                     exerciseAdapter.notifyDataSetChanged()
                 } else {
-                    Toast.makeText(this,
-                        getString(R.string.no_exercises_to_remove), Toast.LENGTH_SHORT).show()
+                        if(currentWorkout.arrExercises.isNotEmpty()){
+                            exerciseDetails.clear()
+                            currentWorkout.arrExercises.removeAt(0)
+                            currentExercise = currentWorkout.arrExercises[0]
+
+                            for(set in 1..currentExercise!!.strength!!.sets+1){
+                                exerciseDetails.add("Set $set: Reps: ${currentExercise!!.strength?.repetitions ?: 0}")
+                            }
+
+                            exerciseAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, exerciseDetails)
+                            exerciseAdapter.notifyDataSetChanged()
+                        }
                 }
             }
 

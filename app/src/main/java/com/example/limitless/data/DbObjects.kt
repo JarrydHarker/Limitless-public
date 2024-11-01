@@ -226,9 +226,9 @@ class Day(
 )
 
 class Workout(
-    var workoutId: Int? = 0,
+    var workoutId: Int = 0,
     var date: LocalDate,
-    var name: String? = "",
+    var name: String = "",
     var userId: String = ""
 ){
     var arrExercises: MutableList<Exercise> = mutableListOf()
@@ -243,9 +243,9 @@ class Workout(
 }
 
 class Exercise(
-    var exerciseId: Int? = null,
-    var movementId: Int? = null,
-    var workoutId: Int? = null
+    var exerciseId: Int = 0,
+    var movementId: Int = 0,
+    var workoutId: Int = 0
 ){
     var movement = Movement()
 

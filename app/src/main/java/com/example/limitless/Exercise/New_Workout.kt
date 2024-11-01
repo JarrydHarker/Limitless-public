@@ -244,7 +244,7 @@ class New_Workout : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val exercise = Exercise(null, currentMove.movementId)
+            val exercise = Exercise(0, currentMove.movementId!!)
             exercise.movement = currentMove
 
             if (currentMove.type.lowercase(Locale.getDefault()) == "cardio") {
