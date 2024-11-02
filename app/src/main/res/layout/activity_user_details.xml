@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FDFDF9"
+    android:background="#F0F2FF"
     tools:context=".User_Details">
 
     <ImageView
@@ -113,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:backgroundTint="#FF934E"
+        android:backgroundTint="#4863F8"
         android:text="@string/next2"
         android:textColorLink="#FFFFFF"
         app:cornerRadius="10dp"
