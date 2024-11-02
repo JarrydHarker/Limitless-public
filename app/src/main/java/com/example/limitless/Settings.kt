@@ -18,13 +18,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.limitless.Exercise.Exercise_Activity
 import com.example.limitless.Nutrition.Diet_Activity
+import com.example.limitless.data.DbAccess
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.Locale
 
 class Settings : AppCompatActivity() {
     lateinit var bottomNavBar: BottomNavigationView
     private var themeChanged = false
-
+    val dbAccess = DbAccess.GetInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -49,6 +50,7 @@ class Settings : AppCompatActivity() {
         val linearLayout7 = findViewById(R.id.linearLayout7) as LinearLayout
         val goals: LinearLayout = findViewById(R.id.ll4)
         val logout: LinearLayout = findViewById(R.id.ll5)
+        val deleteUser :LinearLayout = findViewById(R.id.ll6)
 
         logout.setOnClickListener{
             currentUser?.LogOut()
@@ -85,6 +87,9 @@ class Settings : AppCompatActivity() {
             }
         }
 
+        deleteUser.setOnClickListener{
+            dbAccess.DeleteUser(currentUser!!.userId)
+        }
         btnLanguage.setOnClickListener {
             showDialog()
         }
