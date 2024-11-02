@@ -1,7 +1,9 @@
 package com.example.limitless
 
+import android.app.ActionBar.LayoutParams
 import android.app.AlertDialog
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -11,20 +13,28 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.marginLeft
+import androidx.core.view.setMargins
+import androidx.core.view.setPadding
 import com.example.limitless.data.AI.AIDecoder
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.LinkedList
 import java.util.Queue
 
+private val lstMessages: MutableList<Pair<Boolean, TextView>> = mutableListOf()
+
 class AI_Page : AppCompatActivity() {
     private val decoder = AIDecoder()
-    private val lstMessages: Queue<Pair<Boolean, TextView>> = LinkedList()
+
     private var currentResponse: TextView? = null
     private var subscriberCount = 0
     private val messageHeight = 30.0
@@ -36,13 +46,8 @@ class AI_Page : AppCompatActivity() {
     var saveMessages: ((SaveMessagesEventArgs) -> Unit)? = null
 
     init {
-        val qMessages = LinkedList(lstMessages)
-
-        while (qMessages.isNotEmpty()) {
-            val tuple = qMessages.poll()
-            val message = tuple?.second
-
-            val border = createBorder(tuple!!.first, message!!)
+        for(pair in lstMessages){
+            val border = createBorder(pair.first, pair.second)
             // Add the border to your chat layout
             llMessages_AI.addView(border)
         }
@@ -105,12 +110,10 @@ class AI_Page : AppCompatActivity() {
 
         fun onChatButtonClick() {
             // Calls the SendMessage method
-            if (isDone) {
-                sendMessage()
-                isDone = false
-            }
+            sendMessage()
         }
 
+        @OptIn(DelicateCoroutinesApi::class)
         fun sendMessage() {
             val request = txtChat.text.toString()
 
@@ -121,7 +124,8 @@ class AI_Page : AppCompatActivity() {
                 // Make a POST request to the AI API to process the user's message
                 GlobalScope.launch(Dispatchers.IO) {
                     decoder.makePostRequest(request) { response ->
-                        handleResponse(response.response.toString(), response.done)
+                        // Switch to the main thread to update the UI
+                        handleResponse(response.response.toString())
                     }
                 }
 
@@ -129,6 +133,7 @@ class AI_Page : AppCompatActivity() {
                 val message = TextView(this).apply {
                     text = " ... "
                     isFocusable = false
+                    isElegantTextHeight = true
                     maxWidth = 500
                     setBackgroundColor(Color.parseColor("#EDC0DB"))
                     setTextColor(Color.BLACK)
@@ -138,8 +143,10 @@ class AI_Page : AppCompatActivity() {
 
                 // Add the message to the queue of chat messages
                 lstMessages.add(Pair(false, message))
-                val border = createBorder(false, message)
-                llMessages_AI.addView(border)
+                /*val border = createBorder(false, message)
+
+                border.left = 100*/
+                llMessages_AI.addView(formatMessage(message, false))
 
                 // Clear the textbox after the message is sent
                 txtChat.text = "";
@@ -155,27 +162,40 @@ class AI_Page : AppCompatActivity() {
                 setTextColor(Color.BLACK)
             }
 
-            val border = createBorder(true, message)
+            //val border = createBorder(true, message)
             lstMessages.add(Pair(true, message)) // Add the message to the queue of chat messages
-            llMessages_AI.addView(border)
+            llMessages_AI.addView(formatMessage(message, true))
         }
 
-        fun handleResponse(word: String, done: Boolean) {
-            if (done) {
-                currentResponse = null // Clear the current response
-                isDone = true
-            } else {
-                isDone = false
+        fun formatMessage(message: TextView, isUserMessage: Boolean): TextView{
+            message.setPadding(20)
+
+            if(!isUserMessage){
+                val params = FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.WRAP_CONTENT,
+                    FrameLayout.LayoutParams.WRAP_CONTENT
+                )
+
+                params.setMargins(100,0,0,0)
             }
 
-            // If there is an active response, append the words to the current message
-            currentResponse?.let { response ->
-                if (response.text == " ... ") {
-                    response.text = ""
+            return message
+        }
+
+        @OptIn(DelicateCoroutinesApi::class)
+        fun handleResponse(word: String) {
+            GlobalScope.launch(Dispatchers.Main) {
+                // If there is an active response, append the words to the current message
+                currentResponse?.let { response ->
+                    if (response.text == " ... ") {
+                        response.text = ""
+                    }
+
+                    val temp = response.text.toString() + word
+                    response.text = temp
                 }
 
-                val temp = response.text.toString() + word
-                response.text = temp
+                currentResponse = null // Clear the current response
             }
         }
 
@@ -202,10 +222,6 @@ class AI_Page : AppCompatActivity() {
                 .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
                 .setIcon(android.R.drawable.ic_dialog_info)
                 .show()
-        }
-
-        fun getMessages(qMessages: Queue<Pair<Boolean, TextView>>) {
-            lstMessages.addAll(qMessages)
         }
     }
 
