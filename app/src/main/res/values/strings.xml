@@ -329,7 +329,7 @@
     <string name="Dinner">Dinner</string>
     <string name="select_language">Select Language</string>
     <string name="english">English</string>
-    <string name="l_drank1">%1$s L drank</string>
+    <string name="l_drank">%1$s L drank</string>
     <string name="_0_l_drank">0 L drank</string>
     <string name="l_drank2">%1$s L drank</string>
     <string name="remaining">remaining</string>

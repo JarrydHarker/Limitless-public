@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Switch
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -51,7 +52,7 @@ class Settings : AppCompatActivity() {
         val linearLayout7 = findViewById(R.id.linearLayout7) as LinearLayout
         val goals: LinearLayout = findViewById(R.id.ll4)
         val logout: LinearLayout = findViewById(R.id.ll5)
-        val deleteUser :LinearLayout = findViewById(R.id.ll6)
+        val deleteUser :TextView = findViewById(R.id.txtDeleteAcc)
 
         logout.setOnClickListener{
             currentUser?.LogOut()

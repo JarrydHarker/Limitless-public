@@ -56,7 +56,7 @@ class fragment_water_tracker : Fragment() {
         val addWaterButton: Button = view.findViewById(R.id.addWater)
         addWaterButton.setOnClickListener {
             incrementWater()
-            txtViewWater.text = getString(R.string.l_drank1, currentIntake)
+            txtViewWater.text = getString(R.string.l_drank2, currentIntake)
         }
         val removeWaterButton: Button = view.findViewById(R.id.removeWater)
         removeWaterButton.setOnClickListener {
