@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FDFDF4"
+    android:background="#F0F2FF"
     tools:context=".SignUp">
 
     <ImageView
@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/gymequipment" />
+        app:srcCompat="@drawable/gym_equipment" />
 
     <ImageView
         android:id="@+id/imageView11"
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:backgroundTint="#FF934E"
+            android:backgroundTint="#4863F8"
             android:text="@string/sign_up1"
             app:cornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
