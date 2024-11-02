@@ -324,5 +324,8 @@
     <string name="_0_l_drank">0 L drank</string>
     <string name="l_drank2">%1$s L drank</string>
 
+    <string name="remaining">remaining</string>
+    <string name="get_to_work_to_see_analytics_here">Get to work to see analytics here!</string>
+
 
 </resources>

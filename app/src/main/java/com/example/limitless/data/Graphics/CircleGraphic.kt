@@ -11,6 +11,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
+import com.example.limitless.R
 import java.util.Locale
 import kotlin.math.cos
 import kotlin.math.floor
@@ -57,7 +58,7 @@ class CircleGraphic @JvmOverloads constructor(
                 if(pieValues.size > 0){
                     drawPie(canvas)
                 }else{
-                    canvas.drawText("Get to work to see analytics here!", width/2, height/2, textPaint)
+                    canvas.drawText(context.getString(R.string.get_to_work_to_see_analytics_here), width/2, height/2, textPaint)
                 }
 
             }else if(type == 1){
@@ -96,7 +97,7 @@ class CircleGraphic @JvmOverloads constructor(
             canvas.drawText((goal - progress).toInt().toString(), (width / 2)-100, (height / 2), textPaint)
             textPaint.textSize=height/9
             textPaint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
-            canvas.drawText("remaining", (width / 2)-100, (height / 2)+80, textPaint)
+            canvas.drawText(context.getString(R.string.remaining), (width / 2)-100, (height / 2)+80, textPaint)
         }else {
             canvas.drawArc(10f, 10f, width, height, 270f, calcSegmentSize(progress, goal), false, paint)
             paint.color = Color.LTGRAY
