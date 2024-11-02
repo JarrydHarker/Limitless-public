@@ -65,25 +65,25 @@
         android:layout_height="540dp"
     android:layout_marginBottom="16dp" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView9"
-        android:name="com.example.limitless.fragment_water_tracker"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-    android:layout_marginBottom="16dp" />
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView9"
+            android:name="com.example.limitless.fragment_water_tracker"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginBottom="16dp" />
 
-</LinearLayout>
+    </LinearLayout>
     </ScrollView>
 
-<com.google.android.material.bottomnavigation.BottomNavigationView
-android:id="@+id/NavBar"
-android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
-    android:layout_marginBottom="0dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:menu="@menu/menu"
-    app:navigationIconTint="#FFDA1616" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/NavBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="-60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu"
+        app:navigationIconTint="#FFDA1616" />
     </androidx.constraintlayout.widget.ConstraintLayout>
