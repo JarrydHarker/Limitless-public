@@ -354,7 +354,7 @@ class Login : AppCompatActivity() {
         } else {
             Toast.makeText(
                 applicationContext,
-                "Biometric authentication is not available.",
+                getString(R.string.biometric_authentication_is_not_available),
                 Toast.LENGTH_SHORT
             ).show()
         }

@@ -326,5 +326,8 @@
     <string name="please_login_with_details_first">Meld aan met besonderhede eerste</string>
     <string name="authentication_failed">Geldigheidsverklaring gevaal</string>
 
+    <string name="biometric_authentication_is_not_available">Biometriese verifikasie is nie beskikbaar nie.</string>
+
+
 
 </resources>
