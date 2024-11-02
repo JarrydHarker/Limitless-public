@@ -50,22 +50,22 @@ class fragment_water_tracker : Fragment() {
         waterGraph.setBarHeight(20f)
         waterGraph.update()
 
-        txtViewWater.text = "$currentIntake L drank"
+        txtViewWater.text = getString(R.string.l_drank, currentIntake)
         waterGraph.visibility = View.VISIBLE
 
         val addWaterButton: Button = view.findViewById(R.id.addWater)
         addWaterButton.setOnClickListener {
             incrementWater()
-            txtViewWater.text = "$currentIntake L drank"
+            txtViewWater.text = getString(R.string.l_drank1, currentIntake)
         }
         val removeWaterButton: Button = view.findViewById(R.id.removeWater)
         removeWaterButton.setOnClickListener {
             removeWater()
             if (currentIntake < 0){
-                txtViewWater.text = "0 L drank"
+                txtViewWater.text = getString(R.string._0_l_drank)
             }
             else
-            txtViewWater.text = "$currentIntake L drank"
+            txtViewWater.text = getString(R.string.l_drank2, currentIntake)
         }
 
     }

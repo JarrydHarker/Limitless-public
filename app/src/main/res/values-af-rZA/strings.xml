@@ -13,7 +13,7 @@
     <string name="listData">Inligtinslys</string>
     <string name="listData2">Inligtingslys2</string>
     <string name="notifications">Kennisgewings</string>
-    <string name="terms_amp_conditions"><![CDATA[Bepalings en voorwaardes]]></string>
+    <string name="terms_amp_conditions"><![CDATA[Bepalings en Voorwaardes]]></string>
     <string name="dark_mode">Donker modus</string>
     <string name="language">Taal</string>
     <string name="privacy_policy">Privaatheidsbeleid</string>
@@ -317,6 +317,20 @@
     <string name="please_select_an_exercise_to_add_to_your_workout">Kies n oefening om by jou oefensessie te voeg</string>
     <string name="please_enter_the_number_of_sets_for_this_exercise">Voer die aantal stelle vir hierdie oefening in</string>
     <string name="please_enter_the_number_of_reps_for_this_exercise">Voer die aantal herhalings vir hierdie oefening in</string>
+
+    <string name="l_drank">%1$s L Gedrink</string>
+    <string name="l_drank1">%1$s L Gedrink</string>
+    <string name="_0_l_drank">0 L Gedrink</string>
+    <string name="l_drank2">%1$s L Gedrink</string>
+
+    <string name="remaining">Oorblyvend</string>
+    <string name="get_to_work_to_see_analytics_here">Werk om ontledings hier te sien!</string>
+
+    <string name="please_login_with_details_first">Meld aan met besonderhede eerste</string>
+    <string name="authentication_failed">Geldigheidsverklaring gevaal</string>
+
+    <string name="biometric_authentication_is_not_available">Biometriese verifikasie is nie beskikbaar nie.</string>
+
 
 
 </resources>
