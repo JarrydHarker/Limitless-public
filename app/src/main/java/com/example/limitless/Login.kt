@@ -110,11 +110,16 @@ class Login : AppCompatActivity() {
         // Initialize the CredentialManager
         val credentialManager = CredentialManager.create(this)
 
-        setupBiometricAuthentication()
-
-        btn = findViewById(R.id.btn)
-        btn.setOnClickListener {
-            biometricPrompt.authenticate(promptInfo)
+        setupBiometricAuthentication { isSupported ->
+            if (isSupported) {
+                biometricPrompt.authenticate(promptInfo)
+            } else {
+                Toast.makeText(
+                    applicationContext,
+                    "Biometric authentication is not supported on this device.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         btnForgotPassword.setOnClickListener{
@@ -275,88 +280,79 @@ class Login : AppCompatActivity() {
         }
     }
 
-    private fun setupBiometricAuthentication() {
-        val biometricManager = BiometricManager.from(this)
-        if (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG) ==
-            BiometricManager.BIOMETRIC_SUCCESS
-        ) {
-            val executor = ContextCompat.getMainExecutor(this)
-            biometricPrompt = BiometricPrompt(
-                this,
-                executor,
-                object : BiometricPrompt.AuthenticationCallback() {
-                    override fun onAuthenticationError(
-                        errorCode: Int,
-                        errString: CharSequence
-                    ) {
-                        Toast.makeText(
-                            applicationContext,
-                            "Authentication error: $errString",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+    private fun setupBiometricAuthentication(onComplete: (Boolean) -> Unit) {
+        // Initialize biometricPrompt here, so it’s ready regardless of the check
+        val executor = ContextCompat.getMainExecutor(this)
+        biometricPrompt = BiometricPrompt(
+            this,
+            executor,
+            object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                    Toast.makeText(
+                        applicationContext,
+                        "Authentication error: $errString",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
 
-                    override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                    val username = sharedPreferences.getString("username", null)
+                    val password = sharedPreferences.getString("password", null)
 
-                        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
-                        val username = sharedPreferences.getString("username", null)
-                        val password = sharedPreferences.getString("password", null)
+                    if (username != null && password != null) {
+                        LoginUser(this@Login, username, password) { user ->
+                            if (user != null) {
+                                currentUser = user
+                                currentUser?.LoadUserData {
+                                    nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                                    activityViewModel = ActivityViewModel(LocalDate.now())
 
-                        if (username != null && password != null) {
-                            LoginUser(this@Login, username, password){user ->
-                                if(user != null){
-                                    currentUser = user
+                                    nutritionViewModel.LoadUserData()
+                                    activityViewModel.LoadUserData()
 
-                                    currentUser?.LoadUserData{
-                                        nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
-                                        activityViewModel = ActivityViewModel(LocalDate.now())
-
-                                        nutritionViewModel.LoadUserData()
-                                        activityViewModel.LoadUserData()
-
-                                        dbAccess.GetDay(LocalDate.now(), currentUser?.userId!!){ day ->
-                                            if(day == null){
-                                                currentUser?.CreateDay()
-                                            }else{
-                                                currentUser!!.currentDay = day
-                                            }
+                                    dbAccess.GetDay(LocalDate.now(), currentUser?.userId!!) { day ->
+                                        if (day == null) {
+                                            currentUser?.CreateDay()
+                                        } else {
+                                            currentUser!!.currentDay = day
                                         }
                                     }
-                                    val intent = Intent(this@Login, MainActivity::class.java)
-                                    startActivity(intent)
                                 }
+                                val intent = Intent(this@Login, MainActivity::class.java)
+                                startActivity(intent)
                             }
-                            val intent = Intent(this@Login, MainActivity::class.java)
-                            startActivity(intent)
-                        } else {
-                            Toast.makeText(
-                                applicationContext,
-                                "User not found",
-                                Toast.LENGTH_SHORT
-                            ).show()
                         }
-                    }
-
-                    override fun onAuthenticationFailed() {
+                    } else {
                         Toast.makeText(
                             applicationContext,
-                            "Authentication failed",
+                            getString(R.string.please_login_with_details_first),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                })
+                }
 
-            promptInfo = BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Biometric login for my app")
-                .setSubtitle("Log in using your biometric credential")
-                .setNegativeButtonText("Cancel")
-                .build()
+                override fun onAuthenticationFailed() {
+                    Toast.makeText(
+                        applicationContext,
+                        getString(R.string.authentication_failed),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
+
+        promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Biometric login for my app")
+            .setSubtitle("Log in using your biometric credential")
+            .setNegativeButtonText("Cancel")
+            .build()
+
+        // Check biometric support and then complete
+        val biometricManager = BiometricManager.from(this)
+        if (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG) == BiometricManager.BIOMETRIC_SUCCESS) {
+            onComplete(true)
         } else {
-            Toast.makeText(
-                applicationContext,
-                "Biometric authentication is not available.",
-                Toast.LENGTH_SHORT
-            ).show()
+            onComplete(false)
         }
     }
 

@@ -14,6 +14,7 @@ class AIDecoder {
         val executor = Executors.newSingleThreadExecutor()
 
         executor.execute {
+            val responses = mutableListOf<ApiResponse>()
             var responseMessage = ApiResponse(
             model = null,
             createdAt = null,
@@ -54,7 +55,23 @@ class AIDecoder {
                 val responseCode = connection.responseCode
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     InputStreamReader(connection.inputStream).use { reader ->
-                        responseMessage = gson.fromJson(reader.readText(), ApiResponse::class.java) // Get the server's response message
+                        val jsonString = reader.readText()
+                        Log.d("AI", jsonString) // Log the entire response
+
+                        // Split by newlines to handle each JSON object separately
+                        val jsonObjects = jsonString.split("\n")
+
+
+                        jsonObjects.forEach { json ->
+                            if (json.isNotBlank()) {
+                                val apiResponse = gson.fromJson(json, ApiResponse::class.java)
+                                if (apiResponse != null) {
+                                    responses.add(apiResponse)
+                                } else {
+                                    Log.e("AI", "Failed to parse JSON: $json")
+                                }
+                            }
+                        }
                     }
                 } else {
                     // Read error message if request fails
@@ -67,6 +84,14 @@ class AIDecoder {
                 // Handle exceptions appropriately
                 Log.e("NetworkError", ex.toString())
                 responseMessage.response = "Error: ${ex.message}"
+            }
+
+            if(responses.isNotEmpty()){
+                responseMessage.response = ""
+                for(response in responses){
+                    responseMessage.response += response.response
+                }
+                Log.d("AI", responseMessage.response.toString())
             }
 
             // Execute the callback with the response message
