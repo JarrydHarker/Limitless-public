@@ -10,7 +10,7 @@
     <string name="go">Gaan</string>
 
     <string name="notifications">Kennisgewings</string>
-    <string name="terms_amp_conditions"><![CDATA[Bepalings en voorwaardes]]></string>
+    <string name="terms_amp_conditions"><![CDATA[Bepalings en Voorwaardes]]></string>
     <string name="dark_mode">Donker modus</string>
     <string name="language">Taal</string>
     <string name="privacy_policy">Privaatheidsbeleid</string>
@@ -315,5 +315,9 @@
     <string name="please_enter_the_number_of_sets_for_this_exercise">Voer die aantal stelle vir hierdie oefening in</string>
     <string name="please_enter_the_number_of_reps_for_this_exercise">Voer die aantal herhalings vir hierdie oefening in</string>
 
+    <string name="l_drank">%1$s L Gedrink</string>
+    <string name="l_drank1">%1$s L Gedrink</string>
+    <string name="_0_l_drank">0 L Gedrink</string>
+    <string name="l_drank2">%1$s L Gedrink</string>
 
 </resources>
