@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Switch
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -87,9 +88,22 @@ class Settings : AppCompatActivity() {
             }
         }
 
-        deleteUser.setOnClickListener{
-            dbAccess.DeleteUser(currentUser!!.userId)
+        deleteUser.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("Delete Account")
+                .setMessage("Are you sure you want to delete your account? This action cannot be undone.")
+                .setPositiveButton("Yes") { dialog, _ ->
+                    dbAccess.DeleteUser(currentUser!!.userId)
+                    dialog.dismiss()
+                    Toast.makeText(this, "Account deleted successfully", Toast.LENGTH_SHORT).show()
+
+                }
+                .setNegativeButton("No") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
         }
+
         btnLanguage.setOnClickListener {
             showDialog()
         }
