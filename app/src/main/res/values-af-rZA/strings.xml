@@ -30,7 +30,7 @@
     <string name="carbs">Koolhidrate</string>
     <string name="fats">Vette</string>
     <string name="protein">Protiene</string>
-    <string name="remaining_goal_food_exercise">Oorbly = Doelwit - Kos + Oefening</string>
+    <string name="remaining_goal_food_exercise">Oorblywende = Doelwit - Kos + Oefening</string>
     <string name="water_intake">Water Inname</string>
 
     <!-- exercise category -->
@@ -64,9 +64,9 @@
     <string name="weight">Gewig</string>
     <string name="calorie1">Kalorie</string>
     <string name="steps">stappe</string>
-    <string name="click_to_add">Klik Hier</string>
-    <string name="click_to_add1">Klik Hier</string>
-    <string name="click_to_add2">Klik Hier</string>
+    <string name="click_to_add">Druk Hier</string>
+    <string name="click_to_add1">Druk Hier</string>
+    <string name="click_to_add2">Druk Hier</string>
 
     <!-- Log exercise -->
     <string name="goals1">Doelwitte</string>
@@ -94,8 +94,8 @@
     <string name="continue_with_google">Gaan voort met Google</string>
 
     <!-- Main -->
-    <string name="recent_activities">Onlangse aktiwiteite</string>
-    <string name="daily_activity1">Daaglikse aktiwiteit</string>
+    <string name="recent_activities">Onlangse Aktiwiteite</string>
+    <string name="daily_activity1">Daaglikse Aktiwiteit</string>
     <string name="workouts">Oefensessies</string>
     <string name="popular_exercises">Gewilde Oefeninge</string>
     <string name="overview">Oorsig</string>
@@ -186,7 +186,7 @@
     <string name="next7">Volgende</string>
     <string name="skip4">Slaan Oor</string>
 
-    <string name="workout_planner">Workout Planner</string>
+    <string name="workout_planner">Oefenplan</string>
 
     <!-- exercise dialog -->
     <string name="add_exercise1">Voeg Oefening By</string>
@@ -249,7 +249,7 @@
     <string name="steps2">Stappe</string>
     <string name="calories3">Kalorieë</string>
     <string name="streak">Streek</string>
-    <string name="gym">Jim</string>
+    <string name="gym">Gim</string>
 
     <!-- set goal-->
     <string name="set_your_goal">Stel Jou Doelwit</string>
@@ -317,7 +317,21 @@
     <string name="please_select_an_exercise_to_add_to_your_workout">Kies n oefening om by jou oefensessie te voeg</string>
     <string name="please_enter_the_number_of_sets_for_this_exercise">Voer die aantal stelle vir hierdie oefening in</string>
     <string name="please_enter_the_number_of_reps_for_this_exercise">Voer die aantal herhalings vir hierdie oefening in</string>
+  
+    <string name="change">Verander</string>
 
+    <string name="home">Home</string>
+    <string name="workout">Oefensessie</string>
+    <string name="nutrition">Voeding</string>
+    <string name="settings">Instellings</string>
+
+    <string name="Breakfast">Ontbyt</string>
+    <string name="Lunch">Middagete</string>
+    <string name="Dinner">Aandete</string>
+
+    <string name="select_language">Kies Taal</string>
+    <string name="english">Engels</string>
+  
     <string name="l_drank">%1$s L Gedrink</string>
     <string name="l_drank1">%1$s L Gedrink</string>
     <string name="_0_l_drank">0 L Gedrink</string>
@@ -330,7 +344,5 @@
     <string name="authentication_failed">Geldigheidsverklaring gevaal</string>
 
     <string name="biometric_authentication_is_not_available">Biometriese verifikasie is nie beskikbaar nie.</string>
-
-
 
 </resources>

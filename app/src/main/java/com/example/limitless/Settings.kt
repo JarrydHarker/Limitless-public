@@ -157,10 +157,10 @@ class Settings : AppCompatActivity() {
     }
 
     private fun showDialog(){
-        val languages = arrayOf("English", "Afrikaans")
+        val languages = arrayOf(getString(R.string.english), "Afrikaans")
 
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Select Language")
+        builder.setTitle(getString(R.string.select_language))
         builder.setSingleChoiceItems(languages, -1){ dialog, which ->
             if(which == 0){
                 setLocate("en")

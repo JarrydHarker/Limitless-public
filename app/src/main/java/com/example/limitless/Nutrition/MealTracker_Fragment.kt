@@ -63,19 +63,19 @@ class MealTracker_Fragment : Fragment() {
         val btnAddDinner: Button = view.findViewById(R.id.btnAddDinner_MT)
 
         btnAddBreakfast.setOnClickListener{
-            mealTitle = "Breakfast"
+            mealTitle = getString(R.string.Breakfast)
             val intent = Intent(requireActivity(), Log_Meal::class.java)
             startActivity(intent)
         }
 
         btnAddLunch.setOnClickListener{
-            mealTitle = "Lunch"
+            mealTitle = getString(R.string.Lunch)
             val intent = Intent(requireActivity(), Log_Meal::class.java)
             startActivity(intent)
         }
 
         btnAddDinner.setOnClickListener{
-            mealTitle = "Dinner"
+            mealTitle = getString(R.string.Dinner)
             val intent = Intent(requireActivity(), Log_Meal::class.java)
             startActivity(intent)
         }
