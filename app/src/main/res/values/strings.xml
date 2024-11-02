@@ -326,6 +326,8 @@
 
     <string name="remaining">remaining</string>
     <string name="get_to_work_to_see_analytics_here">Get to work to see analytics here!</string>
+    <string name="please_login_with_details_first">Please login with details first</string>
+    <string name="authentication_failed">Authentication failed</string>
 
 
 </resources>

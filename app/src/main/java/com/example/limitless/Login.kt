@@ -331,7 +331,7 @@ class Login : AppCompatActivity() {
                         } else {
                             Toast.makeText(
                                 applicationContext,
-                                "User not found",
+                                getString(R.string.please_login_with_details_first),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -340,7 +340,7 @@ class Login : AppCompatActivity() {
                     override fun onAuthenticationFailed() {
                         Toast.makeText(
                             applicationContext,
-                            "Authentication failed",
+                            getString(R.string.authentication_failed),
                             Toast.LENGTH_SHORT
                         ).show()
                     }

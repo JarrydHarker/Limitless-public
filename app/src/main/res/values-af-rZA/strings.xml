@@ -323,5 +323,8 @@
     <string name="remaining">Oorblyvend</string>
     <string name="get_to_work_to_see_analytics_here">Werk om ontledings hier te sien!</string>
 
+    <string name="please_login_with_details_first">Meld aan met besonderhede eerste</string>
+    <string name="authentication_failed">Geldigheidsverklaring gevaal</string>
+
 
 </resources>
