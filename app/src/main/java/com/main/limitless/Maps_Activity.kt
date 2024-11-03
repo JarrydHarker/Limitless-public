@@ -27,8 +27,11 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.LatLng
 //import com.example.locations_ice.LatLng
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.os.Handler
 import android.widget.Button
+import android.widget.TextView
 import com.main.limitless.MapsData.Common
 import com.main.limitless.MapsData.IGoogleAPIService
 import com.main.limitless.MapsData.MyPlaces
@@ -36,6 +39,7 @@ import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.main.limitless.Exercise.Exercise_Activity
 import com.main.limitless.databinding.ActivityMapsBinding
 
 class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
@@ -48,9 +52,6 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mLastLocation: Location
     private var mMarker: Marker? = null
-
-    private val PREFS_NAME = "route_prefs"
-    private val ROUTE_POINTS_KEY = "route_points"
 
     //location
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -67,16 +68,55 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
 
     private var isMapReady = false
 
+    private var startTime: Long = 0L
+    private var elapsedTime: Long = 0L
+    private var timerRunning = false
+    private lateinit var timerHandler: Handler
+    private lateinit var timerRunnable: Runnable
+    private var totalDistance: Float = 0f
+
+    private lateinit var distances: TextView
+    private lateinit var time: TextView
+
     @Override
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        clearSharedPreferences() // Clear old data
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         mServices = Common.googleApiService
+
+        time = findViewById(R.id.m_Time)
+        time.text = getString(R.string.time_00_00_00)
+        distances = findViewById(R.id.m_Distance)
+        distances.text = getString(R.string.distance_0_00_km)
+
+        // Initialize timer
+        timerHandler = Handler(Looper.getMainLooper())
+        timerRunnable = object : Runnable {
+            override fun run() {
+                val currentTime = System.currentTimeMillis()
+                elapsedTime = (currentTime - startTime) / 1000
+                val hours = elapsedTime / 3600
+                val minutes = (elapsedTime % 3600) / 60
+                val seconds = elapsedTime % 60
+                val formattedTime = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+                time.text = getString(R.string.time, formattedTime)
+                timerHandler.postDelayed(this, 1000)
+            }
+        }
+
+        val startButton: Button = findViewById(R.id.btnStart_M)
+        startButton.setOnClickListener {
+            startTimer()
+        }
+
+        val stopButton: Button = findViewById(R.id.btnStop_M)
+        stopButton.setOnClickListener {
+            stopTimer()
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkLocationPermission()) {
                 buildLocationRequest()
@@ -98,59 +138,29 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
                 )
             }
         }
-        loadRoute()
-        val showRoutes : Button = findViewById(R.id.showRoutesButton)
+        val close: TextView = findViewById(R.id.m_Close)
 
-        showRoutes.setOnClickListener{
-            showRouteBottomSheet()
+        close.setOnClickListener{
+            val intent = Intent(this, Exercise_Activity::class.java)
+            startActivity(intent)
         }
     }
 
-
-    private fun showRouteBottomSheet() {
-        val savedRoutes = getAllRoutesFromSharedPreferences()
-        val bottomSheetFragment = RouteBottomSheetFragment(savedRoutes)
-        bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
-    }
-
-    private fun getAllRoutesFromSharedPreferences(): List<List<LatLng>> {
-        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val json = sharedPreferences.getString(ROUTE_POINTS_KEY, null)
-        val gson = Gson()
-        return if (json != null) {
-            val type = object : TypeToken<List<List<LatLng>>>() {}.type
-            gson.fromJson(json, type)
-        } else {
-            emptyList()
+    private fun startTimer() {
+        if (!timerRunning) {
+            startTime = System.currentTimeMillis()
+            totalDistance = 0f
+            timerHandler.postDelayed(timerRunnable, 0)
+            timerRunning = true
         }
     }
-    private fun saveRoute(routes: List<List<LatLng>>) {
-        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        val gson = Gson()
-        val json = gson.toJson(routes)
-        editor.putString(ROUTE_POINTS_KEY, json)
-        editor.apply()
-    }
 
-    private fun clearSharedPreferences() {
-        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        sharedPreferences.edit().clear().apply()
+    private fun stopTimer() {
+        if (timerRunning) {
+            timerHandler.removeCallbacks(timerRunnable)
+            timerRunning = false
+        }
     }
-
-   private fun loadRoute() {
-       val savedRoutes = getAllRoutesFromSharedPreferences()
-       if (savedRoutes.isNotEmpty()) {
-           pathPoints.clear()
-           savedRoutes.forEach { route ->
-               pathPoints.addAll(route)
-           }
-           if (isMapReady) {
-               drawPolyline()
-           }
-           showRouteBottomSheet()
-       }
-   }
 
     private fun getUrl(latitude: Double, longitude: Double, typePlace: String): String {
         val googlePlaceUrl =
@@ -166,7 +176,18 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
     private fun buildLocationCallBack() {
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(p0: LocationResult) {
-                mLastLocation = p0.locations.last()
+                val newLocation = p0.locations.last()
+                if (::mLastLocation.isInitialized && timerRunning) {
+                    val distance = mLastLocation.distanceTo(newLocation)
+                    totalDistance += distance
+
+                    val distanceInKilometers = totalDistance / 1000
+
+                    val formattedDistance = String.format("%.2f", distanceInKilometers)
+                    distances.text = getString(R.string.distance_km, formattedDistance)
+                }
+                mLastLocation = newLocation
+
                 if (mMarker != null) {
                     mMarker!!.remove()
                 }
@@ -186,11 +207,10 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
 
                 drawPolyline()
-
-                saveRoute(listOf(pathPoints))
             }
         }
     }
+
 
     private fun drawPolyline() {
        if (!isMapReady) return // Ensure the map is ready
@@ -210,12 +230,8 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
             locationRequest.smallestDisplacement = 10f
         }
 
-        private fun checkLocationPermission(): Boolean {
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    android.Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
+        private fun checkLocationPermission():Boolean {
+            if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(
                         this,
                         android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -233,7 +249,8 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
                         ), MY_PERMISSION_CODE
                     )
                 return false
-            } else
+            }
+            else
                 return true
         }
 
@@ -271,12 +288,9 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         override fun onStop() {
-            clearSharedPreferences()
-            saveRoute(listOf(pathPoints))
             fusedLocationProviderClient.removeLocationUpdates(locationCallback)
             super.onStop()
         }
-
 
         @SuppressLint("MissingPermission")
         override fun onMapReady(googleMap: GoogleMap) {
