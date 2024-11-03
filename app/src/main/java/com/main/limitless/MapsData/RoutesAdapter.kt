@@ -1,4 +1,4 @@
-package com.example.limitless.MapsData
+package com.main.limitless.MapsData
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
