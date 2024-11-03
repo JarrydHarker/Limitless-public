@@ -21,7 +21,7 @@ android {
         viewBinding = true
     }
 
-    buildTypes {
+        buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -76,6 +76,8 @@ dependencies {
     //implementation ("com.android.volley:volley:1.0.0")
     implementation ("com.squareup.retrofit2:retrofit:2.3.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.3.0")
+    implementation ("com.google.android.material:material:1.3.0")
+
 
 
 }
