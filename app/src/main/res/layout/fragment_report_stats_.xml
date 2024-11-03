@@ -124,7 +124,7 @@
                     android:text="-" />
             </LinearLayout>
 
-            <com.example.limitless.data.Graphics.CircleGraphic
+            <com.main.limitless.data.Graphics.CircleGraphic
                 android:id="@+id/cgFats"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -175,7 +175,7 @@
                     android:text="-" />
             </LinearLayout>
 
-            <com.example.limitless.data.Graphics.CircleGraphic
+            <com.main.limitless.data.Graphics.CircleGraphic
                 android:id="@+id/cgCarbs"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -226,7 +226,7 @@
                     android:text="-" />
             </LinearLayout>
 
-            <com.example.limitless.data.Graphics.CircleGraphic
+            <com.main.limitless.data.Graphics.CircleGraphic
                 android:id="@+id/cgFibre"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -275,7 +275,7 @@
                     android:text="-" />
             </LinearLayout>
 
-            <com.example.limitless.data.Graphics.CircleGraphic
+            <com.main.limitless.data.Graphics.CircleGraphic
                 android:id="@+id/cgProtein"
                 android:layout_width="60dp"
                 android:layout_height="60dp"

@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.limitless"
+    namespace = "com.main.limitless"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.limitless"
+        applicationId = "com.main.limitless"
         minSdk = 27
         targetSdk = 34
         versionCode = 1
