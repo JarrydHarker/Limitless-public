@@ -1,7 +1,7 @@
-package com.example.limitless
+package com.main.limitless
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.limitless.MapsData.RoutesAdapter
+import com.main.limitless.MapsData.RoutesAdapter
 import com.google.android.gms.maps.model.LatLng
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.limitless.databinding.BottomSheetRoutesBinding
+import com.main.limitless.databinding.BottomSheetRoutesBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 

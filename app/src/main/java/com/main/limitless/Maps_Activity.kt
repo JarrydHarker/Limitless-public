@@ -11,9 +11,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-//import com.android.volley.Response
-import com.main.limitless.databinding.ActivityMapsBinding
-//import com.google.android.gms.common.internal.service.Common
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -31,6 +28,7 @@ import com.google.android.gms.maps.model.LatLng
 //import com.example.locations_ice.LatLng
 import android.content.Context
 import android.graphics.Color
+import android.widget.Button
 import com.main.limitless.MapsData.Common
 import com.main.limitless.MapsData.IGoogleAPIService
 import com.main.limitless.MapsData.MyPlaces
@@ -38,6 +36,7 @@ import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.main.limitless.databinding.ActivityMapsBinding
 
 class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
 
