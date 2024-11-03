@@ -30,6 +30,7 @@ import androidx.core.app.ActivityOptionsCompat
 import com.main.limitless.Exercise.Exercise_Activity
 import com.main.limitless.Exercise.Workout_Planner
 import com.main.limitless.Nutrition.Diet_Activity
+import com.main.limitless.data.NetworkMonitor
 import com.main.limitless.data.ViewModels.ActivityViewModel
 import com.main.limitless.data.ViewModels.NutritionViewModel
 import java.time.LocalDate

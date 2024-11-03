@@ -1,4 +1,4 @@
-package com.example.limitless.data
+package com.main.limitless.data
 
 import android.content.Context
 import android.net.ConnectivityManager
