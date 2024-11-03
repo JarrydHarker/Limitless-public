@@ -75,8 +75,6 @@ class Log_Exercise : AppCompatActivity() {
 
             btnLogSet.setOnClickListener {
                 if (exerciseAdapter.count > 1) {
-                    // Remove the first item from the arrExercises list
-
                     // Remove the first item from the adapter
                     exerciseAdapter.remove(exerciseAdapter.getItem(0))
                     exerciseAdapter.notifyDataSetChanged()

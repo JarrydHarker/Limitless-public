@@ -15,14 +15,18 @@ class ActivityViewModel(val currentDate: LocalDate) {
     var isOnline = true
 
     fun AddWorkout(workout: Workout, onComplete: (Int?) -> Unit) {
-        dbAccess.CreateWorkout(workout){ response ->
-            dbAccess.GetWorkoutByName(workout.name!!, currentDate){ dbWorkout->
-                workout.workoutId = dbWorkout?.workoutId!!
-                Log.d("Fuck", "Workout ID: ${workout.workoutId.toString()}")
-                arrWorkouts.add(workout)
+        if(isOnline){
+            dbAccess.CreateWorkout(workout){ response ->
+                dbAccess.GetWorkoutByName(workout.name!!, currentDate){ dbWorkout->
+                    workout.workoutId = dbWorkout?.workoutId!!
+                    Log.d("Fuck", "Workout ID: ${workout.workoutId.toString()}")
+                    arrWorkouts.add(workout)
 
-                onComplete(workout.workoutId)
+                    onComplete(workout.workoutId)
+                }
             }
+        }else{
+            //TODO Add offline here
         }
     }
 
@@ -78,7 +82,7 @@ class ActivityViewModel(val currentDate: LocalDate) {
 
     fun SaveWorkout(currentWorkout: Workout) {
         for(exercise in currentWorkout.arrExercises){
-            exercise.workoutId = currentWorkout.workoutId!!
+            exercise.workoutId = currentWorkout.workoutId
 
             dbAccess.CreateExercise(exercise){ id ->
                 if(exercise.strength != null){
