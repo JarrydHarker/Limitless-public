@@ -9,18 +9,17 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayoutai"
-        android:layout_width="0dp"
-        android:layout_height="67dp"
+        android:layout_width="350dp"
+        android:layout_height="70dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/buttonbackground"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.939">
+        app:layout_constraintTop_toBottomOf="@+id/imageView26">
 
         <ImageButton
             android:id="@+id/imgSearch_AI"
@@ -54,39 +53,30 @@
             app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <ImageView
         android:id="@+id/imageView26"
-        android:layout_width="357dp"
-        android:layout_height="187dp"
-        android:layout_marginStart="30dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="27dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="421dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutai"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/img" />
 
-    <ScrollView
-        android:id="@+id/svMessages_AI"
-        android:layout_width="355dp"
-        android:layout_height="372dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutai"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="422dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="31dp"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView26"
-        app:layout_constraintVertical_bias="0.489">
-
-        <LinearLayout
-            android:id="@+id/llMessages_AI"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:orientation="vertical" />
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/imageView26" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
