@@ -4,24 +4,29 @@
 
 The Limitless Fitness App is a comprehensive mobile application designed to help users track their fitness progress, set goals, and monitor nutrition intake. This Android app provides a range of features to support users in their fitness journey, including calorie counting, personalized goal setting, and exercise tracking.
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Navigating the Menu](#navigating-the-menu)
-- [Automated Testing](#automated-testing)
-- [License](#license)
-
-
-
 ## Features
 
-- **Calorie Counter**: Track daily calorie intake by scanning barcodes, searching for food, or adding custom meals.
-- **Personalized Goals**: Set fitness goals such as weight loss or gain and specify a time period to achieve them.
-- **Nutritional Tracking**: Monitor macronutrients (protein, fiber, carbs, fats) with values rounded to two decimal places.
-- **Exercise Tracking**: Log and categorize various types of exercises.
-- **Custom Workouts**: Add and manage custom workout routines.
-- **Visual Progress**: Track fitness and nutritional progress with visual indicators and graphs.
+### Exercise and Workout Planner
+Organize and schedule workouts effectively with a user-friendly planner. Track daily, weekly, and monthly exercise routines, ensuring consistent progress toward fitness goals.
+
+### Custom Workout Builder
+Build personalized workouts by selecting exercises tailored to your needs. Modify workouts anytime by adding or swapping exercises to fit changing goals or preferences.
+
+### Calorie Counter
+Track calorie intake and monitor daily nutritional goals. The counter adjusts based on activity levels, helping users maintain a balanced diet aligned with their fitness objectives.
+
+![image](https://github.com/user-attachments/assets/6f833868-8980-452c-b1a2-abf0f5327bc2)
+
+### Pedometer Functionality
+Count steps and monitor distance in real time, encouraging users to stay active throughout the day. Step counts are automatically recorded, supporting walking, running, and general activity tracking.
+
+![image](https://github.com/user-attachments/assets/be7fd5bc-805c-47b0-86d4-d45e39162f5e)
+
+### AI Advice and Workout Suggestions
+Interact with an AI assistant for personalized fitness advice. Ask questions about workouts, exercises, or muscle groups, and receive tailored suggestions to optimize routines and reach goals.
+
+### Location-Based Workouts
+Track outdoor routes on a map in real-time, similar to Strava. View your path, distance, and speed, save routes, and receive local workout challenges for an engaging, location-driven fitness experience.
 
 ## Usage
 1. Launching the App
@@ -65,7 +70,8 @@ Specify the target period (e.g., weeks or months).
 ## Automated Testing
 We use GitHub Actions for automated testing and continuous integration. Our workflow automatically runs tests on every push or pull request to ensure that changes do not break the existing functionality.
 
-## License
+## Playstore Publication
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+![image](https://github.com/user-attachments/assets/e5f77088-6442-4313-b10d-58cf154842dd)
+
 
