@@ -172,7 +172,6 @@ class Log_Exercise : AppCompatActivity() {
             Ticktimer.reset(time)
             lblTimer.text = Ticktimer.getTime()
         }
-
         dialog.show()
     }
 

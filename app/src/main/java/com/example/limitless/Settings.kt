@@ -91,15 +91,16 @@ class Settings : AppCompatActivity() {
 
         deleteUser.setOnClickListener {
             AlertDialog.Builder(this)
-                .setTitle("Delete Account")
-                .setMessage("Are you sure you want to delete your account? This action cannot be undone.")
-                .setPositiveButton("Yes") { dialog, _ ->
+                .setTitle(getString(R.string.delete_account))
+                .setMessage(getString(R.string.are_you_sure_you_want_to_delete_your_account_this_action_cannot_be_undone))
+                .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
                     dbAccess.DeleteUser(currentUser!!.userId)
                     dialog.dismiss()
-                    Toast.makeText(this, "Account deleted successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,
+                        getString(R.string.account_deleted_successfully), Toast.LENGTH_SHORT).show()
 
                 }
-                .setNegativeButton("No") { dialog, _ ->
+                .setNegativeButton(getString(R.string.no)) { dialog, _ ->
                     dialog.dismiss()
                 }
                 .show()

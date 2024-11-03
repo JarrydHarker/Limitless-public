@@ -344,4 +344,9 @@
 
     <string name="biometric_authentication_is_not_available">Biometriese verifikasie is nie beskikbaar nie.</string>
 
+    <string name="delete_account">Verwyder Rekening</string>
+    <string name="are_you_sure_you_want_to_delete_your_account_this_action_cannot_be_undone">Is jy seker jy wil jou rekening verwyder? Hierdie aksie kan nie ongedaan gemaak word nie.</string>
+    <string name="yes">Ja</string>
+    <string name="account_deleted_successfully">Rekening suksesvol verwyder.</string>
+    <string name="no">Nee</string>
 </resources>
