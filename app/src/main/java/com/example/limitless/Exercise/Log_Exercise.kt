@@ -100,8 +100,6 @@ class Log_Exercise : AppCompatActivity() {
                 Toast.makeText(this,
                     getString(R.string.this_is_still_in_development), Toast.LENGTH_SHORT).show()
             }
-
-
         }
 
 
@@ -131,8 +129,6 @@ class Log_Exercise : AppCompatActivity() {
         val btnMinus10 = dialog.findViewById<Button>(R.id.btnMinus_RD)
         val lblTimer = dialog.findViewById<TextView>(R.id.lblTimer_RD)
         val btnReset = dialog.findViewById<Button>(R.id.btnReset_RD)
-
-
 
         Ticktimer.reset(time)
         lblTimer.text = Ticktimer.getTime()
