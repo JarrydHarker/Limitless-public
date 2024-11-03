@@ -1,57 +1,34 @@
 package com.example.limitless
 
-import android.app.ActionBar.LayoutParams
-import android.app.AlertDialog
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.FrameLayout
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.marginLeft
-import androidx.core.view.setMargins
-import androidx.core.view.setPadding
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.limitless.data.AI.AIDecoder
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.util.LinkedList
-import java.util.Queue
 
-private val lstMessages: MutableList<Pair<Boolean, TextView>> = mutableListOf()
+private val lstMessages: MutableList<Message> = mutableListOf()
 
 class AI_Page : AppCompatActivity() {
     private val decoder = AIDecoder()
-
     private var currentResponse: TextView? = null
-    private var subscriberCount = 0
-    private val messageHeight = 30.0
-    private var isDone = true
-    private var isBold = false
-
-    private lateinit var llMessages_AI: LinearLayout
-    private lateinit var txtChat: TextView
-    var saveMessages: ((SaveMessagesEventArgs) -> Unit)? = null
-
-    init {
-        for(pair in lstMessages){
-            val border = createBorder(pair.first, pair.second)
-            // Add the border to your chat layout
-            llMessages_AI.addView(border)
-        }
-    }
+    private lateinit var chatAdapter: ChatAdapter
+    private lateinit var ai_Chat: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,8 +40,12 @@ class AI_Page : AppCompatActivity() {
             insets
         }
 
-        llMessages_AI = findViewById(com.example.limitless.R.id.llMessages_AI)
-        txtChat = findViewById(R.id.txtChat_AI)
+        val txtChat: EditText = findViewById(R.id.txtChat_AI)
+        ai_Chat = findViewById(R.id.chatRecyclerView)
+        chatAdapter = ChatAdapter(lstMessages)
+
+        ai_Chat.layoutManager = LinearLayoutManager(this)
+        ai_Chat.adapter = chatAdapter
 
         //Nicks Animation things
 //        val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
@@ -78,7 +59,7 @@ class AI_Page : AppCompatActivity() {
         val linearLayout2 = findViewById<ConstraintLayout>(R.id.linearLayoutai)
 
         imageView26.startAnimation(stb)
-        llMessages_AI.startAnimation(btt)
+        ai_Chat.startAnimation(btt)
         linearLayout2.startAnimation(btt2)
         //till here
 
@@ -86,143 +67,96 @@ class AI_Page : AppCompatActivity() {
         val btnSend: ImageButton = findViewById(R.id.imgSearch_AI)
 
         btnSend.setOnClickListener {
-            onChatButtonClick()
+            val request = txtChat.text.toString()
+
+            if(request.isNotEmpty()){
+                sendMessage(request)
+            }
+
+            txtChat.text.clear()
         }
     }
 
-        fun createBorder(isUserMessage: Boolean, message: TextView): View {
-            val border = FrameLayout(this).apply {
-                layoutParams = FrameLayout.LayoutParams(
-                    FrameLayout.LayoutParams.WRAP_CONTENT,
-                    FrameLayout.LayoutParams.WRAP_CONTENT
-                )
-                setBackgroundColor(if (isUserMessage) Color.parseColor("#EDC0DB") else Color.parseColor("#E9EBED"))
-                val params = FrameLayout.LayoutParams(
-                    FrameLayout.LayoutParams.WRAP_CONTENT,
-                    FrameLayout.LayoutParams.WRAP_CONTENT
-                )
-                params.setMargins(20, 0, 0, 0)
-                message.layoutParams = params
-                addView(message)
-            }
-            return border
-        }
-
-        fun onChatButtonClick() {
-            // Calls the SendMessage method
-            sendMessage()
-        }
-
         @OptIn(DelicateCoroutinesApi::class)
-        fun sendMessage() {
-            val request = txtChat.text.toString()
-
+        fun sendMessage(request: String) {
             if (request.isNotEmpty()) { // Null check
-                createMessage(request) // Create a message to display the user's input in the chat UI
-                //subscribeToEvent() // Subscribe to the event that processes the response if not already subscribed
+                lstMessages.add(Message(request, true))
+
+                chatAdapter.notifyItemInserted(lstMessages.size - 1)
+                ai_Chat.scrollToPosition(lstMessages.size - 1)
+
+                // Add placeholder message for bot's response
+                var responseMessage = Message("...", false)
+                lstMessages.add(responseMessage)
+                val placeholderPosition = lstMessages.size - 1
+                chatAdapter.notifyItemInserted(placeholderPosition)
+                ai_Chat.scrollToPosition(placeholderPosition)
 
                 // Make a POST request to the AI API to process the user's message
                 GlobalScope.launch(Dispatchers.IO) {
                     decoder.makePostRequest(request) { response ->
                         // Switch to the main thread to update the UI
-                        handleResponse(response.response.toString())
+
+                        GlobalScope.launch(Dispatchers.Main) {
+                            // Update the placeholder message with the actual response
+                            responseMessage.text = response.response.toString()
+                            chatAdapter.notifyItemChanged(placeholderPosition)
+                            ai_Chat.scrollToPosition(placeholderPosition)
+                        }
                     }
                 }
-
-                // Create a temporary "..." message to show that the system is processing the response
-                val message = TextView(this).apply {
-                    text = " ... "
-                    isFocusable = false
-                    isElegantTextHeight = true
-                    maxWidth = 500
-                    setBackgroundColor(Color.parseColor("#EDC0DB"))
-                    setTextColor(Color.BLACK)
-                }
-
-                currentResponse = message
-
-                // Add the message to the queue of chat messages
-                lstMessages.add(Pair(false, message))
-                /*val border = createBorder(false, message)
-
-                border.left = 100*/
-                llMessages_AI.addView(formatMessage(message, false))
-
-                // Clear the textbox after the message is sent
-                txtChat.text = "";
             }
-        }
-
-        fun createMessage(request: String) {
-            val message = TextView(this).apply {
-                text = request
-                isFocusable = false
-                maxWidth = 500
-                setBackgroundColor(Color.parseColor("#E9EBED"))
-                setTextColor(Color.BLACK)
-            }
-
-            //val border = createBorder(true, message)
-            lstMessages.add(Pair(true, message)) // Add the message to the queue of chat messages
-            llMessages_AI.addView(formatMessage(message, true))
-        }
-
-        fun formatMessage(message: TextView, isUserMessage: Boolean): TextView{
-            message.setPadding(20)
-
-            if(!isUserMessage){
-                val params = FrameLayout.LayoutParams(
-                    FrameLayout.LayoutParams.WRAP_CONTENT,
-                    FrameLayout.LayoutParams.WRAP_CONTENT
-                )
-
-                params.setMargins(100,0,0,0)
-            }
-
-            return message
-        }
-
-        @OptIn(DelicateCoroutinesApi::class)
-        fun handleResponse(word: String) {
-            GlobalScope.launch(Dispatchers.Main) {
-                // If there is an active response, append the words to the current message
-                currentResponse?.let { response ->
-                    if (response.text == " ... ") {
-                        response.text = ""
-                    }
-
-                    val temp = response.text.toString() + word
-                    response.text = temp
-                }
-
-                currentResponse = null // Clear the current response
-            }
-        }
-
-        /*fun subscribeToEvent() {
-            // Check if no subscribers exist, then subscribe to the response handling event
-            if (subscriberCount == 0) {
-                decoder.onStringProcessed = ::handleResponse
-                subscriberCount++ // Increment the subscriber count
-            }
-        }*/
-
-        /*fun onTxtChatKeyDown(view: View, event: KeyEvent) {
-            // If the Enter key is pressed, simulate the chat button click
-            if (event.keyCode == KeyEvent.KEYCODE_ENTER) {
-                onChatButtonClick(view) // Call the button click event
-                event.isCanceled = true // Mark the event as handled to prevent further processing
-            }
-        }*/
-
-        fun onHelpButtonClick(view: View) {
-            AlertDialog.Builder(this)
-                .setTitle("ChatBot Help")
-                .setMessage("Welcome to the municipal app! Our chatbot is here to assist you in reporting local issues and staying informed about community events. If you encounter problems like illegal dumping or broken streetlights, simply describe the issue and its location, and the chatbot will guide you through the reporting process. It can also provide insights into how these issues impact public safety, utilities, and sanitation.\n\nUsing the chatbot is easy. Just type your question or report, and follow the prompts to explore various options related to municipal services. You can also ask about upcoming events, allowing you to engage more with your community. The chatbot offers quick responses, making it convenient for you to access essential information and report issues. By utilizing this feature, you're playing an active role in helping create a cleaner, safer, and more engaged community. Thank you for using the municipal app; we hope you find the chatbot helpful in your interactions with local services!")
-                .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
-                .setIcon(android.R.drawable.ic_dialog_info)
-                .show()
         }
     }
 
-    data class SaveMessagesEventArgs(val lstMessages: Queue<Pair<Boolean, TextView>>)
+class ChatAdapter(private val messages: List<Message>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    companion object {
+        const val VIEW_TYPE_SENT = 1
+        const val VIEW_TYPE_RECEIVED = 2
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (messages[position].isSentByUser) VIEW_TYPE_SENT else VIEW_TYPE_RECEIVED
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == VIEW_TYPE_SENT) {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_message_sent, parent, false)
+            SentMessageViewHolder(view)
+        } else {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_message_received, parent, false)
+            ReceivedMessageViewHolder(view)
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val message = messages[position]
+        if (holder is SentMessageViewHolder) {
+            holder.bind(message)
+        } else if (holder is ReceivedMessageViewHolder) {
+            holder.bind(message)
+        }
+    }
+
+    override fun getItemCount() = messages.size
+
+    inner class SentMessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val messageTextView: TextView = itemView.findViewById(R.id.sentMessageTextView)
+
+        fun bind(message: Message) {
+            messageTextView.text = message.text
+        }
+    }
+
+    inner class ReceivedMessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val messageTextView: TextView = itemView.findViewById(R.id.receivedMessageTextView)
+
+        fun bind(message: Message) {
+            messageTextView.text = message.text
+        }
+    }
+}
+
+data class Message(var text: String, val isSentByUser: Boolean)
+
