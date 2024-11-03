@@ -23,6 +23,7 @@ import com.example.limitless.data.StepCounterService
 import com.example.limitless.data.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.Manifest
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityOptionsCompat
 import com.example.limitless.Exercise.Exercise_Activity
@@ -145,7 +146,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent, options.toBundle())
     }
 
-    private fun checkAndRequestPermissions() {
+    private fun checkAndRequestPermissions(): Boolean {
         val permissionsToRequest = mutableListOf<String>()
 
         // Check for ACTIVITY_RECOGNITION permission (Required from Android 10)
@@ -171,29 +172,39 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
                 != PackageManager.PERMISSION_GRANTED) {
-
                 permissionsToRequest.add(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
 
-        // Check if there are any permissions to request
+        // Request permissions if any are missing
         if (permissionsToRequest.isNotEmpty()) {
             ActivityCompat.requestPermissions(
                 this,
                 permissionsToRequest.toTypedArray(),
                 REQUEST_CODE_PERMISSIONS
             )
+            return false // Permissions not fully granted yet
+        }
+
+        return true // All required permissions are granted
+    }
+
+
+    private fun startStepCounterService() {
+        // Check and request permissions before starting the service
+        if (checkAndRequestPermissions()) {
+            val service = Intent(this, StepCounterService::class.java)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(service)  // For Android O and above
+            } else {
+                startService(service)  // For older versions
+            }
+        } else {
+            // Handle the case where permissions are not granted yet
+            Log.d("PermissionCheck", "Permissions not granted. Service not started.")
         }
     }
 
-    private fun startStepCounterService() {
-        val service = Intent(this, StepCounterService::class.java)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(service)  // For Android O and above
-        } else {
-            startService(service)  // For older versions
-        }
-    }
 
     private fun showPermissionExplanation(permission: String, requestCode: Int) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {

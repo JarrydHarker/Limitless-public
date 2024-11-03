@@ -110,17 +110,20 @@ class Login : AppCompatActivity() {
         // Initialize the CredentialManager
         val credentialManager = CredentialManager.create(this)
 
-        setupBiometricAuthentication { isSupported ->
-            if (isSupported) {
-                biometricPrompt.authenticate(promptInfo)
-            } else {
-                Toast.makeText(
-                    applicationContext,
-                    "Biometric authentication is not supported on this device.",
-                    Toast.LENGTH_SHORT
-                ).show()
+        if(currentUser == null){
+            setupBiometricAuthentication { isSupported ->
+                if (isSupported) {
+                    biometricPrompt.authenticate(promptInfo)
+                } else {
+                    Toast.makeText(
+                        applicationContext,
+                        "Biometric authentication is not supported on this device.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
+
 
         btnForgotPassword.setOnClickListener{
             val intent = Intent(this, ForgotPassword::class.java)
