@@ -22,6 +22,8 @@ import com.main.limitless.data.StepCounterService
 import com.main.limitless.data.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.Manifest
+import android.net.ConnectivityManager
+import android.net.Network
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityOptionsCompat
@@ -38,6 +40,8 @@ var activityViewModel = ActivityViewModel(LocalDate.now())
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var networkMonitor: NetworkMonitor
+    private lateinit var networkCallback: ConnectivityManager.NetworkCallback
     private val REQUEST_CODE_PERMISSIONS = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +62,20 @@ class MainActivity : AppCompatActivity() {
             checkAndRequestPermissions()
             startStepCounterService()
         }
+
+         networkCallback = object : ConnectivityManager.NetworkCallback() {
+
+            override fun onAvailable(network: Network) {
+                activityViewModel.isOnline = true
+            }
+
+            override fun onLost(network: Network) {
+                activityViewModel.isOnline = false
+            }
+        }
+
+        networkMonitor = NetworkMonitor(this)
+        networkMonitor.registerNetworkCallback(networkCallback)
 
         //Nicks Animation things
         val btnGo = findViewById<Button>(R.id.btnGo)
@@ -204,6 +222,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+        networkMonitor.unregisterNetworkCallback(networkCallback)
+    }
 
     private fun showPermissionExplanation(permission: String, requestCode: Int) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
