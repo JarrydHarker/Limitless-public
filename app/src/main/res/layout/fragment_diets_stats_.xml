@@ -57,6 +57,7 @@
                     android:id="@+id/textView5"
                     android:layout_width="match_parent"
                     android:layout_height="29dp"
+                    android:paddingLeft="10dp"
                     android:text="@string/goal"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
@@ -65,6 +66,7 @@
                     android:id="@+id/lblGoal_DSF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
                     android:text="-"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
@@ -73,6 +75,7 @@
                     android:id="@+id/textView7"
                     android:layout_width="match_parent"
                     android:layout_height="31dp"
+                    android:paddingLeft="10dp"
                     android:text="@string/food"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
@@ -81,6 +84,7 @@
                     android:id="@+id/lblFood_DSF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
                     android:text="-"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
@@ -89,6 +93,7 @@
                     android:id="@+id/textView9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
                     android:text="@string/exercise"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
@@ -97,6 +102,7 @@
                     android:id="@+id/lblExercise_DSF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
                     android:text="-"
                     android:textColor="@color/white"
                     android:textSize="16sp" />

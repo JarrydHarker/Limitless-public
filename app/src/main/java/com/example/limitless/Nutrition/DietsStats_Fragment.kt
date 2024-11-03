@@ -79,7 +79,7 @@ class DietsStats_Fragment : Fragment() {
 
         cgTotalCalories.setGoal(nutritionViewModel.calorieWallet!!.toFloat())
         cgTotalCalories.setProgress(nutritionViewModel.CalculateTotalCalories().toFloat())
-        cgTotalCalories.setSize(370f,370f)
+        cgTotalCalories.setSize(360f,360f)
         cgTotalCalories.setThickness(20f)
         cgTotalCalories.setType("circle")
 
@@ -103,7 +103,7 @@ class DietsStats_Fragment : Fragment() {
         circle.RemoveLabel()
         circle.setGoal(goal)
         circle.setProgress(progress)
-        circle.setSize(100f,100f)
+        circle.setSize(110f,110f)
         circle.setThickness(10f)
         circle.setType("circle")
     }
