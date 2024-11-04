@@ -360,4 +360,12 @@
 
     <string name="limitless_potential">Limitless Potensiaal</string>
     <string name="lets_chat">Kom Ons Gesels</string>
+
+    <string name="workout_completed">Oefensessie voltooi</string>
+    <string name="next_set">Volgende Stel</string>
+    <string name="log_set1">Log Stel</string>
+    <string name="next_set1">Volgende Stel</string>
+    <string name="no_exercise_available">Geen oefening beskikbaar nie</string>
+    <string name="please_enter_valid_reps">Voer geldige reps in</string>
+    <string name="this_function_requires_an_internet_connection">Hierdie funksie vereis n internetverbinding</string>
 </resources>

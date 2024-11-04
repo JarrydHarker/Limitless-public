@@ -173,7 +173,7 @@ class Settings : AppCompatActivity() {
         val data = workDataOf(
             "type" to "scheduled",
             "title" to "Reminder",
-            "content" to "It's time to check your app!"
+            "content" to "It's time to check Limitless!"
         )
 
         val notificationWork = OneTimeWorkRequestBuilder<Notifications>()
@@ -186,16 +186,8 @@ class Settings : AppCompatActivity() {
 
     private fun disableNotifications() {
         WorkManager.getInstance(applicationContext).cancelAllWorkByTag("scheduled_notification")
-
     }
 
-    fun saveNotificationState(isEnabled: Boolean) {
-        val sharedPref = getSharedPreferences("NotificationPrefs", Context.MODE_PRIVATE)
-        with(sharedPref.edit()) {
-            putBoolean("notifications_enabled", isEnabled)
-            apply()
-        }
-    }
 
     fun getNotificationState(): Boolean {
         val sharedPref = getSharedPreferences("NotificationPrefs", Context.MODE_PRIVATE)

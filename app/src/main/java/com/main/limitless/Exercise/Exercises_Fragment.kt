@@ -153,7 +153,8 @@ class Exercises_Fragment : Fragment() {
             if(isOnline){
                 ShowDialog()
             }else{
-                Toast.makeText(requireActivity(), "This function requires an internet connection", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireActivity(),
+                    getString(R.string.this_function_requires_an_internet_connection), Toast.LENGTH_LONG).show()
             }
         }
 

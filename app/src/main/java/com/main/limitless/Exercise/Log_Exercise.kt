@@ -62,7 +62,7 @@ class Log_Exercise : AppCompatActivity() {
 
             // Get the exercise name for the TextView
             var currentExercise = currentWorkout.arrExercises.firstOrNull()
-            lblCurrentExercise_LE.text = currentExercise?.GetName() ?: "No exercise available"
+            lblCurrentExercise_LE.text = currentExercise?.GetName() ?: getString(R.string.no_exercise_available)
 
             val exerciseDetails: MutableList<String> = mutableListOf()
 
@@ -75,12 +75,12 @@ class Log_Exercise : AppCompatActivity() {
             lvExercises.adapter = exerciseAdapter
 
             btnLogSet.setOnClickListener {
-                if(btnLogSet.text == "Next Set"){
-                    btnLogSet.text = "Log Set"
+                if(btnLogSet.text == getString(R.string.next_set1)){
+                    btnLogSet.text = getString(R.string.log_set1)
                 }
 
                 if(exerciseAdapter.count == 1){
-                    btnLogSet.text = "Next Set"
+                    btnLogSet.text = getString(R.string.next_set)
                 }
 
                 if (exerciseAdapter.count > 0) {
@@ -106,7 +106,8 @@ class Log_Exercise : AppCompatActivity() {
                             exerciseAdapter.notifyDataSetChanged()
                         }
                     }else{
-                        Toast.makeText(this, "Workout completed", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this,
+                            getString(R.string.workout_completed), Toast.LENGTH_LONG).show()
 
                         val intent = Intent(this, Exercise_Activity::class.java)
                         startActivity(intent)
@@ -215,7 +216,7 @@ class Log_Exercise : AppCompatActivity() {
 
                 dialog.dismiss()
             } else {
-                Toast.makeText(this, "Please enter valid reps", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.please_enter_valid_reps), Toast.LENGTH_SHORT).show()
             }
         }
 

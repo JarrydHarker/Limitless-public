@@ -76,9 +76,9 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }else{
-            startStepCounterService()
-            setupWork()
             if (isOnline && Enabled){
+                startStepCounterService()
+                setupWork()
                 startHealthNotificationService(currentUser!!.GetWeight().toString(),
                     (nutritionViewModel.calorieWallet - nutritionViewModel.CalculateTotalCalories()).toString())
             }
