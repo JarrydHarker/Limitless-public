@@ -64,7 +64,7 @@ class Settings : AppCompatActivity() {
         switch.isChecked = NotificationUtils.getNotificationState(this)
 
             switch.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
+                if (isChecked && isOnline) {
                     enableNotifications()
                     startHealthNotificationService()
                 } else {
