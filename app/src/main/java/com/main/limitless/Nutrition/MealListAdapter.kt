@@ -9,25 +9,25 @@ import android.widget.ArrayAdapter
 import android.widget.NumberPicker
 import android.widget.TextView
 import com.main.limitless.R
+import com.main.limitless.data.Food
+import com.main.limitless.nutritionViewModel
 
-class MealListAdapter(context: Context, private val mealDescriptions: List<String>) : ArrayAdapter<String>(context, 0, mealDescriptions) {
+class MealListAdapter(context: Context, private val lstFoods: List<Food>) : ArrayAdapter<Food>(context, 0, lstFoods) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view: View = convertView ?: LayoutInflater.from(context).inflate(R.layout.log_meal_list, parent, false)
 
         val foodNameTextView: TextView = view.findViewById(R.id.lm_FoodName)
         val numberPicker: NumberPicker = view.findViewById(R.id.lm_NumberPick)
 
-        // Set the food name
-        foodNameTextView.text = getItem(position)
+        foodNameTextView.text = "${lstFoods.indexOf(getItem(position)!!) + 1}. ${getItem(position)!!.description}: ${getItem(position)!!.calories} kcal"
 
-        // Configure NumberPicker
         numberPicker.minValue = 0
         numberPicker.maxValue = 1000
 
         numberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
+            nutritionViewModel.ScaleFood(getItem(position)!!, newVal.toDouble())
             Log.d("NumberPicker", "New value: $newVal for item: ${getItem(position)}")
         }
-
         return view
     }
 }

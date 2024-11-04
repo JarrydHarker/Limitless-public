@@ -54,8 +54,9 @@ class Log_Meal : AppCompatActivity() {
             insets
         }
         val listView = findViewById<ListView>(R.id.lvCreatMeal)
+        var meal = Meal()
         //mealListAdapter = ArrayAdapter(this, R.layout.log_meal_list, R.id.lm_FoodName, mealDescriptions)
-        mealListAdapter = MealListAdapter(this, mealDescriptions)
+        mealListAdapter = MealListAdapter(this, meal.arrFoods)
         listView.adapter = mealListAdapter
 
         val btnLog = findViewById<Button>(R.id.btnLog_LM)
@@ -63,7 +64,7 @@ class Log_Meal : AppCompatActivity() {
         val lblMealTitle = findViewById<TextView>(R.id.lblMealTitle_LM)
         val mealFoods: MutableList<Food> = mutableListOf()
         val spinMeals: AutoCompleteTextView = findViewById(R.id.spinPrevFoods_LM)
-        var meal = Meal()
+
         val Back: ImageView = findViewById(R.id.LM_ivBack)
         var prevMeals: MutableList<Meal> = mutableListOf()
         val inflater = LayoutInflater.from(this)
@@ -247,8 +248,7 @@ class Log_Meal : AppCompatActivity() {
 
             if(txtMealName.text.isNotEmpty()){
                 for(food in mealFoods){
-                    mealDescription = "${mealFoods.indexOf(food) + 1}. ${food.description}: ${food.calories} kcal"
-                    mealListAdapter.add(mealDescription)
+                    mealListAdapter.add(food)
                 }
                 mealListAdapter.notifyDataSetChanged()
                 dialog.dismiss()
