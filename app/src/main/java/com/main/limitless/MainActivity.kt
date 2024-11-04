@@ -22,6 +22,10 @@ import com.main.limitless.data.StepCounterService
 import com.main.limitless.data.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.Manifest
+import android.app.AlarmManager
+import android.app.Notification
+import android.app.PendingIntent
+import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.util.Log
@@ -32,9 +36,11 @@ import com.main.limitless.data.NetworkMonitor
 import com.main.limitless.Exercise.Exercise_Activity
 import com.main.limitless.Exercise.Workout_Planner
 import com.main.limitless.Nutrition.Diet_Activity
+import com.main.limitless.data.Notifications
 import com.main.limitless.data.ViewModels.ActivityViewModel
 import com.main.limitless.data.ViewModels.NutritionViewModel
 import java.time.LocalDate
+import java.util.Calendar
 
 var  currentUser: User? = null
 var nutritionViewModel = NutritionViewModel()
@@ -57,6 +63,10 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+//        val serviceIntent = Intent(this, Notifications::class.java)
+//        startService(serviceIntent)
+
 
         if(currentUser == null){
             val intent = Intent(this, Login::class.java)
@@ -240,6 +250,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun scheduleNotification(hour: Int, minute: Int, message: String) {
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, Notifications::class.java).apply {
+            putExtra("notification_message", message)
+        }
+        val pendingIntent = PendingIntent.getBroadcast(
+            this, hour * 100 + minute, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, hour)
+            set(Calendar.MINUTE, minute)
+            set(Calendar.SECOND, 0)
+        }
+
+        if (calendar.timeInMillis < System.currentTimeMillis()) {
+            calendar.add(Calendar.DAY_OF_YEAR, 1)
+        }
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
+    }
+
+
+
     // Handle the result of the permission request
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -253,7 +287,6 @@ class MainActivity : AppCompatActivity() {
 
             if (permissionsGranted) {
                 // All required permissions were granted, now start the service
-
             }
         }
     }

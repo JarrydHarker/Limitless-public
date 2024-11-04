@@ -13,8 +13,10 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
+
         android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -131,6 +133,14 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDTh8RbF3Jqbiwz9JnO9fhz1hpRqEbNq8s" />
+
+        <!-- Register the service -->
+        <service android:name=".data.Notifications" android:exported="true"
+            android:permission="android.permission.FOREGROUND_SERVICE"/>
+
+        <!-- Register the receiver -->
+        <receiver android:name=".data.AlarmReceiver" android:exported="true" />
+
     </application>
 
 </manifest>
