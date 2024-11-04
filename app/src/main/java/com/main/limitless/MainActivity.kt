@@ -23,7 +23,6 @@ import com.main.limitless.data.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.Manifest
 import android.app.AlarmManager
-import android.app.Notification
 import android.app.PendingIntent
 import android.content.Context
 import android.net.ConnectivityManager
@@ -32,6 +31,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityOptionsCompat
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import androidx.fragment.app.FragmentContainerView
 import com.main.limitless.data.NetworkMonitor
 import com.main.limitless.Exercise.Exercise_Activity
@@ -39,14 +41,16 @@ import com.main.limitless.Exercise.Workout_Planner
 import com.main.limitless.Nutrition.Diet_Activity
 import com.main.limitless.data.Notifications
 import com.main.limitless.data.ViewModels.ActivityViewModel
+import com.main.limitless.data.HealthNotifications
 import com.main.limitless.data.ViewModels.NutritionViewModel
 import java.time.LocalDate
 import java.util.Calendar
+import java.util.concurrent.TimeUnit
 
-var  currentUser: User? = null
+var currentUser: User? = null
 var nutritionViewModel = NutritionViewModel()
 var activityViewModel = ActivityViewModel(LocalDate.now())
-var isOnline = true
+var isOnline = false
 
 class MainActivity : AppCompatActivity() {
 
@@ -65,19 +69,19 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-//        val serviceIntent = Intent(this, Notifications::class.java)
-//        startService(serviceIntent)
-
+        val serviceIntent = Intent(this, Notifications::class.java)
+       startService(serviceIntent)
 
         if(currentUser == null){
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }else{
             startStepCounterService()
+            setupWork()
+            startHealthNotificationService(currentUser!!.userInfo.weight.toString(), (nutritionViewModel.calorieWallet - nutritionViewModel.CalculateTotalCalories()).toString())
         }
 
          networkCallback = object : ConnectivityManager.NetworkCallback() {
-
             override fun onAvailable(network: Network) {
                 isOnline = true
             }
@@ -91,9 +95,6 @@ class MainActivity : AppCompatActivity() {
         networkMonitor.registerNetworkCallback(networkCallback)
 
         //Nicks Animation things
-
-
-
         val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
 //        val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
         val btt = AnimationUtils.loadAnimation(this, R.anim.btt)
@@ -114,9 +115,6 @@ class MainActivity : AppCompatActivity() {
         ThemeManager.applyTheme(this)
 
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
-
-
-
         ThemeManager.updateNavBarColor(this, bottomNavBar)
 
         bottomNavBar.setSelectedItemId(R.id.ic_home)
@@ -138,7 +136,6 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
 
 
         val mLayoutManager = LinearLayoutManager(applicationContext)
@@ -163,7 +160,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent, options.toBundle())
     }
 
-    private fun checkAndRequestPermissions(): Boolean {
+    private fun checkAndRequestPermissions(onComplete: (Boolean) -> Unit) {
         val permissionsToRequest = mutableListOf<String>()
 
         // Check for ACTIVITY_RECOGNITION permission (Required from Android 10)
@@ -187,32 +184,88 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Request permissions if any are missing
         if (permissionsToRequest.isNotEmpty()) {
             ActivityCompat.requestPermissions(
                 this,
                 permissionsToRequest.toTypedArray(),
                 REQUEST_CODE_PERMISSIONS
             )
-            return false // Permissions not fully granted yet
+            // Return early as we need to wait for the user's response
+        } else {
+            onComplete(true) // All permissions are already granted
         }
-
-        return true // All required permissions are granted
     }
 
+    // Handle permission request results
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            // Check if all requested permissions are granted
+            val allGranted = grantResults.all { it == PackageManager.PERMISSION_GRANTED }
+            if (allGranted) {
+                // All permissions granted, continue with the operation
+                startStepCounterService()
+            } else {
+                // Handle the case where permissions are denied
+                Toast.makeText(this, "Permissions not granted. Service not started.", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+    
+    private fun startHealthNotificationService(weight: String, calories: String) {
+        /*val intent = Intent(this, HealthNotifications::class.java)
+        intent.putExtra("weight", weight)
+        intent.putExtra("calories", calories)
+        startService(intent)*/
+    }
+
+    private fun setupWork() {
+        // Scheduled Notifications
+        scheduleWork("scheduled", "Good Morning! It's 8 AM time to Log your breakfast.", "", 8, 0)
+        scheduleWork("scheduled", "Time for a quick break! Add your lunch!", "", 12, 0)
+        scheduleWork("scheduled", "It's 6 PM. Time to wrap up your day with a nice dinner!", "", 18, 0)
+    }
+
+    private fun scheduleWork(type: String, value1: String, value2: String, hour: Int, minute: Int) {
+        val calendar = Calendar.getInstance()
+        val now = Calendar.getInstance()
+
+        calendar.set(Calendar.HOUR_OF_DAY, hour)
+        calendar.set(Calendar.MINUTE, minute)
+        calendar.set(Calendar.SECOND, 0)
+
+        if (calendar.before(now)) {
+            calendar.add(Calendar.DAY_OF_YEAR, 1)
+        }
+
+        val delay = calendar.timeInMillis - System.currentTimeMillis()
+
+        val inputData = when (type) {
+            "health" -> workDataOf("type" to type, "weight" to value1, "calories" to value2)
+            "scheduled" -> workDataOf("type" to type, "title" to value1, "content" to value2)
+            else -> throw IllegalArgumentException("Invalid notification type")
+        }
+
+        val workRequest = OneTimeWorkRequestBuilder<Notifications>()
+            .setInitialDelay(delay, TimeUnit.MILLISECONDS)
+            .setInputData(inputData)
+            .build()
+
+        WorkManager.getInstance(this).enqueue(workRequest)
+    }
 
     private fun startStepCounterService() {
         // Check and request permissions before starting the service
-        val permissions = checkAndRequestPermissions()
-
-        Log.d("Perms", permissions.toString())
-
-        if (permissions) {
-            val service = Intent(this, StepCounterService::class.java)
-            startForegroundService(service)  // For Android O and above
-        } else {
-            // Handle the case where permissions are not granted yet
-            Toast.makeText(this, "Permissions not granted. Service not started.", Toast.LENGTH_LONG).show()
+        checkAndRequestPermissions{ isGranted ->
+            if (isGranted) {
+                val service = Intent(this, StepCounterService::class.java)
+                startForegroundService(service)  // For Android O and above
+            }
         }
     }
 
@@ -258,24 +311,5 @@ class MainActivity : AppCompatActivity() {
         }
 
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
-    }
-
-
-
-    // Handle the result of the permission request
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            val permissionsGranted = permissions.indices.all { grantResults[it] == PackageManager.PERMISSION_GRANTED }
-
-            if (permissionsGranted) {
-                // All required permissions were granted, now start the service
-            }
-        }
     }
 }

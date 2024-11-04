@@ -1,5 +1,6 @@
 package com.main.limitless.data
 
+import android.Manifest
 import android.app.AlarmManager
 import android.app.Notification
 import android.app.NotificationChannel
@@ -9,110 +10,81 @@ import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.IBinder
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.work.ListenableWorker.Result
+import androidx.work.Worker
+import androidx.work.WorkerParameters
 import com.main.limitless.MainActivity
 import com.main.limitless.R
 import java.util.Calendar
 
-class Notifications : Service() {
+class Notifications(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
-    private lateinit var notificationManager: NotificationManager
-    private val CHANNEL_ID = "notification_channel"
+    override fun doWork(): Result {
+        val type = inputData.getString("type")
 
-    companion object {
-        const val NOTIFICATION_ID = 1
-    }
-
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        // Start foreground service
-        startForeground(NOTIFICATION_ID, buildNotification("Service Started"))
-
-        // Schedule the notifications
-        scheduleNotification(10, 0, "Good Morning! It's 10 AM.")
-        scheduleNotification(13, 10, "It's 12:30 PM. Time for a quick break!")
-        scheduleNotification(17, 0, "It's 5 PM. Time to wrap up your day.")
-
-        return START_STICKY
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        createNotificationChannel()
-    }
-
-    private fun scheduleNotification(hour: Int, minute: Int, message: String) {
-        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, AlarmReceiver::class.java).apply {
-            putExtra("notification_message", message)
-        }
-        val pendingIntent = PendingIntent.getBroadcast(
-            this, hour * 100 + minute, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-
-        val calendar = Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, hour)
-            set(Calendar.MINUTE, minute)
-            set(Calendar.SECOND, 0)
+        when (type) {
+            "scheduled" -> {
+                val title = inputData.getString("title") ?: "Scheduled Notification"
+                val content = inputData.getString("content") ?: "It's time for your scheduled task"
+                createNotificationChannel()
+                showNotification(title, content, "test_channel")
+            }
         }
 
-        if (calendar.timeInMillis < System.currentTimeMillis()) {
-            calendar.add(Calendar.DAY_OF_YEAR, 1)
-        }
-
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
-    }
-
-    private fun buildNotification(contentText: String): Notification {
-        val notificationIntent = Intent(this, MainActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(
-            this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE
-        )
-
-        return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("Scheduled Notification")
-            .setContentText(contentText)
-            .setSmallIcon(R.drawable.logo_bg_white)
-            .setContentIntent(pendingIntent)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setAutoCancel(false)
-            .setOngoing(true)
-            .setStyle(NotificationCompat.BigTextStyle())
-            .setCategory(NotificationCompat.CATEGORY_SERVICE)
-            .build()
+        return Result.success()
     }
 
     private fun createNotificationChannel() {
-        val name = "Notification Channel"
-        val descriptionText = "Channel for scheduled notifications"
-        val importance = NotificationManager.IMPORTANCE_DEFAULT
-        val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
-            description = descriptionText
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val name = "Test Channel"
+            val descriptionText = "Channel for test notifications"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("test_channel", name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager =
+                applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
         }
-        notificationManager.createNotificationChannel(channel)
     }
 
-    override fun onBind(intent: Intent?): IBinder? {
-        return null
+    private fun createNotificationChannelHealth() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val name = "Health Channel"
+            val descriptionText = "Channel for health notifications"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("health_channel", name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager =
+                applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
     }
-}
 
-class AlarmReceiver : BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent) {
-        val message = intent.getStringExtra("notification_message")
-        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val notificationChannelId = "notification_channel"
-
-        val notification = NotificationCompat.Builder(context, notificationChannelId)
-            .setContentTitle("Scheduled Notification")
-            .setContentText(message)
+    private fun showNotification(title: String, content: String, channelId: String) {
+        val builder = NotificationCompat.Builder(applicationContext, channelId)
             .setSmallIcon(R.drawable.logo_bg_white)
-            .build()
+            .setContentTitle(title)
+            .setContentText(content)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
-        notificationManager.notify((System.currentTimeMillis() / 1000).toInt(), notification)
+        with(NotificationManagerCompat.from(applicationContext)) {
+            if (ActivityCompat.checkSelfPermission(applicationContext, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                return
+            }
+            notify((System.currentTimeMillis() / 1000).toInt(), builder.build())
+        }
     }
 }
+
+
+
 
 
 

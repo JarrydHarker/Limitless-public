@@ -18,8 +18,6 @@ class MealTracker : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meal_tracker)
 
-
-
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
 
         ThemeManager.updateNavBarColor(this, bottomNavBar)

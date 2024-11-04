@@ -1,4 +1,4 @@
-package com.main.limitless.data.AI
+package com.main.limitless.AI
 
 import android.util.Log
 import com.google.gson.Gson

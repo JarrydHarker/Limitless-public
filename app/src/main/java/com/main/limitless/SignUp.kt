@@ -71,10 +71,18 @@ class SignUp : AppCompatActivity() {
             currentUser?.email = email
             currentUser?.password = password
 
+            saveSignUp(email, password)
+
             val intent = Intent(this, User_Password::class.java)
             startActivity(intent)
         }
     }
 
-
+    fun saveSignUp(username: String, password: String) {
+        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("username", username)
+        editor.putString("password", password)
+        editor.apply()
+    }
 }

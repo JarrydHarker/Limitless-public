@@ -230,6 +230,7 @@ class Day(
     var water: Double = 0.0,
     var userId: String,
 )
+
 @Entity(tableName = "workouts")
 class Workout(
 

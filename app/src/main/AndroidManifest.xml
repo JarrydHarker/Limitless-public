@@ -8,12 +8,16 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_HEALTH" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.BODY_SENSORS"/>
+    <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
 
     <application
 
@@ -90,7 +94,7 @@
             android:name=".Settings"
             android:exported="false" />
         <activity
-            android:name=".AI_Page"
+            android:name=".AI.AI_Page"
             android:exported="false" />
         <activity
             android:name=".Map_Activity"
@@ -135,11 +139,8 @@
             android:value="AIzaSyDTh8RbF3Jqbiwz9JnO9fhz1hpRqEbNq8s" />
 
         <!-- Register the service -->
-        <service android:name=".data.Notifications" android:exported="true"
-            android:permission="android.permission.FOREGROUND_SERVICE"/>
+        <service android:name=".data.HealthNotifications" android:exported="false" android:foregroundServiceType="health"/>
 
-        <!-- Register the receiver -->
-        <receiver android:name=".data.AlarmReceiver" android:exported="true" />
 
     </application>
 

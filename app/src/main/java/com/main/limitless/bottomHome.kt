@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.main.limitless.Exercise.Exercise_Activity
 import com.main.limitless.Nutrition.Diet_Activity
-import com.main.limitless.Nutrition.Log_Meal
+import com.main.limitless.AI.AI_Page
 
 
 class bottomHome : Fragment() {

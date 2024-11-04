@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ece5dd"
-    tools:context=".AI_Page">
+    tools:context=".AI.AI_Page">
+
 
     <ImageView
         android:id="@+id/backAi"

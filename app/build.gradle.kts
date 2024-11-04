@@ -83,7 +83,6 @@ dependencies {
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
     implementation (libs.material.v130)
-
-
+    implementation (libs.androidx.work.runtime.ktx)
 
 }
