@@ -32,7 +32,7 @@
         android:id="@+id/textView65"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome To"
+        android:text="@string/welcome_to"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -190,7 +190,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_weight="1"
-            android:text="Weight"
+            android:text="@string/weight1"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView3"
@@ -203,7 +203,7 @@
             android:id="@+id/imageView3"
             android:layout_width="30dp"
             android:layout_height="48dp"
-            android:src="@drawable/hamb_icon"
+            android:src="@drawable/scale"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.881"
@@ -265,9 +265,9 @@
 
                 <ImageView
                     android:id="@+id/imageView23"
-                    android:layout_width="30dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_local_fire_department_24" />
+                    android:layout_width="50dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/water" />
             </LinearLayout>
 
             <TextView
@@ -293,7 +293,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="24dp"
-        android:text="Metrics"
+        android:text="@string/metrics"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/diet_background" />
