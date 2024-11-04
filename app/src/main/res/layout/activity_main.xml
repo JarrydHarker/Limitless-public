@@ -26,10 +26,16 @@
             android:orientation="vertical">
 
             <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView15"
-                android:name="com.main.limitless.ai"
+                android:id="@+id/fragmentContainerView10"
+                android:name="com.main.limitless.HomeFragment"
                 android:layout_width="match_parent"
-                android:layout_height="73dp" />
+                android:layout_height="700dp" />
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView14"
+                android:name="com.main.limitless.bottomHome"
+                android:layout_width="match_parent"
+                android:layout_height="440dp" />
 
             <TextView
                 android:id="@+id/RA"
@@ -124,7 +130,8 @@
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="162dp">
+                android:layout_height="162dp"
+                android:paddingBottom="10dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -135,8 +142,8 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="320dp"
                         android:layout_height="match_parent"
-                        android:paddingLeft="25dp"
-                        android:background="@drawable/exerciselistbox">
+                        android:background="@drawable/exerciselistbox"
+                        android:paddingLeft="25dp">
 
                         <LinearLayout
                             android:id="@+id/linearLayout15"
@@ -194,13 +201,13 @@
                             android:layout_width="130dp"
                             android:layout_height="161dp"
                             android:layout_weight="1"
+                            android:src="@drawable/headphones_icon"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="1.0"
-                            android:src="@drawable/headphones_icon"/>
+                            app:layout_constraintVertical_bias="1.0" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -218,20 +225,6 @@
                     </LinearLayout>
                 </LinearLayout>
             </HorizontalScrollView>
-
-            <TextView
-                android:id="@+id/textView20"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:text="@string/overview"
-                android:textSize="20sp" />
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView16"
-                android:name="com.main.limitless.fragment_workout_process"
-                android:layout_width="match_parent"
-                android:layout_height="350dp" />
 
         </LinearLayout>
     </ScrollView>
