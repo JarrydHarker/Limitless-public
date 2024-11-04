@@ -29,6 +29,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityOptionsCompat
 import com.main.limitless.data.NetworkMonitor
@@ -184,12 +185,6 @@ class MainActivity : AppCompatActivity() {
             permissionsToRequest.add(Manifest.permission.ACTIVITY_RECOGNITION)
         }
 
-        // Add INTERNET permission if not already granted (it's usually granted automatically)
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)
-            != PackageManager.PERMISSION_GRANTED) {
-            permissionsToRequest.add(Manifest.permission.INTERNET)
-        }
-
         // Foreground Service permissions
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P &&
             ContextCompat.checkSelfPermission(this, Manifest.permission.FOREGROUND_SERVICE)
@@ -220,16 +215,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun startStepCounterService() {
         // Check and request permissions before starting the service
-        if (checkAndRequestPermissions()) {
+        val permissions = checkAndRequestPermissions()
+
+        Log.d("Perms", permissions.toString())
+
+        if (permissions) {
             val service = Intent(this, StepCounterService::class.java)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(service)  // For Android O and above
-            } else {
-                startService(service)  // For older versions
-            }
+            startForegroundService(service)  // For Android O and above
         } else {
             // Handle the case where permissions are not granted yet
-            Log.d("PermissionCheck", "Permissions not granted. Service not started.")
+            Toast.makeText(this, "Permissions not granted. Service not started.", Toast.LENGTH_LONG).show()
         }
     }
 

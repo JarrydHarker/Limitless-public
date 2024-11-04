@@ -8,28 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.main.limitless.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,35 +18,16 @@ class HomeFragment : Fragment() {
     ): View? {
         var view = inflater.inflate(R.layout.fragment_home, container, false)
 
-//        val lblSteps: TextView = view.findViewById(R.id.WP_txtSteps)
-//        val lblCalories: TextView = view.findViewById(R.id.WP_txtCalories)
-//        val lblStreak: TextView = view.findViewById(R.id.WP_txtStreak)
-//        val lblGym: TextView = view.findViewById(R.id.WP_txtToLet)
-//
-//        lblSteps.setText(nutritionViewModel.steps.toString())
-//        lblCalories.setText((nutritionViewModel.calorieWallet - nutritionViewModel.CalculateTotalCalories()).toString())
+        val lblSteps: TextView = view.findViewById(R.id.WP_txtSteps)
+        val lblWeight: TextView = view.findViewById(R.id.WP_txtWeight)
 
-        // Inflate the layout for this fragment
+        lblSteps.setText(nutritionViewModel.steps.toString())
+        lblWeight.setText(currentUser!!.GetWeightGoal().toString())
+        if(lblWeight.text == "null")
+        {
+            lblWeight.text = "-"
+        }
+
         return view
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

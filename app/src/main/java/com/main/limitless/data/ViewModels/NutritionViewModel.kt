@@ -14,7 +14,6 @@ class NutritionViewModel(val currentDate: LocalDate = LocalDate.now() , var calo
 
     val weight: Double? = null
     var water: Double = 0.0
-    var steps: Int = 0
     var carbWallet = calorieWallet*ratio.carbs
     var proteinWallet = calorieWallet*ratio.protein
     var fibreWallet = calorieWallet*ratio.fibre

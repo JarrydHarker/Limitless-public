@@ -1,7 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id ("kotlin-kapt") // Add this line
 }
+
 
 android {
     namespace = "com.main.limitless"
@@ -39,6 +41,10 @@ android {
     }
 }
 dependencies {
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler.v261)  // Replace 2.x.x with the Room version in your catalog or specify manually
+
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -58,27 +64,25 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.foundation)
     implementation(libs.androidx.material)
-    implementation(libs.androidx.room.common)
-    implementation(libs.androidx.room.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation ("com.google.android.gms:play-services-auth:20.7.0")
-    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
-    implementation("com.github.1902shubh:SendMail:1.0.0")
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("org.mockito:mockito-core:5.2.1")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
-    testImplementation ("org.robolectric:robolectric:4.9")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
-    implementation("com.github.kittinunf.fuel:fuel-gson:2.3.1")
-    implementation("com.google.code.gson:gson:2.8.7")
-    implementation ("com.google.android.gms:play-services-maps:18.1.0")
-    implementation ("com.google.android.gms:play-services-location:20.0.0")
+    implementation (libs.play.services.auth.v2070)
+    implementation(libs.mpandroidchart)
+    implementation(libs.sendmail)
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation (libs.robolectric)
+    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.fuel.gson)
+    implementation(libs.gson.v287)
+    implementation (libs.play.services.maps)
+    implementation (libs.play.services.location)
     //implementation ("com.android.volley:volley:1.0.0")
-    implementation ("com.squareup.retrofit2:retrofit:2.3.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.3.0")
-    implementation ("com.google.android.material:material:1.3.0")
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation (libs.material.v130)
 
 
 

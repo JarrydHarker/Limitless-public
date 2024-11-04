@@ -2,10 +2,8 @@ package com.main.limitless.data.ViewModels
 
 import android.content.Context
 import android.util.Log
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.main.limitless.activityViewModel
 import com.main.limitless.currentUser
-import com.main.limitless.data.AppDatabase
+import com.main.limitless.data.offline.AppDatabase
 import com.main.limitless.data.Movement
 import com.main.limitless.data.Workout
 import com.main.limitless.data.dbAccess
@@ -73,9 +71,13 @@ class ActivityViewModel(val currentDate: LocalDate) {
                     }
                 }
 
-                // Offline database update code here, after all workouts and exercises are loaded
-                withContext(Dispatchers.IO) {
-                    UpdateOfflineDb(context)
+                try{
+                    // Offline database update code here, after all workouts and exercises are loaded
+                    withContext(Dispatchers.IO) {
+                        UpdateOfflineDb(context)
+                    }
+                }catch(ex: Exception){
+                    Log.e("OfflineSync", "${ex}")
                 }
             }
         } else {

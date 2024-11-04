@@ -1,4 +1,7 @@
 package com.main.limitless.data
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.main.limitless.activityViewModel
 import com.main.limitless.nutritionViewModel
 import java.time.LocalDate
 
@@ -59,7 +62,7 @@ class User(
     fun CreateDay(){
         currentDay.date = nutritionViewModel.currentDate
         currentDay.calories = nutritionViewModel.CalculateTotalCalories()
-        currentDay.steps = nutritionViewModel.steps
+        currentDay.steps = activityViewModel.steps
         currentDay.water = nutritionViewModel.water
         currentDay.userId = userId
         currentDay.activeTime = 0 //TODO Implement active time
@@ -114,7 +117,7 @@ class User(
 
         currentDay.date = nutritionViewModel.currentDate
         currentDay.calories = nutritionViewModel.CalculateTotalCalories()
-        currentDay.steps = nutritionViewModel.steps
+        currentDay.steps = activityViewModel.steps
         currentDay.water = nutritionViewModel.water
         currentDay.userId = userId
         currentDay.activeTime = 0 //TODO Implement active time
@@ -223,10 +226,10 @@ class Day(
     var water: Double = 0.0,
     var userId: String,
 )
-
+@Entity(tableName = "workouts")
 class Workout(
-    var workoutId: Int = 0,
-    var date: LocalDate,
+   @PrimaryKey var workoutId: Int = 0,
+    var date: String,
     var name: String = "",
     var userId: String = ""
 ){
@@ -240,9 +243,9 @@ class Workout(
         arrExercises.addAll(exercises)
     }
 }
-
+@Entity(tableName = "exercises")
 class Exercise(
-    var exerciseId: Int = 0,
+   @PrimaryKey var exerciseId: Int = 0,
     var movementId: Int = 0,
     var workoutId: Int = 0
 ){
@@ -265,9 +268,9 @@ fun getCategory(): String {
     var cardio: Cardio? = null
     var strength: Strength? = null
 }
-
+@Entity(tableName = "movements")
 class Movement(
-    var movementId: Int? = 0,
+ @PrimaryKey   var movementId: Int? = 0,
     var name: String = "",
     var description: String? = null,
     var type: String = "",
@@ -278,17 +281,17 @@ class Movement(
 ){
 
 }
-
+@Entity(tableName = "cardio_exercises")
 class Cardio(
-    var exerciseId: Int? = 0,
+    @PrimaryKey var exerciseId: Int? = 0,
     var time: Int = 0,
     var distance: Double = 0.0
 ){
 
 }
-
+@Entity(tableName = "strength_exercises")
 class Strength(
-    var exerciseId: Int? = 0,
+ @PrimaryKey  var exerciseId: Int? = 0,
     var sets: Int = 0,
     var repetitions: Int = 0,
     var favourite: Boolean = false
