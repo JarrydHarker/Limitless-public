@@ -352,4 +352,12 @@
     <string name="metrics">Metrics</string>
     <string name="limitless_potential">Limitless Potential</string>
     <string name="lets_chat">Lets Chat</string>
+
+    <string name="workout_completed">Workout completed</string>
+    <string name="next_set">Next Set</string>
+    <string name="log_set1">Log Set</string>
+    <string name="next_set1">Next Set</string>
+    <string name="no_exercise_available">No exercise available</string>
+    <string name="please_enter_valid_reps">Please enter valid reps</string>
+    <string name="this_function_requires_an_internet_connection">This function requires an internet connection</string>
 </resources>
