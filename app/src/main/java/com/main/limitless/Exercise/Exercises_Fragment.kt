@@ -155,7 +155,6 @@ class Exercises_Fragment : Fragment() {
             }else{
                 Toast.makeText(requireActivity(), "This function requires an internet connection", Toast.LENGTH_LONG).show()
             }
-
         }
 
         return view

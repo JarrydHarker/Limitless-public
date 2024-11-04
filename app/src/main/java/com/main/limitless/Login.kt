@@ -167,6 +167,7 @@ class Login : AppCompatActivity() {
             if(isOnline){
                 LoginUser(this, username, password){user ->
                     if(user != null){
+                        Log.d("ToHashOrNotToHash", "Username: $username\nPassword: $password")
                         saveLogin(username, password)
                         currentUser = user
 
@@ -198,11 +199,11 @@ class Login : AppCompatActivity() {
                 val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
                 val localUsername = sharedPreferences.getString("username", null)
                 val localPassword = sharedPreferences.getString("password", null)
+                val hasher = PasswordHasher()
 
                 if(localUsername != null && localPassword != null){
-                    if(localUsername == username && localPassword == password){
+                    if(localUsername == username && localPassword == hasher.HashPassword(password)){
                         currentUser = User("Temp", "Firstname", "Surname", username, password)
-
                         activityViewModel.LoadUserData(this)
 
                         val intent = Intent(this, MainActivity::class.java)
@@ -348,6 +349,8 @@ class Login : AppCompatActivity() {
                     if (username != null && password != null) {
                         LoginUser(this@Login, username, password) { user ->
                             if (user != null) {
+                                Log.d("ToHashOrNotToHash", "Username: $username\nPassword: $password")
+                                saveLogin(username, password)
                                 currentUser = user
                                 currentUser?.LoadUserData {
                                     nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
@@ -404,8 +407,10 @@ class Login : AppCompatActivity() {
     fun saveLogin(username: String, password: String) {
         val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
+        val hasher = PasswordHasher()
+
         editor.putString("username", username)
-        editor.putString("password", password)
+        editor.putString("password", hasher.HashPassword(password))
         editor.apply()
     }
 

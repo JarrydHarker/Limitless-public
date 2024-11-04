@@ -11,6 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.main.limitless.data.PasswordHasher
 import com.main.limitless.data.User
 
 class SignUp : AppCompatActivity() {
@@ -81,8 +82,10 @@ class SignUp : AppCompatActivity() {
     fun saveSignUp(username: String, password: String) {
         val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
+        val hasher = PasswordHasher()
+
         editor.putString("username", username)
-        editor.putString("password", password)
+        editor.putString("password", hasher.HashPassword(password))
         editor.apply()
     }
 }
