@@ -112,7 +112,7 @@ class StepCounterService : Service() {
             .build()
     }
 
-    private fun createNotificationChannel() {
+    private fun createNotificationChannel(){
         val name = "Step Counter Channel"
         val descriptionText = "Channel for live step counter"
         val importance = NotificationManager.IMPORTANCE_LOW
