@@ -7,7 +7,7 @@ import com.main.limitless.currentUser
 import com.main.limitless.data.Offline.AppDatabase
 import com.main.limitless.data.Movement
 import com.main.limitless.data.Workout
-import com.main.limitless.data.dbAccess
+import com.main.limitless.dbAccess
 import com.main.limitless.isOnline
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -30,7 +30,7 @@ import com.main.limitless.activityViewModel
 import com.main.limitless.currentUser
 import com.main.limitless.data.ViewModels.ActivityViewModel
 import com.main.limitless.data.Workout
-import com.main.limitless.data.dbAccess
+import com.main.limitless.dbAccess
 import com.main.limitless.isOnline
 import com.main.limitless.nutritionViewModel
 import kotlinx.coroutines.CoroutineScope

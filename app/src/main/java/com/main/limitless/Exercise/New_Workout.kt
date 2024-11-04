@@ -33,7 +33,7 @@ import com.main.limitless.data.Cardio
 import com.main.limitless.data.Exercise
 import com.main.limitless.data.Movement
 import com.main.limitless.data.Strength
-import com.main.limitless.data.dbAccess
+import com.main.limitless.dbAccess
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.main.limitless.data.Offline.AppDatabase
 import kotlinx.coroutines.CoroutineScope
