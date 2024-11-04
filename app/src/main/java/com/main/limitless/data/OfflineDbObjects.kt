@@ -1,4 +1,4 @@
-package com.example.limitless.data
+package com.main.limitless.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
