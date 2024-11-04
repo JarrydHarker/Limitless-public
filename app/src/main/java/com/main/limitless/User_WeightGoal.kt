@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.main.limitless.data.ViewModels.ActivityViewModel
 import com.main.limitless.data.ViewModels.NutritionViewModel
+import com.main.limitless.data.dbAccess
 import java.time.LocalDate
 
 class User_WeightGoal : AppCompatActivity() {
@@ -64,6 +65,10 @@ class User_WeightGoal : AppCompatActivity() {
 
                 currentUser?.CalcCalorieWallet()
                 currentUser?.SaveUserInfo()
+
+                currentUser?.let { it1 ->
+                    dbAccess.CreateUser(it1){}
+                }
 
                 // Initialize ViewModel with calorieWallet from currentUser
                 nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)

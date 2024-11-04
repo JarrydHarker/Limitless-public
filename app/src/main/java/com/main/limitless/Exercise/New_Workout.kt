@@ -187,7 +187,7 @@ class New_Workout : AppCompatActivity() {
 
         val btnAddMovement = dialog.findViewById<Button>(R.id.btnAddMovement_WD)
         val txtAddExercise: AutoCompleteTextView = dialog.findViewById(R.id.txtAddExercise_WD)
-        val btnClose = dialog.findViewById<Button>(R.id.btnClose_WD)
+        val btnClose = dialog.findViewById<ImageView>(R.id.btnClose_WD)
         val txtSets: EditText = dialog.findViewById(R.id.txtSets_WD)
         val txtReps: EditText = dialog.findViewById(R.id.txtReps_WD)
         var arrMoves: MutableList<Movement> = mutableListOf()
