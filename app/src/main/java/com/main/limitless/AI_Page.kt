@@ -1,12 +1,14 @@
 package com.main.limitless
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -57,8 +59,14 @@ class AI_Page : AppCompatActivity() {
 //        val btt3 = AnimationUtils.loadAnimation(this, R.anim.btt3)
 //        val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
 
+        val back = findViewById<ImageView>(R.id.backAi)
         val imageView26 = findViewById<ImageView>(R.id.imageView26)
         val linearLayout2 = findViewById<ConstraintLayout>(R.id.linearLayoutai)
+
+        back.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
         imageView26.startAnimation(stb)
         ai_Chat.startAnimation(btt)
@@ -66,7 +74,7 @@ class AI_Page : AppCompatActivity() {
         //till here
 
 
-        val btnSend: ImageButton = findViewById(R.id.imgSearch_AI)
+        val btnSend: Button = findViewById(R.id.imgSearch_AI)
 
         btnSend.setOnClickListener {
             val request = txtChat.text.toString()
@@ -79,29 +87,34 @@ class AI_Page : AppCompatActivity() {
         }
     }
 
-        @OptIn(DelicateCoroutinesApi::class)
-        fun sendMessage(request: String) {
-            if (request.isNotEmpty()) { // Null check
-                lstMessages.add(Message(request, true))
+    @OptIn(DelicateCoroutinesApi::class)
+    fun sendMessage(request: String) {
+        if (request.isNotEmpty()) { // Null check
+            lstMessages.add(Message(request, true))
 
-                chatAdapter.notifyItemInserted(lstMessages.size - 1)
-                ai_Chat.scrollToPosition(lstMessages.size - 1)
+            chatAdapter.notifyItemInserted(lstMessages.size - 1)
+            ai_Chat.scrollToPosition(lstMessages.size - 1)
 
-                // Add placeholder message for bot's response
-                var responseMessage = Message("...", false)
-                lstMessages.add(responseMessage)
-                val placeholderPosition = lstMessages.size - 1
-                chatAdapter.notifyItemInserted(placeholderPosition)
-                ai_Chat.scrollToPosition(placeholderPosition)
+            // Add placeholder message for bot's response
+            val responseMessage = Message("...", false)
+            lstMessages.add(responseMessage)
+            val placeholderPosition = lstMessages.size - 1
+            chatAdapter.notifyItemInserted(placeholderPosition)
+            ai_Chat.scrollToPosition(placeholderPosition)
 
-                // Make a POST request to the AI API to process the user's message
-                GlobalScope.launch(Dispatchers.IO) {
-                    decoder.makePostRequest(request) { response ->
-                        // Switch to the main thread to update the UI
-
-                        GlobalScope.launch(Dispatchers.Main) {
-                            // Update the placeholder message with the actual response
+            // Make a POST request to the AI API to process the user's message
+            GlobalScope.launch(Dispatchers.IO) {
+                decoder.makePostRequest(request) { response ->
+                    // Switch to the main thread to update the UI
+                    GlobalScope.launch(Dispatchers.Main) {
+                        if(responseMessage.text == "..."){
+                            // Update the placeholder message with each part of the response
                             responseMessage.text = response.response.toString()
+                            chatAdapter.notifyItemChanged(placeholderPosition)
+                            ai_Chat.scrollToPosition(placeholderPosition)
+                        }else{
+                            // Update the placeholder message with each part of the response
+                            responseMessage.text += response.response.toString()
                             chatAdapter.notifyItemChanged(placeholderPosition)
                             ai_Chat.scrollToPosition(placeholderPosition)
                         }
@@ -111,7 +124,8 @@ class AI_Page : AppCompatActivity() {
         }
     }
 
-class ChatAdapter(private val messages: List<Message>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    class ChatAdapter(private val messages: List<Message>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         const val VIEW_TYPE_SENT = 1
@@ -158,6 +172,8 @@ class ChatAdapter(private val messages: List<Message>) : RecyclerView.Adapter<Re
             messageTextView.text = message.text
         }
     }
+}
+
 }
 
 data class Message(var text: String, val isSentByUser: Boolean)

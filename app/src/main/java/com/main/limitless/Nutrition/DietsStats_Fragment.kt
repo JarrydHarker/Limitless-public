@@ -77,7 +77,7 @@ class DietsStats_Fragment : Fragment() {
         val lblFats: TextView = view.findViewById(R.id.lblFats_RSF)
 
 
-        cgTotalCalories.setGoal(nutritionViewModel.calorieWallet!!.toFloat())
+        cgTotalCalories.setGoal(nutritionViewModel.calorieWallet.toFloat())
         cgTotalCalories.setProgress(nutritionViewModel.CalculateTotalCalories().toFloat())
         cgTotalCalories.setSize(360f,360f)
         cgTotalCalories.setThickness(20f)
@@ -85,10 +85,10 @@ class DietsStats_Fragment : Fragment() {
 
         lblFood.setText(nutritionViewModel.CalculateTotalCalories().toString())
         lblGoal.setText(nutritionViewModel.calorieWallet.toString())
-        lblProtein.setText(String.format("%.2f g", nutritionViewModel.GetTotalProtein().toDouble()))
-        lblFibre.setText(String.format("%.2f g", nutritionViewModel.GetTotalFibre().toDouble()))
-        lblCarbs.setText(String.format("%.2f g", nutritionViewModel.GetTotalCarbs().toDouble()))
-        lblFats.setText(String.format("%.2f g", nutritionViewModel.GetTotalFat().toDouble()))
+        lblProtein.setText(String.format("%.2f g", nutritionViewModel.GetTotalProtein()))
+        lblFibre.setText(String.format("%.2f g", nutritionViewModel.GetTotalFibre()))
+        lblCarbs.setText(String.format("%.2f g", nutritionViewModel.GetTotalCarbs()))
+        lblFats.setText(String.format("%.2f g", nutritionViewModel.GetTotalFat()))
 
         DrawMiniCircle(cgFibre, nutritionViewModel.fibreWallet.toFloat(), nutritionViewModel.GetTotalFibre().toFloat())
         DrawMiniCircle(cgCarbs, nutritionViewModel.carbWallet.toFloat(), nutritionViewModel.GetTotalCarbs().toFloat())

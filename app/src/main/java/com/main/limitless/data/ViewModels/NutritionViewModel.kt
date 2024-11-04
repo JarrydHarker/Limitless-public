@@ -13,7 +13,7 @@ import java.time.LocalDate
 class NutritionViewModel(val currentDate: LocalDate = LocalDate.now() , var calorieWallet: Double = 2000.0, var ratio: Ratios = Ratios()): ViewModel() {
 
     val weight: Double? = null
-    var water: Double = 0.0
+    var water: Double = 0.00
     var carbWallet = calorieWallet*ratio.carbs
     var proteinWallet = calorieWallet*ratio.protein
     var fibreWallet = calorieWallet*ratio.fibre

@@ -14,7 +14,6 @@ import com.main.limitless.MainActivity
 import com.main.limitless.R
 import com.main.limitless.Settings
 import com.main.limitless.ThemeManager
-import com.main.limitless.fragment_water_tracker
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.main.limitless.isOnline
 

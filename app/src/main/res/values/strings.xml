@@ -329,9 +329,9 @@
     <string name="Dinner">Dinner</string>
     <string name="select_language">Select Language</string>
     <string name="english">English</string>
-    <string name="l_drank">%.2f L drank</string>
-    <string name="_0_l_drank">0 L drank</string>
-    <string name="l_drank2">%.2f L drank</string>
+    <string name="l_drank">%.2fL drank</string>
+    <string name="_0_l_drank">0.00L drank</string>
+    <string name="l_drank2">%.2fL drank</string>
     <string name="remaining">remaining</string>
     <string name="get_to_work_to_see_analytics_here">Get to work to see analytics here!</string>
     <string name="please_login_with_details_first">Please login with details first</string>
@@ -348,4 +348,8 @@
     <string name="distance_0_00_km">Distance: 0.00 km</string>
     <string name="time">Time: %1$s</string>
     <string name="distance_km">Distance: %1$s km</string>
+    <string name="welcome_to">Welcome To</string>
+    <string name="metrics">Metrics</string>
+    <string name="limitless_potential">Limitless Potential</string>
+    <string name="lets_chat">Lets Chat</string>
 </resources>
