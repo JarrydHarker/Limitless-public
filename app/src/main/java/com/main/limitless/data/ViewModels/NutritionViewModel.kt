@@ -133,6 +133,35 @@ class NutritionViewModel(val currentDate: LocalDate = LocalDate.now() , var calo
         return totalFibre
     }
 
+    fun ScaleFood(food: Food, newWeight: Double) {
+        val oldWeight = food.weight ?: return // Exit if old weight is null to avoid division by null
+        val scaleFactor = newWeight / oldWeight
+
+        // Update weight
+        food.weight = newWeight
+
+        // Scale all nutrient values proportionally
+        food.calories = (food.calories * scaleFactor).toInt() // Convert back to Int
+        food.protein = food.protein?.times(scaleFactor)
+        food.carbohydrates = food.carbohydrates?.times(scaleFactor)
+        food.fibre = food.fibre?.times(scaleFactor)
+        food.fat = food.fat?.times(scaleFactor)
+        food.cholesterol = food.cholesterol?.times(scaleFactor)
+        food.sugar = food.sugar?.times(scaleFactor)
+        food.saturatedFat = food.saturatedFat?.times(scaleFactor)
+        food.vitaminB12 = food.vitaminB12?.times(scaleFactor)
+        food.vitaminB6 = food.vitaminB6?.times(scaleFactor)
+        food.vitaminK = food.vitaminK?.times(scaleFactor)
+        food.vitaminE = food.vitaminE?.times(scaleFactor)
+        food.vitaminC = food.vitaminC?.times(scaleFactor)
+        food.vitaminA = food.vitaminA?.times(scaleFactor)
+        food.zinc = food.zinc?.times(scaleFactor)
+        food.magnesium = food.magnesium?.times(scaleFactor)
+        food.sodium = food.sodium?.times(scaleFactor)
+        food.potassium = food.potassium?.times(scaleFactor)
+        food.iron = food.iron?.times(scaleFactor)
+        food.calcium = food.calcium?.times(scaleFactor)
+    }
 
     fun ChangeCalorieWallet(newWallet: Double){
         calorieWallet = newWallet
