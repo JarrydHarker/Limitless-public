@@ -22,6 +22,9 @@ import com.main.limitless.data.StepCounterService
 import com.main.limitless.data.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.Manifest
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.util.Log
@@ -31,7 +34,6 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
-
 import androidx.fragment.app.FragmentContainerView
 import com.main.limitless.data.NetworkMonitor
 import com.main.limitless.Exercise.Exercise_Activity
@@ -45,10 +47,10 @@ import java.time.LocalDate
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
 
-var  currentUser: User? = null
+var currentUser: User? = null
 var nutritionViewModel = NutritionViewModel()
 var activityViewModel = ActivityViewModel(LocalDate.now())
-var isOnline = true
+var isOnline = false
 
 class MainActivity : AppCompatActivity() {
 
@@ -70,7 +72,6 @@ class MainActivity : AppCompatActivity() {
         val serviceIntent = Intent(this, Notifications::class.java)
        startService(serviceIntent)
 
-
         if(currentUser == null){
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
@@ -81,7 +82,6 @@ class MainActivity : AppCompatActivity() {
         }
 
          networkCallback = object : ConnectivityManager.NetworkCallback() {
-
             override fun onAvailable(network: Network) {
                 isOnline = true
             }
@@ -95,9 +95,6 @@ class MainActivity : AppCompatActivity() {
         networkMonitor.registerNetworkCallback(networkCallback)
 
         //Nicks Animation things
-
-
-
         val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
 //        val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
         val btt = AnimationUtils.loadAnimation(this, R.anim.btt)
@@ -118,10 +115,6 @@ class MainActivity : AppCompatActivity() {
         ThemeManager.applyTheme(this)
 
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
-
-
-
-
         ThemeManager.updateNavBarColor(this, bottomNavBar)
 
         bottomNavBar.setSelectedItemId(R.id.ic_home)

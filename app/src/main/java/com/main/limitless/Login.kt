@@ -3,6 +3,8 @@ package com.main.limitless
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.Network
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -37,6 +39,7 @@ import com.main.limitless.data.dbAccess
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
+import com.main.limitless.data.NetworkMonitor
 import com.main.limitless.data.Notifications
 import kotlinx.coroutines.launch
 import java.security.SecureRandom
@@ -52,6 +55,8 @@ class Login : AppCompatActivity() {
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
     private  lateinit var btn: Button
+    private lateinit var networkMonitor: NetworkMonitor
+    private lateinit var networkCallback: ConnectivityManager.NetworkCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +67,19 @@ class Login : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        networkCallback = object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                isOnline = true
+            }
+
+            override fun onLost(network: Network) {
+                isOnline = false
+            }
+        }
+
+        networkMonitor = NetworkMonitor(this)
+        networkMonitor.registerNetworkCallback(networkCallback)
 
         val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
         //val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
@@ -146,34 +164,54 @@ class Login : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            LoginUser(this, username, password){user ->
-                if(user != null){
-                    saveLogin(username, password)
-                    currentUser = user
+            if(isOnline){
+                LoginUser(this, username, password){user ->
+                    if(user != null){
+                        saveLogin(username, password)
+                        currentUser = user
 
-                    currentUser?.LoadUserData{
-                        nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
-                        activityViewModel = ActivityViewModel(LocalDate.now())
+                        currentUser?.LoadUserData{
+                            nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                            activityViewModel = ActivityViewModel(LocalDate.now())
 
-                        nutritionViewModel.LoadUserData()
-                        activityViewModel.LoadUserData(this)
+                            nutritionViewModel.LoadUserData()
+                            activityViewModel.LoadUserData(this)
 
-                        dbAccess.GetDay(LocalDate.now(), currentUser?.userId!!){ day ->
-                            if(day == null){
-                                currentUser?.CreateDay()
-                            }else{
-                                currentUser!!.currentDay = day
+                            dbAccess.GetDay(LocalDate.now(), currentUser?.userId!!){ day ->
+                                if(day == null){
+                                    currentUser?.CreateDay()
+                                }else{
+                                    currentUser!!.currentDay = day
+                                }
                             }
                         }
 
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    }else {
+                        runOnUiThread {
+                            Toast.makeText(this, getString(R.string.user_not_found_please_sign_up), Toast.LENGTH_LONG).show()
+                        }
                     }
+                }
+            }else{
+                val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                val localUsername = sharedPreferences.getString("username", null)
+                val localPassword = sharedPreferences.getString("password", null)
 
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                }else {
-                    runOnUiThread {
-                        Toast.makeText(this, getString(R.string.user_not_found_please_sign_up), Toast.LENGTH_LONG).show()
+                if(localUsername != null && localPassword != null){
+                    if(localUsername == username && localPassword == password){
+                        currentUser = User("Temp", "Firstname", "Surname", username, password)
+
+                        activityViewModel.LoadUserData(this)
+
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    }else{
+                        Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show()
                     }
+                }else{
+                    Toast.makeText(this, "You have to login at least once with an internet connection", Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -238,6 +276,12 @@ class Login : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        networkMonitor.unregisterNetworkCallback(networkCallback)
     }
 
     private fun handleSignup(result: GetCredentialResponse, onComplete: () -> Unit) {
@@ -424,8 +468,7 @@ fun LoginUser(context: Context, username: String, password: String, onComplete: 
     }
 }
 
-
-private fun handleFailure(type: String, e: GetCredentialException) {
+    private fun handleFailure(type: String, e: GetCredentialException) {
     }
 
     fun GenerateNonce(length: Int = 16): String {
