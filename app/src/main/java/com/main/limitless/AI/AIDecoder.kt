@@ -67,7 +67,7 @@ class AIDecoder {
                 val responseMessage = ApiResponse(
                     model = null,
                     createdAt = null,
-                    response = "Error: ${ex.message}",
+                    response = "Oops! Something went wrong, please try again. If the problem persists, please contact our support team.",
                     done = false,
                     totalDuration = null,
                     loadDuration = null,
