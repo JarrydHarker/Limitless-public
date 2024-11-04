@@ -39,7 +39,7 @@ class AIDecoder {
                 val gson = Gson()
                 val requestBody = mapOf(
                     "model" to "llama3.1",
-                    "prompt" to request,
+                    "prompt" to request + " (Keep response concise and to the point)",
                     "stream" to true
                 )
                 val jsonInputString = gson.toJson(requestBody)
