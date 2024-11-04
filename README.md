@@ -1,5 +1,12 @@
 # Limitless Fitness App
 
+## Youtube Links 
+
+[Limitless Fitness Application](https://youtu.be/zDFIbk5f57c)
+
+[Watch the Database video](https://youtu.be/qqYoK3leEIo)
+
+## Release notes have been added to the github.
 ## Overview
 
 The Limitless Fitness App is a comprehensive mobile application designed to help users track their fitness progress, set goals, and monitor nutrition intake. This Android app provides a range of features to support users in their fitness journey, including calorie counting, personalized goal setting, and exercise tracking.
