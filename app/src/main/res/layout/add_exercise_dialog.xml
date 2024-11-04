@@ -36,21 +36,26 @@
         app:layout_constraintTop_toBottomOf="@+id/txtReps_WD"
         app:layout_constraintVertical_bias="0.385" />
 
-    <Button
+    <ImageView
         android:id="@+id/btnClose_WD"
-        android:layout_width="wrap_content"
-        android:layout_height="49dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="#00FFFFFF"
-        android:text="x"
-        android:textColor="@color/black"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout14"
+        android:layout_width="107dp"
+        android:layout_height="106dp"
+        android:layout_marginStart="-41dp"
+        android:layout_marginTop="-24dp"
+        android:background="@drawable/rounded_background"
+        android:backgroundTint="#4863F8"
+        android:contentDescription="Back"
+        android:paddingLeft="40dp"
+        android:paddingTop="30dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.846"
-        app:layout_constraintStart_toEndOf="@+id/textView33"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.783" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/baseline_arrow_back_24" />
 
     <EditText
         android:id="@+id/txtSets_WD"

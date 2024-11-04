@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
@@ -66,6 +67,12 @@ class New_Workout : AppCompatActivity() {
         val txtName: TextView = findViewById(R.id.txtName)
         val workoutId = intent.getIntExtra("workoutId", -1)
         val currentWorkout = activityViewModel.GetWorkout(workoutId)
+        val backimg: ImageView = findViewById(R.id.imgback)
+
+        backimg.setOnClickListener{
+            val intent = Intent(this, Exercise_Activity::class.java)
+            startActivity(intent)
+        }
 
         if(currentWorkout == null){
             Toast.makeText(this, getString(R.string.invalid_workout), Toast.LENGTH_SHORT).show()

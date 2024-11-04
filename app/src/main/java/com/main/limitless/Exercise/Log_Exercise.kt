@@ -1,6 +1,7 @@
 package com.main.limitless.Exercise
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.view.Window
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
@@ -18,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.main.limitless.R
+import com.main.limitless.Settings
 import com.main.limitless.Timer
 import com.main.limitless.activityViewModel
 import com.main.limitless.data.Strength
@@ -46,7 +49,13 @@ class Log_Exercise : AppCompatActivity() {
         val workoutId = intent.getIntExtra("workoutId", -1)
         val currentWorkout = activityViewModel.GetWorkout(workoutId)
         val lblCurrentExercise_LE: TextView = findViewById(R.id.lblCurrentExercise_LE)
+        val Back: ImageView = findViewById(R.id.backback)
 
+
+        Back.setOnClickListener{
+            val intent = Intent(this, Exercise_Activity::class.java)
+            startActivity(intent)
+        }
 
         if (currentWorkout == null) {
             Toast.makeText(this, getString(R.string.workout_not_found), Toast.LENGTH_SHORT).show()
@@ -120,7 +129,7 @@ class Log_Exercise : AppCompatActivity() {
         dialog.window!!.setGravity(Gravity.BOTTOM)
 
         val btnStart = dialog.findViewById<Button>(R.id.btnStart_RD)
-        val btnClose = dialog.findViewById<Button>(R.id.btnClose_RD)
+        val btnClose = dialog.findViewById<ImageView>(R.id.btnClose_RD)
         val btnAdd10 = dialog.findViewById<Button>(R.id.btnAdd10_RD)
         val btnMinus10 = dialog.findViewById<Button>(R.id.btnMinus_RD)
         val lblTimer = dialog.findViewById<TextView>(R.id.lblTimer_RD)
