@@ -1,12 +1,14 @@
 package com.main.limitless
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -57,8 +59,14 @@ class AI_Page : AppCompatActivity() {
 //        val btt3 = AnimationUtils.loadAnimation(this, R.anim.btt3)
 //        val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
 
+        val back = findViewById<ImageView>(R.id.backAi)
         val imageView26 = findViewById<ImageView>(R.id.imageView26)
         val linearLayout2 = findViewById<ConstraintLayout>(R.id.linearLayoutai)
+
+        back.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
         imageView26.startAnimation(stb)
         ai_Chat.startAnimation(btt)
@@ -66,7 +74,7 @@ class AI_Page : AppCompatActivity() {
         //till here
 
 
-        val btnSend: ImageButton = findViewById(R.id.imgSearch_AI)
+        val btnSend: Button = findViewById(R.id.imgSearch_AI)
 
         btnSend.setOnClickListener {
             val request = txtChat.text.toString()
