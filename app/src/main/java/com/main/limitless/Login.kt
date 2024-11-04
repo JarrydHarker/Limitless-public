@@ -48,9 +48,7 @@ import java.util.Base64
 import java.util.concurrent.Executor
 
 class Login : AppCompatActivity() {
-
     lateinit var info: String
-
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
@@ -167,7 +165,7 @@ class Login : AppCompatActivity() {
             if(isOnline){
                 LoginUser(this, username, password){user ->
                     if(user != null){
-                        Log.d("ToHashOrNotToHash", "Username: $username\nPassword: $password")
+
                         saveLogin(username, password)
                         currentUser = user
 
@@ -416,6 +414,8 @@ class Login : AppCompatActivity() {
         editor.putString("username", username)
         editor.putString("password", hasher.HashPassword(password))
         editor.apply()
+
+
     }
 
 
