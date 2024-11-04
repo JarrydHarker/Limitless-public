@@ -61,9 +61,6 @@ class Log_Exercise : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.workout_not_found), Toast.LENGTH_SHORT).show()
             finish()
         } else {
-            if (currentWorkout.arrExercises == null) {
-                currentWorkout.arrExercises = mutableListOf()
-            }
 
             // Get the exercise name for the TextView
             var currentExercise = currentWorkout.arrExercises.firstOrNull()
@@ -73,31 +70,49 @@ class Log_Exercise : AppCompatActivity() {
 
             // Prepare the details for the ListView
             for(set in 1..currentExercise!!.strength!!.sets+1){
-                exerciseDetails.add("Set $set: Reps: ${currentExercise.strength?.repetitions ?: 0}")
+                exerciseDetails.add("Set $set: Reps: ${currentExercise.strength?.repetitions ?: 1}")
             }
 
-
-            var exerciseAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, exerciseDetails)
+            val exerciseAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, exerciseDetails)
             lvExercises.adapter = exerciseAdapter
 
             btnLogSet.setOnClickListener {
+                if(btnLogSet.text == "Next Set"){
+                    btnLogSet.text = "Log Set"
+                }
+
+                if(exerciseAdapter.count == 1){
+                    btnLogSet.text = "Next Set"
+                }
+
                 if (exerciseAdapter.count > 0) {
                     // Remove the first item from the adapter
                     exerciseAdapter.remove(exerciseAdapter.getItem(0))
                     exerciseAdapter.notifyDataSetChanged()
-                } else {
-                        if(currentWorkout.arrExercises.isNotEmpty()){
-                            exerciseDetails.clear()
-                            currentWorkout.arrExercises.removeAt(0)
-                            currentExercise = currentWorkout.arrExercises[0]
 
-                            for(set in 1..currentExercise!!.strength!!.sets+1){
-                                exerciseDetails.add("Set $set: Reps: ${currentExercise!!.strength?.repetitions ?: 0}")
+
+
+                } else {
+                    if(currentWorkout.arrExercises.count() > 1){
+                        exerciseDetails.clear()
+                        exerciseAdapter.clear()
+                        currentWorkout.arrExercises.removeAt(0)
+                        currentExercise = currentWorkout.arrExercises[0]
+
+                        if(currentExercise != null){
+                            lblCurrentExercise_LE.text = currentExercise!!.GetName()
+                            for(set in 1..currentExercise!!.strength!!.sets){
+                                exerciseDetails.add("Set $set: Reps: ${currentExercise!!.strength?.repetitions ?: 1}")
                             }
 
-                            exerciseAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, exerciseDetails)
                             exerciseAdapter.notifyDataSetChanged()
                         }
+                    }else{
+                        Toast.makeText(this, "Workout completed", Toast.LENGTH_LONG).show()
+
+                        val intent = Intent(this, Exercise_Activity::class.java)
+                        startActivity(intent)
+                    }
                 }
             }
 
