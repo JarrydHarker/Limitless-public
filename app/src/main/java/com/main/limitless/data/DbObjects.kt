@@ -111,7 +111,6 @@ class User(
                 userInfo = info
                 onComplete()
             }
-
             onComplete()
         }
     }

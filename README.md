@@ -6,27 +6,33 @@ The Limitless Fitness App is a comprehensive mobile application designed to help
 
 ## Features
 
-### Exercise and Workout Planner
+### Exercise and Workout Planner - Feature 1
 Organize and schedule workouts effectively with a user-friendly planner. Track daily, weekly, and monthly exercise routines, ensuring consistent progress toward fitness goals.
 
-### Custom Workout Builder
+![image](https://github.com/user-attachments/assets/95180c42-2845-4796-8a39-cb2943ed7f0f)
+
+### Custom Workout Builder - Feature 2
 Build personalized workouts by selecting exercises tailored to your needs. Modify workouts anytime by adding or swapping exercises to fit changing goals or preferences.
 
-### Calorie Counter
+### Calorie Counter - Feature 3
 Track calorie intake and monitor daily nutritional goals. The counter adjusts based on activity levels, helping users maintain a balanced diet aligned with their fitness objectives.
 
-![image](https://github.com/user-attachments/assets/6f833868-8980-452c-b1a2-abf0f5327bc2)
+![image](https://github.com/user-attachments/assets/5ee6e04a-c013-4cf0-8463-560cfca5266a)
 
-### Pedometer Functionality
+### Pedometer Functionality - Feature 4
 Count steps and monitor distance in real time, encouraging users to stay active throughout the day. Step counts are automatically recorded, supporting walking, running, and general activity tracking.
 
 ![image](https://github.com/user-attachments/assets/be7fd5bc-805c-47b0-86d4-d45e39162f5e)
 
-### AI Advice and Workout Suggestions
+### AI Advice and Workout Suggestions - Feature 5
 Interact with an AI assistant for personalized fitness advice. Ask questions about workouts, exercises, or muscle groups, and receive tailored suggestions to optimize routines and reach goals.
 
-### Location-Based Workouts
+![image](https://github.com/user-attachments/assets/ca018929-0f87-49e2-80b0-b1f40a2dfdd9)
+
+### Location-Based Workouts - Feature 6
 Track outdoor routes on a map in real-time, similar to Strava. View your path, distance, and speed, save routes, and receive local workout challenges for an engaging, location-driven fitness experience.
+
+![image](https://github.com/user-attachments/assets/e0de4c9b-6b14-49ff-a938-3dbcb3a0d30a)
 
 ## Usage
 1. Launching the App

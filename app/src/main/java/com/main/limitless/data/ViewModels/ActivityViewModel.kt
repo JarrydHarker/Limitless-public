@@ -100,51 +100,66 @@ class ActivityViewModel(val currentDate: LocalDate) {
     suspend fun LoadOfflineData(context: Context) {
         val offlineDB = AppDatabase.getDatabase(context)
         val offlineWorkouts = offlineDB.workoutDao().getAllWorkouts()
+        Log.d("LoadOfflineData", "Fetched offline workouts: $offlineWorkouts")
 
         for(workout in offlineWorkouts){
-            workout.arrExercises.addAll(offlineDB.exerciseDao().getExercisesForWorkout(workout.workoutId))
+            val exercises = offlineDB.exerciseDao().getExercisesForWorkout(workout.workoutId)
+            workout.arrExercises.addAll(exercises)
+            Log.d("LoadOfflineData", "Fetched exercises for workout ${workout.workoutId}: $exercises")
 
             for(exercise in workout.arrExercises){
                 exercise.movement = offlineDB.movementDao().getMovementById(exercise.movementId)
+                Log.d("LoadOfflineData", "Fetched movement for exercise ${exercise.exerciseId}: ${exercise.movement}")
 
                 val strength = offlineDB.strengthDao().getStrengthExercise(exercise.exerciseId)
                 val cardio = offlineDB.cardioDao().getCardioExercise(exercise.exerciseId)
 
                 if(strength != null){
                     exercise.strength = strength
+                    Log.d("LoadOfflineData", "Fetched strength for exercise ${exercise.exerciseId}: $strength")
                 }
 
                 if(cardio != null){
                     exercise.cardio = cardio
+                    Log.d("LoadOfflineData", "Fetched cardio for exercise ${exercise.exerciseId}: $cardio")
                 }
             }
 
             arrWorkouts.add(workout)
-            Log.d("OfflineLoad", "Workout: ${workout.name}")
         }
     }
+
 
     suspend fun UpdateOfflineDb(context: Context) {
         val offlineDB = AppDatabase.getDatabase(context)
         val existingWorkouts = offlineDB.workoutDao().getAllWorkouts().toSet()
+        Log.d("UpdateOfflineDb", "Fetched existing offline workouts: $existingWorkouts")
 
         for(workout in arrWorkouts){
             if(!existingWorkouts.contains(workout)){
                 offlineDB.workoutDao().insert(workout)
+                Log.d("UpdateOfflineDb", "Inserted workout: $workout")
 
                 for(exercise in workout.arrExercises){
                     offlineDB.exerciseDao().insert(exercise)
                     offlineDB.movementDao().insert(exercise.movement)
+                    Log.d("UpdateOfflineDb", "Inserted exercise: $exercise and movement: ${exercise.movement}")
 
                     if(exercise.cardio != null){
                         offlineDB.cardioDao().insert(exercise.cardio!!)
-                    }else {
+                        Log.d("UpdateOfflineDb", "Inserted cardio: ${exercise.cardio}")
+                    } else {
                         offlineDB.strengthDao().insert(exercise.strength!!)
+                        Log.d("UpdateOfflineDb", "Inserted strength: ${exercise.strength}")
                     }
                 }
+            } else {
+                Log.d("UpdateOfflineDb", "Workout already exists: $workout")
             }
         }
+        Log.d("UpdateOfflineDb", "Completed updating offline database")
     }
+
 
     fun GetWorkout(workoutId: Int): Workout? {
         for(workout in arrWorkouts){

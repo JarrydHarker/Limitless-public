@@ -8,8 +8,8 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.IBinder
+import android.os.Build
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -30,6 +30,7 @@ class HealthNotifications : Service() {
         val weight = intent?.getStringExtra("weight") ?: "No data"
         val calories = intent?.getStringExtra("calories") ?: "No data"
         val notification = createNotification("Health Update", "Weight: $weight, Calories Remaining: $calories")
+
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

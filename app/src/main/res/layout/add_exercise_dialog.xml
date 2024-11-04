@@ -7,9 +7,10 @@
 
     <TextView
         android:id="@+id/textView33"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/add_exercise1"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +21,7 @@
 
     <Button
         android:id="@+id/btnAddMovement_WD"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="59dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
