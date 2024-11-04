@@ -347,36 +347,40 @@ class Login : AppCompatActivity() {
                     val password = sharedPreferences.getString("password", null)
 
                     if (username != null && password != null) {
-                        LoginUser(this@Login, username, password) { user ->
+                        dbAccess.GetUserByEmail(username) { user ->
+
+
                             if (user != null) {
-                                Log.d("ToHashOrNotToHash", "Username: $username\nPassword: $password")
-                                saveLogin(username, password)
-                                currentUser = user
-                                currentUser?.LoadUserData {
-                                    nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
-                                    activityViewModel = ActivityViewModel(LocalDate.now())
+                                if (user.password == password) {
+                                    Log.d("ToHashOrNotToHash", "Username: $username\nPassword: $password")
+                                    saveLogin(username, password)
+                                    currentUser = user
+                                    currentUser?.LoadUserData {
+                                        nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                                        activityViewModel = ActivityViewModel(LocalDate.now())
 
-                                    nutritionViewModel.LoadUserData()
-                                    activityViewModel.LoadUserData(context)
+                                        nutritionViewModel.LoadUserData()
+                                        activityViewModel.LoadUserData(context)
 
-                                    dbAccess.GetDay(LocalDate.now(), currentUser?.userId!!) { day ->
-                                        if (day == null) {
-                                            currentUser?.CreateDay()
-                                        } else {
-                                            currentUser!!.currentDay = day
+                                        dbAccess.GetDay(LocalDate.now(), currentUser?.userId!!) { day ->
+                                            if (day == null) {
+                                                currentUser?.CreateDay()
+                                            } else {
+                                                currentUser!!.currentDay = day
+                                            }
                                         }
                                     }
+                                    val intent = Intent(this@Login, MainActivity::class.java)
+                                    startActivity(intent)
                                 }
-                                val intent = Intent(this@Login, MainActivity::class.java)
-                                startActivity(intent)
+                            } else {
+                                // Ensure the Toast runs on the main/UI thread
+                                Handler(Looper.getMainLooper()).post {
+                                    Toast.makeText(context,
+                                        context.getString(R.string.incorrect_username_or_password), Toast.LENGTH_LONG).show()
+                                }
                             }
                         }
-                    } else {
-                        Toast.makeText(
-                            applicationContext,
-                            getString(R.string.please_login_with_details_first),
-                            Toast.LENGTH_SHORT
-                        ).show()
                     }
                 }
 
