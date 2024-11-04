@@ -167,7 +167,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent, options.toBundle())
     }
 
-    private fun checkAndRequestPermissions(): Boolean {
+    private fun checkAndRequestPermissions(onComplete: (Boolean) -> Unit) {
         val permissionsToRequest = mutableListOf<String>()
 
         // Check for ACTIVITY_RECOGNITION permission (Required from Android 10)
@@ -191,19 +191,39 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Request permissions if any are missing
         if (permissionsToRequest.isNotEmpty()) {
             ActivityCompat.requestPermissions(
                 this,
                 permissionsToRequest.toTypedArray(),
                 REQUEST_CODE_PERMISSIONS
             )
-            return false // Permissions not fully granted yet
+            // Return early as we need to wait for the user's response
+        } else {
+            onComplete(true) // All permissions are already granted
         }
-
-        return true // All required permissions are granted
     }
 
+    // Handle permission request results
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            // Check if all requested permissions are granted
+            val allGranted = grantResults.all { it == PackageManager.PERMISSION_GRANTED }
+            if (allGranted) {
+                // All permissions granted, continue with the operation
+                startStepCounterService()
+            } else {
+                // Handle the case where permissions are denied
+                Toast.makeText(this, "Permissions not granted. Service not started.", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+    
     private fun startHealthNotificationService(weight: String, calories: String) {
         val intent = Intent(this, HealthNotifications::class.java)
         intent.putExtra("weight", weight)
@@ -248,16 +268,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun startStepCounterService() {
         // Check and request permissions before starting the service
-        val permissions = checkAndRequestPermissions()
-
-        Log.d("Perms", permissions.toString())
-
-        if (permissions) {
-            val service = Intent(this, StepCounterService::class.java)
-            startForegroundService(service)  // For Android O and above
-        } else {
-            // Handle the case where permissions are not granted yet
-            Toast.makeText(this, "Permissions not granted. Service not started.", Toast.LENGTH_LONG).show()
+        checkAndRequestPermissions{ isGranted ->
+            if (isGranted) {
+                val service = Intent(this, StepCounterService::class.java)
+                startForegroundService(service)  // For Android O and above
+            }
         }
     }
 
@@ -283,21 +298,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    // Handle the result of the permission request
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            val permissionsGranted = permissions.indices.all { grantResults[it] == PackageManager.PERMISSION_GRANTED }
-
-            if (permissionsGranted) {
-                // All required permissions were granted, now start the service
-            }
+    private fun scheduleNotification(hour: Int, minute: Int, message: String) {
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, Notifications::class.java).apply {
+            putExtra("notification_message", message)
         }
+        val pendingIntent = PendingIntent.getBroadcast(
+            this, hour * 100 + minute, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, hour)
+            set(Calendar.MINUTE, minute)
+            set(Calendar.SECOND, 0)
+        }
+
+        if (calendar.timeInMillis < System.currentTimeMillis()) {
+            calendar.add(Calendar.DAY_OF_YEAR, 1)
+        }
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
     }
 }

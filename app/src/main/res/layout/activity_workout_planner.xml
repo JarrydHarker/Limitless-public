@@ -9,7 +9,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.main.limitless.ai"
+        android:name="com.main.limitless.AI.AI_Fragment"
         android:layout_width="409dp"
         android:layout_height="51dp"
         android:layout_marginEnd="2dp"
