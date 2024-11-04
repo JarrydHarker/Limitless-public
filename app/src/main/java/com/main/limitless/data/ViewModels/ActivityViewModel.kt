@@ -37,58 +37,63 @@ class ActivityViewModel(val currentDate: LocalDate) {
     fun LoadUserData(context: Context) {
         arrWorkouts = mutableListOf()
 
-        if (isOnline) {
-            // Launching a coroutine on the main thread if context is needed for UI updates
-            CoroutineScope(Dispatchers.Main).launch {
-                // Load workouts asynchronously
-                val workouts = withContext(Dispatchers.IO) {
-                    dbAccess.GetUserWorkoutsByDate(currentUser?.userId!!, currentDate)
-                }
-                // Process workouts and add exercises to each workout
-                for (w in workouts) {
-                    val workout = Workout(w.workoutId, w.date, w.name, w.userId)
-                    arrWorkouts.add(workout)
-
-                    // Load exercises for each workout
-                    val exercises = withContext(Dispatchers.IO) {
-                        dbAccess.GetExercisesByWorkoutId(workout.workoutId)
-                    }
-                    workout.AddExercises(exercises)
-
-                    // Load movement, strength, and cardio details for each exercise
-                    for (exercise in workout.arrExercises) {
-                        exercise.movement = withContext(Dispatchers.IO) {
-                            dbAccess.GetMovement(exercise.movementId)
-                        } ?: Movement() // Default to empty Movement if null
-
-                        exercise.strength = withContext(Dispatchers.IO) {
-                            dbAccess.GetStrength(exercise.exerciseId)
+        CoroutineScope(Dispatchers.Main).launch {
+            if (isOnline) {
+                // Attempt to load data from online database
+                currentUser?.userId?.let { userId ->
+                    try {
+                        // Load workouts asynchronously in IO context
+                        val workouts = withContext(Dispatchers.IO) {
+                            dbAccess.GetUserWorkoutsByDate(userId, currentDate)
                         }
 
-                        exercise.cardio = withContext(Dispatchers.IO) {
-                            dbAccess.GetCardio(exercise.exerciseId)
-                        }
-                    }
-                }
+                        for (w in workouts) {
+                            val workout = Workout(w.workoutId, w.date, w.name, w.userId)
+                            arrWorkouts.add(workout)
 
-                try{
-                    // Offline database update code here, after all workouts and exercises are loaded
+                            // Load exercises for the workout
+                            val exercises = withContext(Dispatchers.IO) {
+                                dbAccess.GetExercisesByWorkoutId(workout.workoutId)
+                            }
+                            workout.AddExercises(exercises)
+
+                            // Load movement, strength, and cardio details for each exercise
+                            for (exercise in workout.arrExercises) {
+                                withContext(Dispatchers.IO) {
+                                    exercise.movement = dbAccess.GetMovement(exercise.movementId) ?: Movement()
+                                    exercise.strength = dbAccess.GetStrength(exercise.exerciseId)
+                                    exercise.cardio = dbAccess.GetCardio(exercise.exerciseId)
+                                }
+                            }
+                        }
+
+                        // Update the offline database once all data is loaded
+                        try {
+                            withContext(Dispatchers.IO) {
+                                UpdateOfflineDb(context)
+                            }
+                        } catch (ex: Exception) {
+                            Log.e("OfflineSync", "Error updating offline DB: ${ex.message}")
+                        }
+
+                    } catch (ex: Exception) {
+                        Log.e("DataLoad", "Error loading data online: ${ex.message}")
+                    }
+                } ?: Log.e("LoadUserData", "User ID is null")
+
+            } else {
+                // Handle offline case
+                try {
                     withContext(Dispatchers.IO) {
-                        UpdateOfflineDb(context)
+                        LoadOfflineData(context)
                     }
-                }catch(ex: Exception){
-                    Log.e("OfflineSync", "${ex}")
-                }
-            }
-        } else {
-            CoroutineScope(Dispatchers.Main).launch {
-                // Handle offline case, e.g., loading data from local storage
-                withContext(Dispatchers.IO) {
-                    LoadOfflineData(context)
+                } catch (ex: Exception) {
+                    Log.e("OfflineDataLoad", "Error loading offline data: ${ex.message}")
                 }
             }
         }
     }
+
 
     suspend fun LoadOfflineData(context: Context) {
         val offlineDB = AppDatabase.getDatabase(context)
@@ -112,14 +117,14 @@ class ActivityViewModel(val currentDate: LocalDate) {
                 }
             }
         }
-
     }
 
     suspend fun UpdateOfflineDb(context: Context) {
         val offlineDB = AppDatabase.getDatabase(context)
+        val existingWorkouts = offlineDB.workoutDao().getAllWorkouts().toSet()
 
         for(workout in arrWorkouts){
-            if(!offlineDB.workoutDao().getAllWorkouts().contains(workout)){
+            if(!existingWorkouts.contains(workout)){
                 offlineDB.workoutDao().insert(workout)
 
                 for(exercise in workout.arrExercises){

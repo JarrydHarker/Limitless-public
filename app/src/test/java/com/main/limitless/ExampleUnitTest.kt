@@ -132,7 +132,7 @@ class ExampleUnitTest {
         // Create a workout
         val workout = Workout(
             workoutId = 1,
-            date = LocalDate.now(),
+            date = LocalDate.now().toString(),
             name = "Morning Workout"
         )
 
@@ -144,8 +144,8 @@ class ExampleUnitTest {
 
         // Verify that the workouts list is not null and contains the workout
         assertNotNull(workouts)
-        assertEquals(1, workouts?.size)
-        assertEquals(workout, workouts?.get(0))
+        assertEquals(1, workouts.size)
+        assertEquals(workout, workouts.get(0))
     }
 
 
