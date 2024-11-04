@@ -1,4 +1,4 @@
-package com.main.limitless
+package com.main.limitless.Nutrition
 
 import android.content.Context
 import android.os.Bundle
@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.main.limitless.R
 
 import com.main.limitless.data.Graphics.BarGraphic
+import com.main.limitless.nutritionViewModel
 
 
 class fragment_water_tracker : Fragment() {
@@ -68,8 +69,8 @@ class fragment_water_tracker : Fragment() {
     }
 
     private fun incrementWater() {
-        currentIntake += 0.25f
-        if (currentIntake <= 3f) {
+        if (currentIntake < 3f) {
+            currentIntake += 0.25f
             waterGraph.setProgress(currentIntake)
             waterGraph.update()
             saveCurrentIntake(currentIntake)
@@ -80,8 +81,8 @@ class fragment_water_tracker : Fragment() {
         }
     }
     private fun removeWater() {
-        currentIntake -= 0.25f
-        if (currentIntake >= 0f) {
+        if (currentIntake > 0f) {
+            currentIntake -= 0.25f
             waterGraph.setProgress(currentIntake)
             waterGraph.update()
             saveCurrentIntake(currentIntake)

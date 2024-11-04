@@ -51,7 +51,6 @@ class Log_Exercise : AppCompatActivity() {
         val lblCurrentExercise_LE: TextView = findViewById(R.id.lblCurrentExercise_LE)
         val Back: ImageView = findViewById(R.id.backback)
 
-
         Back.setOnClickListener{
             val intent = Intent(this, Exercise_Activity::class.java)
             startActivity(intent)
@@ -170,7 +169,7 @@ class Log_Exercise : AppCompatActivity() {
         btnStart.setOnClickListener {
             Ticktimer.start()
 
-            Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate({
+            Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay({
                 try {
                     runOnUiThread {
                         lblTimer.text = Ticktimer.getTime()
