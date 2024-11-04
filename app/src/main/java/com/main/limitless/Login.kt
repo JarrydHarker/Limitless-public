@@ -332,13 +332,13 @@ class Login : AppCompatActivity() {
                     }
                 }
 
-                override fun onAuthenticationFailed() {
+                /*override fun onAuthenticationFailed() {
                     Toast.makeText(
                         applicationContext,
                         getString(R.string.authentication_failed),
                         Toast.LENGTH_SHORT
                     ).show()
-                }
+                }*/
             })
 
         promptInfo = BiometricPrompt.PromptInfo.Builder()
