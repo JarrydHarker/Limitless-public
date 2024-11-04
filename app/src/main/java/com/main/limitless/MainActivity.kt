@@ -218,10 +218,10 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun startHealthNotificationService(weight: String, calories: String) {
-        val intent = Intent(this, HealthNotifications::class.java)
+        /*val intent = Intent(this, HealthNotifications::class.java)
         intent.putExtra("weight", weight)
         intent.putExtra("calories", calories)
-        startService(intent)
+        startService(intent)*/
     }
 
     private fun setupWork() {

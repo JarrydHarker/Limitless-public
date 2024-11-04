@@ -1,12 +1,15 @@
 package com.main.limitless.data
 
+import android.Manifest
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.IBinder
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.main.limitless.R
@@ -25,6 +28,7 @@ class HealthNotifications: Service() {
         val weight = intent?.getStringExtra("weight") ?: "No data"
         val calories = intent?.getStringExtra("calories") ?: "No data"
         val notification = createNotification("Health Update", "Weight: $weight, Calories Remaining: $calories")
+
 
         NotificationManagerCompat.from(this).notify(1, notification)
         return START_STICKY
