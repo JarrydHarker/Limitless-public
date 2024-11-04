@@ -159,7 +159,7 @@ class Exercises_Fragment : Fragment() {
             val name = txtName.text.toString()
 
             if(name.isNotEmpty()) {
-                val workout = Workout(0, LocalDate.now(), name, currentUser!!.userId)
+                val workout = Workout(0, LocalDate.now().toString(), name, currentUser!!.userId)
 
                 activityViewModel.AddWorkout(workout) { id ->
                     val intent = Intent(requireActivity(), New_Workout::class.java)
