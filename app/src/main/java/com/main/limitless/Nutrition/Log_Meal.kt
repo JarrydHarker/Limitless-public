@@ -9,6 +9,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import android.widget.AdapterView
@@ -18,6 +19,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ListView
+import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -51,7 +53,7 @@ class Log_Meal : AppCompatActivity() {
             insets
         }
         val listView = findViewById<ListView>(R.id.lvCreatMeal)
-        mealListAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, mealDescriptions)
+        mealListAdapter = ArrayAdapter(this, R.layout.log_meal_list, R.id.lm_FoodName, mealDescriptions)
         listView.adapter = mealListAdapter
 
         val btnLog = findViewById<Button>(R.id.btnLog_LM)
@@ -62,15 +64,25 @@ class Log_Meal : AppCompatActivity() {
         var meal = Meal()
         val Back: ImageView = findViewById(R.id.LM_ivBack)
         var prevMeals: MutableList<Meal> = mutableListOf()
+        val inflater = LayoutInflater.from(this)
+        val numberPickerView = inflater.inflate(R.layout.log_meal_list, null)
+        val numberPicker: NumberPicker = numberPickerView.findViewById(R.id.lm_NumberPick)
+
+        numberPicker.minValue = 0
+        numberPicker.maxValue = 1000
 
         Back.setOnClickListener{
             val intent = Intent(this, MealTracker::class.java)
             startActivity(intent)
         }
 
+        numberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
+            Log.d("NumberPicker", "New value: $newVal")
+        }
+
         CoroutineScope(Dispatchers.Main).launch {
             dbAccess.GetUserMeals(currentUser?.userId!!) { meals ->
-                val mealsAdapter = ArrayAdapter<String>(this@Log_Meal, android.R.layout.simple_list_item_1)
+                val mealsAdapter = ArrayAdapter<String>(this@Log_Meal, R.layout.log_meal_list)
 
                 prevMeals.addAll(meals)
 
@@ -88,7 +100,7 @@ class Log_Meal : AppCompatActivity() {
             meal = prevMeals[i]
 
                 val mealsAdapter =
-                    ArrayAdapter<String>(this@Log_Meal, android.R.layout.simple_list_item_1)
+                    ArrayAdapter<String>(this@Log_Meal, R.layout.log_meal_list)
 
                 nutritionViewModel.GetMealFoods(meal.mealId!!) { foods ->
                     Log.d("Fuck", "Num Foods: ${foods.size}")
