@@ -1,7 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id ("kotlin-kapt") // Add this line
 }
+
 
 android {
     namespace = "com.main.limitless"
@@ -39,7 +41,10 @@ android {
     }
 }
 dependencies {
-    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.ktx)
+    kapt("androidx.room:room-compiler:2.6.1")  // Replace 2.x.x with the Room version in your catalog or specify manually
+
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

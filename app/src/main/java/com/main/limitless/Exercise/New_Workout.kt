@@ -29,13 +29,12 @@ import com.main.limitless.R
 import com.main.limitless.Settings
 import com.main.limitless.activityViewModel
 import com.main.limitless.data.Cardio
-import com.main.limitless.data.DbAccess
 import com.main.limitless.data.Exercise
 import com.main.limitless.data.Movement
 import com.main.limitless.data.Strength
 import com.main.limitless.data.dbAccess
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.main.limitless.data.AppDatabase
+import com.main.limitless.data.offline.AppDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
