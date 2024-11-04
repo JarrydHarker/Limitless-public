@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
@@ -16,12 +17,18 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import com.main.limitless.Exercise.Exercise_Activity
 import com.main.limitless.Nutrition.Diet_Activity
 import com.main.limitless.data.DbAccess
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.main.limitless.data.HealthNotifications
+import com.main.limitless.data.Notifications
 import java.util.Locale
 
 class Settings : AppCompatActivity() {
@@ -53,6 +60,21 @@ class Settings : AppCompatActivity() {
         val goals: LinearLayout = findViewById(R.id.ll4)
         val logout: LinearLayout = findViewById(R.id.ll5)
         val deleteUser :TextView = findViewById(R.id.txtDeleteAcc)
+        val switch: Switch = findViewById(R.id.switchNotifications)
+        switch.isChecked = NotificationUtils.getNotificationState(this)
+
+            switch.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    enableNotifications()
+                    startHealthNotificationService()
+                } else {
+                    disableNotifications()
+                    stopHealthNotificationService()
+                }
+
+                NotificationUtils.saveNotificationState(this, isChecked)
+            }
+
 
         logout.setOnClickListener{
             currentUser?.LogOut()
@@ -132,6 +154,54 @@ class Settings : AppCompatActivity() {
             }
         }
     }
+
+    private fun startHealthNotificationService() {
+        val intent = Intent(this, HealthNotifications::class.java)
+        intent.putExtra("weight", currentUser!!.userInfo.weight.toString())
+        intent.putExtra("calories", (nutritionViewModel.calorieWallet - nutritionViewModel.CalculateTotalCalories()).toString())
+        ContextCompat.startForegroundService(this, intent)
+    }
+
+    private fun stopHealthNotificationService() {
+        val intent = Intent(this, HealthNotifications::class.java)
+        stopService(intent)
+    }
+
+
+    private fun enableNotifications() {
+        // Enable notifications (basic example with WorkManager)
+        val data = workDataOf(
+            "type" to "scheduled",
+            "title" to "Reminder",
+            "content" to "It's time to check your app!"
+        )
+
+        val notificationWork = OneTimeWorkRequestBuilder<Notifications>()
+            .setInputData(data)
+            .build()
+
+        WorkManager.getInstance(applicationContext).enqueue(notificationWork)
+
+    }
+
+    private fun disableNotifications() {
+        WorkManager.getInstance(applicationContext).cancelAllWorkByTag("scheduled_notification")
+
+    }
+
+    fun saveNotificationState(isEnabled: Boolean) {
+        val sharedPref = getSharedPreferences("NotificationPrefs", Context.MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putBoolean("notifications_enabled", isEnabled)
+            apply()
+        }
+    }
+
+    fun getNotificationState(): Boolean {
+        val sharedPref = getSharedPreferences("NotificationPrefs", Context.MODE_PRIVATE)
+        return sharedPref.getBoolean("notifications_enabled", false)
+    }
+
     fun recreateActivitySmoothly() {
         val intent = Intent(this, this::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -197,3 +267,20 @@ class Settings : AppCompatActivity() {
         setLocate(language!!)
     }
 }
+
+object NotificationUtils {
+
+    fun saveNotificationState(context: Context, isEnabled: Boolean) {
+        val sharedPref = context.getSharedPreferences("NotificationPrefs", Context.MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putBoolean("notifications_enabled", isEnabled)
+            apply()
+        }
+    }
+
+    fun getNotificationState(context: Context): Boolean {
+        val sharedPref = context.getSharedPreferences("NotificationPrefs", Context.MODE_PRIVATE)
+        return sharedPref.getBoolean("notifications_enabled", false)
+    }
+}
+

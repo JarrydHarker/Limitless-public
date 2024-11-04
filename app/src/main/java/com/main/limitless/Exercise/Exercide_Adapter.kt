@@ -37,7 +37,6 @@ class Exercide_Adapter(context: Context, private val items: MutableList<Workout>
         for(item in items){
             Log.d("Ericcc", "Ons is hier ${item.name}")
         }
-
         return view
     }
 
