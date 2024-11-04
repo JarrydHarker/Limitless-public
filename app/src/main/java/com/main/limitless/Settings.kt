@@ -63,17 +63,17 @@ class Settings : AppCompatActivity() {
         val switch: Switch = findViewById(R.id.switchNotifications)
         switch.isChecked = NotificationUtils.getNotificationState(this)
 
-            switch.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked && isOnline) {
-                    enableNotifications()
-                    startHealthNotificationService()
-                } else {
-                    disableNotifications()
-                    stopHealthNotificationService()
-                }
-
-                NotificationUtils.saveNotificationState(this, isChecked)
+        switch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked && isOnline) {
+                enableNotifications()
+                startHealthNotificationService()
+            } else {
+                disableNotifications()
+                stopHealthNotificationService()
             }
+
+            NotificationUtils.saveNotificationState(this, isChecked)
+        }
 
 
         logout.setOnClickListener{
