@@ -1,22 +1,28 @@
-package com.main.limitless.data
+package com.main.limitless.data.offline
 
 import android.content.Context
-import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
 import androidx.room.Dao
 import androidx.room.Database
 import androidx.room.Delete
-import androidx.room.Entity
 import androidx.room.Insert
-import androidx.room.PrimaryKey
 import androidx.room.Query
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.main.limitless.data.Cardio
+import com.main.limitless.data.Converters
+import com.main.limitless.data.Exercise
+import com.main.limitless.data.Movement
+import com.main.limitless.data.Strength
+import com.main.limitless.data.Workout
+
+
 
 @Database(
     entities = [Workout::class, Exercise::class, Movement::class, Cardio::class, Strength::class],
     version = 1
 )
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun workoutDao(): WorkoutDao
     abstract fun exerciseDao(): ExerciseDao
