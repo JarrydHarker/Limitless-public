@@ -36,7 +36,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-private lateinit var mealListAdapter: ArrayAdapter<String>
+//private lateinit var mealListAdapter: ArrayAdapter<String>
+private lateinit var mealListAdapter: MealListAdapter
 private val mealDescriptions = mutableListOf<String>()
 
 class Log_Meal : AppCompatActivity() {
@@ -53,7 +54,8 @@ class Log_Meal : AppCompatActivity() {
             insets
         }
         val listView = findViewById<ListView>(R.id.lvCreatMeal)
-        mealListAdapter = ArrayAdapter(this, R.layout.log_meal_list, R.id.lm_FoodName, mealDescriptions)
+        //mealListAdapter = ArrayAdapter(this, R.layout.log_meal_list, R.id.lm_FoodName, mealDescriptions)
+        mealListAdapter = MealListAdapter(this, mealDescriptions)
         listView.adapter = mealListAdapter
 
         val btnLog = findViewById<Button>(R.id.btnLog_LM)
@@ -128,8 +130,8 @@ class Log_Meal : AppCompatActivity() {
                 meal.date = nutritionViewModel.currentDate
                 meal.arrFoods = mealFoods
                 meal.userId = currentUser?.userId
-                
-              if(meal.name.isNotEmpty()){
+
+              if(mealname.isNotEmpty()){
                 nutritionViewModel.CreateMeal(meal)
               }
                
@@ -235,6 +237,7 @@ class Log_Meal : AppCompatActivity() {
 
             if(name.isNotEmpty()){
                 mealname = name
+
             }else {
                 Toast.makeText(this, getString(R.string.please_enter_meal_name), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
