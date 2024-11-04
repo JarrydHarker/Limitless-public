@@ -25,12 +25,14 @@ class HomeFragment : Fragment() {
         val lblCal: TextView = view.findViewById(R.id.WP_txtCal)
         val waterGraph: BarGraphic = view.findViewById(R.id.HP_Water)
 
+
         lblSteps.setText(activityViewModel.steps.toString())
         if(lblSteps.text == "null")
         {
             lblSteps.text = "0"
         }
         lblWeight.setText(currentUser!!.GetWeight().toString())
+
         if(lblWeight.text == "null")
         {
             lblWeight.text = "-"
