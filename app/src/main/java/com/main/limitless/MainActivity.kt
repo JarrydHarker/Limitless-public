@@ -32,6 +32,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityOptionsCompat
+import androidx.fragment.app.FragmentContainerView
 import com.main.limitless.data.NetworkMonitor
 import com.main.limitless.Exercise.Exercise_Activity
 import com.main.limitless.Exercise.Workout_Planner
@@ -90,11 +91,7 @@ class MainActivity : AppCompatActivity() {
         networkMonitor.registerNetworkCallback(networkCallback)
 
         //Nicks Animation things
-        val btnGo = findViewById<Button>(R.id.btnGo)
-        btnGo.setOnClickListener{
-        val intent = Intent(this,Exercise_Activity::class.java)
-        startActivity(intent)
-        }
+
 
 
         val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
@@ -104,21 +101,21 @@ class MainActivity : AppCompatActivity() {
 //        val btt3 = AnimationUtils.loadAnimation(this, R.anim.btt3)
 //        val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
 
-        val LinearLayout3 = findViewById<LinearLayout>(R.id.linearLayout3)
-        val linearLayout2 = findViewById<LinearLayout>(R.id.linearLayout2)
         val scrollView2 = findViewById<ScrollView>(R.id.scrollView2)
+        val frag = findViewById<FragmentContainerView>(R.id.fragmentContainerView10)
+        val frag2 = findViewById<FragmentContainerView>(R.id.fragmentContainerView14)
+
 
         scrollView2.startAnimation(ttb)
-        linearLayout2.startAnimation(btt2)
-        LinearLayout3.startAnimation(btt)
+        frag.startAnimation(btt)
+        frag2.startAnimation(btt2)
         //till here
 
         ThemeManager.applyTheme(this)
 
         val bottomNavBar: BottomNavigationView = findViewById(R.id.NavBar)
-        val dailyActivity: CardView = findViewById(R.id.dailyActivityCard)
-        val workout: CardView = findViewById(R.id.workoutsCard)
-        val recyclerView: RecyclerView = findViewById(R.id.PE_ListExercises)
+
+
 
         ThemeManager.updateNavBarColor(this, bottomNavBar)
 
@@ -142,19 +139,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        dailyActivity.setOnClickListener{
-            val intent = Intent(this, Exercise_Activity::class.java)
-            startActivity(intent)
-        }
-        workout.setOnClickListener{
-            val intent = Intent(this, Workout_Planner::class.java)
-            startActivity(intent)
-        }
+
 
         val mLayoutManager = LinearLayoutManager(applicationContext)
         mLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        recyclerView.layoutManager = mLayoutManager
-        recyclerView.itemAnimator = DefaultItemAnimator()
         //recyclerView.adapter = moviesAdapter
 
     }

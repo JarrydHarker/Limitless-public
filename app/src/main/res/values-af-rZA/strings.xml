@@ -354,4 +354,10 @@
     <string name="distance_0_00_km">Afstand: 0.00 km</string>
     <string name="time">Tyd: %1$s</string>
     <string name="distance_km">Afstand: %1$s km</string>
+
+    <string name="welcome_to">Welkom By</string>
+    <string name="metrics">Metrieke</string>
+
+    <string name="limitless_potential">Limitless Potensiaal</string>
+    <string name="lets_chat">Kom Ons Gesels</string>
 </resources>

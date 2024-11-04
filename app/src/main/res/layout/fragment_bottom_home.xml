@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:text="Limitless Potential"
+        android:text="@string/limitless_potential"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
                     android:id="@+id/textView67"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Exercise"
+                    android:text="@string/exercise"
                     android:textColor="#4863F8"
                     android:textSize="19sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -81,7 +81,7 @@
                     android:id="@+id/textView68"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nutrition"
+                    android:text="@string/nutrition"
                     android:textColor="#4863F8"
                     android:textSize="19sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -112,7 +112,7 @@
                     android:id="@+id/textView69"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lets Chat"
+                    android:text="@string/lets_chat"
                     android:textColor="#4863F8"
                     android:textSize="19sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -133,62 +133,4 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </HorizontalScrollView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="218dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="216dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/textView71"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Steps" />
-
-            <TextView
-                android:id="@+id/textView72"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="-" />
-
-            <TextView
-                android:id="@+id/textView73"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Weight" />
-
-            <TextView
-                android:id="@+id/textView74"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="-" />
-
-            <TextView
-                android:id="@+id/textView75"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Calorie" />
-
-            <TextView
-                android:id="@+id/textView76"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="-" />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
