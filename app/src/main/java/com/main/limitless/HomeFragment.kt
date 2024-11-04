@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
         val lblSteps: TextView = view.findViewById(R.id.WP_txtSteps)
         val lblWeight: TextView = view.findViewById(R.id.WP_txtWeight)
 
-        lblSteps.setText(nutritionViewModel.steps.toString())
+        lblSteps.setText(activityViewModel.steps.toString())
         lblWeight.setText(currentUser!!.GetWeightGoal().toString())
         if(lblWeight.text == "null")
         {

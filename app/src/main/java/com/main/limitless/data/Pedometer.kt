@@ -25,18 +25,32 @@ class Pedometer(private val context: Context) {
             override fun onSensorChanged(event: SensorEvent?) {
                 if (event != null) {
                     val stepsSinceReboot = event.values[0].toLong()
+                    Log.d("Steps", "Pedo: $stepsSinceReboot")
 
                     // Retrieve the stored steps reset at midnight from SharedPreferences
                     val sharedPreferences = context.getSharedPreferences("StepCounterPrefs", Context.MODE_PRIVATE)
-                    storedSteps = sharedPreferences.getLong("storedSteps", stepsSinceReboot)
+                    storedSteps = sharedPreferences.getLong("storedSteps", 0)
+
+                    Log.d("Steps", "Retrieved stored steps: $storedSteps")
 
                     // Calculate daily steps by subtracting storedSteps from stepsSinceReboot
                     currentStepCount = stepsSinceReboot - storedSteps
+
+                    if (storedSteps == 0L) {
+                        storeSteps(stepsSinceReboot)  // Save the steps since reboot, not storedSteps which is 0
+                        Log.d("Steps", "Storing steps since reboot: $stepsSinceReboot")
+                    }
+
+                    Log.d("Steps", "Stored: $storedSteps")
+                    Log.d("Steps", "Current: $currentStepCount")
+
                     activityViewModel.steps = currentStepCount.toInt()
 
                     val editor = sharedPreferences.edit()
                     editor.putLong("currentStepCount", currentStepCount)
                     editor.apply()
+
+                    Log.d("Steps", "Updated current step count: $currentStepCount")
 
                     onStepCountUpdated(currentStepCount)
                 }
@@ -49,20 +63,11 @@ class Pedometer(private val context: Context) {
         }
     }
 
-    // Stop listening and unregister the listener
-    fun stopListening() {
-        if (!isListening) return
-
-        sensorManager.unregisterListener(listener)
-        listener = null
-        isListening = false
-        Log.d(TAG, "Sensor listener unregistered")
-    }
-
     private fun storeSteps(steps: Long) {
         val sharedPreferences = context.getSharedPreferences("StepCounterPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.putLong("steps_today", steps)
+        editor.putLong("storedSteps", steps)
         editor.apply() // Save the changes
+        Log.d("Steps", "Steps stored: $steps")
     }
 }
