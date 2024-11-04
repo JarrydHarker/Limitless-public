@@ -35,7 +35,7 @@
                 android:id="@+id/fragmentContainerView14"
                 android:name="com.main.limitless.bottomHome"
                 android:layout_width="match_parent"
-                android:layout_height="440dp" />
+                android:layout_height="220dp" />
 
             <TextView
                 android:id="@+id/RA"

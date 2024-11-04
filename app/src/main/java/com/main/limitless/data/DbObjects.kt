@@ -41,6 +41,10 @@ class User(
         return userInfo.stepGoal
     }
 
+    fun GetWeight(): Double?{
+        return userInfo.weight
+    }
+
     fun GetWeightGoal(): Double? {
         return userInfo.weightGoal
     }
