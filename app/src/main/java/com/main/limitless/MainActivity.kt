@@ -22,20 +22,12 @@ import com.main.limitless.data.StepCounterService
 import com.main.limitless.data.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.Manifest
-import android.app.AlarmManager
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityOptionsCompat
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
@@ -45,6 +37,7 @@ import com.main.limitless.Exercise.Workout_Planner
 import com.main.limitless.Nutrition.Diet_Activity
 import com.main.limitless.data.Notifications
 import com.main.limitless.data.ViewModels.ActivityViewModel
+import com.main.limitless.data.HealthNotifications
 import com.main.limitless.data.ViewModels.NutritionViewModel
 import java.time.LocalDate
 import java.util.Calendar
@@ -81,6 +74,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }else{
             startStepCounterService()
+            setupWork()
+            startHealthNotificationService(currentUser!!.userInfo.weight.toString(), (nutritionViewModel.calorieWallet - nutritionViewModel.CalculateTotalCalories()).toString())
         }
 
          networkCallback = object : ConnectivityManager.NetworkCallback() {
@@ -129,10 +124,6 @@ class MainActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.PE_ListExercises)
 
 
-
-
-
-
         ThemeManager.updateNavBarColor(this, bottomNavBar)
 
         bottomNavBar.setSelectedItemId(R.id.ic_home)
@@ -155,7 +146,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        setupWork()
+
 
         dailyActivity.setOnClickListener{
             val intent = Intent(this, Exercise_Activity::class.java)
@@ -227,14 +218,21 @@ class MainActivity : AppCompatActivity() {
         return true // All required permissions are granted
     }
 
-
-    private fun setupWork() {
-        scheduleWork("Good Morning! It's 10 AM.", "It's time for your morning meal!!", 8, 0)
-        scheduleWork("Lunch time!", "Come and add your Lunch!!", 12, 0)
-        scheduleWork("It's 6 PM.", "Don't forget to eat Dinner!!", 18, 0)
+    private fun startHealthNotificationService(weight: String, calories: String) {
+        val intent = Intent(this, HealthNotifications::class.java)
+        intent.putExtra("weight", weight)
+        intent.putExtra("calories", calories)
+        startService(intent)
     }
 
-    private fun scheduleWork(title: String, content: String, hour: Int, minute: Int) {
+    private fun setupWork() {
+        // Scheduled Notifications
+        scheduleWork("scheduled", "Good Morning! It's 8 AM time to Log your breakfast.", "", 8, 0)
+        scheduleWork("scheduled", "Time for a quick break! Add your lunch!", "", 12, 0)
+        scheduleWork("scheduled", "It's 6 PM. Time to wrap up your day with a nice dinner!", "", 18, 0)
+    }
+
+    private fun scheduleWork(type: String, value1: String, value2: String, hour: Int, minute: Int) {
         val calendar = Calendar.getInstance()
         val now = Calendar.getInstance()
 
@@ -248,9 +246,15 @@ class MainActivity : AppCompatActivity() {
 
         val delay = calendar.timeInMillis - System.currentTimeMillis()
 
+        val inputData = when (type) {
+            "health" -> workDataOf("type" to type, "weight" to value1, "calories" to value2)
+            "scheduled" -> workDataOf("type" to type, "title" to value1, "content" to value2)
+            else -> throw IllegalArgumentException("Invalid notification type")
+        }
+
         val workRequest = OneTimeWorkRequestBuilder<Notifications>()
             .setInitialDelay(delay, TimeUnit.MILLISECONDS)
-            .setInputData(workDataOf("title" to title, "content" to content))
+            .setInputData(inputData)
             .build()
 
         WorkManager.getInstance(this).enqueue(workRequest)
@@ -292,29 +296,6 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, arrayOf(permission), requestCode)
         }
     }
-
-    private fun scheduleNotification(hour: Int, minute: Int, message: String) {
-        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, Notifications::class.java).apply {
-            putExtra("notification_message", message)
-        }
-        val pendingIntent = PendingIntent.getBroadcast(
-            this, hour * 100 + minute, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-
-        val calendar = Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, hour)
-            set(Calendar.MINUTE, minute)
-            set(Calendar.SECOND, 0)
-        }
-
-        if (calendar.timeInMillis < System.currentTimeMillis()) {
-            calendar.add(Calendar.DAY_OF_YEAR, 1)
-        }
-
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
-    }
-
 
 
     // Handle the result of the permission request
