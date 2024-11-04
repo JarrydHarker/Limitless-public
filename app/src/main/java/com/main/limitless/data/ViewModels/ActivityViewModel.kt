@@ -71,9 +71,13 @@ class ActivityViewModel(val currentDate: LocalDate) {
                     }
                 }
 
-                // Offline database update code here, after all workouts and exercises are loaded
-                withContext(Dispatchers.IO) {
-                    UpdateOfflineDb(context)
+                try{
+                    // Offline database update code here, after all workouts and exercises are loaded
+                    withContext(Dispatchers.IO) {
+                        UpdateOfflineDb(context)
+                    }
+                }catch(ex: Exception){
+                    Log.e("OfflineSync", "${ex}")
                 }
             }
         } else {
