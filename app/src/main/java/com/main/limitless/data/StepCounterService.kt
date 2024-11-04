@@ -58,7 +58,7 @@ class StepCounterService : Service() {
     private fun startTrackingSteps() {
         pedometer.startListening { currentSteps ->
             updateNotification(currentSteps)
-            nutritionViewModel.steps = currentSteps.toInt()
+            activityViewModel.steps = currentSteps.toInt()
         }
     }
 

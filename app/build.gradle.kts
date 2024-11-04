@@ -43,7 +43,7 @@ android {
 dependencies {
     implementation(libs.androidx.room.common)
     implementation(libs.androidx.room.ktx)
-    kapt("androidx.room:room-compiler:2.6.1")  // Replace 2.x.x with the Room version in your catalog or specify manually
+    kapt(libs.androidx.room.compiler.v261)  // Replace 2.x.x with the Room version in your catalog or specify manually
 
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.core.ktx)
@@ -64,9 +64,6 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.foundation)
     implementation(libs.androidx.material)
-    implementation(libs.androidx.room.common)
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.androidx.room.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
