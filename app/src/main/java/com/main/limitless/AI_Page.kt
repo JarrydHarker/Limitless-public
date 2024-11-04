@@ -88,7 +88,7 @@ class AI_Page : AppCompatActivity() {
             ai_Chat.scrollToPosition(lstMessages.size - 1)
 
             // Add placeholder message for bot's response
-            var responseMessage = Message("...", false)
+            val responseMessage = Message("...", false)
             lstMessages.add(responseMessage)
             val placeholderPosition = lstMessages.size - 1
             chatAdapter.notifyItemInserted(placeholderPosition)
