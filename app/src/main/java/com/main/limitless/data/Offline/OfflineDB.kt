@@ -1,4 +1,4 @@
-package com.main.limitless.data.offline
+package com.main.limitless.data.Offline
 
 import android.content.Context
 import androidx.room.Dao

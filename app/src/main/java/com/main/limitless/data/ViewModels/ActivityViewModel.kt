@@ -3,7 +3,7 @@ package com.main.limitless.data.ViewModels
 import android.content.Context
 import android.util.Log
 import com.main.limitless.currentUser
-import com.main.limitless.data.offline.AppDatabase
+import com.main.limitless.data.Offline.AppDatabase
 import com.main.limitless.data.Movement
 import com.main.limitless.data.Workout
 import com.main.limitless.data.dbAccess

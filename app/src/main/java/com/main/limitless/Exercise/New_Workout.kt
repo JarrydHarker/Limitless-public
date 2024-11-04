@@ -35,7 +35,7 @@ import com.main.limitless.data.Movement
 import com.main.limitless.data.Strength
 import com.main.limitless.data.dbAccess
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.main.limitless.data.offline.AppDatabase
+import com.main.limitless.data.Offline.AppDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers

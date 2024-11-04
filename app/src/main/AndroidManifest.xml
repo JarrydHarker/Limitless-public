@@ -90,7 +90,7 @@
             android:name=".Settings"
             android:exported="false" />
         <activity
-            android:name=".AI_Page"
+            android:name=".AI.AI_Page"
             android:exported="false" />
         <activity
             android:name=".Map_Activity"
