@@ -30,7 +30,7 @@ import com.main.limitless.R
 import com.main.limitless.currentUser
 import com.main.limitless.data.Food
 import com.main.limitless.data.Meal
-import com.main.limitless.data.dbAccess
+import com.main.limitless.dbAccess
 import com.main.limitless.nutritionViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

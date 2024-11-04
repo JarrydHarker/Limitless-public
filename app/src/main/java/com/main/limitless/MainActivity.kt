@@ -39,6 +39,7 @@ import com.main.limitless.data.NetworkMonitor
 import com.main.limitless.Exercise.Exercise_Activity
 import com.main.limitless.Exercise.Workout_Planner
 import com.main.limitless.Nutrition.Diet_Activity
+import com.main.limitless.data.DbAccess
 import com.main.limitless.data.Notifications
 import com.main.limitless.data.ViewModels.ActivityViewModel
 import com.main.limitless.data.HealthNotifications
@@ -51,6 +52,7 @@ var currentUser: User? = null
 var nutritionViewModel = NutritionViewModel()
 var activityViewModel = ActivityViewModel(LocalDate.now())
 var isOnline = false
+var dbAccess = DbAccess.GetInstance()
 
 class MainActivity : AppCompatActivity() {
 

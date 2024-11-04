@@ -35,7 +35,7 @@ import com.main.limitless.data.PasswordHasher
 import com.main.limitless.data.User
 import com.main.limitless.data.ViewModels.ActivityViewModel
 import com.main.limitless.data.ViewModels.NutritionViewModel
-import com.main.limitless.data.dbAccess
+import com.main.limitless.dbAccess
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException

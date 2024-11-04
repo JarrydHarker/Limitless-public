@@ -7,7 +7,7 @@ import com.main.limitless.data.Food
 import com.main.limitless.data.Meal
 import com.main.limitless.data.MealFood
 import com.main.limitless.data.Ratios
-import com.main.limitless.data.dbAccess
+import com.main.limitless.dbAccess
 import java.time.LocalDate
 
 class NutritionViewModel(val currentDate: LocalDate = LocalDate.now() , var calorieWallet: Double = 2000.0, var ratio: Ratios = Ratios()): ViewModel() {

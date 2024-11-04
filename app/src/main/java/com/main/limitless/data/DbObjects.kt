@@ -2,10 +2,9 @@ package com.main.limitless.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.main.limitless.activityViewModel
+import com.main.limitless.dbAccess
 import com.main.limitless.nutritionViewModel
 import java.time.LocalDate
-
-val dbAccess = DbAccess.GetInstance()
 
 class User(
     var userId: String = "",
