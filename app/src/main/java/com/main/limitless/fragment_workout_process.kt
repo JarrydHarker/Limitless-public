@@ -42,7 +42,7 @@ class fragment_workout_process : Fragment() {
         val lblStreak: TextView = view.findViewById(R.id.WP_txtStreak)
         val lblGym: TextView = view.findViewById(R.id.WP_txtToLet)
 
-        lblSteps.setText(nutritionViewModel.steps.toString())
+        lblSteps.setText(activityViewModel.steps.toString())
         lblCalories.setText((nutritionViewModel.calorieWallet - nutritionViewModel.CalculateTotalCalories()).toString())
 
         return view

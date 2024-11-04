@@ -1,6 +1,7 @@
 package com.main.limitless.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.main.limitless.activityViewModel
 import com.main.limitless.nutritionViewModel
 import java.time.LocalDate
 
@@ -61,7 +62,7 @@ class User(
     fun CreateDay(){
         currentDay.date = nutritionViewModel.currentDate
         currentDay.calories = nutritionViewModel.CalculateTotalCalories()
-        currentDay.steps = nutritionViewModel.steps
+        currentDay.steps = activityViewModel.steps
         currentDay.water = nutritionViewModel.water
         currentDay.userId = userId
         currentDay.activeTime = 0 //TODO Implement active time
@@ -116,7 +117,7 @@ class User(
 
         currentDay.date = nutritionViewModel.currentDate
         currentDay.calories = nutritionViewModel.CalculateTotalCalories()
-        currentDay.steps = nutritionViewModel.steps
+        currentDay.steps = activityViewModel.steps
         currentDay.water = nutritionViewModel.water
         currentDay.userId = userId
         currentDay.activeTime = 0 //TODO Implement active time
@@ -227,6 +228,7 @@ class Day(
 )
 @Entity(tableName = "workouts")
 class Workout(
+
    @PrimaryKey (autoGenerate = true) var workoutId: Int = 0,
     var date: String = "",
     var name: String = "",

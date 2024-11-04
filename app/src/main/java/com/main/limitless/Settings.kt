@@ -44,7 +44,7 @@ class Settings : AppCompatActivity() {
         val btt = AnimationUtils.loadAnimation(this, R.anim.btt)
 
         val btnLanguage = findViewById<Button>(R.id.btnLanguage_ST)
-//        val btt2 = AnimationUtils.loadAnimation(this, R.anim.btt2)
+        val btt2 = AnimationUtils.loadAnimation(this, R.anim.btt2)
 //        val btt3 = AnimationUtils.loadAnimation(this, R.anim.btt3)
 //        val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
 
@@ -69,6 +69,7 @@ class Settings : AppCompatActivity() {
 
         BackgroundImage.startAnimation(ttb)
         linearLayout7.startAnimation(btt)
+        deleteUser.startAnimation(btt2)
         //till here
 
         ThemeManager.applyTheme(this)

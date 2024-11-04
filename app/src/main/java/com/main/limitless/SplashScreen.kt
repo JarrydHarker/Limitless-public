@@ -7,6 +7,7 @@ import android.os.Looper
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 
+
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         window.setFlags(
@@ -20,7 +21,6 @@ class SplashScreen : AppCompatActivity() {
             startActivity(Intent(this@SplashScreen, Login::class.java))
             finish()
         }, 3000)
-
     }
 
 }
