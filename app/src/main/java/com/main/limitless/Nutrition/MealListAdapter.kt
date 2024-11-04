@@ -24,10 +24,14 @@ class MealListAdapter(context: Context, private val lstFoods: List<Food>) : Arra
         numberPicker.minValue = 0
         numberPicker.maxValue = 1000
 
+        numberPicker.value = getItem(position)!!.weight!!.toInt()
+
         numberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
             nutritionViewModel.ScaleFood(getItem(position)!!, newVal.toDouble())
+            foodNameTextView.text = "${lstFoods.indexOf(getItem(position)!!) + 1}. ${getItem(position)!!.description}: ${getItem(position)!!.calories} kcal"
             Log.d("NumberPicker", "New value: $newVal for item: ${getItem(position)}")
         }
+
         return view
     }
 }
