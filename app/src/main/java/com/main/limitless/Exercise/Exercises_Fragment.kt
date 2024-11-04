@@ -100,8 +100,6 @@ class Exercises_Fragment : Fragment() {
             }
         }
 
-
-
         lvWorkouts.setOnItemClickListener { parent, view, position, id ->
             val selectedWorkout = activityViewModel.arrWorkouts[position]
             activityViewModel.currentWorkout = selectedWorkout
