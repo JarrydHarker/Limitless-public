@@ -228,8 +228,9 @@ class Day(
 )
 @Entity(tableName = "workouts")
 class Workout(
-   @PrimaryKey var workoutId: Int = 0,
-    var date: String,
+
+   @PrimaryKey (autoGenerate = true) var workoutId: Int = 0,
+    var date: String = "",
     var name: String = "",
     var userId: String = ""
 ){
@@ -245,7 +246,7 @@ class Workout(
 }
 @Entity(tableName = "exercises")
 class Exercise(
-   @PrimaryKey var exerciseId: Int = 0,
+   @PrimaryKey (autoGenerate = true) var exerciseId: Int = 0,
     var movementId: Int = 0,
     var workoutId: Int = 0
 ){
@@ -270,7 +271,7 @@ fun getCategory(): String {
 }
 @Entity(tableName = "movements")
 class Movement(
- @PrimaryKey   var movementId: Int? = 0,
+ @PrimaryKey (autoGenerate = true) var movementId: Int? = 0,
     var name: String = "",
     var description: String? = null,
     var type: String = "",
@@ -291,7 +292,7 @@ class Cardio(
 }
 @Entity(tableName = "strength_exercises")
 class Strength(
- @PrimaryKey  var exerciseId: Int? = 0,
+ @PrimaryKey (autoGenerate = true) var exerciseId: Int? = 0,
     var sets: Int = 0,
     var repetitions: Int = 0,
     var favourite: Boolean = false

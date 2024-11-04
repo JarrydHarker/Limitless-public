@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Database
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -50,7 +51,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     @Dao
     interface WorkoutDao {
-        @Insert
+        @Insert (onConflict = OnConflictStrategy.REPLACE)
         suspend fun insert(workout: Workout)
 
         @Query("SELECT * FROM workouts")
@@ -62,7 +63,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     @Dao
     interface ExerciseDao {
-        @Insert
+        @Insert (onConflict = OnConflictStrategy.REPLACE)
         suspend fun insert(exercise: Exercise)
 
         @Query("SELECT * FROM exercises WHERE workoutId = :workoutId")
@@ -74,7 +75,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     @Dao
     interface MovementDao {
-        @Insert
+        @Insert (onConflict = OnConflictStrategy.REPLACE)
         suspend fun insert(movement: Movement)
 
         @Query("SELECT * FROM movements")
@@ -89,7 +90,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     @Dao
     interface CardioDao {
-        @Insert
+        @Insert (onConflict = OnConflictStrategy.REPLACE)
         suspend fun insert(cardio: Cardio)
 
         @Query("SELECT * FROM cardio_exercises WHERE exerciseId = :exerciseId")
@@ -101,7 +102,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     @Dao
     interface StrengthDao {
-        @Insert
+        @Insert (onConflict = OnConflictStrategy.REPLACE)
         suspend fun insert(strength: Strength)
 
         @Query("SELECT * FROM strength_exercises WHERE exerciseId = :exerciseId")
