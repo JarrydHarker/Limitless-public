@@ -81,7 +81,7 @@ class Log_Exercise : AppCompatActivity() {
             lvExercises.adapter = exerciseAdapter
 
             btnLogSet.setOnClickListener {
-                if (exerciseAdapter.count > 1) {
+                if (exerciseAdapter.count > 0) {
                     // Remove the first item from the adapter
                     exerciseAdapter.remove(exerciseAdapter.getItem(0))
                     exerciseAdapter.notifyDataSetChanged()
