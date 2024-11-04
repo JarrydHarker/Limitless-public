@@ -2,6 +2,7 @@ package com.main.limitless.data.ViewModels
 
 import android.content.Context
 import android.util.Log
+import com.main.limitless.activityViewModel
 import com.main.limitless.currentUser
 import com.main.limitless.data.Offline.AppDatabase
 import com.main.limitless.data.Movement
@@ -82,6 +83,7 @@ class ActivityViewModel(val currentDate: LocalDate) {
                 } ?: Log.e("LoadUserData", "User ID is null")
 
             } else {
+                Log.d("OfflineLoad", "It gets to the offline else")
                 // Handle offline case
                 try {
                     withContext(Dispatchers.IO) {
@@ -116,6 +118,9 @@ class ActivityViewModel(val currentDate: LocalDate) {
                     exercise.cardio = cardio
                 }
             }
+
+            arrWorkouts.add(workout)
+            Log.d("OfflineLoad", "Workout: ${workout.name}")
         }
     }
 
