@@ -2,6 +2,7 @@ package com.main.limitless.Exercise
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,12 +34,18 @@ class Exercide_Adapter(context: Context, private val items: MutableList<Workout>
                 context.startActivity(intent)
             }
         }
+        for(item in items){
+            Log.d("Ericcc", "Ons is hier ${item.name}")
+        }
+
         return view
     }
 
     fun updateItems(newItems: List<Workout>) {
+        Log.d("Ericcc", "Ons is hier ${items.size}")
         items.clear()
         items.addAll(newItems)
         notifyDataSetChanged()
+        Log.d("Ericcc", "Ons is hier ${newItems.size}")
     }
 }

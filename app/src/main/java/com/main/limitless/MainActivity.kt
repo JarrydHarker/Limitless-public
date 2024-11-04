@@ -78,7 +78,10 @@ class MainActivity : AppCompatActivity() {
         }else{
             startStepCounterService()
             setupWork()
-            startHealthNotificationService(currentUser!!.userInfo.weight.toString(), (nutritionViewModel.calorieWallet - nutritionViewModel.CalculateTotalCalories()).toString())
+            if (isOnline){
+                startHealthNotificationService(currentUser!!.GetWeight().toString(),
+                    (nutritionViewModel.calorieWallet - nutritionViewModel.CalculateTotalCalories()).toString())
+            }
         }
 
          networkCallback = object : ConnectivityManager.NetworkCallback() {
@@ -96,11 +99,11 @@ class MainActivity : AppCompatActivity() {
 
         //Nicks Animation things
         val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
-//        val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
+//      val stb = AnimationUtils.loadAnimation(this, R.anim.stb)
         val btt = AnimationUtils.loadAnimation(this, R.anim.btt)
         val btt2 = AnimationUtils.loadAnimation(this, R.anim.btt2)
-//        val btt3 = AnimationUtils.loadAnimation(this, R.anim.btt3)
-//        val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
+//      val btt3 = AnimationUtils.loadAnimation(this, R.anim.btt3)
+//      val btt4 = AnimationUtils.loadAnimation(this, R.anim.btt4)
 
         val scrollView2 = findViewById<ScrollView>(R.id.scrollView2)
         val frag = findViewById<FragmentContainerView>(R.id.fragmentContainerView10)

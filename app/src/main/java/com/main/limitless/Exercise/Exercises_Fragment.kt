@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,7 @@ import com.main.limitless.Maps_Activity
 import com.main.limitless.R
 import com.main.limitless.activityViewModel
 import com.main.limitless.currentUser
+import com.main.limitless.data.ViewModels.ActivityViewModel
 import com.main.limitless.data.Workout
 import com.main.limitless.data.dbAccess
 import com.main.limitless.isOnline
@@ -80,25 +82,47 @@ class Exercises_Fragment : Fragment() {
             startActivity(intent)
         }
 
-        CoroutineScope(Dispatchers.Main).launch {
-            withContext(Dispatchers.IO){
-                val workouts = dbAccess.GetUserWorkoutsByDate(
-                    currentUser?.userId!!,
-                    nutritionViewModel.currentDate
-                )
-                arrWorkouts.clear()
-                arrWorkouts.addAll(workouts)
+        if (isOnline) {
+            CoroutineScope(Dispatchers.Main).launch {
+                withContext(Dispatchers.IO) {
+                    val workouts = dbAccess.GetUserWorkoutsByDate(
+                        currentUser?.userId!!,
+                        nutritionViewModel.currentDate
+                    )
 
-                Handler(Looper.getMainLooper()).post {
-                    for (workout in activityViewModel.arrWorkouts) {
-                        workoutAdapter.add(workout.name)
+                    arrWorkouts.clear()
+                    arrWorkouts.addAll(workouts)
+
+                    Handler(Looper.getMainLooper()).post {
+                        workoutAdapter.clear()
+                        for (workout in workouts) {
+                            workoutAdapter.add(workout.name)
+                        }
+
+                        workoutAdapter.notifyDataSetChanged()
+                        adapter.updateItems(workouts)
+                        lvWorkouts.adapter = adapter
+                        Log.d("OnlineData", "Adapter updated with online workouts")
                     }
-
-                    adapter.updateItems(workouts)
-                    lvWorkouts.adapter = adapter
                 }
             }
+        } else {
+            arrWorkouts.clear()
+            arrWorkouts.addAll(activityViewModel.arrWorkouts)
+            workoutAdapter.clear()
+            for (workout in arrWorkouts) {
+                workoutAdapter.add(workout.name)
+                Log.d("OfflineData", "Fetched workouts: ${workout.name}")
+            }
+            workoutAdapter.notifyDataSetChanged()
+            Log.d("OfflineData", "${arrWorkouts.size}")
+            adapter.updateItems(arrWorkouts.toList())
+            lvWorkouts.adapter = adapter
+            Log.d("OfflineData", "${adapter.count}")
         }
+
+
+
 
         lvWorkouts.setOnItemClickListener { parent, view, position, id ->
             val selectedWorkout = activityViewModel.arrWorkouts[position]
