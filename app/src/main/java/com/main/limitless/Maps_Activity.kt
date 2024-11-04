@@ -150,6 +150,7 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
         if (!timerRunning) {
             startTime = System.currentTimeMillis()
             totalDistance = 0f
+            pathPoints.clear()
             timerHandler.postDelayed(timerRunnable, 0)
             timerRunning = true
         }
@@ -185,6 +186,10 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
 
                     val formattedDistance = String.format("%.2f", distanceInKilometers)
                     distances.text = getString(R.string.distance_km, formattedDistance)
+
+                    val latLng = LatLng(newLocation.latitude, newLocation.longitude)
+                    pathPoints.add(latLng)
+                    drawPolyline()
                 }
                 mLastLocation = newLocation
 
@@ -195,8 +200,6 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
                 longitude = mLastLocation.longitude
                 val latLng = LatLng(latitude, longitude)
 
-                pathPoints.add(latLng)
-
                 val markerOptions = MarkerOptions()
                     .position(latLng)
                     .title("Your Location")
@@ -205,12 +208,9 @@ class Maps_Activity : AppCompatActivity(), OnMapReadyCallback {
                 mMarker = mMap.addMarker(markerOptions)
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
-
-                drawPolyline()
             }
         }
     }
-
 
     private fun drawPolyline() {
        if (!isMapReady) return // Ensure the map is ready
