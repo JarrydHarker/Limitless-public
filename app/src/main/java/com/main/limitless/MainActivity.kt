@@ -22,6 +22,9 @@ import com.main.limitless.data.StepCounterService
 import com.main.limitless.data.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.Manifest
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.util.Log
