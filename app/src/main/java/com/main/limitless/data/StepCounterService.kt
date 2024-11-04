@@ -9,6 +9,7 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.IBinder
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.main.limitless.MainActivity
 import com.main.limitless.R
@@ -57,6 +58,7 @@ class StepCounterService : Service() {
 
     private fun startTrackingSteps() {
         pedometer.startListening { currentSteps ->
+            Log.d("Steps", currentSteps.toString())
             updateNotification(currentSteps)
             activityViewModel.steps = currentSteps.toInt()
         }
@@ -81,11 +83,6 @@ class StepCounterService : Service() {
             AlarmManager.INTERVAL_DAY,
             pendingIntent
         )
-    }
-
-    private fun calculateStepsForTheDay(stepsSinceReboot: Long): Long {
-        // Logic to calculate steps for the day. This can be saved and compared using shared preferences or a database.
-        return stepsSinceReboot // Example, customize this for your needs.
     }
 
     private fun updateNotification(stepCount: Long) {
