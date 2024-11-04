@@ -8,13 +8,15 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.IBinder
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.main.limitless.R
 
-class HealthNotifications: Service() {
+class HealthNotifications : Service() {
 
     private val CHANNEL_ID = "health_channel"
 
@@ -30,16 +32,25 @@ class HealthNotifications: Service() {
         val notification = createNotification("Health Update", "Weight: $weight, Calories Remaining: $calories")
 
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+
+                Toast.makeText(this, "Notification permission not granted", Toast.LENGTH_SHORT).show()
+                return START_NOT_STICKY
+            }
+        }
+
+
         NotificationManagerCompat.from(this).notify(1, notification)
         return START_STICKY
     }
 
-    override fun onBind(p0: Intent?): IBinder? {
+    override fun onBind(intent: Intent?): IBinder? {
         return null
     }
 
     private fun createNotificationChannel() {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "Health Channel"
             val descriptionText = "Channel for health notifications"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
@@ -60,5 +71,4 @@ class HealthNotifications: Service() {
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .build()
     }
-
 }
