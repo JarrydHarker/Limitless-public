@@ -5,6 +5,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -27,8 +29,13 @@ import com.main.limitless.activityViewModel
 import com.main.limitless.currentUser
 import com.main.limitless.data.Workout
 import com.main.limitless.data.dbAccess
+import com.main.limitless.isOnline
 import com.main.limitless.nutritionViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.LocalDate
 
 
@@ -73,18 +80,24 @@ class Exercises_Fragment : Fragment() {
             startActivity(intent)
         }
 
-        dbAccess.GetUserWorkoutsByDate(currentUser?.userId!!, nutritionViewModel.currentDate) { workouts ->
-            arrWorkouts.clear()
-            arrWorkouts.addAll(workouts)
+        CoroutineScope(Dispatchers.Main).launch {
+            withContext(Dispatchers.IO){
+                val workouts = dbAccess.GetUserWorkoutsByDate(
+                    currentUser?.userId!!,
+                    nutritionViewModel.currentDate
+                )
+                arrWorkouts.clear()
+                arrWorkouts.addAll(workouts)
 
-            for (workout in activityViewModel.arrWorkouts) {
-                workoutAdapter.add(workout.name)
+                Handler(Looper.getMainLooper()).post {
+                    for (workout in activityViewModel.arrWorkouts) {
+                        workoutAdapter.add(workout.name)
+                    }
+
+                    adapter.updateItems(workouts)
+                    lvWorkouts.adapter = adapter
+                }
             }
-           //lvWorkouts.adapter = workoutAdapter
-
-            adapter.updateItems(workouts)
-            lvWorkouts.adapter = adapter
-
         }
 
 
@@ -115,7 +128,12 @@ class Exercises_Fragment : Fragment() {
         lvWorkouts.startAnimation(btt3)
 
         btnAddWorkout.setOnClickListener {
-            ShowDialog()
+            if(isOnline){
+                ShowDialog()
+            }else{
+                Toast.makeText(requireActivity(), "This function requires an internet connection", Toast.LENGTH_LONG).show()
+            }
+
         }
 
         return view

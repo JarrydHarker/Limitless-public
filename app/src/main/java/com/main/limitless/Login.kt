@@ -107,7 +107,7 @@ class Login : AppCompatActivity() {
         val credentialManager = CredentialManager.create(this)
 
         if(currentUser == null){
-            setupBiometricAuthentication { isSupported ->
+            setupBiometricAuthentication(this) { isSupported ->
                 if (isSupported) {
                     biometricPrompt.authenticate(promptInfo)
                 } else {
@@ -155,7 +155,7 @@ class Login : AppCompatActivity() {
                         activityViewModel = ActivityViewModel(LocalDate.now())
 
                         nutritionViewModel.LoadUserData()
-                        activityViewModel.LoadUserData()
+                        activityViewModel.LoadUserData(this)
 
                         dbAccess.GetDay(LocalDate.now(), currentUser?.userId!!){ day ->
                             if(day == null){
@@ -170,8 +170,9 @@ class Login : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }else {
-                    Toast.makeText(this,
-                        getString(R.string.user_not_found_please_sign_up), Toast.LENGTH_LONG).show()
+                    runOnUiThread {
+                        Toast.makeText(this, getString(R.string.user_not_found_please_sign_up), Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         }
@@ -279,7 +280,7 @@ class Login : AppCompatActivity() {
         }
     }
 
-    private fun setupBiometricAuthentication(onComplete: (Boolean) -> Unit) {
+    private fun setupBiometricAuthentication(context: Context, onComplete: (Boolean) -> Unit) {
         // Initialize biometricPrompt here, so it’s ready regardless of the check
         val executor = ContextCompat.getMainExecutor(this)
         biometricPrompt = BiometricPrompt(
@@ -308,7 +309,7 @@ class Login : AppCompatActivity() {
                                     activityViewModel = ActivityViewModel(LocalDate.now())
 
                                     nutritionViewModel.LoadUserData()
-                                    activityViewModel.LoadUserData()
+                                    activityViewModel.LoadUserData(context)
 
                                     dbAccess.GetDay(LocalDate.now(), currentUser?.userId!!) { day ->
                                         if (day == null) {

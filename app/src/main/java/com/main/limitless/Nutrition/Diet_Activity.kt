@@ -3,6 +3,7 @@ package com.main.limitless.Nutrition
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -15,6 +16,7 @@ import com.main.limitless.Settings
 import com.main.limitless.ThemeManager
 import com.main.limitless.fragment_water_tracker
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.main.limitless.isOnline
 
 class Diet_Activity : AppCompatActivity() {
 
@@ -37,11 +39,15 @@ class Diet_Activity : AppCompatActivity() {
         // Setup button to navigate to Add Meal page
        val btnAddMeal: Button = findViewById(R.id.btnAddMeal)
         btnAddMeal.setOnClickListener {
-            val intent = Intent(this, MealTracker::class.java)
-            val options = ActivityOptionsCompat.makeCustomAnimation(
-                this, R.anim.slide_in_right, R.anim.slide_out_left
-            )
-            startActivity(intent, options.toBundle())
+            if(isOnline){
+                val intent = Intent(this, MealTracker::class.java)
+                val options = ActivityOptionsCompat.makeCustomAnimation(
+                    this, R.anim.slide_in_right, R.anim.slide_out_left
+                )
+                startActivity(intent, options.toBundle())
+            }else{
+                Toast.makeText(this, "This function requires an internet connection", Toast.LENGTH_LONG).show()
+            }
         }
 
         ThemeManager.applyTheme(this)

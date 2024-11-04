@@ -27,10 +27,10 @@ import android.net.Network
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityOptionsCompat
+import com.main.limitless.data.NetworkMonitor
 import com.main.limitless.Exercise.Exercise_Activity
 import com.main.limitless.Exercise.Workout_Planner
 import com.main.limitless.Nutrition.Diet_Activity
-import com.main.limitless.data.NetworkMonitor
 import com.main.limitless.data.ViewModels.ActivityViewModel
 import com.main.limitless.data.ViewModels.NutritionViewModel
 import java.time.LocalDate
@@ -38,6 +38,7 @@ import java.time.LocalDate
 var  currentUser: User? = null
 var nutritionViewModel = NutritionViewModel()
 var activityViewModel = ActivityViewModel(LocalDate.now())
+var isOnline = true
 
 class MainActivity : AppCompatActivity() {
 
@@ -60,18 +61,17 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }else{
-            checkAndRequestPermissions()
             startStepCounterService()
         }
 
          networkCallback = object : ConnectivityManager.NetworkCallback() {
 
             override fun onAvailable(network: Network) {
-                activityViewModel.isOnline = true
+                isOnline = true
             }
 
             override fun onLost(network: Network) {
-                activityViewModel.isOnline = false
+                isOnline = false
             }
         }
 

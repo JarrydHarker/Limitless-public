@@ -10,6 +10,7 @@ import androidx.room.Entity
 import androidx.room.Insert
 import androidx.room.PrimaryKey
 import androidx.room.Query
+import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
@@ -22,6 +23,23 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun movementDao(): MovementDao
     abstract fun cardioDao(): CardioDao
     abstract fun strengthDao(): StrengthDao
+
+    companion object {
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
+
+        fun getDatabase(context: Context): AppDatabase {
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDatabase::class.java,
+                    "exercise_tracker_db"
+                ).build()
+                INSTANCE = instance
+                instance
+            }
+        }
+    }
 }
 
     @Dao
@@ -55,6 +73,9 @@ abstract class AppDatabase : RoomDatabase() {
 
         @Query("SELECT * FROM movements")
         suspend fun getAllMovements(): List<Movement>
+
+        @Query("SELECT * FROM movements WHERE movementId = :movementId")
+        suspend fun getMovementById(movementId: Int): Movement
 
         @Delete
         suspend fun delete(movement: Movement)
