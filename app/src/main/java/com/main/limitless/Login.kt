@@ -104,6 +104,7 @@ class Login : AppCompatActivity() {
         val txtPassword: EditText = findViewById(R.id.txtPassword_LG)
         val btnGoogle: Button = findViewById(R.id.google_sso_button)
         val activityContext = this
+
         // Initialize the CredentialManager
         val credentialManager = CredentialManager.create(this)
 

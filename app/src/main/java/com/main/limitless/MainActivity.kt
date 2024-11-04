@@ -24,6 +24,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.Manifest
 import android.app.AlarmManager
 import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.net.ConnectivityManager
@@ -32,6 +34,11 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import com.main.limitless.data.NetworkMonitor
 import com.main.limitless.Exercise.Exercise_Activity
 import com.main.limitless.Exercise.Workout_Planner
@@ -41,6 +48,7 @@ import com.main.limitless.data.ViewModels.ActivityViewModel
 import com.main.limitless.data.ViewModels.NutritionViewModel
 import java.time.LocalDate
 import java.util.Calendar
+import java.util.concurrent.TimeUnit
 
 var  currentUser: User? = null
 var nutritionViewModel = NutritionViewModel()
@@ -64,8 +72,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-//        val serviceIntent = Intent(this, Notifications::class.java)
-//        startService(serviceIntent)
+        val serviceIntent = Intent(this, Notifications::class.java)
+       startService(serviceIntent)
 
 
         if(currentUser == null){
@@ -120,6 +128,11 @@ class MainActivity : AppCompatActivity() {
         val workout: CardView = findViewById(R.id.workoutsCard)
         val recyclerView: RecyclerView = findViewById(R.id.PE_ListExercises)
 
+
+
+
+
+
         ThemeManager.updateNavBarColor(this, bottomNavBar)
 
         bottomNavBar.setSelectedItemId(R.id.ic_home)
@@ -141,6 +154,8 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        setupWork()
 
         dailyActivity.setOnClickListener{
             val intent = Intent(this, Exercise_Activity::class.java)
@@ -212,6 +227,34 @@ class MainActivity : AppCompatActivity() {
         return true // All required permissions are granted
     }
 
+
+    private fun setupWork() {
+        scheduleWork("Good Morning! It's 10 AM.", "It's time for your morning meal!!", 8, 0)
+        scheduleWork("Lunch time!", "Come and add your Lunch!!", 12, 0)
+        scheduleWork("It's 6 PM.", "Don't forget to eat Dinner!!", 18, 0)
+    }
+
+    private fun scheduleWork(title: String, content: String, hour: Int, minute: Int) {
+        val calendar = Calendar.getInstance()
+        val now = Calendar.getInstance()
+
+        calendar.set(Calendar.HOUR_OF_DAY, hour)
+        calendar.set(Calendar.MINUTE, minute)
+        calendar.set(Calendar.SECOND, 0)
+
+        if (calendar.before(now)) {
+            calendar.add(Calendar.DAY_OF_YEAR, 1)
+        }
+
+        val delay = calendar.timeInMillis - System.currentTimeMillis()
+
+        val workRequest = OneTimeWorkRequestBuilder<Notifications>()
+            .setInitialDelay(delay, TimeUnit.MILLISECONDS)
+            .setInputData(workDataOf("title" to title, "content" to content))
+            .build()
+
+        WorkManager.getInstance(this).enqueue(workRequest)
+    }
 
     private fun startStepCounterService() {
         // Check and request permissions before starting the service
