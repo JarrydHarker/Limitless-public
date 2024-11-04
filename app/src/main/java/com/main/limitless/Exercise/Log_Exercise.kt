@@ -107,12 +107,9 @@ class Log_Exercise : AppCompatActivity() {
             }
         }
 
-
         btnRestTimer.setOnClickListener {
             ShowDialog()
         }
-
-
     }
 
     fun ShowDialog(){
