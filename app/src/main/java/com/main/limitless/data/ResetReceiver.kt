@@ -17,8 +17,6 @@ class ResetReceiver : BroadcastReceiver() {
         editor.putLong("storedSteps", storedSteps + currentSteps)
         editor.apply()
 
-
-
         // Optionally, you can notify the main activity to update the UI if needed
         Log.d("StepResetReceiver", "Steps reset at midnight")
     }
