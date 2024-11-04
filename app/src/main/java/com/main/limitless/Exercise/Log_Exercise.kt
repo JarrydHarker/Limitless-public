@@ -44,7 +44,6 @@ class Log_Exercise : AppCompatActivity() {
 
         val btnRestTimer = findViewById<Button>(R.id.btnRestTimer_LE)
         val lvExercises: ListView = findViewById(R.id.listSets_LE)
-        val btnAddSet = findViewById<Button>(R.id.btnAddSet_LE)
         val btnLogSet = findViewById<Button>(R.id.btnLogSet_LE)
         val workoutId = intent.getIntExtra("workoutId", -1)
         val currentWorkout = activityViewModel.GetWorkout(workoutId)
@@ -113,11 +112,6 @@ class Log_Exercise : AppCompatActivity() {
                         startActivity(intent)
                     }
                 }
-            }
-
-            btnAddSet.setOnClickListener{
-                Toast.makeText(this,
-                    getString(R.string.this_is_still_in_development), Toast.LENGTH_SHORT).show()
             }
         }
 

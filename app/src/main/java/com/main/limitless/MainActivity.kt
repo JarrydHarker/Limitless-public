@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        val Enabled =  NotificationUtils.getNotificationState(context = this)
         val serviceIntent = Intent(this, Notifications::class.java)
        startService(serviceIntent)
 
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         }else{
             startStepCounterService()
             setupWork()
-            if (isOnline){
+            if (isOnline && Enabled){
                 startHealthNotificationService(currentUser!!.GetWeight().toString(),
                     (nutritionViewModel.calorieWallet - nutritionViewModel.CalculateTotalCalories()).toString())
             }
@@ -221,10 +221,10 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun startHealthNotificationService(weight: String, calories: String) {
-        /*val intent = Intent(this, HealthNotifications::class.java)
+        val intent = Intent(this, HealthNotifications::class.java)
         intent.putExtra("weight", weight)
         intent.putExtra("calories", calories)
-        startService(intent)*/
+        startService(intent)
     }
 
     private fun setupWork() {
