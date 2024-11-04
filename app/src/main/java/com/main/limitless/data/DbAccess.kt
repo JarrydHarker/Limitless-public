@@ -1273,51 +1273,37 @@ class DbAccess private constructor(){
         return meals // Return the list of users (could be empty if request fails)
     }
 
-    fun GetExercisesByWorkoutId(workoutId: Int?, onComplete: (List<Exercise>) -> Unit) {
-        val executor = Executors.newSingleThreadExecutor()
-        var exercises: List<Exercise> = emptyList()
-
-        executor.execute {
-            try {
-                // Construct the URL for the GET request
-                val url = URL(apiUrl + epExercise + "/Workout?workoutId=$workoutId") // Assuming the endpoint is something like /users
-                val connection = url.openConnection() as HttpURLConnection
-
-                // Set the request method to GET
+    suspend fun GetExercisesByWorkoutId(workoutId: Int?): List<Exercise> {
+        return withContext(Dispatchers.IO) {
+            val url = URL("$apiUrl$epExercise/Workout?workoutId=$workoutId")
+            val connection = url.openConnection() as HttpURLConnection
+            val exercises: List<Exercise> = try {
                 connection.requestMethod = "GET"
                 connection.setRequestProperty("Content-Type", "application/json; utf-8")
 
-                // Read the response message from the input stream
-                val responseCode = connection.responseCode
-                if (responseCode == HttpURLConnection.HTTP_OK) {
+                if (connection.responseCode == HttpURLConnection.HTTP_OK) {
                     InputStreamReader(connection.inputStream).use { reader ->
-                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val jsonResponse = reader.readText()
                         val gson = GsonBuilder()
-                            .registerTypeAdapter(LocalDate::class.java, LocalDateSerializer())  // Register LocalDate serializer
+                            .registerTypeAdapter(LocalDate::class.java, LocalDateSerializer())
                             .registerTypeAdapter(LocalDate::class.java, LocalDateDeserializer())
                             .create()
-
-                        // Deserialize the JSON array into a List<User>
-                        exercises = gson.fromJson(jsonResponse, Array<Exercise>::class.java).toList()
-                        Handler(Looper.getMainLooper()).post {
-                            for(e in exercises){
-                                Log.d("Poes", "DBAccess: Eid:${e.exerciseId}, Mid:${e.movementId}, Wid:${e.workoutId}")
-                            }
-                            onComplete(exercises)
-                        }
+                        gson.fromJson(jsonResponse, Array<Exercise>::class.java).toList()
                     }
                 } else {
-                    // Handle error message if request fails
                     InputStreamReader(connection.errorStream).use { reader ->
-                        Log.e("GetAllWorkoutError", reader.readText())
+                        Log.e("GetExercisesError", reader.readText())
                     }
+                    emptyList() // Return an empty list on error
                 }
-
             } catch (ex: Exception) {
-                // Handle exceptions appropriately
-                Log.e("GetAllWorkoutError", ex.toString())
-                ex.printStackTrace() // For debugging purposes
+                Log.e("GetExercisesError", ex.toString())
+                ex.printStackTrace()
+                emptyList() // Return an empty list if an exception occurs
+            } finally {
+                connection.disconnect()
             }
+            exercises
         }
     }
 
@@ -1367,48 +1353,39 @@ class DbAccess private constructor(){
         }
     }
 
-    fun GetUserWorkoutsByDate(userId: String, date: LocalDate, onComplete: (List<Workout>) -> Unit) {
-        val executor = Executors.newSingleThreadExecutor()
-        var workout: List<Workout> = emptyList()
-
-        executor.execute {
-            try {
-                // Construct the URL for the GET request
-                val url = URL(apiUrl + epWorkout + "/User?userId=$userId&date=${date.year}-${date.monthValue}-${date.dayOfMonth}") // Assuming the endpoint is something like /users
-                val connection = url.openConnection() as HttpURLConnection
-
-                // Set the request method to GET
+    suspend fun GetUserWorkoutsByDate(userId: String, date: LocalDate): List<Workout> {
+        return withContext(Dispatchers.IO) {
+            val url = URL("$apiUrl$epWorkout/User?userId=$userId&date=${date.year}-${date.monthValue}-${date.dayOfMonth}")
+            val connection = url.openConnection() as HttpURLConnection
+            val workouts: List<Workout> = try {
                 connection.requestMethod = "GET"
                 connection.setRequestProperty("Content-Type", "application/json; utf-8")
 
-                // Read the response message from the input stream
-                val responseCode = connection.responseCode
-                if (responseCode == HttpURLConnection.HTTP_OK) {
+                // Check response code
+                if (connection.responseCode == HttpURLConnection.HTTP_OK) {
                     InputStreamReader(connection.inputStream).use { reader ->
-                        val jsonResponse = reader.readText() // Read the server's JSON response
+                        val jsonResponse = reader.readText()
                         val gson = GsonBuilder()
-                            .registerTypeAdapter(LocalDate::class.java, LocalDateSerializer())  // Register LocalDate serializer
+                            .registerTypeAdapter(LocalDate::class.java, LocalDateSerializer())
                             .registerTypeAdapter(LocalDate::class.java, LocalDateDeserializer())
                             .create()
-
-                        // Deserialize the JSON array into a List<User>
-                        workout = gson.fromJson(jsonResponse, Array<Workout>::class.java).toList()
-                        Handler(Looper.getMainLooper()).post {
-                            onComplete(workout)
-                        }
+                        gson.fromJson(jsonResponse, Array<Workout>::class.java).toList()
                     }
                 } else {
-                    // Handle error message if request fails
+                    // Log the error if the request fails
                     InputStreamReader(connection.errorStream).use { reader ->
-                        Log.e("GetAllWorkoutError", reader.readText())
+                        Log.e("GetUserWorkoutsError", reader.readText())
                     }
+                    emptyList() // Return an empty list if there's an error
                 }
-
             } catch (ex: Exception) {
-                // Handle exceptions appropriately
-                Log.e("GetAllWorkoutError", ex.toString())
-                ex.printStackTrace() // For debugging purposes
+                Log.e("GetUserWorkoutsError", ex.toString())
+                ex.printStackTrace()
+                emptyList() // Return an empty list if there's an exception
+            } finally {
+                connection.disconnect()
             }
+            workouts
         }
     }
 
@@ -1667,88 +1644,71 @@ class DbAccess private constructor(){
         return exercise // Return the deserialized User object (if any)
     }
 
-    fun GetCardio(exerciseId: Int, onComplete: (Cardio?) -> Unit){
-        val executor = Executors.newSingleThreadExecutor()
+    suspend fun GetCardio(exerciseId: Int): Cardio? {
+        return withContext(Dispatchers.IO) {
+            val url = URL("$apiUrl$epCardio?exerciseId=$exerciseId")
+            val connection = url.openConnection() as HttpURLConnection
+            var cardio: Cardio? = null
 
-        var cardio: Cardio? = null
-
-        executor.execute {
             try {
-                // Construct URL with query parameter
-                val url = URL( apiUrl + epCardio + "?exerciseId=$exerciseId")
-                val connection = url.openConnection() as HttpURLConnection
-
                 connection.requestMethod = "GET"
                 connection.setRequestProperty("Content-Type", "application/json; utf-8")
 
-                // Read the response message from the input stream
-                val responseCode = connection.responseCode
-                if (responseCode == HttpURLConnection.HTTP_OK) {
+                if (connection.responseCode == HttpURLConnection.HTTP_OK) {
                     InputStreamReader(connection.inputStream).use { reader ->
                         val jsonResponse = reader.readText()
-
-                        // Deserialize JSON response into User object
                         val gson = Gson()
                         cardio = gson.fromJson(jsonResponse, Cardio::class.java)
                     }
                 } else {
-                    // Handle error if request fails
                     InputStreamReader(connection.errorStream).use { reader ->
                         val errorMessage = reader.readText()
                         Log.e("GetCardioError", "Error: $errorMessage")
                     }
                 }
-
             } catch (ex: Exception) {
-                // Handle exceptions appropriately
                 Log.e("GetCardioError", ex.toString())
                 ex.printStackTrace() // For debugging purposes
+            } finally {
+                connection.disconnect()
             }
-            onComplete(cardio) // Return the deserialized User object (if any)
+
+            cardio
         }
     }
 
-    fun GetStrength(exerciseId: Int, onComplete: (Strength?) -> Unit)
-    {
-        val executor = Executors.newSingleThreadExecutor()
 
-        var strength: Strength? = null
-
-        executor.execute {
-            try {
-                // Construct URL with query parameter
-                val url = URL(apiUrl + epStrength + "?exerciseId=$exerciseId")
-                val connection = url.openConnection() as HttpURLConnection
-
+    suspend fun GetStrength(exerciseId: Int): Strength? {
+        return withContext(Dispatchers.IO) {
+            val url = URL("$apiUrl$epStrength?exerciseId=$exerciseId")
+            val connection = url.openConnection() as HttpURLConnection
+            val strength: Strength? = try {
                 connection.requestMethod = "GET"
                 connection.setRequestProperty("Content-Type", "application/json; utf-8")
 
-                // Read the response message from the input stream
-                val responseCode = connection.responseCode
-                if (responseCode == HttpURLConnection.HTTP_OK) {
+                if (connection.responseCode == HttpURLConnection.HTTP_OK) {
                     InputStreamReader(connection.inputStream).use { reader ->
                         val jsonResponse = reader.readText()
-
-                        // Deserialize JSON response into User object
                         val gson = Gson()
-                        strength = gson.fromJson(jsonResponse, Strength::class.java)
+                        gson.fromJson(jsonResponse, Strength::class.java)
                     }
                 } else {
-                    // Handle error if request fails
                     InputStreamReader(connection.errorStream).use { reader ->
-                        val errorMessage = reader.readText()
-                        Log.e("GetStrengthError", "Error: $errorMessage")
+                        Log.e("GetStrengthError", "Error: ${reader.readText()}")
                     }
+                    null // Return null if the response code indicates failure
                 }
-
             } catch (ex: Exception) {
-                // Handle exceptions appropriately
                 Log.e("GetStrengthError", ex.toString())
-                ex.printStackTrace() // For debugging purposes
+                ex.printStackTrace()
+                null // Return null if an exception occurs
+            } finally {
+                connection.disconnect()
             }
-            onComplete(strength)
+            strength
         }
     }
+
 
     fun GetMeal(mealId: Meal): Meal?{
         val executor = Executors.newSingleThreadExecutor()
@@ -1834,46 +1794,37 @@ class DbAccess private constructor(){
         return food // Return the deserialized User object (if any)
     }
 
-    fun GetMovement(movementId: Int, onComplete: (Movement?) -> Unit) {
-        val executor = Executors.newSingleThreadExecutor()
-
-        var movement: Movement? = null
-
-        executor.execute {
-            try {
-                // Construct URL with query parameter
-                val url = URL( apiUrl + epMovement + "?movementId=$movementId")
-                val connection = url.openConnection() as HttpURLConnection
-
+    suspend fun GetMovement(movementId: Int): Movement? {
+        return withContext(Dispatchers.IO) {
+            val url = URL("$apiUrl$epMovement?movementId=$movementId")
+            val connection = url.openConnection() as HttpURLConnection
+            val movement: Movement? = try {
                 connection.requestMethod = "GET"
                 connection.setRequestProperty("Content-Type", "application/json; utf-8")
 
-                // Read the response message from the input stream
-                val responseCode = connection.responseCode
-                if (responseCode == HttpURLConnection.HTTP_OK) {
+                if (connection.responseCode == HttpURLConnection.HTTP_OK) {
                     InputStreamReader(connection.inputStream).use { reader ->
                         val jsonResponse = reader.readText()
-
-                        // Deserialize JSON response into User object
                         val gson = Gson()
-                        movement = gson.fromJson(jsonResponse, Movement::class.java)
+                        gson.fromJson(jsonResponse, Movement::class.java)
                     }
                 } else {
-                    // Handle error if request fails
                     InputStreamReader(connection.errorStream).use { reader ->
-                        val errorMessage = reader.readText()
-                        Log.e("GetMovementError", "Error: $errorMessage")
+                        Log.e("GetMovementError", "Error: ${reader.readText()}")
                     }
+                    null // Return null if the response code indicates failure
                 }
-
             } catch (ex: Exception) {
-                // Handle exceptions appropriately
                 Log.e("GetMovementError", ex.toString())
-                ex.printStackTrace() // For debugging purposes
+                ex.printStackTrace()
+                null // Return null if an exception occurs
+            } finally {
+                connection.disconnect()
             }
-            onComplete(movement)
+            movement
         }
     }
+
 
     fun GetWorkout(workoutId: Workout): Workout?{
         val executor = Executors.newSingleThreadExecutor()

@@ -35,8 +35,11 @@ import com.main.limitless.data.Movement
 import com.main.limitless.data.Strength
 import com.main.limitless.data.dbAccess
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.main.limitless.data.AppDatabase
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.Locale
 
@@ -45,6 +48,7 @@ class New_Workout : AppCompatActivity() {
     var currentMove = Movement()
     val workoutExercises : MutableList<Exercise> = mutableListOf()
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -56,8 +60,6 @@ class New_Workout : AppCompatActivity() {
         }
         val btnCreateExercise = findViewById<Button>(R.id.btnCreateExercise_AE)
        // val spinCategory: Spinner  = findViewById(R.id.spinCategory)
-        val db = DbAccess.GetInstance()
-        val categories = db.GetCategories()
         val lvNewWorkout: ListView = findViewById(R.id.lvNewWorkout)
         val newWorkoutAdapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line)
         val btnAddWorkout: Button = findViewById(R.id.btnAddWorkout_AE)
@@ -91,6 +93,9 @@ class New_Workout : AppCompatActivity() {
 
                 activityViewModel.SaveWorkout(currentWorkout)
 
+                GlobalScope.launch(Dispatchers.IO) {
+                    UpdateOfflineDb()
+                }
                 val intent = Intent(this, Exercise_Activity::class.java)
                 startActivity(intent)
             }
@@ -128,6 +133,27 @@ class New_Workout : AppCompatActivity() {
         }
 
     }
+
+    suspend fun UpdateOfflineDb() {
+        val offlineDB = AppDatabase.getDatabase(this)
+
+        for(workout in activityViewModel.arrWorkouts){
+            if(!offlineDB.workoutDao().getAllWorkouts().contains(workout)){
+                offlineDB.workoutDao().insert(workout)
+
+                for(exercise in workout.arrExercises){
+                    offlineDB.exerciseDao().insert(exercise)
+
+                    if(exercise.cardio != null){
+                        offlineDB.cardioDao().insert(exercise.cardio!!)
+                    }else {
+                        offlineDB.strengthDao().insert(exercise.strength!!)
+                    }
+                }
+            }
+        }
+    }
+
     private fun navigateToActivityRight(activityClass: Class<*>) {
         val intent = Intent(this, activityClass)
         val options = ActivityOptionsCompat.makeCustomAnimation(
