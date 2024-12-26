@@ -35,12 +35,10 @@ import com.main.limitless.data.PasswordHasher
 import com.main.limitless.data.User
 import com.main.limitless.data.ViewModels.ActivityViewModel
 import com.main.limitless.data.ViewModels.NutritionViewModel
-import com.main.limitless.dbAccess
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import com.main.limitless.data.NetworkMonitor
-import com.main.limitless.data.Notifications
 import kotlinx.coroutines.launch
 import java.security.SecureRandom
 import java.time.LocalDate
@@ -165,7 +163,6 @@ class Login : AppCompatActivity() {
             if(isOnline){
                 LoginUser(this, username, password){user ->
                     if(user != null){
-
                         saveLogin(username, password)
                         currentUser = user
 
@@ -340,45 +337,58 @@ class Login : AppCompatActivity() {
                 }
 
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                    val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                    val sharedPreferences = getSharedPreferences("user_prefs_online", MODE_PRIVATE)
                     val username = sharedPreferences.getString("username", null)
                     val password = sharedPreferences.getString("password", null)
 
-                    if (username != null && password != null) {
-                        dbAccess.GetUserByEmail(username) { user ->
+                    if(isOnline){
+                        if (username != null && password != null) {
+                            dbAccess.GetUserByEmail(username) { user ->
+                                if (user != null) {
+                                    if (user.password == password) {
+                                        Log.d("ToHashOrNotToHash", "Username: $username\nPassword: $password")
+                                        saveLoginOffline(username, password)
+                                        currentUser = user
+                                        currentUser?.LoadUserData {
+                                            nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
+                                            activityViewModel = ActivityViewModel(LocalDate.now())
 
+                                            nutritionViewModel.LoadUserData()
+                                            activityViewModel.LoadUserData(context)
 
-                            if (user != null) {
-                                if (user.password == password) {
-                                    Log.d("ToHashOrNotToHash", "Username: $username\nPassword: $password")
-                                    saveLogin(username, password)
-                                    currentUser = user
-                                    currentUser?.LoadUserData {
-                                        nutritionViewModel = NutritionViewModel(LocalDate.now(), currentUser!!.GetCalorieWallet(), currentUser!!.ratios)
-                                        activityViewModel = ActivityViewModel(LocalDate.now())
-
-                                        nutritionViewModel.LoadUserData()
-                                        activityViewModel.LoadUserData(context)
-
-                                        dbAccess.GetDay(LocalDate.now(), currentUser?.userId!!) { day ->
-                                            if (day == null) {
-                                                currentUser?.CreateDay()
-                                            } else {
-                                                currentUser!!.currentDay = day
+                                            dbAccess.GetDay(LocalDate.now(), currentUser?.userId!!) { day ->
+                                                if (day == null) {
+                                                    currentUser?.CreateDay()
+                                                } else {
+                                                    currentUser!!.currentDay = day
+                                                }
                                             }
                                         }
+                                        Log.d("ToHashOrNotToHash", "Should Intent")
+                                        val intent = Intent(this@Login, MainActivity::class.java)
+                                        startActivity(intent)
+                                    }else{
+                                        // Ensure the Toast runs on the main/UI thread
+                                        Handler(Looper.getMainLooper()).post {
+                                            Toast.makeText(context,
+                                                context.getString(R.string.incorrect_username_or_password), Toast.LENGTH_LONG).show()
+                                        }
                                     }
-                                    val intent = Intent(this@Login, MainActivity::class.java)
-                                    startActivity(intent)
-                                }
-                            } else {
-                                // Ensure the Toast runs on the main/UI thread
-                                Handler(Looper.getMainLooper()).post {
-                                    Toast.makeText(context,
-                                        context.getString(R.string.incorrect_username_or_password), Toast.LENGTH_LONG).show()
+                                } else {
+                                    // Ensure the Toast runs on the main/UI thread
+                                    Handler(Looper.getMainLooper()).post {
+                                        Toast.makeText(context,
+                                            context.getString(R.string.incorrect_username_or_password), Toast.LENGTH_LONG).show()
+                                    }
                                 }
                             }
                         }
+                    }else{
+                        currentUser = User("Temp", "Firstname", "Surname", username!!, password!!)
+                        activityViewModel.LoadUserData(this@Login)
+
+                        val intent = Intent(this@Login, MainActivity::class.java)
+                        startActivity(intent)
                     }
                 }
 
@@ -406,7 +416,7 @@ class Login : AppCompatActivity() {
         }
     }
 
-    fun saveLogin(username: String, password: String) {
+    fun saveLoginOffline(username: String, password: String) {
         val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         val hasher = PasswordHasher()
@@ -414,8 +424,15 @@ class Login : AppCompatActivity() {
         editor.putString("username", username)
         editor.putString("password", hasher.HashPassword(password))
         editor.apply()
+    }
 
+    fun saveLogin(username: String, password: String) {
+        val sharedPreferences = getSharedPreferences("user_prefs_online", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
 
+        editor.putString("username", username)
+        editor.putString("password", password)
+        editor.apply()
     }
 
 
